@@ -18,4 +18,10 @@ public class Changelog {
     public String release_at;
     public String created_at;
     public String updated_at;
+
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " v" + version + " Release: " + release_at;
+    }
 }

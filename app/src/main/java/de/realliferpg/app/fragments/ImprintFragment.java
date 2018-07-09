@@ -7,22 +7,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.objects.Changelog;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ImprintFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ImprintFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ImprintFragment extends Fragment {
-
-
+public class ImprintFragment extends Fragment implements RequestCallbackInterface {
 
     private OnFragmentInteractionListener mListener;
 
@@ -30,12 +29,6 @@ public class ImprintFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ImprintFragment.
-     */
     public static ImprintFragment newInstance() {
         ImprintFragment fragment = new ImprintFragment();
         Bundle args = new Bundle();
@@ -53,18 +46,23 @@ public class ImprintFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ApiHelper apiHelper = new ApiHelper();
+        ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getChangelog();
 
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_imprint, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onResponse(JSONObject response, Class type) {
+        if (type.equals(Changelog.Wrapper.class)) {
+
+            Gson gson = new Gson();
+            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
+
+            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+
+            TextView tv = this.getActivity().findViewById(R.id.tv_imprint_main);
+            tv.setText(changelogs.get(1).toString());
         }
     }
 
@@ -85,16 +83,6 @@ public class ImprintFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

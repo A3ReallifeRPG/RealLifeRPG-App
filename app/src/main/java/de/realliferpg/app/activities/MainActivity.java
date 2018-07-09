@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Singleton.setContext(getApplicationContext());
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
