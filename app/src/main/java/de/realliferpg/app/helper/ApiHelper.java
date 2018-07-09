@@ -8,12 +8,15 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.objects.Changelog;
 
 public class ApiHelper {
 
 
     public ArrayList<Changelog> getChangelog() {
+
+        String url = Constants.URL_CHANGELOG;
 
         String json = "{" +
                 "'data': [" +
