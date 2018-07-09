@@ -31,7 +31,6 @@ public class ChangelogFragment extends Fragment {
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
 
-
     private OnFragmentInteractionListener mListener;
 
     public ChangelogFragment() {
