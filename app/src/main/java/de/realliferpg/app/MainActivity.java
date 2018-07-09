@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
+import de.realliferpg.app.fragments.ImprintFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
