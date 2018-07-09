@@ -70,7 +70,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
         }
-        TextView text_changelog_listitemgroup = (TextView)convertView.findViewById(R.id.text_changelog_listitemgroup);
+        TextView text_changelog_listitemgroup = convertView.findViewById(R.id.tv_changelog_listitemgroup);
         text_changelog_listitemgroup.setTypeface(null, Typeface.BOLD);
         text_changelog_listitemgroup.setText(headerTilte);
         return convertView;
@@ -86,7 +86,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
         }
 
-        TextView text_changelog_listitem = (TextView)convertView.findViewById(R.id.text_changelog_listitem);
+        TextView text_changelog_listitem = convertView.findViewById(R.id.tv_changelog_listitemgroup);
         text_changelog_listitem.setText(childText);
         return convertView;
 

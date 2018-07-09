@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +26,10 @@ import de.realliferpg.app.R;
  */
 public class ChangelogFragment extends Fragment {
 
+    private ExpandableListView listView;
+    private de.realliferpg.app.fragments.ExpandableListAdapter listAdapter;
+    private List<String> listDataHeader;
+    private HashMap<String,List<String>> listHash;
 
 
     private OnFragmentInteractionListener mListener;
@@ -57,8 +62,52 @@ public class ChangelogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_changelog, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_changelog, container, false);
+
+        listView = view.findViewById(R.id.lvExp);
+        initData();
+        listAdapter = new de.realliferpg.app.fragments.ExpandableListAdapter(view.getContext(),listDataHeader,listHash);
+        listView.setAdapter(listAdapter);
+
+
+        return view;
+    }
+
+    private void initData() {
+        listDataHeader = new ArrayList<>();
+        listHash = new HashMap<>();
+
+        listDataHeader.add("EDMTDev");
+        listDataHeader.add("Android");
+        listDataHeader.add("Xamarin");
+        listDataHeader.add("UWP");
+
+        List<String> edmtDev = new ArrayList<>();
+        edmtDev.add("This is Expandable ListView");
+
+        List<String> androidStudio = new ArrayList<>();
+        androidStudio.add("Expandable ListView");
+        androidStudio.add("Google Map");
+        androidStudio.add("Chat Application");
+        androidStudio.add("Firebase ");
+
+        List<String> xamarin = new ArrayList<>();
+        xamarin.add("Xamarin Expandable ListView");
+        xamarin.add("Xamarin Google Map");
+        xamarin.add("Xamarin Chat Application");
+        xamarin.add("Xamarin Firebase ");
+
+        List<String> uwp = new ArrayList<>();
+        uwp.add("UWP Expandable ListView");
+        uwp.add("UWP Google Map");
+        uwp.add("UWP Chat Application");
+        uwp.add("UWP Firebase ");
+
+        listHash.put(listDataHeader.get(0),edmtDev);
+        listHash.put(listDataHeader.get(1),androidStudio);
+        listHash.put(listDataHeader.get(2),xamarin);
+        listHash.put(listDataHeader.get(3),uwp);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
