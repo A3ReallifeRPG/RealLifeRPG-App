@@ -5,12 +5,15 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import de.realliferpg.app.objects.Changelog;
 
 public class ApiHelper {
 
 
-    public void getChangelog(){
+    public ArrayList<Changelog> getChangelog() {
 
         String json = "{" +
                 "'data': [" +
@@ -69,7 +72,8 @@ public class ApiHelper {
 
         Gson gson = new Gson();
         Changelog.Wrapper value = gson.fromJson(json, Changelog.Wrapper.class);
-        Log.d("Test","Test");
+
+        return new ArrayList<>(Arrays.asList(value.data));
     }
 
 }
