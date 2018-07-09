@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.ApiHelper;
 
 
 /**
@@ -51,6 +52,11 @@ public class ImprintFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ApiHelper apiHelper = new ApiHelper();
+        apiHelper.getChangelog();
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_imprint, container, false);
     }
