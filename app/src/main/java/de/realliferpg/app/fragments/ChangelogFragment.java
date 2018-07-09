@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+
+import java.util.HashMap;
+import java.util.List;
 
 import de.realliferpg.app.R;
 
@@ -19,6 +24,8 @@ import de.realliferpg.app.R;
  * create an instance of this fragment.
  */
 public class ChangelogFragment extends Fragment {
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,6 +50,8 @@ public class ChangelogFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
