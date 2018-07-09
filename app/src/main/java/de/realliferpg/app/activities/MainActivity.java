@@ -74,24 +74,14 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
         if (id == R.id.nav_camera) {
             ImprintFragment imprintFragment = new ImprintFragment();
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
             transaction.replace(R.id.include_main_content, imprintFragment);
-            transaction.addToBackStack(null);
-
-            transaction.commit();
         } else if (id == R.id.nav_gallery) {
             ChangelogFragment changelogFragment = new ChangelogFragment();
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
             transaction.replace(R.id.include_main_content, changelogFragment);
-            transaction.addToBackStack(null);
-
-            transaction.commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -101,6 +91,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+
+        transaction.addToBackStack(null);
+
+        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
