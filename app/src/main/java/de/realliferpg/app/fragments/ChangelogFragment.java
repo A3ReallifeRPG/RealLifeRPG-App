@@ -133,7 +133,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
                 if(temp.change_mod.length > 0){
-                    changesMission.add("Mod");
+                    changesMod.add("Mod");
                     for (String tempmod : temp.change_mod) {
                         changesMod.add(" · " + tempmod);
                     }
