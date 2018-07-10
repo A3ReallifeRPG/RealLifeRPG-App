@@ -119,7 +119,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 if(temp.change_map.length > 0){
                     changes.add("<b>Map</b>");
                     for (String tempmap : temp.change_map) {
-                        changes.add(" · " + tempmap);
+                        changes.add("&bull; " + tempmap);
                     }
                     //Collections.addAll(changesMap, temp.change_map); //fügt alle elemente hinzu, jedoch ohne symbol am anfang
                 }
@@ -127,7 +127,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 if(temp.change_mission.length > 0){
                     changes.add("<b>Mission</b>");
                     for (String tempmission : temp.change_mission) {
-                        changes.add(" · " + tempmission);
+                        changes.add("&bull; " + tempmission);
                     }
                 }
 
@@ -135,7 +135,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 if(temp.change_mod.length > 0){
                     changes.add("<b>Mod</b>");
                     for (String tempmod : temp.change_mod) {
-                        changes.add(" · " + tempmod);
+                        changes.add("&bull; " + tempmod);
                     }
                 }
 
