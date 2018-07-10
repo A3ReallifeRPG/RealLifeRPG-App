@@ -1,6 +1,7 @@
 package de.realliferpg.app.fragments;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -107,13 +108,16 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
             for (de.realliferpg.app.objects.Changelog temp : changelogs) {
+
+
+
                 List<String> changes = new ArrayList<>();
 
                 listDataHeader.add(temp.toString());
 
 
                 if(temp.change_map.length > 0){
-                    changes.add("Map");
+                    changes.add("<b>Map</b>");
                     for (String tempmap : temp.change_map) {
                         changes.add(" · " + tempmap);
                     }
@@ -121,7 +125,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 }
 
                 if(temp.change_mission.length > 0){
-                    changes.add("Mission");
+                    changes.add("<b>Mission</b>");
                     for (String tempmission : temp.change_mission) {
                         changes.add(" · " + tempmission);
                     }
@@ -129,7 +133,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
                 if(temp.change_mod.length > 0){
-                    changes.add("Mod");
+                    changes.add("<b>Mod</b>");
                     for (String tempmod : temp.change_mod) {
                         changes.add(" · " + tempmod);
                     }

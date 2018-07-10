@@ -2,6 +2,7 @@ package de.realliferpg.app.fragments;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView text_changelog_listitemgroup = convertView.findViewById(R.id.tv_changelog_listitemgroup);
         text_changelog_listitemgroup.setTypeface(null, Typeface.BOLD);
-        text_changelog_listitemgroup.setText(headerTilte);
+        text_changelog_listitemgroup.setText(Html.fromHtml(headerTilte));
         return convertView;
     }
 
@@ -85,10 +86,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView text_changelog_listitem = convertView.findViewById(R.id.tv_changelog_listitem);
-        text_changelog_listitem.setText(childText);
+        text_changelog_listitem.setText(Html.fromHtml(childText));
         return convertView;
 
     }
+
+
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
