@@ -1,16 +1,13 @@
 package de.realliferpg.app.fragments;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -18,12 +15,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.adapter.ExpandableListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
@@ -39,7 +35,7 @@ import de.realliferpg.app.objects.Changelog;
 public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
 
     private ExpandableListView listView;
-    private de.realliferpg.app.fragments.ExpandableListAdapter listAdapter;
+    private de.realliferpg.app.adapter.ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
 
@@ -96,8 +92,6 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             listView = this.getActivity().findViewById(R.id.lvExp);
 
-
-
             listDataHeader = new ArrayList<>();
             listHash = new HashMap<>();
 
@@ -107,14 +101,11 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
 
 
-            for (de.realliferpg.app.objects.Changelog temp : changelogs) {
-
-
+            for (Changelog temp : changelogs) {
 
                 List<String> changes = new ArrayList<>();
 
                 listDataHeader.add(temp.toString());
-
 
                 if(temp.change_map.length > 0){
                     changes.add("<b>Map</b>");
@@ -139,7 +130,9 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                     }
                 }
 
-                changes.add("<i><font color='red'>" + temp.note.toString() + "</font></i>");
+                if ( !temp.note.equals("")){
+                    changes.add("<i><font color='red'>" + temp.note + "</font></i>");
+                }
 
                 listHash.put(temp.toString(), changes);
 
@@ -147,7 +140,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
 
-            listAdapter = new de.realliferpg.app.fragments.ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
+            listAdapter = new ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
             listView.setAdapter(listAdapter);
 
 

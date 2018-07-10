@@ -13,16 +13,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ExpandableListView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
-import de.realliferpg.app.fragments.ExpandableListAdapter;
 import de.realliferpg.app.fragments.ImprintFragment;
 
 public class MainActivity extends AppCompatActivity

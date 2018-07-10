@@ -1,4 +1,4 @@
-package de.realliferpg.app.fragments;
+package de.realliferpg.app.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,10 +9,15 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.objects.Changelog;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
@@ -62,16 +67,43 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTilte= (String)getGroup(groupPosition);
+        String changelog= (String)getGroup(groupPosition);
 
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
         }
-        TextView text_changelog_listitemgroup = convertView.findViewById(R.id.tv_changelog_listitemgroup);
-        text_changelog_listitemgroup.setTypeface(null, Typeface.BOLD);
-        text_changelog_listitemgroup.setText(Html.fromHtml(headerTilte));
+        TextView tv_groupHeader = convertView.findViewById(R.id.tv_changelog_group_header);
+        tv_groupHeader.setTypeface(null, Typeface.BOLD);
+
+
+        // ich wollte da eigentlcih in subtitle einbauen und habe jetzt aber festgestellt das du gar nicht das komplette changelog array übergibst
+        // das macht man so eigentlich nicth, die logik dafür was in einem elment passiert sollte im adapter passieren
+        // können wir morgen noch mal drüber reden, da bin ich nicht so spät da
+        /*
+        String itemHeader = "v" + changelog.version;
+        String itemSubtitle = "Veröffentlicht am "; // TODO localize
+
+        SimpleDateFormat format = new SimpleDateFormat("dd.MMM.yyyy hh:mm", Locale.GERMANY);
+        Date newDate = null;
+        try {
+            newDate = format.parse(changelog.release_at);
+            itemSubtitle += format.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            itemSubtitle += "ERROR";
+        }
+
+        TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_cahngelog_group_subtitle);
+
+
+        tv_groupHeader.setText(itemHeader);
+        tv_groupSubtitle.setText(itemSubtitle);
+        */
+
+        tv_groupHeader.setText(changelog);
+
         return convertView;
     }
 
