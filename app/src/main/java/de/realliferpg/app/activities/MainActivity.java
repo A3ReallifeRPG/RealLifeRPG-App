@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             ImprintFragment imprintFragment = new ImprintFragment();
             transaction.replace(R.id.include_main_content, imprintFragment);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_changelog) {
             ChangelogFragment changelogFragment = new ChangelogFragment();
             transaction.replace(R.id.include_main_content, changelogFragment);
         } else if (id == R.id.nav_slideshow) {

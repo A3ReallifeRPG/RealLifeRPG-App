@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Test Imprint" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_changelog"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Test Changelog" />
+            android:title="Changelog" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

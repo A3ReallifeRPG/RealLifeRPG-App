@@ -17,7 +17,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import de.realliferpg.app.R;
@@ -98,11 +100,53 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             listDataHeader = new ArrayList<>();
             listHash = new HashMap<>();
 
+            //List<String> edmtDev = new ArrayList<>();
 
-            listDataHeader.add(changelogs.get(1).toString());
+            //listDataHeader.add(changelogs.get(1).toString());
+            //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
 
 
-            
+            for (de.realliferpg.app.objects.Changelog temp : changelogs) {
+                List<String> changesMap = new ArrayList<>();
+                List<String> changesMission = new ArrayList<>();
+                List<String> changesMod = new ArrayList<>();
+
+                listDataHeader.add(temp.toString());
+
+
+                if(temp.change_map.length > 0){
+                    changesMap.add("Map");
+                    for (String tempmap : temp.change_map) {
+                        changesMap.add(" · " + tempmap);
+                    }
+                    //Collections.addAll(changesMap, temp.change_map); //fügt alle elemente hinzu, jedoch ohne symbol am anfang
+                    listHash.put(temp.toString(), changesMap);
+                }
+
+                if(temp.change_mission.length > 0){
+                    changesMission.add("Mission");
+                    for (String tempmission : temp.change_mission) {
+                        changesMission.add(" · " + tempmission);
+                    }
+                    listHash.put(temp.toString(), changesMission);
+                }
+
+
+                if(temp.change_mod.length > 0){
+                    changesMission.add("Mod");
+                    for (String tempmod : temp.change_mod) {
+                        changesMod.add(" · " + tempmod);
+                    }
+                    listHash.put(temp.toString(), changesMod);
+                }
+
+
+
+
+            }
+
+
+
             listAdapter = new de.realliferpg.app.fragments.ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
             listView.setAdapter(listAdapter);
 
@@ -110,7 +154,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
         }
     }
 
-    private void initData() {
+    private void initData() {  //not used; only for code sample
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
