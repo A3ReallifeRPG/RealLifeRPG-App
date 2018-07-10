@@ -107,41 +107,35 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
             for (de.realliferpg.app.objects.Changelog temp : changelogs) {
-                List<String> changesMap = new ArrayList<>();
-                List<String> changesMission = new ArrayList<>();
-                List<String> changesMod = new ArrayList<>();
+                List<String> changes = new ArrayList<>();
 
                 listDataHeader.add(temp.toString());
 
 
                 if(temp.change_map.length > 0){
-                    changesMap.add("Map");
+                    changes.add("Map");
                     for (String tempmap : temp.change_map) {
-                        changesMap.add(" · " + tempmap);
+                        changes.add(" · " + tempmap);
                     }
                     //Collections.addAll(changesMap, temp.change_map); //fügt alle elemente hinzu, jedoch ohne symbol am anfang
-                    listHash.put(temp.toString(), changesMap);
                 }
 
                 if(temp.change_mission.length > 0){
-                    changesMission.add("Mission");
+                    changes.add("Mission");
                     for (String tempmission : temp.change_mission) {
-                        changesMission.add(" · " + tempmission);
+                        changes.add(" · " + tempmission);
                     }
-                    listHash.put(temp.toString(), changesMission);
                 }
 
 
                 if(temp.change_mod.length > 0){
-                    changesMod.add("Mod");
+                    changes.add("Mod");
                     for (String tempmod : temp.change_mod) {
-                        changesMod.add(" · " + tempmod);
+                        changes.add(" · " + tempmod);
                     }
-                    listHash.put(temp.toString(), changesMod);
                 }
 
-
-
+                listHash.put(temp.toString(), changes);
 
             }
 
