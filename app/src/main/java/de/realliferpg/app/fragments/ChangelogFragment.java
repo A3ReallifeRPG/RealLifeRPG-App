@@ -139,6 +139,8 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                     }
                 }
 
+                changes.add("<i><font color='red'>" + temp.note.toString() + "</font></i>");
+
                 listHash.put(temp.toString(), changes);
 
             }
