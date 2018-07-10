@@ -9,12 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.objects.Changelog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +33,7 @@ import de.realliferpg.app.R;
  * Use the {@link ChangelogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChangelogFragment extends Fragment {
+public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
 
     private ExpandableListView listView;
     private de.realliferpg.app.fragments.ExpandableListAdapter listAdapter;
@@ -64,13 +73,41 @@ public class ChangelogFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_changelog, container, false);
 
-        listView = view.findViewById(R.id.lvExp);
-        initData();
-        listAdapter = new de.realliferpg.app.fragments.ExpandableListAdapter(view.getContext(),listDataHeader,listHash);
-        listView.setAdapter(listAdapter);
+        ApiHelper apiHelper = new ApiHelper(this);
+        apiHelper.getChangelog();
 
 
         return view;
+    }
+
+
+
+    @Override
+    public void onResponse(JSONObject response, Class type) {
+        if (type.equals(Changelog.Wrapper.class)) {
+
+            Gson gson = new Gson();
+            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
+
+            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+
+            listView = this.getActivity().findViewById(R.id.lvExp);
+
+
+
+            listDataHeader = new ArrayList<>();
+            listHash = new HashMap<>();
+
+
+            listDataHeader.add(changelogs.get(1).toString());
+
+
+            
+            listAdapter = new de.realliferpg.app.fragments.ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
+            listView.setAdapter(listAdapter);
+
+
+        }
     }
 
     private void initData() {
