@@ -45,13 +45,6 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ChangelogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ChangelogFragment newInstance() {
         ChangelogFragment fragment = new ChangelogFragment();
         Bundle args = new Bundle();
@@ -62,8 +55,6 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -74,7 +65,6 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
         ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getChangelog();
-
 
         return view;
     }
@@ -138,12 +128,20 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             }
 
-
-
             listAdapter = new ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
             listView.setAdapter(listAdapter);
 
+            // collapse all but selected item
+            listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                int previousItem = -1;
 
+                @Override
+                public void onGroupExpand(int groupPosition) {
+                    if(groupPosition != previousItem )
+                        listView.collapseGroup(previousItem );
+                    previousItem = groupPosition;
+                }
+            });
         }
     }
 
