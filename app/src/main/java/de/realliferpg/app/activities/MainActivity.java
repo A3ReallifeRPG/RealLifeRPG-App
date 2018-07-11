@@ -18,10 +18,12 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
+import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener, ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
+        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener {
 
 
     @SuppressLint("WrongViewCast")
@@ -96,6 +98,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_overview) {
             MainFragment mainFragment = new MainFragment();
             transaction.replace(R.id.include_main_content, mainFragment);
+        } else if (id == R.id.nav_info) {
+            InfoFragment infoFragment = new InfoFragment();
+            transaction.replace(R.id.include_main_content, infoFragment);
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
             startActivity(browserIntent);
@@ -108,7 +113,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         transaction.addToBackStack(null);
-
         transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

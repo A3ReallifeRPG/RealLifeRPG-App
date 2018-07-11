@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_info_vehicles"
+        android:enabled="true"
+        android:icon="@drawable/ic_directions_car_black_24dp"
+        android:title="@string/str_vehicles"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_info_shops"
+        android:enabled="true"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/str_shops"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_info_licenses"
+        android:enabled="true"
+        android:icon="@drawable/ic_bank_black_24dp"
+        android:title="@string/str_licenses"
+        app:showAsAction="ifRoom" />
+</menu>

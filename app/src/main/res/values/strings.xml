@@ -94,4 +94,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="str_overview">Overview</string>
     <string name="str_Servers">Servers</string>
+    <string name="str_information">Information</string>
+    <string name="str_vehicles">Vehicles</string>
+    <string name="str_shops">Shops</string>
+    <string name="str_licenses">Licenses</string>
 </resources>
