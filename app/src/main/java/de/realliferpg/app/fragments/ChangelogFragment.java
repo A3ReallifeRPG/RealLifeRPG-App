@@ -84,7 +84,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
 
-            listView = this.getActivity().findViewById(R.id.lvExp);
+            listView = view.findViewById(R.id.lvExp);
 
             listDataHeader = new ArrayList<>();
             listHash = new HashMap<>();
