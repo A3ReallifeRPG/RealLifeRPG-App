@@ -46,7 +46,6 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
         Server server = getItem(position);
 
-
         String title = server.Servername + " - " + server.Playercount + "/" + server.Slots;
         viewHolder.tvHead.setText(title);
 
@@ -54,11 +53,12 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
         viewHolder.pbPlayers.setProgress((int) progress);
 
-
-        viewHolder.tvPlayerInfo.setText(Html.fromHtml("<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
-                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) +
-                "'>COP " + server.Cops + "</font> - <font color='" +
-                convertView.getResources().getColor(R.color.colorMed) + "'> MED: " + server.Medics + "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC: " + server.Adac + "</font>"));
+        viewHolder.tvPlayerInfo.setText(Html.fromHtml(
+                "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
+                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) + "'>COP " + server.Cops +
+                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorMed) + "'> MED: " + server.Medics +
+                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC: " + server.Adac +
+            "</font>"));
 
         convertView.setTag(viewHolder);
 

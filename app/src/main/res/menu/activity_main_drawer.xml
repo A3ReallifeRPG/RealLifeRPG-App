@@ -17,7 +17,7 @@
 
     </group>
 
-    <group android:checkableBehavior="none" android:id="@+id/nav_group_share">
+    <group android:checkableBehavior="single" android:id="@+id/nav_group_share">
         <item android:title="@string/str_communicate">
             <menu>
                 <item
@@ -36,7 +36,7 @@
         </item>
     </group>
 
-    <group android:checkableBehavior="none" android:id="@+id/nav_group_misc">
+    <group android:checkableBehavior="single" android:id="@+id/nav_group_misc">
         <item
             android:id="@+id/nav_imprint"
             android:icon="@drawable/ic_bank_black_24dp"
