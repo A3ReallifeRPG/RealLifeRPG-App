@@ -7,12 +7,19 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import de.realliferpg.app.R;
+import de.realliferpg.app.adapter.InfoAdapter;
+import de.realliferpg.app.objects.Vehicle;
 
 
 public class InfoFragment extends Fragment {
@@ -55,6 +62,26 @@ public class InfoFragment extends Fragment {
                 return true;
             }
         });
+
+
+        RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(llM);
+
+        ArrayList<Vehicle> list = new ArrayList<>();
+        list.add(new Vehicle("Lada","Slada Shop"));
+        list.add(new Vehicle("Slada","Slada Shop"));
+        list.add(new Vehicle("E63","Mercedes Shop"));
+        list.add(new Vehicle("Mercedes G Klasse","Mercedes Shop"));
+
+        InfoAdapter infoAdapter = new InfoAdapter(list);
+        recyclerView.setAdapter(infoAdapter);
 
         return view;
     }
