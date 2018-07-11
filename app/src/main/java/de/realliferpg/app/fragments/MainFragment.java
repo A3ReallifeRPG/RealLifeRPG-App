@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -54,10 +55,21 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ApiHelper apiHelper = new ApiHelper(this);
+        this.view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        final ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getServers();
 
-        this.view = inflater.inflate(R.layout.fragment_main, container, false);
+        SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
+        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
+        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                apiHelper.getServers();
+            }
+        });
+
+
 
         return view;
     }
@@ -81,6 +93,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
     @Override
     public void onResponse(JSONObject response, Class type) {
+        SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
+
         if (type.equals(Server.Wrapper.class)) {
             Gson gson = new Gson();
 
@@ -92,6 +106,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
+            sc.setRefreshing(false);
         }
     }
 
