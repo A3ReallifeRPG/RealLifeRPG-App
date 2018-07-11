@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +71,9 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String changelog= (String)getGroup(groupPosition);
+        Gson gson = new Gson();
+
+        ArrayList<Changelog> changelog = (ArrayList<Changelog>) getGroup(groupPosition);
 
         if(convertView == null)
         {
@@ -81,7 +87,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         // ich wollte da eigentlcih in subtitle einbauen und habe jetzt aber festgestellt das du gar nicht das komplette changelog array übergibst
         // das macht man so eigentlich nicth, die logik dafür was in einem elment passiert sollte im adapter passieren
         // können wir morgen noch mal drüber reden, da bin ich nicht so spät da
-        /*
+
         String itemHeader = "v" + changelog.version;
         String itemSubtitle = "Veröffentlicht am "; // TODO localize
 
@@ -100,9 +106,9 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setText(itemHeader);
         tv_groupSubtitle.setText(itemSubtitle);
-        */
 
-        tv_groupHeader.setText(changelog);
+
+        //tv_groupHeader.setText(changelog);
 
         return convertView;
     }
