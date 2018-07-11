@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class InfoFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View view;
+    private ArrayList<Vehicle> vehicleArray;
 
 
     public InfoFragment() {
@@ -63,25 +67,58 @@ public class InfoFragment extends Fragment {
             }
         });
 
+        ArrayList<String> shops = new ArrayList<>();
+        shops.add("Slada Shop");
+        shops.add("Mercedes Shop");
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
+                (view.getContext(), android.R.layout.simple_spinner_item,
+                        shops); //selected item will look like a spinner set from XML
 
-        // use a linear layout manager
-        LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
-        recyclerView.setLayoutManager(llM);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        shopSelect.setAdapter(spinnerArrayAdapter);
 
-        ArrayList<Vehicle> list = new ArrayList<>();
-        list.add(new Vehicle("Lada","Slada Shop"));
-        list.add(new Vehicle("Slada","Slada Shop"));
-        list.add(new Vehicle("E63","Mercedes Shop"));
-        list.add(new Vehicle("Mercedes G Klasse","Mercedes Shop"));
+        shopSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String slectedItem = (String) shopSelect.getItemAtPosition(position);
 
-        InfoAdapter infoAdapter = new InfoAdapter(list);
-        recyclerView.setAdapter(infoAdapter);
+
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                recyclerView.setHasFixedSize(true);
+
+                // use a linear layout manager
+                LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
+                recyclerView.setLayoutManager(llM);
+
+                ArrayList<Vehicle> list = new ArrayList<>();
+                for(Vehicle tmpVeh : vehicleArray){
+                    if(tmpVeh.shop.equals(slectedItem)){
+                        list.add(tmpVeh);
+                    }
+                }
+
+                InfoAdapter infoAdapter = new InfoAdapter(list);
+                recyclerView.setAdapter(infoAdapter);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO clear list
+            }
+        });
+
+        vehicleArray = new ArrayList<>();
+        vehicleArray.add(new Vehicle("Lada", "Slada Shop"));
+        vehicleArray.add(new Vehicle("Slada", "Slada Shop"));
+        vehicleArray.add(new Vehicle("E63", "Mercedes Shop"));
+        vehicleArray.add(new Vehicle("Mercedes G Klasse", "Mercedes Shop"));
 
         return view;
     }
