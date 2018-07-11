@@ -41,6 +41,10 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
     private OnFragmentInteractionListener mListener;
 
+
+    private View view;
+
+
     public ChangelogFragment() {
         // Required empty public constructor
     }
@@ -61,7 +65,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_changelog, container, false);
+        this.view = inflater.inflate(R.layout.fragment_changelog, container, false);
 
         ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getChangelog();
