@@ -30,10 +30,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_main_test">
 
         <TextView
+            android:id="@+id/tv_main_s1_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
             android:id="@+id/tv_main_s1_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/str_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

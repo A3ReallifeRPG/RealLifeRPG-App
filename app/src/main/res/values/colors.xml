@@ -8,4 +8,9 @@
     <color name="secondaryDarkColor">#1c313a</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
+
+    <color name="colorCiv">#660080</color>
+    <color name="colorCop">#004D99</color>
+    <color name="colorMed">#008000</color>
+    <color name="colorRac">#800000</color>
 </resources>

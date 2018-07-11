@@ -29,6 +29,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
     private OnFragmentInteractionListener mListener;
 
+    private View view;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -53,7 +55,9 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getServers();
 
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        this.view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        return view;
     }
 
     @Override
@@ -82,13 +86,13 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
 
-            TextView tv = this.getActivity().findViewById(R.id.tv_main_test);
+            TextView tv = view.findViewById(R.id.tv_main_test);
             tv.setText(servers.get(0).toString());
 
             Server server1 = servers.get(0); //TODO actually search for s1
 
-            TextView tvS1Head = this.getActivity().findViewById(R.id.tv_main_s1_head);
-            ProgressBar pbS1Player = this.getActivity().findViewById(R.id.pb_main_s1_players);
+            TextView tvS1Head = view.findViewById(R.id.tv_main_s1_head);
+            ProgressBar pbS1Player = view.findViewById(R.id.pb_main_s1_players);
 
 
             String title = server1.Servername + " - " +  server1.Playercount + "/" + server1.Slots;
