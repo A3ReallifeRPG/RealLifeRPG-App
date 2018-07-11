@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +16,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.adapter.InfoAdapter;
+import de.realliferpg.app.objects.License;
+import de.realliferpg.app.objects.ShopEntry;
 import de.realliferpg.app.objects.Vehicle;
 
 
@@ -29,8 +30,16 @@ public class InfoFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View view;
-    private ArrayList<Vehicle> vehicleArray;
 
+    private ArrayList<Vehicle> vehicleArray = new ArrayList<>();
+    private ArrayList<ShopEntry> shopArray = new ArrayList<>();
+    private ArrayList<License> licenseArray = new ArrayList<>();
+
+    private ArrayList<String> vehicleTypes = new ArrayList<>();
+    private ArrayList<String> shopTypes = new ArrayList<>();
+    private ArrayList<String> licenseTypes = new ArrayList<>();
+
+    private int currentCategory;
 
     public InfoFragment() {
         // Required empty public constructor
@@ -46,9 +55,11 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_info, container, false);
+
+        currentCategory = Constants.CATEGORY_VEHICLE;
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_info);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,27 +67,34 @@ public class InfoFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_info_vehicles:
-
+                        currentCategory = Constants.CATEGORY_VEHICLE;
+                        break;
                     case R.id.action_info_shops:
-
+                        currentCategory = Constants.CATEGORY_SHOP;
+                        break;
                     case R.id.action_info_licenses:
-
+                        currentCategory = Constants.CATEGORY_LICENSE;
+                        break;
                 }
-
+                onCategoryChanged();
                 return true;
             }
         });
 
-        ArrayList<String> shops = new ArrayList<>();
-        shops.add("Slada Shop");
-        shops.add("Mercedes Shop");
+        vehicleTypes = new ArrayList<>();
+        vehicleTypes.add("Slada Shop");
+        vehicleTypes.add("Mercedes Shop");
+
+        shopTypes = new ArrayList<>();
+        shopTypes.add("Jäger");
+        shopTypes.add("Tankstelle");
+
 
         final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
         final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                (view.getContext(), android.R.layout.simple_spinner_item,
-                        shops); //selected item will look like a spinner set from XML
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>
+                (view.getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
 
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                 .simple_spinner_dropdown_item);
@@ -86,7 +104,6 @@ public class InfoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String slectedItem = (String) shopSelect.getItemAtPosition(position);
-
 
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
@@ -121,6 +138,29 @@ public class InfoFragment extends Fragment {
         vehicleArray.add(new Vehicle("Mercedes G Klasse", "Mercedes Shop"));
 
         return view;
+    }
+
+    private void onCategoryChanged(){
+        final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        recyclerView.getRecycledViewPool().clear();
+
+        final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
+
+        ArrayList<String> list = new ArrayList<>();
+        if(currentCategory == Constants.CATEGORY_VEHICLE){
+            list = vehicleTypes;
+        }else if (currentCategory == Constants.CATEGORY_SHOP){
+            list = shopTypes;
+        }else if (currentCategory == Constants.CATEGORY_LICENSE){
+            list = licenseTypes;
+        }
+
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>
+                (view.getContext(), android.R.layout.simple_spinner_item, list);
+
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shopSelect.setAdapter(spinnerArrayAdapter);
     }
 
     @Override
