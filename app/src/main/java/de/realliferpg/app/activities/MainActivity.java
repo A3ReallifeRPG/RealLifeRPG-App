@@ -88,20 +88,21 @@ public class MainActivity extends AppCompatActivity
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_imprint) {
             ImprintFragment imprintFragment = new ImprintFragment();
             transaction.replace(R.id.include_main_content, imprintFragment);
         } else if (id == R.id.nav_changelog) {
             ChangelogFragment changelogFragment = new ChangelogFragment();
             transaction.replace(R.id.include_main_content, changelogFragment);
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_website) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
+            startActivity(browserIntent);
+        } else if (id == R.id.nav_twitter) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/A3ReallifeRPG"));
+            startActivity(browserIntent);
+        } else if (id == R.id.nav_facebook) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/RealLifeRPGCommunity/"));
+            startActivity(browserIntent);
         }
 
         transaction.addToBackStack(null);

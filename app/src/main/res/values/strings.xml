@@ -84,4 +84,10 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="set_playerApiKey">Player API Key</string>
     <string name="str_placeholder">Placeholder</string>
+    <string name="str_website">Website</string>
+    <string name="str_twitter">Twitter</string>
+    <string name="str_facebook">Facebook</string>
+    <string name="str_changelog">Changelog</string>
+    <string name="str_imprint">Imprint</string>
+    <string name="str_communicate">Communicate</string>
 </resources>

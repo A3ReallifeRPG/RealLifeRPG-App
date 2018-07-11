@@ -4,34 +4,32 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Test Imprint" />
+
         <item
             android:id="@+id/nav_changelog"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Changelog" />
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/str_changelog" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_imprint"
+            android:icon="@drawable/ic_bank_black_24dp"
+            android:title="@string/str_imprint" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/str_communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_website"
+                android:icon="@drawable/ic_public_black_24dp"
+                android:title="@string/str_website" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_twitter"
+                android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+                android:title="@string/str_twitter" />
+            <item
+                android:id="@+id/nav_facebook"
+                android:icon="@drawable/ic_rss_feed_black_24dp"
+                android:title="@string/str_facebook" />
         </menu>
     </item>
 
