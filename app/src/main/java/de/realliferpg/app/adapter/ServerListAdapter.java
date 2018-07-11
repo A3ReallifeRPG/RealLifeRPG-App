@@ -16,36 +16,59 @@ import de.realliferpg.app.objects.Server;
 
 public class ServerListAdapter extends ArrayAdapter<Server> {
 
+    Context context;
+
     public ServerListAdapter(Context context, ArrayList<Server> users) {
         super(context, 0, users);
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Server server = getItem(position);
+        final ViewHolder viewHolder;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_server, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.position = position;
+
+            viewHolder.tvPlayerInfo = convertView.findViewById(R.id.tv_list_server_info);
+            viewHolder.tvHead = convertView.findViewById(R.id.tv_list_server_head);
+            viewHolder.pbPlayers = convertView.findViewById(R.id.pb_list_server);
+
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView tvS1Head = convertView.findViewById(R.id.tv_main_s1_head);
-        ProgressBar pbS1Player = convertView.findViewById(R.id.pb_main_s1_players);
+        viewHolder.position = position;
+
+        Server server = getItem(position);
+
 
         String title = server.Servername + " - " + server.Playercount + "/" + server.Slots;
-        tvS1Head.setText(title);
+        viewHolder.tvHead.setText(title);
 
         double progress = ((double) server.Playercount / (double) server.Slots) * 100;
 
-        pbS1Player.setProgress((int) progress);
+        viewHolder.pbPlayers.setProgress((int) progress);
 
-        TextView tvS1PlayerInfo = convertView.findViewById(R.id.tv_main_s1_pInfo);
 
-        tvS1PlayerInfo.setText(Html.fromHtml("<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
+        viewHolder.tvPlayerInfo.setText(Html.fromHtml("<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
                 "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) +
                 "'>COP " + server.Cops + "</font> - <font color='" +
                 convertView.getResources().getColor(R.color.colorMed) + "'> MED: " + server.Medics + "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC: " + server.Adac + "</font>"));
 
+        convertView.setTag(viewHolder);
+
         return convertView;
+    }
+
+    static class ViewHolder {
+        TextView tvHead;
+        TextView tvPlayerInfo;
+        ProgressBar pbPlayers;
+        int position;
     }
 }

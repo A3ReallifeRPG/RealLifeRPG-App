@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_main_head">
 
         <TextView
-            android:id="@+id/tv_main_s1_pInfo"
+            android:id="@+id/tv_list_server_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -32,10 +32,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pb_main_s1_players" />
+            app:layout_constraintTop_toBottomOf="@+id/pb_list_server" />
 
         <TextView
-            android:id="@+id/tv_main_s1_head"
+            android:id="@+id/tv_list_server_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/pb_main_s1_players"
+            android:id="@+id/pb_list_server"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -57,6 +57,6 @@
             android:progressTint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_main_s1_head" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_list_server_head" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
