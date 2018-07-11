@@ -18,9 +18,10 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
+import de.realliferpg.app.fragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,ImprintFragment.OnFragmentInteractionListener , ChangelogFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener,ImprintFragment.OnFragmentInteractionListener , ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener{
 
 
     @SuppressLint("WrongViewCast")
@@ -43,7 +44,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        // Load Main fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        MainFragment imprintFragment = new MainFragment();
+        transaction.replace(R.id.include_main_content, imprintFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override

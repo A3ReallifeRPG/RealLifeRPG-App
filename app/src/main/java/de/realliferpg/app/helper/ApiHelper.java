@@ -3,6 +3,7 @@ package de.realliferpg.app.helper;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.Server;
 
 public class ApiHelper {
 
@@ -15,5 +16,10 @@ public class ApiHelper {
     public void getChangelog() {
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.doJSONRequest(Constants.URL_CHANGELOG,callbackInterface,Changelog.Wrapper.class);
+    }
+
+    public void getServers() {
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,Server.Wrapper.class);
     }
 }

@@ -3,34 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" android:id="@+id/nav_group_main">
+
+        <item
+            android:id="@+id/nav_overview"
+            android:icon="@drawable/ic_show_chart_black_24dp"
+            android:title="@string/str_overview" />
 
         <item
             android:id="@+id/nav_changelog"
             android:icon="@drawable/ic_assignment_black_24dp"
             android:title="@string/str_changelog" />
 
+    </group>
+
+    <group android:checkableBehavior="none" android:id="@+id/nav_group_share">
+        <item android:title="@string/str_communicate">
+            <menu>
+                <item
+                    android:id="@+id/nav_website"
+                    android:icon="@drawable/ic_public_black_24dp"
+                    android:title="@string/str_website" />
+                <item
+                    android:id="@+id/nav_twitter"
+                    android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+                    android:title="@string/str_twitter" />
+                <item
+                    android:id="@+id/nav_facebook"
+                    android:icon="@drawable/ic_rss_feed_black_24dp"
+                    android:title="@string/str_facebook" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="none" android:id="@+id/nav_group_misc">
         <item
             android:id="@+id/nav_imprint"
             android:icon="@drawable/ic_bank_black_24dp"
             android:title="@string/str_imprint" />
     </group>
-
-    <item android:title="@string/str_communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_website"
-                android:icon="@drawable/ic_public_black_24dp"
-                android:title="@string/str_website" />
-            <item
-                android:id="@+id/nav_twitter"
-                android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
-                android:title="@string/str_twitter" />
-            <item
-                android:id="@+id/nav_facebook"
-                android:icon="@drawable/ic_rss_feed_black_24dp"
-                android:title="@string/str_facebook" />
-        </menu>
-    </item>
-
 </menu>
