@@ -26,11 +26,12 @@ import de.realliferpg.app.objects.Changelog;
 public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
+    private  ArrayList<Changelog> changelog;
     private HashMap<String, List<String>> listHashMap;
 
-    public ChangelogAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ChangelogAdapter(Context context, ArrayList<Changelog> changelog, HashMap<String, List<String>> listHashMap) {
         this.context = context;
-        this.listDataHeader = listDataHeader;
+        this.changelog = changelog;
         this.listHashMap = listHashMap;
     }
 
@@ -73,7 +74,8 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Gson gson = new Gson();
 
-        ArrayList<Changelog> changelog = (ArrayList<Changelog>) getGroup(groupPosition);
+        //ArrayList<Changelog> changelog = (ArrayList<Changelog>) getGroup(groupPosition);
+        Changelog changelog = (Changelog) getGroup(groupPosition);
 
         if(convertView == null)
         {

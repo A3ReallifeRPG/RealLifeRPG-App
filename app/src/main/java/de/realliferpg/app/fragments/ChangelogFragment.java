@@ -77,7 +77,8 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
     @Override
     public void onResponse(JSONObject response, Class type) {
-        if (type.equals(Changelog.Wrapper.class)) {
+
+        //if (type.equals(Changelog.Wrapper.class)) {
 
             Gson gson = new Gson();
             Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
@@ -94,9 +95,12 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             //listDataHeader.add(changelogs.get(1).toString());
             //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
 
-
+            /*
             for (Changelog temp : changelogs) {
 
+
+
+                /*
                 List<String> changes = new ArrayList<>();
 
                 listDataHeader.add(temp.toString());
@@ -129,11 +133,13 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 }
 
                 listHash.put(temp.toString(), changes);
+                */
 
-            }
-
-            listAdapter = new ChangelogAdapter(this.getContext(),listDataHeader,listHash);
+       // }
+            listAdapter = new ChangelogAdapter(this.getContext(), changelogs, listHash);
             listView.setAdapter(listAdapter);
+
+
 
             // collapse all but selected item
             listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -146,8 +152,8 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                     previousItem = groupPosition;
                 }
             });
-        }
     }
+
 
     private void initData() {  //not used; only for code sample
         listDataHeader = new ArrayList<>();
