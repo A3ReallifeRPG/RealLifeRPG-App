@@ -4,24 +4,26 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
-import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.Server;
 
 
@@ -86,21 +88,10 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
 
-            TextView tv = view.findViewById(R.id.tv_main_test);
-            tv.setText(servers.get(0).toString());
+            ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
-            Server server1 = servers.get(0); //TODO actually search for s1
-
-            TextView tvS1Head = view.findViewById(R.id.tv_main_s1_head);
-            ProgressBar pbS1Player = view.findViewById(R.id.pb_main_s1_players);
-
-
-            String title = server1.Servername + " - " +  server1.Playercount + "/" + server1.Slots;
-            tvS1Head.setText(title);
-
-            double progress = ((double) server1.Playercount / (double) server1.Slots)*100;
-
-            pbS1Player.setProgress( (int) progress);
+            ListView listView = view.findViewById(R.id.lv_main_serverList);
+            listView.setAdapter(adapter);
         }
     }
 
