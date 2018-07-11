@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -21,7 +22,7 @@ import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
 
-public class ImprintFragment extends Fragment implements RequestCallbackInterface {
+public class ImprintFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,25 +47,15 @@ public class ImprintFragment extends Fragment implements RequestCallbackInterfac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ApiHelper apiHelper = new ApiHelper(this);
-        apiHelper.getChangelog();
+        View view = inflater.inflate(R.layout.fragment_imprint, container, false);
 
-        return inflater.inflate(R.layout.fragment_imprint, container, false);
+        WebView webView = view.findViewById(R.id.wv_imprint_main);
+        webView.loadUrl("file:///android_res/raw/imprint.html");
+
+
+        return view;
     }
 
-    @Override
-    public void onResponse(JSONObject response, Class type) {
-        if (type.equals(Changelog.Wrapper.class)) {
-
-            Gson gson = new Gson();
-            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
-
-            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
-
-            TextView tv = this.getActivity().findViewById(R.id.tv_imprint_main);
-            tv.setText(changelogs.get(1).toString());
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

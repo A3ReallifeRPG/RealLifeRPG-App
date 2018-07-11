@@ -7,12 +7,10 @@
     <string name="nav_notLoggedIn">Not logged in</string>
     <string name="nav_loginInfo">visit info.realliferpg.de</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
-
+    <!-- TODO remove example code, once used correctly and no longer needed as template -->
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 
@@ -88,6 +86,7 @@
     <string name="str_twitter">Twitter</string>
     <string name="str_facebook">Facebook</string>
     <string name="str_changelog">Changelog</string>
-    <string name="str_imprint">Imprint</string>
     <string name="str_communicate">Communicate</string>
+    <string name="str_imprint">Imprint &amp; Privacy</string>
+    <string name="str_imprint_text">RealLifeRPG is a modded Arma 3 Roleplay server.</string>
 </resources>
