@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.realliferpg.app.R;
-import de.realliferpg.app.adapter.ExpandableListAdapter;
+import de.realliferpg.app.adapter.ChangelogAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
@@ -35,7 +35,7 @@ import de.realliferpg.app.objects.Changelog;
 public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
 
     private ExpandableListView listView;
-    private de.realliferpg.app.adapter.ExpandableListAdapter listAdapter;
+    private de.realliferpg.app.adapter.ChangelogAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
 
@@ -128,7 +128,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             }
 
-            listAdapter = new ExpandableListAdapter(this.getContext(),listDataHeader,listHash);
+            listAdapter = new ChangelogAdapter(this.getContext(),listDataHeader,listHash);
             listView.setAdapter(listAdapter);
 
             // collapse all but selected item

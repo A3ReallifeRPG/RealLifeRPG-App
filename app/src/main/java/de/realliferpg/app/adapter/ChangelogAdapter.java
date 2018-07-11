@@ -19,12 +19,12 @@ import java.util.Locale;
 import de.realliferpg.app.R;
 import de.realliferpg.app.objects.Changelog;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ChangelogAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
