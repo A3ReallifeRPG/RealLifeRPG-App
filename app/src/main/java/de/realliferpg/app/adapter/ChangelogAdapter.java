@@ -65,17 +65,17 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         Changelog changelog = changelogs.get(groupPosition);
 
         if(childPosition < changelog.change_mission.length){
-            child = changelog.change_mission[childPosition];
+            child = "&bull;" +changelog.change_mission[childPosition];
         }else{
             int offsetMission = changelog.change_mission.length;
             if((childPosition - offsetMission) < changelog.change_map.length){
-                child = changelog.change_map[(childPosition - offsetMission)];
+                child = "&bull;" +changelog.change_map[(childPosition - offsetMission)];
             }else {
                 int offsetMap =  offsetMission + changelog.change_map.length;
                 if((childPosition - offsetMap) < changelog.change_mod.length){
-                    child = changelog.change_mod[(childPosition - offsetMission)];
+                    child = "&bull;" + changelog.change_mod[(childPosition - offsetMission)];
                 }else{
-                    child = changelog.note;
+                    child = "<i><font color='red'>" + changelog.note + "</font></i>";
                 }
             }
         }
