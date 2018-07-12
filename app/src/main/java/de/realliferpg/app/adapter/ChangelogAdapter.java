@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,34 +24,63 @@ import de.realliferpg.app.objects.Changelog;
 
 public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private  ArrayList<Changelog> changelog;
+    private ArrayList<Changelog> changelogs;
     private HashMap<String, List<String>> listHashMap;
 
-    public ChangelogAdapter(Context context, ArrayList<Changelog> changelog, HashMap<String, List<String>> listHashMap) {
+    public ChangelogAdapter(Context context, ArrayList<Changelog> changelogs, HashMap<String, List<String>> listHashMap) {
         this.context = context;
-        this.changelog = changelog;
+        this.changelogs = changelogs;
         this.listHashMap = listHashMap;
     }
 
     @Override
     public int getGroupCount() {
-        return changelog.size();
+        return changelogs.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return listHashMap.get(changelog.get(i)).size();
+        int count = 0;
+        Changelog changelog = changelogs.get(i);
 
+        count += changelog.change_mission.length;
+        count += changelog.change_map.length;
+        count += changelog.change_mod.length;
+
+        if( !changelog.note.equals("")){
+            count++;
+        }
+
+        return count;
     }
 
     @Override
     public Object getGroup(int i) {
-        return changelog.get(i);
+        return changelogs.get(i);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return listHashMap.get(changelog.get(groupPosition)).get(childPosition); // groupPosition = Group Item , childPosition = ChildItem
+        String child = "";
+        Changelog changelog = changelogs.get(groupPosition);
+
+        if(childPosition < changelog.change_mission.length){
+            child = changelog.change_mission[childPosition];
+        }else{
+            int offsetMission = changelog.change_mission.length;
+            if((childPosition - offsetMission) < changelog.change_map.length){
+                child = changelog.change_map[(childPosition - offsetMission)];
+            }else {
+                int offsetMap =  offsetMission + changelog.change_map.length;
+                if((childPosition - offsetMap) < changelog.change_mod.length){
+                    child = changelog.change_mod[(childPosition - offsetMission)];
+                }else{
+                    child = changelog.note;
+                }
+            }
+        }
+
+        return child;
     }
 
     @Override
@@ -74,7 +102,6 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Gson gson = new Gson();
 
-        //ArrayList<Changelog> changelog = (ArrayList<Changelog>) getGroup(groupPosition);
         Changelog changelog = (Changelog) getGroup(groupPosition);
 
         if(convertView == null)
@@ -84,11 +111,6 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         }
         TextView tv_groupHeader = convertView.findViewById(R.id.tv_changelog_group_header);
         tv_groupHeader.setTypeface(null, Typeface.BOLD);
-
-
-        // ich wollte da eigentlcih in subtitle einbauen und habe jetzt aber festgestellt das du gar nicht das komplette changelog array übergibst
-        // das macht man so eigentlich nicth, die logik dafür was in einem elment passiert sollte im adapter passieren
-        // können wir morgen noch mal drüber reden, da bin ich nicht so spät da
 
         String itemHeader = "v" + changelog.version;
         String itemSubtitle = "Veröffentlicht am "; // TODO localize
@@ -107,10 +129,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
 
         tv_groupHeader.setText(itemHeader);
-        tv_groupSubtitle.setText(itemSubtitle);
-
-
-        //tv_groupHeader.setText(changelog);
+        tv_groupSubtitle.setText(changelog.release_at);
 
         return convertView;
     }
