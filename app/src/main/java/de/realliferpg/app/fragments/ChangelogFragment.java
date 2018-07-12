@@ -95,7 +95,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             //listDataHeader.add(changelogs.get(1).toString());
             //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
 
-            /*
+
             for (Changelog temp : changelogs) {
 
 
@@ -134,9 +134,9 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
                 listHash.put(temp.toString(), changes);
                 */
+                listAdapter = new ChangelogAdapter(this.getContext(), changelogs, listHash);
+            }
 
-       // }
-            listAdapter = new ChangelogAdapter(this.getContext(), changelogs, listHash);
             listView.setAdapter(listAdapter);
 
 
