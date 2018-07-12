@@ -1,5 +1,6 @@
 package de.realliferpg.app.objects;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 
 public class Changelog {
@@ -11,6 +12,9 @@ public class Changelog {
     public int id;
     public String version;
     public String[] change_mission;
+
+
+
     public String[] change_map;
     public String[] change_mod;
 

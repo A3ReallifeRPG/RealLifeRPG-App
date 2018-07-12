@@ -48,20 +48,6 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         count += changelog.change_map.length;
         count += changelog.change_mod.length;
 
-        /*
-
-        if (changelog.change_mission.length > 0){
-            count ++;
-        }
-        if (changelog.change_map.length > 0){
-            count ++;
-        }
-        if (changelog.change_mod.length > 0){
-            count ++;
-        }
-
-        */
-
         if( !changelog.note.equals("")){
             count++;
         }
@@ -79,6 +65,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         String child = "";
         Changelog changelog = changelogs.get(groupPosition);
 
+
         if(childPosition < changelog.change_mission.length){
 
             child = "&bull;" +changelog.change_mission[childPosition];
@@ -92,9 +79,13 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
                     child = "&bull;" + changelog.change_mod[offsetMap];
                 } else{
 
-                    child = "f<i><font color='red'>" + changelog.note + "</font></i>";
+                    child = "<i><font color='red'>" + changelog.note + "</font></i>";
                 }
             }
+        }
+
+        if(child.contains("<b>")){
+            child = child.replace("&bull;","");
         }
 
         return child;
@@ -161,13 +152,13 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.list_item_changeloglititem,null);
         }
 
-
-
         TextView text_changelog_listitem = convertView.findViewById(R.id.tv_changelog_listitem);
         text_changelog_listitem.setText(Html.fromHtml(childText));
-        return convertView;
 
+        return convertView;
     }
+
+
 
 
 

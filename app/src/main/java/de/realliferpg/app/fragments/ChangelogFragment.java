@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,47 +96,28 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             //listDataHeader.add(changelogs.get(1).toString());
             //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
 
+        ArrayList<Changelog> temp = new ArrayList<>();
 
-            for (Changelog temp : changelogs) {
+            for(Changelog temp_changelog : changelogs){
 
-
-
-                /*
-                List<String> changes = new ArrayList<>();
-
-                listDataHeader.add(temp.toString());
-
-                if(temp.change_map.length > 0){
-                    changes.add("<b>Map</b>");
-                    for (String tempmap : temp.change_map) {
-                        changes.add("&bull; " + tempmap);
-                    }
-                    //Collections.addAll(changesMap, temp.change_map); //fügt alle elemente hinzu, jedoch ohne symbol am anfang
+                if (temp_changelog.change_mission.length > 0){
+                    temp_changelog.change_mission = addHeader("<b>Mission</b>",temp_changelog.change_mission);
                 }
 
-                if(temp.change_mission.length > 0){
-                    changes.add("<b>Mission</b>");
-                    for (String tempmission : temp.change_mission) {
-                        changes.add("&bull; " + tempmission);
-                    }
+                if (temp_changelog.change_mod.length > 0){
+                    temp_changelog.change_mod = addHeader("<b>Mod</b>",temp_changelog.change_mod);
                 }
 
-
-                if(temp.change_mod.length > 0){
-                    changes.add("<b>Mod</b>");
-                    for (String tempmod : temp.change_mod) {
-                        changes.add("&bull; " + tempmod);
-                    }
+                if (temp_changelog.change_map.length > 0){
+                    temp_changelog.change_map = addHeader("<b>Map</b>",temp_changelog.change_map);
                 }
 
-                if ( !temp.note.equals("")){
-                    changes.add("<i><font color='red'>" + temp.note + "</font></i>");
-                }
-
-                listHash.put(temp.toString(), changes);
-                */
-                listAdapter = new ChangelogAdapter(this.getContext(), changelogs, listHash);
+                temp.add(temp_changelog);
             }
+
+
+            listAdapter = new ChangelogAdapter(this.getContext(), temp, listHash);
+
 
             listView.setAdapter(listAdapter);
 
@@ -154,6 +136,18 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             });
     }
 
+
+     String[] addHeader(String Headline, String[] changelog_spe){
+        int currentSize = changelog_spe.length;
+        int newSize = currentSize;
+        String[] tempArray = new String[ newSize ];
+        for (int i=1; i < currentSize; i++)
+        {
+            tempArray[i] = changelog_spe[i];
+        }
+        tempArray[0] = Headline;
+        return tempArray;
+    }
 
     private void initData() {  //not used; only for code sample
         listDataHeader = new ArrayList<>();
