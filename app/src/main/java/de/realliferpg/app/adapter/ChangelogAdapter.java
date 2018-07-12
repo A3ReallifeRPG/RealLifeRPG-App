@@ -25,7 +25,6 @@ import de.realliferpg.app.objects.Changelog;
 
 public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private List<String> listDataHeader;
     private  ArrayList<Changelog> changelog;
     private HashMap<String, List<String>> listHashMap;
 
@@ -37,22 +36,23 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return listDataHeader.size();
+        return changelog.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return listHashMap.get(listDataHeader.get(i)).size();
+        return listHashMap.get(changelog.get(i)).size();
+
     }
 
     @Override
     public Object getGroup(int i) {
-        return listDataHeader.get(i);
+        return changelog.get(i);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return listHashMap.get(listDataHeader.get(groupPosition)).get(childPosition); // groupPosition = Group Item , childPosition = ChildItem
+        return listHashMap.get(changelog.get(groupPosition)).get(childPosition); // groupPosition = Group Item , childPosition = ChildItem
     }
 
     @Override
