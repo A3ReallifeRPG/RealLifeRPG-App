@@ -139,11 +139,11 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
      String[] addHeader(String Headline, String[] changelog_spe){
         int currentSize = changelog_spe.length;
-        int newSize = currentSize;
+        int newSize = currentSize +1;
         String[] tempArray = new String[ newSize ];
-        for (int i=1; i < currentSize; i++)
+        for (int i=0; i < currentSize; i++)
         {
-            tempArray[i] = changelog_spe[i];
+            tempArray[i+1] = changelog_spe[i];
         }
         tempArray[0] = Headline;
         return tempArray;
