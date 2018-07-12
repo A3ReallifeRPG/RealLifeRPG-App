@@ -31,6 +31,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         this.context = context;
         this.changelogs = changelogs;
         this.listHashMap = listHashMap;
+
     }
 
     @Override
@@ -46,6 +47,20 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         count += changelog.change_mission.length;
         count += changelog.change_map.length;
         count += changelog.change_mod.length;
+
+        /*
+
+        if (changelog.change_mission.length > 0){
+            count ++;
+        }
+        if (changelog.change_map.length > 0){
+            count ++;
+        }
+        if (changelog.change_mod.length > 0){
+            count ++;
+        }
+
+        */
 
         if( !changelog.note.equals("")){
             count++;
@@ -65,17 +80,19 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
         Changelog changelog = changelogs.get(groupPosition);
 
         if(childPosition < changelog.change_mission.length){
+
             child = "&bull;" +changelog.change_mission[childPosition];
         }else{
             int offsetMission = changelog.change_mission.length;
             if((childPosition - offsetMission) < changelog.change_map.length){
                 child = "&bull;" +changelog.change_map[(childPosition - offsetMission)];
             }else {
-                int offsetMap =  offsetMission + changelog.change_map.length;
-                if((childPosition - offsetMap) < changelog.change_mod.length){
-                    child = "&bull;" + changelog.change_mod[(childPosition - offsetMission)];
-                }else{
-                    child = "<i><font color='red'>" + changelog.note + "</font></i>";
+                int offsetMap =  childPosition - changelog.change_mission.length - changelog.change_map.length;
+                if(offsetMap < changelog.change_mod.length) {
+                    child = "&bull;" + changelog.change_mod[offsetMap];
+                } else{
+
+                    child = "f<i><font color='red'>" + changelog.note + "</font></i>";
                 }
             }
         }
@@ -143,6 +160,8 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_changeloglititem,null);
         }
+
+
 
         TextView text_changelog_listitem = convertView.findViewById(R.id.tv_changelog_listitem);
         text_changelog_listitem.setText(Html.fromHtml(childText));
