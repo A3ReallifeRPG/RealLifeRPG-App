@@ -25,26 +25,11 @@ import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ChangelogFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ChangelogFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
 
     private ExpandableListView listView;
-    private de.realliferpg.app.adapter.ChangelogAdapter listAdapter;
-    private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
-
     private OnFragmentInteractionListener mListener;
-
-
     private View view;
-
 
     public ChangelogFragment() {
         // Required empty public constructor
@@ -75,11 +60,10 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     }
 
 
-
     @Override
     public void onResponse(JSONObject response, Class type) {
 
-        //if (type.equals(Changelog.Wrapper.class)) {
+        if (type.equals(Changelog.Wrapper.class)) {
 
             Gson gson = new Gson();
             Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
@@ -88,40 +72,28 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             listView = view.findViewById(R.id.lvExp);
 
-            listDataHeader = new ArrayList<>();
-            listHash = new HashMap<>();
+            ArrayList<Changelog> temp = new ArrayList<>();
 
-            //List<String> edmtDev = new ArrayList<>();
+            for (Changelog temp_changelog : changelogs) {
 
-            //listDataHeader.add(changelogs.get(1).toString());
-            //listHash.put(listDataHeader.get(0), Arrays.asList(changelogs.get(1).change_map));
-
-        ArrayList<Changelog> temp = new ArrayList<>();
-
-            for(Changelog temp_changelog : changelogs){
-
-                if (temp_changelog.change_mission.length > 0){
-                    temp_changelog.change_mission = addHeader("<b>Mission</b>",temp_changelog.change_mission);
+                if (temp_changelog.change_mission.length > 0) {
+                    temp_changelog.change_mission = addHeader("<b>Mission</b>", temp_changelog.change_mission);
                 }
 
-                if (temp_changelog.change_mod.length > 0){
-                    temp_changelog.change_mod = addHeader("<b>Mod</b>",temp_changelog.change_mod);
+                if (temp_changelog.change_mod.length > 0) {
+                    temp_changelog.change_mod = addHeader("<b>Mod</b>", temp_changelog.change_mod);
                 }
 
-                if (temp_changelog.change_map.length > 0){
-                    temp_changelog.change_map = addHeader("<b>Map</b>",temp_changelog.change_map);
+                if (temp_changelog.change_map.length > 0) {
+                    temp_changelog.change_map = addHeader("<b>Map</b>", temp_changelog.change_map);
                 }
 
                 temp.add(temp_changelog);
             }
 
-
-            listAdapter = new ChangelogAdapter(this.getContext(), temp, listHash);
-
+            ChangelogAdapter listAdapter = new ChangelogAdapter(this.getContext(), temp);
 
             listView.setAdapter(listAdapter);
-
-
 
             // collapse all but selected item
             listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -129,67 +101,22 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
                 @Override
                 public void onGroupExpand(int groupPosition) {
-                    if(groupPosition != previousItem )
-                        listView.collapseGroup(previousItem );
+                    if (groupPosition != previousItem)
+                        listView.collapseGroup(previousItem);
                     previousItem = groupPosition;
                 }
             });
+        }
     }
 
 
-     String[] addHeader(String Headline, String[] changelog_spe){
+    String[] addHeader(String Headline, String[] changelog_spe) {
         int currentSize = changelog_spe.length;
-        int newSize = currentSize +1;
-        String[] tempArray = new String[ newSize ];
-        for (int i=0; i < currentSize; i++)
-        {
-            tempArray[i+1] = changelog_spe[i];
-        }
+        int newSize = currentSize + 1;
+        String[] tempArray = new String[newSize];
+        System.arraycopy(changelog_spe, 0, tempArray, 1, currentSize);
         tempArray[0] = Headline;
         return tempArray;
-    }
-
-    private void initData() {  //not used; only for code sample
-        listDataHeader = new ArrayList<>();
-        listHash = new HashMap<>();
-
-        listDataHeader.add("EDMTDev");
-        listDataHeader.add("Android");
-        listDataHeader.add("Xamarin");
-        listDataHeader.add("UWP");
-
-        List<String> edmtDev = new ArrayList<>();
-        edmtDev.add("This is Expandable ListView");
-
-        List<String> androidStudio = new ArrayList<>();
-        androidStudio.add("Expandable ListView");
-        androidStudio.add("Google Map");
-        androidStudio.add("Chat Application");
-        androidStudio.add("Firebase ");
-
-        List<String> xamarin = new ArrayList<>();
-        xamarin.add("Xamarin Expandable ListView");
-        xamarin.add("Xamarin Google Map");
-        xamarin.add("Xamarin Chat Application");
-        xamarin.add("Xamarin Firebase ");
-
-        List<String> uwp = new ArrayList<>();
-        uwp.add("UWP Expandable ListView");
-        uwp.add("UWP Google Map");
-        uwp.add("UWP Chat Application");
-        uwp.add("UWP Firebase ");
-
-        listHash.put(listDataHeader.get(0),edmtDev);
-        listHash.put(listDataHeader.get(1),androidStudio);
-        listHash.put(listDataHeader.get(2),xamarin);
-        listHash.put(listDataHeader.get(3),uwp);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

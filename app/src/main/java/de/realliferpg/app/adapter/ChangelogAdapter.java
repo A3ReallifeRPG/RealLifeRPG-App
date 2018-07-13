@@ -15,8 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import de.realliferpg.app.R;
@@ -25,13 +23,10 @@ import de.realliferpg.app.objects.Changelog;
 public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<Changelog> changelogs;
-    private HashMap<String, List<String>> listHashMap;
 
-    public ChangelogAdapter(Context context, ArrayList<Changelog> changelogs, HashMap<String, List<String>> listHashMap) {
+    public ChangelogAdapter(Context context, ArrayList<Changelog> changelogs) {
         this.context = context;
         this.changelogs = changelogs;
-        this.listHashMap = listHashMap;
-
     }
 
     @Override
@@ -62,7 +57,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        String child = "";
+        String child;
         Changelog changelog = changelogs.get(groupPosition);
 
 
