@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -100,13 +102,22 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             Server.Wrapper value = gson.fromJson(response.toString(), Server.Wrapper.class);
 
-            ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
+            final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
 
             ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
             ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
+
+            final ListView lv = view.findViewById(R.id.lv_main_serverList);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+                    String selectedFromList = (String) lv.getItemAtPosition(myItemInt).toString();
+                    Log.d("test", Arrays.toString(servers.get(myItemInt).Players));
+                }
+            });
         }
     }
 
