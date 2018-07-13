@@ -1,18 +1,24 @@
 package de.realliferpg.app.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -100,22 +106,41 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             Server.Wrapper value = gson.fromJson(response.toString(), Server.Wrapper.class);
 
-            ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
+            final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
 
             ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
             ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
-        }else if (type.equals(PlayerInfo.Wrapper.class)){
-            Gson gson = new Gson();
 
-            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
+            final ListView lv = view.findViewById(R.id.lv_main_serverList);
 
-            PlayerInfo playerInfo = value.data[0];
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+                    String selectedFromList = (String) lv.getItemAtPosition(myItemInt).toString();
+                    Log.d("test", Arrays.toString(servers.get(myItemInt).Players));
 
+                    AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
+                    ad.setCancelable(false); // This blocks the 'BACK' button
 
+                    String players = "";
 
+                    for(String player: servers.get(myItemInt).Players)
+                    {
+                        players = players + "\n" + player;
+                    }
+                    
+                    ad.setMessage(players);
+                    ad.setButton("schließen", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+                }
+            });
         }
     }
 
