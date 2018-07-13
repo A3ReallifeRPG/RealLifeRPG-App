@@ -17,7 +17,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_main_head"
@@ -36,15 +36,32 @@
             <ListView
                 android:id="@+id/lv_main_serverList"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_main_head" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lv_main_serverList">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="TextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/str_placeholder" />
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

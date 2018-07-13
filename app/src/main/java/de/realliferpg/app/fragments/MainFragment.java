@@ -25,6 +25,7 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
 
@@ -59,6 +60,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
         final ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getServers();
+        apiHelper.getPlayerStats();
 
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -68,8 +70,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 apiHelper.getServers();
             }
         });
-
-
 
         return view;
     }
@@ -107,6 +107,15 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
+        }else if (type.equals(PlayerInfo.Wrapper.class)){
+            Gson gson = new Gson();
+
+            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
+
+            PlayerInfo playerInfo = value.data[0];
+
+
+
         }
     }
 
