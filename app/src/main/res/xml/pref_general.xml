@@ -14,6 +14,16 @@
         android:singleLine="true"
         android:title="@string/set_playerApiKey" />
 
+    <Preference
+        android:id="@+id/scan_qr_code"
+        android:capitalize="words"
+        android:inputType="textPassword"
+        android:key="scan_qr_code"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Scan QR Code" />
+
 
     <!-- Template Preferences for later use -->
     <!--
