@@ -1,6 +1,9 @@
 package de.realliferpg.app.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -116,6 +120,25 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                     String selectedFromList = (String) lv.getItemAtPosition(myItemInt).toString();
                     Log.d("test", Arrays.toString(servers.get(myItemInt).Players));
+
+                    AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
+                    ad.setCancelable(false); // This blocks the 'BACK' button
+
+                    String players = "";
+
+                    for(String player: servers.get(myItemInt).Players)
+                    {
+                        players = players + "\n" + player;
+                    }
+                    
+                    ad.setMessage(players);
+                    ad.setButton("schließen", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
                 }
             });
         }
