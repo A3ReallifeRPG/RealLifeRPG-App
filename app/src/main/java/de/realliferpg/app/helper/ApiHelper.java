@@ -26,6 +26,9 @@ public class ApiHelper {
 
     public void getPlayerStats() {
         NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS,callbackInterface,PlayerInfo.Wrapper.class);
+
+        String secret = "ff3dd7b15cf05768dcdfc78c4fb784dd";
+
+        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
     }
 }

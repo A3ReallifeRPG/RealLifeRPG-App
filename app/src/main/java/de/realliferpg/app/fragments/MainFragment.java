@@ -110,15 +110,13 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
-            ListView listView = view.findViewById(R.id.lv_main_serverList);
+            final ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
 
-            final ListView lv = view.findViewById(R.id.lv_main_serverList);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
-                    String selectedFromList = (String) lv.getItemAtPosition(myItemInt).toString();
+                    String selectedFromList = (String) listView.getItemAtPosition(myItemInt).toString();
                     Log.d("test", Arrays.toString(servers.get(myItemInt).Players));
 
                     AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
@@ -141,6 +139,31 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                     ad.show();
                 }
             });
+        }else if (type.equals(PlayerInfo.Wrapper.class)) {
+            Gson gson = new Gson();
+
+            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
+
+            PlayerInfo playerInfo = value.data[0];
+
+            TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
+            TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
+            TextView tvPiGUID = view.findViewById(R.id.tv_main_playerInfo_guid);
+
+            TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
+            TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
+            TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
+            TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+
+            tvPiName.setText(playerInfo.name);
+            tvPiPID.setText(playerInfo.pid);
+            tvPiGUID.setText(playerInfo.guid);
+
+            tvPiInfoBank.setText(String.valueOf( playerInfo.bankacc + " $"));
+            tvPiInfoCash.setText(String.valueOf( playerInfo.cash  + " $"));
+            tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
+            tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
+
         }
     }
 

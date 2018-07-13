@@ -98,4 +98,10 @@
     <string name="str_vehicles">Vehicles</string>
     <string name="str_shops">Shops</string>
     <string name="str_licenses">Licenses</string>
+    <string name="str_playerInfo">Player Info</string>
+    <string name="str_null">0</string>
+    <string name="str_bank">Bank</string>
+    <string name="str_cash">Cash</string>
+    <string name="str_level">Level</string>
+    <string name="str_skillpoint">Skillpoint</string>
 </resources>

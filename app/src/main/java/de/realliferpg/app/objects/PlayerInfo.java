@@ -51,4 +51,9 @@ public class PlayerInfo {
     public String avatar_medium;
     public String profilename;
     public String profileurl;
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " PID:" + pid + " Name: " + name;
+    }
 }
