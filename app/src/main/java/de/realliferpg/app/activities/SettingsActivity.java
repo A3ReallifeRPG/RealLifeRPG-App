@@ -1,8 +1,12 @@
 package de.realliferpg.app.activities;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -16,10 +20,15 @@ import android.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.Toolbar;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import de.realliferpg.app.R;
 
@@ -180,8 +189,21 @@ public class SettingsActivity extends PreferenceActivity {
 
             // do not bind API key to prevent preview from showing secret
             //bindPreferenceSummaryToValue(findPreference("api_player_key"));
+            Preference pref = findPreference("scan_qr_code");
+            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new IntentIntegrator(getActivity()).initiateScan();
+
+
+                    return false;
+                }
+
+
+            });
 
         }
+
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
@@ -192,6 +214,28 @@ public class SettingsActivity extends PreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.d("test","cancelled");
+            } else {
+                Log.d("test",result.getContents());
+                SharedPreferences.Editor editor = getPrefsEditor(this);
+                editor.putString("api_player_key", result.getContents());
+                editor.commit();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private static SharedPreferences.Editor getPrefsEditor(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.edit();
     }
 
     /**
