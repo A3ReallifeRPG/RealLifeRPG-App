@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
@@ -33,6 +35,7 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
@@ -75,14 +78,11 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                apiHelper.getServers();
+                apiHelper.getServers(); apiHelper.getPlayerStats();
             }
         });
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-        TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
 
-        tvPiName.setText(prefs.getString("api_player_key", ""));
 
         return view;
     }
@@ -105,7 +105,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     }
 
     @Override
-    public void onResponse(JSONObject response, Class type) {
+    public void onResponse(Object response, Class type) {
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
 
         if (type.equals(Server.Wrapper.class)) {
@@ -124,19 +124,19 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                     String selectedFromList = (String) listView.getItemAtPosition(myItemInt).toString();
-                    Log.d("test", Arrays.toString(servers.get(myItemInt).Players));
+                    Log.d("MainFragment", Arrays.toString(servers.get(myItemInt).Players));
 
                     AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
                     ad.setCancelable(false); // This blocks the 'BACK' button
 
-                    String players = "";
+                    StringBuilder players = new StringBuilder();
 
                     for(String player: servers.get(myItemInt).Players)
                     {
-                        players = players + "\n" + player;
+                        players.append("\n").append(player);
                     }
                     
-                    ad.setMessage(players);
+                    ad.setMessage(players.toString());
                     ad.setButton("schließen", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -170,6 +170,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoCash.setText(String.valueOf( playerInfo.cash  + " $"));
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
+
+        }else if (type.equals(CustomNetworkError.class)){
 
         }
     }

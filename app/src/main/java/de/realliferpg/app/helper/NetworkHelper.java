@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
-import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.CustomNetworkError;
 
 public class NetworkHelper {
 
@@ -29,6 +29,7 @@ public class NetworkHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("NetworkHelper","Error in response");
+                        callback.onResponse(error,CustomNetworkError.class);
 
                     }
                 });

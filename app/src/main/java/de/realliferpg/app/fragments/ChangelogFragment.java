@@ -61,7 +61,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
     @Override
-    public void onResponse(JSONObject response, Class type) {
+    public void onResponse(Object response, Class type) {
 
         if (type.equals(Changelog.Wrapper.class)) {
 
