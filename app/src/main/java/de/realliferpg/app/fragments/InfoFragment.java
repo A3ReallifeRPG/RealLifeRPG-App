@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import de.realliferpg.app.adapter.InfoAdapter;
 import de.realliferpg.app.adapter.InfoSpinnerAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.License;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
@@ -38,14 +40,6 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
 
     private OnFragmentInteractionListener mListener;
     private View view;
-
-    private ArrayList<Vehicle> vehicleArray = new ArrayList<>();
-    private ArrayList<ShopEntry> shopArray = new ArrayList<>();
-    private ArrayList<License> licenseArray = new ArrayList<>();
-
-    private ArrayList<String> vehicleTypes = new ArrayList<>();
-    private ArrayList<String> shopTypes = new ArrayList<>();
-    private ArrayList<String> licenseTypes = new ArrayList<>();
 
     private int currentCategory;
 
@@ -89,35 +83,22 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
             }
         });
 
-        ApiHelper apiHelper = new ApiHelper(this);
+        final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        final ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getShops(currentCategory);
 
-        final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
         final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
 
         shopSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Shop slectedItem = (Shop) shopSelect.getItemAtPosition(position);
-
-                // use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
-                recyclerView.setHasFixedSize(true);
-
-                // use a linear layout manager
-                LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
-                recyclerView.setLayoutManager(llM);
-
-                ArrayList<Vehicle> list = new ArrayList<>();
-
-                InfoAdapter infoAdapter = new InfoAdapter(list);
-                recyclerView.setAdapter(infoAdapter);
-
+                Shop shop = (Shop) shopSelect.getItemAtPosition(position);
+                apiHelper.getShopInfo(currentCategory,shop.shoptype);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // TODO clear list
+                recyclerView.setAdapter(null);
             }
         });
 
@@ -162,6 +143,33 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
             InfoSpinnerAdapter spinnerArrayAdapter = new InfoSpinnerAdapter(view.getContext(), shops);
 
             shopSelect.setAdapter(spinnerArrayAdapter);
+        }else if (type.equals(CustomNetworkError.class)){
+            CustomNetworkError error = (CustomNetworkError) response;
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_info), error.toString(), Snackbar.LENGTH_LONG);
+
+            snackbar.show();
+        }else {
+            Gson gson = new Gson();
+
+            RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+            recyclerView.setHasFixedSize(true);
+
+            LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
+            recyclerView.setLayoutManager(llM);
+            
+            if(type.equals(Vehicle.Wrapper.class)){
+                Vehicle.Wrapper value = gson.fromJson(response.toString(), Vehicle.Wrapper.class);
+                ArrayList<Vehicle> vehicles = new ArrayList<>(Arrays.asList(value.data));
+
+                InfoAdapter<Vehicle> infoAdapter = new InfoAdapter<>(vehicles);
+                recyclerView.setAdapter(infoAdapter);
+            } else if(type.equals(ShopEntry.Wrapper.class)){
+                ShopEntry.Wrapper value = gson.fromJson(response.toString(), ShopEntry.Wrapper.class);
+                ArrayList<ShopEntry> vehicles = new ArrayList<>(Arrays.asList(value.data));
+
+                InfoAdapter<ShopEntry> infoAdapter = new InfoAdapter<>(vehicles);
+                recyclerView.setAdapter(infoAdapter);
+            }
         }
     }
 

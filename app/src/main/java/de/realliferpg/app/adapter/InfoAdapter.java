@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.objects.Shop;
+import de.realliferpg.app.objects.ShopEntry;
 import de.realliferpg.app.objects.Vehicle;
 
 public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder> {
@@ -58,7 +60,12 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
             Vehicle vehicle = (Vehicle) object;
 
             holder.tvHead.setText(vehicle.name);
-            holder.tvSub.setText(vehicle.shopname);
+            holder.tvSub.setText(String.valueOf(vehicle.price));
+        }else if (object instanceof ShopEntry){
+            ShopEntry shop = (ShopEntry) object;
+
+            holder.tvHead.setText(shop.name);
+            holder.tvSub.setText(String.valueOf(shop.price));
         }
     }
 
