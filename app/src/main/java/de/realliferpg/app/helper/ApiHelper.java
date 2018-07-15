@@ -32,7 +32,7 @@ public class ApiHelper {
         NetworkHelper networkHelper = new NetworkHelper();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Singleton.getInstance().getContext());
-        String secret = prefs.getString("player_api_key","");
+        String secret = prefs.getString("api_player_key","");
 
         networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
     }

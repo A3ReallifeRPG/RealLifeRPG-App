@@ -174,7 +174,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_INDEFINITE);
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);
 
             snackbar.show();
         }
