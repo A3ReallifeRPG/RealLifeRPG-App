@@ -15,7 +15,7 @@
         android:title="@string/set_playerApiKey" />
 
     <Preference
-        android:id="@+id/scan_qr_code"
+        android:id="@+id/set_scan_qr_code"
         android:capitalize="words"
         android:inputType="textPassword"
         android:key="scan_qr_code"

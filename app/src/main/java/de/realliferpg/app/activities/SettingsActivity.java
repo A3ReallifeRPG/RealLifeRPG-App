@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -189,17 +190,17 @@ public class SettingsActivity extends PreferenceActivity {
 
             // do not bind API key to prevent preview from showing secret
             //bindPreferenceSummaryToValue(findPreference("api_player_key"));
+
+            // setup "scan" setting as qr code button
             Preference pref = findPreference("scan_qr_code");
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    new IntentIntegrator(getActivity()).initiateScan();
-
-
+                    IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
+                    intentIntegrator.addExtra(Intents.Scan.BEEP_ENABLED,false);
+                    intentIntegrator.initiateScan();
                     return false;
                 }
-
-
             });
 
         }
@@ -221,9 +222,9 @@ public class SettingsActivity extends PreferenceActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                Log.d("test","cancelled");
+                Log.d("SettingsActivity","cancelled");
             } else {
-                Log.d("test",result.getContents());
+                Log.d("SettingsActivity",result.getContents());
                 SharedPreferences.Editor editor = getPrefsEditor(this);
                 editor.putString("api_player_key", result.getContents());
                 editor.commit();
@@ -237,6 +238,11 @@ public class SettingsActivity extends PreferenceActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.edit();
     }
+
+
+    // ------------------------ UNUSED AUTO GENERATED TEMPLATE CODE
+
+
 
     /**
      * This fragment shows notification preferences only. It is used when the

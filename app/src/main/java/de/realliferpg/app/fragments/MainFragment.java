@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
@@ -76,6 +78,11 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 apiHelper.getServers();
             }
         });
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
+
+        tvPiName.setText(prefs.getString("api_player_key", ""));
 
         return view;
     }
