@@ -156,7 +156,7 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
 
             LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
             recyclerView.setLayoutManager(llM);
-            
+
             if(type.equals(Vehicle.Wrapper.class)){
                 Vehicle.Wrapper value = gson.fromJson(response.toString(), Vehicle.Wrapper.class);
                 ArrayList<Vehicle> vehicles = new ArrayList<>(Arrays.asList(value.data));
