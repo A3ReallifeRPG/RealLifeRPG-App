@@ -6,6 +6,7 @@ public class Constants {
 
     public static final String URL_SERVER = "https://api.realliferpg.de/v1/servers";
 
+    public static final String URL_PLAYERSTATS = "https://api.realliferpg.de/v1/player/";
 
     public static final int CATEGORY_VEHICLE = 1;
     public static final int CATEGORY_SHOP = 2;

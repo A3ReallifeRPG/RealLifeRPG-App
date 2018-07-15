@@ -3,6 +3,7 @@ package de.realliferpg.app.helper;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
 public class ApiHelper {
@@ -21,5 +22,13 @@ public class ApiHelper {
     public void getServers() {
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,Server.Wrapper.class);
+    }
+
+    public void getPlayerStats() {
+        NetworkHelper networkHelper = new NetworkHelper();
+
+        String secret = "ff3dd7b15cf05768dcdfc78c4fb784dd";
+
+        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
     }
 }
