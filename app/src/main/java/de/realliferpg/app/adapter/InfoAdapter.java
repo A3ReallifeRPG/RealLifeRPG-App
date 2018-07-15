@@ -57,8 +57,8 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
         if(object instanceof Vehicle){
             Vehicle vehicle = (Vehicle) object;
 
-            holder.tvHead.setText(vehicle.displayName);
-            holder.tvSub.setText(vehicle.displayName);
+            holder.tvHead.setText(vehicle.name);
+            holder.tvSub.setText(vehicle.shopname);
         }
     }
 

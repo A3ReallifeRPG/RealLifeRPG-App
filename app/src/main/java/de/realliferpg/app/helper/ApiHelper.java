@@ -9,6 +9,7 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
+import de.realliferpg.app.objects.Shop;
 
 public class ApiHelper {
 
@@ -36,4 +37,15 @@ public class ApiHelper {
 
         networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
     }
+
+    public void getShops(int shopType) {
+        NetworkHelper networkHelper = new NetworkHelper();
+
+        if(shopType == Constants.CATEGORY_SHOP){
+            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_ITEMS,callbackInterface,Shop.Wrapper.class);
+        }else if(shopType == Constants.CATEGORY_VEHICLE){
+            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_VEHICLES,callbackInterface,Shop.Wrapper.class);
+        }
+    }
+
 }

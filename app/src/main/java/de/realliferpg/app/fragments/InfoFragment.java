@@ -16,17 +16,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.adapter.InfoAdapter;
+import de.realliferpg.app.adapter.InfoSpinnerAdapter;
+import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.License;
+import de.realliferpg.app.objects.Server;
+import de.realliferpg.app.objects.Shop;
 import de.realliferpg.app.objects.ShopEntry;
 import de.realliferpg.app.objects.Vehicle;
 
 
-public class InfoFragment extends Fragment {
+public class InfoFragment extends Fragment implements RequestCallbackInterface {
 
     private OnFragmentInteractionListener mListener;
     private View view;
@@ -81,29 +89,16 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        vehicleTypes = new ArrayList<>();
-        vehicleTypes.add("Slada Shop");
-        vehicleTypes.add("Mercedes Shop");
-
-        shopTypes = new ArrayList<>();
-        shopTypes.add("Jäger");
-        shopTypes.add("Tankstelle");
-
+        ApiHelper apiHelper = new ApiHelper(this);
+        apiHelper.getShops(currentCategory);
 
         final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
         final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>
-                (view.getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
-
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        shopSelect.setAdapter(spinnerArrayAdapter);
-
         shopSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String slectedItem = (String) shopSelect.getItemAtPosition(position);
+                Shop slectedItem = (Shop) shopSelect.getItemAtPosition(position);
 
                 // use this setting to improve performance if you know that changes
                 // in content do not change the layout size of the RecyclerView
@@ -114,11 +109,6 @@ public class InfoFragment extends Fragment {
                 recyclerView.setLayoutManager(llM);
 
                 ArrayList<Vehicle> list = new ArrayList<>();
-                for(Vehicle tmpVeh : vehicleArray){
-                    if(tmpVeh.shop.equals(slectedItem)){
-                        list.add(tmpVeh);
-                    }
-                }
 
                 InfoAdapter infoAdapter = new InfoAdapter(list);
                 recyclerView.setAdapter(infoAdapter);
@@ -131,36 +121,15 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        vehicleArray = new ArrayList<>();
-        vehicleArray.add(new Vehicle("Lada", "Slada Shop"));
-        vehicleArray.add(new Vehicle("Slada", "Slada Shop"));
-        vehicleArray.add(new Vehicle("E63", "Mercedes Shop"));
-        vehicleArray.add(new Vehicle("Mercedes G Klasse", "Mercedes Shop"));
-
         return view;
     }
 
     private void onCategoryChanged(){
-        final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
-        recyclerView.getRecycledViewPool().clear();
-
         final Spinner shopSelect = view.findViewById(R.id.sp_info_select);
+        shopSelect.setAdapter(null);
 
-        ArrayList<String> list = new ArrayList<>();
-        if(currentCategory == Constants.CATEGORY_VEHICLE){
-            list = vehicleTypes;
-        }else if (currentCategory == Constants.CATEGORY_SHOP){
-            list = shopTypes;
-        }else if (currentCategory == Constants.CATEGORY_LICENSE){
-            list = licenseTypes;
-        }
-
-
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>
-                (view.getContext(), android.R.layout.simple_spinner_item, list);
-
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shopSelect.setAdapter(spinnerArrayAdapter);
+        ApiHelper apiHelper = new ApiHelper(this);
+        apiHelper.getShops(currentCategory);
     }
 
     @Override
@@ -178,6 +147,22 @@ public class InfoFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResponse(Object response, Class type) {
+        if (type.equals(Shop.Wrapper.class)) {
+            Gson gson = new Gson();
+
+            Shop.Wrapper value = gson.fromJson(response.toString(), Shop.Wrapper.class);
+            final ArrayList<Shop> shops = new ArrayList<>(Arrays.asList(value.data));
+
+            Spinner shopSelect = view.findViewById(R.id.sp_info_select);
+
+            InfoSpinnerAdapter spinnerArrayAdapter = new InfoSpinnerAdapter(view.getContext(), shops);
+
+            shopSelect.setAdapter(spinnerArrayAdapter);
+        }
     }
 
     /**
