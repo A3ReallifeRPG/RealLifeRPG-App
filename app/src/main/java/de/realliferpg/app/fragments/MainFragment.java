@@ -24,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -172,7 +173,10 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
 
         }else if (type.equals(CustomNetworkError.class)){
+            CustomNetworkError error = (CustomNetworkError) response;
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_INDEFINITE);
 
+            snackbar.show();
         }
     }
 

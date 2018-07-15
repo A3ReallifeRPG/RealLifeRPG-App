@@ -29,8 +29,12 @@ public class NetworkHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("NetworkHelper","Error in response");
-                        callback.onResponse(error,CustomNetworkError.class);
+                        CustomNetworkError customNetworkError = new CustomNetworkError();
+                        customNetworkError.requestReturnClass = type;
+                        customNetworkError.statusCode = error.networkResponse.statusCode;
+                        customNetworkError.msg = error.getMessage();
 
+                        callback.onResponse(customNetworkError,CustomNetworkError.class);
                     }
                 });
 
