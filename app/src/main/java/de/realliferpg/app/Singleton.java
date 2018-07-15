@@ -17,7 +17,7 @@ public class Singleton {
     }
 
     private RequestQueue volleyQueue;
-    private static Context context;
+    private Context context;
 
     public RequestQueue getRequestQueue() {
         if (volleyQueue == null) {
@@ -33,7 +33,9 @@ public class Singleton {
     }
 
 
-    public static void setContext(Context context) {
-        Singleton.context = context;
+    public void setContext(Context context) {
+        this.context = context;
     }
+
+    public Context getContext (){return this.context;}
 }
