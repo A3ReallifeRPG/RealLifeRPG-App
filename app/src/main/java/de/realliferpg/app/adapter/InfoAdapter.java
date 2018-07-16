@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.objects.Shop;
 import de.realliferpg.app.objects.ShopEntry;
 import de.realliferpg.app.objects.Vehicle;
@@ -52,7 +53,7 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        FormatHelper formatHelper = new FormatHelper();
         Object object = dataArray.get(position);
 
         if (object instanceof Vehicle) {
@@ -61,14 +62,14 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
             holder.tvHead.setText(vehicle.name);
             holder.tvSub.setText("V-Items: " + vehicle.v_space + " kg\nLevel: " + vehicle.level);
 
-            holder.tvRight.setText(String.valueOf(vehicle.price) + "$");
+            holder.tvRight.setText(formatHelper.formatCurrency(vehicle.price));
         } else if (object instanceof ShopEntry) {
             ShopEntry shop = (ShopEntry) object;
 
             holder.tvHead.setText(shop.name);
             holder.tvSub.setText("Level: " + shop.level);
 
-            holder.tvRight.setText(String.valueOf(shop.price) + "$");
+            holder.tvRight.setText(formatHelper.formatCurrency(shop.price));
         }
     }
 

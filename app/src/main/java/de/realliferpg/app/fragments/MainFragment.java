@@ -35,6 +35,7 @@ import java.util.Arrays;
 import de.realliferpg.app.R;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
@@ -167,8 +168,10 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiPID.setText(playerInfo.pid);
             tvPiGUID.setText(playerInfo.guid);
 
-            tvPiInfoBank.setText(String.valueOf( playerInfo.bankacc + " $"));
-            tvPiInfoCash.setText(String.valueOf( playerInfo.cash  + " $"));
+            FormatHelper formatHelper = new FormatHelper();
+
+            tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
+            tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
 
