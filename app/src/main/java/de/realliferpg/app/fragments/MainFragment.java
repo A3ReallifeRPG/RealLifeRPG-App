@@ -76,19 +76,11 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         apiHelper.getServers();
         apiHelper.getPlayerStats();
 
-        final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
-        final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
-
-        pbServer.setVisibility(View.VISIBLE);
-        pbPlayer.setVisibility(View.VISIBLE);
-
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                pbServer.setVisibility(View.VISIBLE);
-                pbPlayer.setVisibility(View.VISIBLE);
                 apiHelper.getServers();
                 apiHelper.getPlayerStats();
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
@@ -160,10 +152,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                     ad.show();
                 }
             });
-
-            ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
-            //pbServer.setVisibility(View.GONE);
-
         }else if (type.equals(PlayerInfo.Wrapper.class)) {
             Gson gson = new Gson();
             FormatHelper formatHelper = new FormatHelper();
@@ -189,9 +177,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
-
-            ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
-            //pbPlayer.setVisibility(View.GONE);
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
             mListener.onFragmentInteraction(Uri.parse("update_login_state"));
