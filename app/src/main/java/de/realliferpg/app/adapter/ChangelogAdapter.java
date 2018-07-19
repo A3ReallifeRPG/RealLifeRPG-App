@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.objects.Changelog;
 
 public class ChangelogAdapter extends BaseExpandableListAdapter {
@@ -103,7 +104,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Gson gson = new Gson();
+        FormatHelper formatHelper = new FormatHelper();
 
         Changelog changelog = (Changelog) getGroup(groupPosition);
 
@@ -112,27 +113,17 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
         }
+
+        TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_cahngelog_group_subtitle);
         TextView tv_groupHeader = convertView.findViewById(R.id.tv_changelog_group_header);
+
+
         tv_groupHeader.setTypeface(null, Typeface.BOLD);
 
         String itemHeader = "v" + changelog.version;
-        String itemSubtitle = "Veröffentlicht am "; // TODO localize
-
-        SimpleDateFormat format = new SimpleDateFormat("dd.MMM.yyyy hh:mm", Locale.GERMANY);
-        Date newDate = null;
-        try {
-            newDate = format.parse(changelog.release_at);
-            itemSubtitle += format.format(newDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            itemSubtitle += "ERROR";
-        }
-
-        TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_cahngelog_group_subtitle);
-
 
         tv_groupHeader.setText(itemHeader);
-        tv_groupSubtitle.setText(changelog.release_at);
+        tv_groupSubtitle.setText(formatHelper.toDateTime(formatHelper.getApiDate(changelog.release_at)));
 
         return convertView;
     }
@@ -152,10 +143,6 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
         return convertView;
     }
-
-
-
-
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

@@ -174,8 +174,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
 
-
-            formatHelper.formatApiDate(playerInfo.created_at);
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
             Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);

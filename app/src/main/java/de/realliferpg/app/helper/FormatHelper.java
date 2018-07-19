@@ -17,21 +17,11 @@ public class FormatHelper {
         return format.format(input) + " $";
     }
 
-    public String formatApiDate(String input){
+    public String toDateTime(Date input){
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date newDate = null;
-        try {
-            newDate = format.parse(input);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long milliDate = newDate.getTime();
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(milliDate);
-        String test = format.format(cal.getTime());
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
-        return "";
+        return format.format(input);
     }
 
     public Date getApiDate(String input){
