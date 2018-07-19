@@ -6,6 +6,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import de.realliferpg.app.objects.PlayerInfo;
+
 public class Singleton {
     private static final Singleton instance = new Singleton();
 
@@ -18,6 +20,8 @@ public class Singleton {
 
     private RequestQueue volleyQueue;
     private Context context;
+
+    private PlayerInfo playerInfo;
 
     public RequestQueue getRequestQueue() {
         if (volleyQueue == null) {
@@ -38,4 +42,12 @@ public class Singleton {
     }
 
     public Context getContext (){return this.context;}
+
+    public PlayerInfo getPlayerInfo() {
+        return playerInfo;
+    }
+
+    public void setPlayerInfo(PlayerInfo playerInfo) {
+        this.playerInfo = playerInfo;
+    }
 }

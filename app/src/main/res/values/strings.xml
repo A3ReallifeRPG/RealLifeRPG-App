@@ -104,4 +104,6 @@
     <string name="str_cash">Cash</string>
     <string name="str_level">Level</string>
     <string name="str_skillpoint">Skillpoint</string>
+    <string name="str_forum">Forum</string>
+    <string name="str_logged_in">Logged in as</string>
 </resources>

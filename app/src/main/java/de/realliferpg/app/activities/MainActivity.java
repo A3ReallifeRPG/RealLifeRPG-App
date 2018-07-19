@@ -11,8 +11,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -20,6 +22,7 @@ import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
+import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -104,6 +108,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
             startActivity(browserIntent);
+        } else if (id == R.id.nav_forum) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forum.realliferpg.de"));
+            startActivity(browserIntent);
         } else if (id == R.id.nav_twitter) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/A3ReallifeRPG"));
             startActivity(browserIntent);
@@ -115,13 +122,27 @@ public class MainActivity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+        Log.d("MainActivity","Fragment interaction");
 
+        switch (uri.toString()){
+            case "update_login_state":{
+                PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
+
+                TextView tvInfo = findViewById(R.id.tv_nav_info);
+                TextView tvHead = findViewById(R.id.tv_nav_head);
+
+                tvHead.setText(R.string.str_logged_in);
+                tvInfo.setText(playerInfo.name);
+
+                break;
+            }
+        }
     }
 }

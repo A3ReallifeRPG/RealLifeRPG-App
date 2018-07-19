@@ -12,12 +12,12 @@
 
         <item
             android:id="@+id/nav_changelog"
-            android:icon="@drawable/ic_assignment_black_24dp"
+            android:icon="@drawable/ic_clipboard"
             android:title="@string/str_changelog" />
 
         <item
             android:id="@+id/nav_info"
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_info_filled"
             android:title="@string/str_information" />
 
     </group>
@@ -27,15 +27,19 @@
             <menu>
                 <item
                     android:id="@+id/nav_website"
-                    android:icon="@drawable/ic_public_black_24dp"
+                    android:icon="@drawable/ic_globe"
                     android:title="@string/str_website" />
+                <item
+                    android:id="@+id/nav_forum"
+                    android:icon="@drawable/ic_comment"
+                    android:title="@string/str_forum" />
                 <item
                     android:id="@+id/nav_twitter"
                     android:icon="@drawable/ic_chat_bubble"
                     android:title="@string/str_twitter" />
                 <item
                     android:id="@+id/nav_facebook"
-                    android:icon="@drawable/ic_rss_feed_black_24dp"
+                    android:icon="@drawable/ic_rss"
                     android:title="@string/str_facebook" />
             </menu>
         </item>
@@ -44,7 +48,7 @@
     <group android:checkableBehavior="single" android:id="@+id/nav_group_misc">
         <item
             android:id="@+id/nav_imprint"
-            android:icon="@drawable/ic_bank_black_24dp"
+            android:icon="@drawable/ic_bank"
             android:title="@string/str_imprint" />
     </group>
 </menu>

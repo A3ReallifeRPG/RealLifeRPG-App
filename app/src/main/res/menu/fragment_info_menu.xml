@@ -10,13 +10,13 @@
     <item
         android:id="@+id/action_info_shops"
         android:enabled="true"
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:icon="@drawable/ic_shopping_cart"
         android:title="@string/str_shops"
         app:showAsAction="ifRoom" />
     <!--<item
         android:id="@+id/action_info_licenses"
         android:enabled="true"
-        android:icon="@drawable/ic_bank_black_24dp"
+        android:icon="@drawable/ic_bank"
         android:title="@string/str_licenses"
         app:showAsAction="ifRoom" />-->
 </menu>

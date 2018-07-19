@@ -130,7 +130,7 @@
                     android:layout_marginTop="16dp"
                     android:contentDescription="@string/str_bank"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_bank_black_24dp"
+                    android:src="@drawable/ic_bank"
                     android:tint="@color/primaryColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_main_playerInfo_guid" />
@@ -143,7 +143,7 @@
                     android:layout_marginTop="8dp"
                     android:contentDescription="@string/str_cash"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_attach_money_black_24dp"
+                    android:src="@drawable/ic_money"
                     android:tint="@color/primaryColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_main_playerInfo_bank" />
@@ -230,7 +230,33 @@
                     app:layout_constraintEnd_toStartOf="@+id/iv_main_playerInfo_skill"
                     app:layout_constraintTop_toTopOf="@+id/iv_main_playerInfo_skill" />
 
+                <ProgressBar
+                    android:id="@+id/pb_main_player"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_main_playerHead" />
+
             </android.support.constraint.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_main_server"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/lv_main_serverList" />
 
         </android.support.constraint.ConstraintLayout>
 

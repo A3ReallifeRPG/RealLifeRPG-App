@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
@@ -75,12 +76,23 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         apiHelper.getServers();
         apiHelper.getPlayerStats();
 
+        final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+        final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+
+        pbServer.setVisibility(View.VISIBLE);
+        pbPlayer.setVisibility(View.VISIBLE);
+
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                apiHelper.getServers(); apiHelper.getPlayerStats();
+                pbServer.setVisibility(View.VISIBLE);
+                pbPlayer.setVisibility(View.VISIBLE);
+                apiHelper.getServers();
+                apiHelper.getPlayerStats();
+                final ListView listView = view.findViewById(R.id.lv_main_serverList);
+                listView.setAdapter(null);
             }
         });
 
@@ -125,7 +137,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
-                    String selectedFromList = (String) listView.getItemAtPosition(myItemInt).toString();
+                    String selectedFromList = listView.getItemAtPosition(myItemInt).toString();
                     Log.d("MainFragment", Arrays.toString(servers.get(myItemInt).Players));
 
                     AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
@@ -148,6 +160,10 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                     ad.show();
                 }
             });
+
+            ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+            //pbServer.setVisibility(View.GONE);
+
         }else if (type.equals(PlayerInfo.Wrapper.class)) {
             Gson gson = new Gson();
             FormatHelper formatHelper = new FormatHelper();
@@ -174,6 +190,11 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
 
+            ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+            //pbPlayer.setVisibility(View.GONE);
+
+            Singleton.getInstance().setPlayerInfo(playerInfo);
+            mListener.onFragmentInteraction(Uri.parse("update_login_state"));
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
             Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);
