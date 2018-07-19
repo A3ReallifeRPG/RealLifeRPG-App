@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_info_vehicles"
         android:enabled="true"
-        android:icon="@drawable/ic_directions_car_black_24dp"
+        android:icon="@drawable/ic_car"
         android:title="@string/str_vehicles"
         app:showAsAction="ifRoom" />
     <item

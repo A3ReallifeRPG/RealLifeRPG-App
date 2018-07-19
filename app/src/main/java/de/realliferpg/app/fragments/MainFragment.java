@@ -150,6 +150,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             });
         }else if (type.equals(PlayerInfo.Wrapper.class)) {
             Gson gson = new Gson();
+            FormatHelper formatHelper = new FormatHelper();
 
             PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
 
@@ -168,13 +169,13 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiPID.setText(playerInfo.pid);
             tvPiGUID.setText(playerInfo.guid);
 
-            FormatHelper formatHelper = new FormatHelper();
-
             tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
             tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
 
+
+            formatHelper.formatApiDate(playerInfo.created_at);
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
             Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);

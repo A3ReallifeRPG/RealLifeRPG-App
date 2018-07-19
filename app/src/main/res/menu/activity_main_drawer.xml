@@ -31,7 +31,7 @@
                     android:title="@string/str_website" />
                 <item
                     android:id="@+id/nav_twitter"
-                    android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+                    android:icon="@drawable/ic_chat_bubble"
                     android:title="@string/str_twitter" />
                 <item
                     android:id="@+id/nav_facebook"

@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
     tools:context=".fragments.ImprintFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,7 +16,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:text="@string/str_imprint"
-        android:textColor="@color/secondaryDarkColor"
+        android:textColor="@color/secondaryTextColor"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,12 +24,11 @@
     <WebView
         android:id="@+id/wv_imprint_main"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/secondaryLightColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_imprint_head" />

@@ -5,6 +5,7 @@
     android:id="@+id/cl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
     tools:context=".fragments.MainFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +36,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
                 android:text="@string/str_Servers"
-                android:textColor="@color/secondaryDarkColor"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_playerInfo"
-                    android:textColor="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +88,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/str_placeholder"
-                    android:textColor="@color/primaryDarkColor"
+                    android:textColor="@color/primaryLightColor"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +102,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_placeholder"
+                    android:textColor="@color/secondaryLightColor"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,6 +131,7 @@
                     android:contentDescription="@string/str_bank"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_bank_black_24dp"
+                    android:tint="@color/primaryColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_main_playerInfo_guid" />
 
@@ -141,6 +144,7 @@
                     android:contentDescription="@string/str_cash"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_attach_money_black_24dp"
+                    android:tint="@color/primaryColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_main_playerInfo_bank" />
 
@@ -153,6 +157,7 @@
                     android:contentDescription="@string/str_level"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_show_chart_black_24dp"
+                    android:tint="@color/primaryColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_main_playerInfo_guid" />
 
@@ -165,6 +170,7 @@
                     android:contentDescription="@string/str_skillpoint"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_bubble_chart_black_24dp"
+                    android:tint="@color/primaryColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_main_playerInfo_level" />
 
@@ -176,7 +182,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_null"
-                    android:textColor="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_main_playerInfo_bank"
                     app:layout_constraintStart_toEndOf="@+id/iv_main_playerInfo_bank"
@@ -190,7 +196,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_null"
-                    android:textColor="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_main_playerInfo_cash"
                     app:layout_constraintStart_toEndOf="@+id/iv_main_playerInfo_cash"
@@ -204,7 +210,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_null"
-                    android:textColor="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_main_playerInfo_level"
                     app:layout_constraintEnd_toStartOf="@+id/iv_main_playerInfo_level"
@@ -218,7 +224,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="2dp"
                     android:text="@string/str_null"
-                    android:textColor="@color/secondaryDarkColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_main_playerInfo_skill"
                     app:layout_constraintEnd_toStartOf="@+id/iv_main_playerInfo_skill"
