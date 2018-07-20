@@ -19,6 +19,7 @@ import android.preference.PreferenceActivity;
 import android.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
@@ -134,6 +135,20 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+
+        boolean scanCode = false;
+        try{
+            scanCode = getIntent().getExtras().getBoolean("scan_code",false);
+        }catch (NullPointerException ignored){
+
+        }
+
+        if(scanCode){
+            IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+            intentIntegrator.addExtra(Intents.Scan.BEEP_ENABLED,false);
+            intentIntegrator.initiateScan();
+        }
+
     }
 
     /**
@@ -216,6 +231,7 @@ public class SettingsActivity extends PreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

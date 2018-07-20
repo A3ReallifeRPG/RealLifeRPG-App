@@ -22,7 +22,7 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Scan QR Code" />
+        android:title="@string/str_scan" />
 
 
     <!-- Template Preferences for later use -->

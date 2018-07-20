@@ -69,7 +69,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/F:/Programme/android-studio-stable/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_comment_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/F:/Programme/android-studio-stable/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_linked_camera_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -79,7 +79,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_comment" />
+                            <entry key="outputName" value="ic_linked_camera" />
                             <entry key="sourceFile" value="C:\Users\vabene1111" />
                           </map>
                         </option>

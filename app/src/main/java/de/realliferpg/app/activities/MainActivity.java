@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.realliferpg.app.R;
@@ -52,10 +54,21 @@ public class MainActivity extends AppCompatActivity
 
         // Load Main fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        MainFragment imprintFragment = new MainFragment();
-        transaction.replace(R.id.include_main_content, imprintFragment);
+        MainFragment mainFragment = new MainFragment();
+        transaction.replace(R.id.include_main_content, mainFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+        View header = navigationView.getHeaderView(0);
+        ImageButton imageButton = header.findViewById(R.id.ib_nav_scanCode);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SettingsActivity.class);
+                intent.putExtra("scan_code",true);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
