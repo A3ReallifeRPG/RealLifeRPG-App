@@ -8,11 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
@@ -44,7 +49,29 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
+
+        if(Singleton.getInstance().getPlayerInfo() == null){
+            ApiHelper apiHelper = new ApiHelper(this);
+            apiHelper.getPlayerStats();
+        }else{
+            showPlayerInfo();
+        }
+
         return view;
+    }
+
+    public void showPlayerInfo(){
+        PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
+
+        ImageView ivProfilePic = view.findViewById(R.id.iv_player_profile);
+
+        Picasso.get().load(playerInfo.avatar_full).into(ivProfilePic);
+
+        TextView tvName = view.findViewById(R.id.tv_player_name);
+        TextView tvPid = view.findViewById(R.id.tv_player_pid);
+
+        tvName.setText(playerInfo.name);
+        tvPid.setText(playerInfo.pid);
     }
 
     @Override
@@ -76,6 +103,8 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
             mListener.onFragmentInteraction(Uri.parse("update_login_state"));
+
+            showPlayerInfo();
         } else if (type.equals(CustomNetworkError.class)) {
             CustomNetworkError error = (CustomNetworkError) response;
             Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);
@@ -87,4 +116,5 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }

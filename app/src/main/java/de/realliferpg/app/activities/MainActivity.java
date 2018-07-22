@@ -25,11 +25,12 @@ import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
+import de.realliferpg.app.fragments.PlayerStatsFragment;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
-        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener, PlayerFragment.OnFragmentInteractionListener {
+        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener, PlayerFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener {
 
 
     @SuppressLint("WrongViewCast")

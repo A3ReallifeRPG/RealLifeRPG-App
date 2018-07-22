@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/fragment_info_menu">
+        app:menu="@menu/bnv_info">
 
     </android.support.design.widget.BottomNavigationView>
 
