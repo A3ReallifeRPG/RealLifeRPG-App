@@ -24,11 +24,12 @@ import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
+import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
-        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener {
+        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener, PlayerFragment.OnFragmentInteractionListener {
 
 
     @SuppressLint("WrongViewCast")
@@ -118,6 +119,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_info) {
             InfoFragment infoFragment = new InfoFragment();
             transaction.replace(R.id.include_main_content, infoFragment);
+        } else if (id == R.id.nav_player) {
+            PlayerFragment playerFragment = new PlayerFragment();
+            transaction.replace(R.id.include_main_content, playerFragment);
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
             startActivity(browserIntent);

@@ -107,4 +107,5 @@
     <string name="str_forum">Forum</string>
     <string name="str_logged_in">Logged in as</string>
     <string name="str_scan">Scan QR Code</string>
+    <string name="str_player_info">Player Info</string>
 </resources>
