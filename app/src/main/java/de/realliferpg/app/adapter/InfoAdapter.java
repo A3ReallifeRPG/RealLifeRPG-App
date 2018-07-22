@@ -50,7 +50,6 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
         return new ViewHolder(v);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FormatHelper formatHelper = new FormatHelper();

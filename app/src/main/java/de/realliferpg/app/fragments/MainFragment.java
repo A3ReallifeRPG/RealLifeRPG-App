@@ -132,7 +132,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                     }
                     
                     ad.setMessage(players.toString());
-                    ad.setButton("schließen", new DialogInterface.OnClickListener() {
+                    ad.setButton(getString(R.string.str_close), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
