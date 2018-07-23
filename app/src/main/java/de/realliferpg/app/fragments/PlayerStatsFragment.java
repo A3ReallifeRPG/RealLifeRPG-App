@@ -62,12 +62,18 @@ public class PlayerStatsFragment extends Fragment {
         TextView tvLevelNext = view.findViewById(R.id.tv_p_stats_level_next);
         ProgressBar pbLevel = view.findViewById(R.id.pb_p_stats_level);
 
+        TextView tvSkillpoint = view.findViewById(R.id.tv_p_stats_skillpoint);
+        TextView tvLastSeen = view.findViewById(R.id.tv_p_stats_last_seen);
+
         tvCash.setText(formatHelper.formatCurrency(playerInfo.cash));
         tvBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
 
         tvLevelCur.setText(String.valueOf(playerInfo.level));
         tvLevelNext.setText(String.valueOf(playerInfo.level + 1));
         pbLevel.setProgress(playerInfo.level_progress);
+
+        tvLastSeen.setText(formatHelper.toDateTime(formatHelper.getApiDate(playerInfo.last_seen.date)));
+        tvSkillpoint.setText(String.valueOf(playerInfo.skillpoint));
     }
 
     @Override

@@ -103,7 +103,7 @@
     <string name="str_bank">Bank</string>
     <string name="str_cash">Cash</string>
     <string name="str_level">Level</string>
-    <string name="str_skillpoint">Skillpoint</string>
+    <string name="str_skillpoint">Skillpoint(s)</string>
     <string name="str_forum">Forum</string>
     <string name="str_logged_in">Logged in as</string>
     <string name="str_scan">Scan QR Code</string>
@@ -124,4 +124,5 @@
     <string name="str_deleted">Deleted</string>
     <string name="str_permanent">Permanent</string>
     <string name="str_days">Day(s)</string>
+    <string name="str_lastSeen">Last seen</string>
 </resources>

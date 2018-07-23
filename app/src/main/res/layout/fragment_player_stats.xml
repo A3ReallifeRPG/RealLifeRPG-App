@@ -108,4 +108,50 @@
         app:layout_constraintBottom_toTopOf="@+id/pb_p_stats_level"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/lbl_p_stats_skillpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/str_skillpoint"
+        android:textColor="@color/primaryColor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pb_p_stats_level" />
+
+    <TextView
+        android:id="@+id/lbl_p_stats_last_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_lastSeen"
+        android:textColor="@color/primaryColor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_p_stats_skillpoint" />
+
+    <TextView
+        android:id="@+id/tv_p_stats_skillpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/str_null"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lbl_p_stats_skillpoint"
+        app:layout_constraintTop_toTopOf="@+id/lbl_p_stats_skillpoint" />
+
+    <TextView
+        android:id="@+id/tv_p_stats_last_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/str_null"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lbl_p_stats_last_seen"
+        app:layout_constraintTop_toTopOf="@+id/lbl_p_stats_last_seen" />
+
 </android.support.constraint.ConstraintLayout>
