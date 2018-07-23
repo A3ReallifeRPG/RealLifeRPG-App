@@ -115,4 +115,13 @@
     <string name="str_activated">Activated</string>
     <string name="str_stats">Stats</string>
     <string name="str_donations">Donations</string>
+    <string name="str_unknown">Unknown</string>
+    <string name="str_bronze">Bronze</string>
+    <string name="str_silver">Silver</string>
+    <string name="str_gold">Gold</string>
+    <string name="str_platin">Platin</string>
+    <string name="str_donation">Donation</string>
+    <string name="str_deleted">Deleted</string>
+    <string name="str_permanent">Permanent</string>
+    <string name="str_days">Day(s)</string>
 </resources>

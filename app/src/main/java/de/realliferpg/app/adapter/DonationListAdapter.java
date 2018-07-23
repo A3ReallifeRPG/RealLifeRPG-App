@@ -58,41 +58,42 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
 
         Donation donation = donations.get(position);
 
-        String level = "Unknown";
+        String level = holder.context.getString(R.string.str_unknown);
         switch (donation.level){
             case 1:{
                 holder.ivIcon.setImageResource(R.drawable.donate_bronze);
-                level = "Bronze";
+                level = holder.context.getString(R.string.str_bronze);
                 break;
             }
             case 2:{
                 holder.ivIcon.setImageResource(R.drawable.donate_silver);
-                level = "Silver";
+                level = holder.context.getString(R.string.str_silver);
                 break;
             }
             case 3:{
                 holder.ivIcon.setImageResource(R.drawable.donate_gold);
-                level = "Gold";
+                level = holder.context.getString(R.string.str_gold);
                 break;
             }
             case 4:{
                 holder.ivIcon.setImageResource(R.drawable.donate_platin);
-                level = "Platin";
+                level = holder.context.getString(R.string.str_platin);
                 break;
             }
         }
 
-        holder.tvHead.setText(level + " Donation - " + formatHelper.formatCurrency(donation.amount));
+        String head = level + " " + holder.context.getString(R.string.str_donation) + " - " + formatHelper.formatCurrency(donation.amount);
+        holder.tvHead.setText(head);
 
         String status;
         if (donation.active == 0){
-            status = "Deleted";
+            status = holder.context.getString(R.string.str_deleted);
         }else if(donation.duration == -1){
-            status = "Permanent";
+            status = holder.context.getString(R.string.str_permanent);
         }else if (donation.duration > 45){ // TODO calc
-            status = "Expired";
+            status = holder.context.getString(R.string.str_expired);
         }else{
-            status = donation.duration + " Day(s)";
+            status = donation.duration + " " + holder.context.getString(R.string.str_days);
         }
 
         holder.tvStatus.setText(status);
