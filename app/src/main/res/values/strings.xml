@@ -113,4 +113,6 @@
     <string name="str_close">close</string>
     <string name="str_expired">Expired</string>
     <string name="str_activated">Activated</string>
+    <string name="str_stats">Stats</string>
+    <string name="str_donations">Donations</string>
 </resources>

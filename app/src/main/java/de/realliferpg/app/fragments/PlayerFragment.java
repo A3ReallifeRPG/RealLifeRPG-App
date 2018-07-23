@@ -3,8 +3,12 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.helper.ApiHelper;
@@ -50,12 +55,31 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
 
+        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_stats"));
+
         if(Singleton.getInstance().getPlayerInfo() == null){
             ApiHelper apiHelper = new ApiHelper(this);
             apiHelper.getPlayerStats();
         }else{
             showPlayerInfo();
         }
+
+        BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.bnv_player_stats:
+                        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_stats"));
+                        break;
+                    case R.id.bnv_player_donation:
+                        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_donation"));
+                        break;
+                }
+                return true;
+            }
+        });
 
         return view;
     }

@@ -2,6 +2,7 @@ package de.realliferpg.app.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -164,6 +165,21 @@ public class MainActivity extends AppCompatActivity
 
                 break;
             }
+            case "fragment_player_change_to_stats": {
+                changePlayerFragment(new PlayerStatsFragment());
+                break;
+            }
+            case "fragment_player_change_to_donation": {
+                changePlayerFragment(new PlayerDonationFragment());
+                break;
+            }
         }
+    }
+
+    void changePlayerFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.include_player_content, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

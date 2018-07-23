@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_info_vehicles"
+        android:id="@+id/bnv_player_stats"
         android:enabled="true"
         android:icon="@drawable/ic_chart"
-        android:title="Stats"
+        android:title="@string/str_stats"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_info_shops"
+        android:id="@+id/bnv_player_donation"
         android:enabled="true"
         android:icon="@drawable/ic_shopping_cart"
-        android:title="Donations"
+        android:title="@string/str_donations"
         app:showAsAction="ifRoom" />
 
 </menu>
