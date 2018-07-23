@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 
@@ -56,6 +57,9 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
         ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getChangelog();
 
+        ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
+        pbChangelog.setVisibility(View.VISIBLE);
+
         return view;
     }
 
@@ -70,7 +74,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
 
-            listView = view.findViewById(R.id.lvExp);
+            listView = view.findViewById(R.id.lv_changelog_main);
 
             ArrayList<Changelog> temp = new ArrayList<>();
 
@@ -94,6 +98,9 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
             ChangelogAdapter listAdapter = new ChangelogAdapter(this.getContext(), temp);
 
             listView.setAdapter(listAdapter);
+
+            ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
+            pbChangelog.setVisibility(View.GONE);
 
             // collapse all but selected item
             listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {

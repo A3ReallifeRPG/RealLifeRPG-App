@@ -65,9 +65,9 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
         currentCategory = Constants.CATEGORY_VEHICLE;
 
         final ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
-        pbContent.setVisibility(View.GONE);
+        pbContent.setVisibility(View.VISIBLE);
         final ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
-        pbCategory.setVisibility(View.GONE);
+        pbCategory.setVisibility(View.VISIBLE);
 
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_info);
@@ -118,11 +118,18 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
     }
 
     private void onCategoryChanged(){
+        // clear spinner
         Spinner shopSelect = view.findViewById(R.id.sp_info_select);
         shopSelect.setAdapter(null);
 
         ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
         pbCategory.setVisibility(View.VISIBLE);
+
+        // clear content
+        RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        recyclerView.setAdapter(null);
+        ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
+        pbContent.setVisibility(View.VISIBLE);
 
         ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getShops(currentCategory);

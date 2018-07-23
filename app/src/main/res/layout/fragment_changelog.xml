@@ -5,10 +5,11 @@
     android:id="@+id/cl_changelog_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
     tools:context=".fragments.ChangelogFragment">
 
     <ExpandableListView
-        android:id="@+id/lvExp"
+        android:id="@+id/lv_changelog_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="4dp"
@@ -17,5 +18,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ExpandableListView>
+
+    <ProgressBar
+        android:id="@+id/pb_changelog_main"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lv_changelog_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

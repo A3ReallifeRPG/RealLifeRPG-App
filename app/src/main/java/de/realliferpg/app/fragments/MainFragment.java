@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -65,6 +66,18 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         apiHelper.getServers();
         apiHelper.getPlayerStats();
 
+        final TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
+        final TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
+        final TextView tvPiGUID = view.findViewById(R.id.tv_main_playerInfo_guid);
+        tvPiName.setText("");
+        tvPiPID.setText("");
+        tvPiGUID.setText("");
+
+        final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+        final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+        pbPlayer.setVisibility(View.VISIBLE);
+        pbServer.setVisibility(View.VISIBLE);
+
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -72,6 +85,14 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             public void onRefresh() {
                 apiHelper.getServers();
                 apiHelper.getPlayerStats();
+
+                pbPlayer.setVisibility(View.VISIBLE);
+                pbServer.setVisibility(View.VISIBLE);
+
+                tvPiName.setText("");
+                tvPiPID.setText("");
+                tvPiGUID.setText("");
+
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
                 listView.setAdapter(null);
             }
@@ -111,6 +132,9 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
 
             ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
+
+            final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+            pbServer.setVisibility(View.GONE);
 
             final ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
@@ -166,6 +190,9 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
             tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
             tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
+
+            final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+            pbPlayer.setVisibility(View.GONE);
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
             mListener.onFragmentInteraction(Uri.parse("update_login_state"));
