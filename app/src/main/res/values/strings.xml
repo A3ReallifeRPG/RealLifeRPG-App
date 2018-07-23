@@ -111,4 +111,6 @@
     <string name="str_profilePicture">Profile Picture</string>
     <string name="str_pid">PID</string>
     <string name="str_close">close</string>
+    <string name="str_expired">Expired</string>
+    <string name="str_activated">Activated</string>
 </resources>

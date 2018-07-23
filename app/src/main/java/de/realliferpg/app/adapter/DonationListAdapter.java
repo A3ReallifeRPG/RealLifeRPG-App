@@ -20,7 +20,7 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
     private ArrayList<Donation> donations;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvHead;
+        TextView tvHead, tvStatus, tvSub;
         ImageView ivIcon;
 
         private Context context;
@@ -29,6 +29,8 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
             super(itemView);
 
             tvHead = itemView.findViewById(R.id.tv_list_donate_head);
+            tvSub = itemView.findViewById(R.id.tv_list_donate_sub);
+            tvStatus = itemView.findViewById(R.id.tv_list_donate_status);
             ivIcon = itemView.findViewById(R.id.iv_list_donate);
 
             context = itemView.getContext();
@@ -56,27 +58,46 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
 
         Donation donation = donations.get(position);
 
-        holder.tvHead.setText(String.valueOf(donation.amount));
-
+        String level = "Unknown";
         switch (donation.level){
             case 1:{
                 holder.ivIcon.setImageResource(R.drawable.donate_bronze);
+                level = "Bronze";
                 break;
             }
             case 2:{
                 holder.ivIcon.setImageResource(R.drawable.donate_silver);
+                level = "Silver";
                 break;
             }
             case 3:{
                 holder.ivIcon.setImageResource(R.drawable.donate_gold);
+                level = "Gold";
                 break;
             }
             case 4:{
                 holder.ivIcon.setImageResource(R.drawable.donate_platin);
+                level = "Platin";
                 break;
             }
         }
 
+        holder.tvHead.setText(level + " Donation - " + formatHelper.formatCurrency(donation.amount));
+
+        String status;
+        if (donation.active == 0){
+            status = "Deleted";
+        }else if(donation.duration == -1){
+            status = "Permanent";
+        }else if (donation.duration > 45){ // TODO calc
+            status = "Expired";
+        }else{
+            status = donation.duration + " Day(s)";
+        }
+
+        holder.tvStatus.setText(status);
+
+        holder.tvSub.setText(formatHelper.toDateTime(formatHelper.getApiDate(donation.activated_at)));
     }
 
     // Return the size of your donations (invoked by the layout manager)
