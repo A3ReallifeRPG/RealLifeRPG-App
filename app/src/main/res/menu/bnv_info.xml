@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_info_vehicles"
+        android:id="@+id/bnv_info_vehicles"
         android:enabled="true"
         android:icon="@drawable/ic_car"
         android:title="@string/str_vehicles"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_info_shops"
+        android:id="@+id/bnv_info_shops"
         android:enabled="true"
         android:icon="@drawable/ic_shopping_cart"
         android:title="@string/str_shops"

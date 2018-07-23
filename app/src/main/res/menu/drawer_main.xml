@@ -16,15 +16,15 @@
             android:title="@string/str_player_info" />
 
         <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info_filled"
+            android:title="@string/str_information" />
+
+        <item
             android:id="@+id/nav_changelog"
             android:icon="@drawable/ic_clipboard"
             android:title="@string/str_changelog" />
 
-        <item
-            android:id="@+id/nav_info"
-            android:icon="@drawable/ic_info_filled"
-            android:title="@string/str_information" />
-        
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/nav_group_share">

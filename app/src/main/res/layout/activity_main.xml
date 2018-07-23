@@ -23,7 +23,7 @@
         android:fitsSystemWindows="true"
         android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" >
+        app:menu="@menu/drawer_main" >
 
     </android.support.design.widget.NavigationView>
 
