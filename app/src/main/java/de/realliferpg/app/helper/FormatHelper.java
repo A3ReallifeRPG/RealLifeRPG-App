@@ -17,6 +17,12 @@ public class FormatHelper {
         return format.format(input) + " $";
     }
 
+    public String formatCurrency(double input){
+        DecimalFormat format = (DecimalFormat)DecimalFormat.getNumberInstance(Locale.GERMAN);
+
+        return format.format(input) + " $";
+    }
+
     public String toDateTime(Date input){
 
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");

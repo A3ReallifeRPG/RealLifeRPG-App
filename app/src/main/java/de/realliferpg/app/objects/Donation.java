@@ -1,7 +1,7 @@
 package de.realliferpg.app.objects;
 
 public class Donation {
-    public int amount;
+    public double amount;
     public int level;
     public int duration;
     public int active;
