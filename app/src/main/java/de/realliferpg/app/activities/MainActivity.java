@@ -28,13 +28,15 @@ import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
+import de.realliferpg.app.fragments.SettingsFragment;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
         ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener,
         PlayerFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
-        PlayerDonationFragment.OnFragmentInteractionListener{
+        PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
 
 
     @SuppressLint("WrongViewCast")
@@ -127,6 +129,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_player) {
             PlayerFragment playerFragment = new PlayerFragment();
             transaction.replace(R.id.include_main_content, playerFragment);
+        } else if (id == R.id.nav_settings) {
+            SettingsFragment settingsFragment = new SettingsFragment();
+            transaction.replace(R.id.include_main_content, settingsFragment);
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
             startActivity(browserIntent);
@@ -174,6 +179,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             }
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Class type, Uri uri) {
+
     }
 
     void changePlayerFragment(Fragment fragment){
