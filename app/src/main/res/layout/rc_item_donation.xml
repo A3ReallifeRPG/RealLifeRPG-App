@@ -74,7 +74,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="@string/str_activated"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintStart_toEndOf="@+id/iv_list_donate"
             app:layout_constraintTop_toBottomOf="@+id/tv_list_donate_head" />
 

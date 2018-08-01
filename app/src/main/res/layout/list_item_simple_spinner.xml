@@ -15,7 +15,7 @@
         android:paddingRight="8dp"
         android:paddingTop="4dp"
         android:text="@string/str_placeholder"
-        android:textColor="@color/secondaryTextColor"
+        android:textColor="@color/primaryTextColor"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

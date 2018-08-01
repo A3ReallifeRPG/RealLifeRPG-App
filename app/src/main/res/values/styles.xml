@@ -8,16 +8,16 @@
         <item name="colorAccent">@color/primaryColor</item>
         <item name="preferenceTheme">@style/Theme.MyTheme</item>
 
-        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
 
-    <style name="Theme.MyTheme" parent="@style/PreferenceFixTheme.Light.NoActionBar">
-        <item name="colorAccent">@color/primaryColor</item>
+    <style name="Theme.MyTheme" parent="@style/PreferenceFixTheme.Light.DarkActionBar">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryColor</item>
-        <!-- [...] -->
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
     </style>
-
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -25,7 +25,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/str_placeholder"
-        android:textColor="@color/secondaryTextColor"
+        android:textColor="@color/primaryTextColor"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
         app:layout_constraintTop_toTopOf="@+id/iv_player_profile" />
@@ -71,7 +71,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/str_pid"
-        android:textColor="@color/secondaryTextColor"
+        android:textColor="@color/primaryTextColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_player_profile"
         app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
