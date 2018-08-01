@@ -6,7 +6,25 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
+        <item name="preferenceTheme">@style/AppPrefTheme</item>
+
+        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
+
+    <style name="AppPrefTheme" parent="@style/PreferenceThemeOverlay">
+        <!--<item name="android:background">?attr/colorAppBarAndDrawer</item>
+        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:textColorSecondary">?attr/colorTextSecondary</item>-->
+
+        <item name="android:textColor">@color/primaryColor</item>
+
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+
+    </style>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
