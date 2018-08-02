@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         PlayerFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
         PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
 
+    private Fragment currentFragment;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -68,20 +70,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        MainFragment mainFragment = new MainFragment();
-        transaction.replace(R.id.include_main_content, mainFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        switchFragment(new MainFragment());
 
         View header = navigationView.getHeaderView(0);
         ImageButton imageButton = header.findViewById(R.id.ib_nav_scanCode);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SettingsActivity.class);
-                intent.putExtra("scan_code",true);
-                startActivity(intent);
+                SettingsFragment settingsFragment = new SettingsFragment();
+                switchFragment(settingsFragment);
+
             }
         });
     }
@@ -96,33 +94,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    Fragment currFragment;
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
         if (id == R.id.nav_imprint) {
-            ImprintFragment imprintFragment = new ImprintFragment();
-            transaction.replace(R.id.include_main_content, imprintFragment);
+            switchFragment(new ImprintFragment());
         } else if (id == R.id.nav_changelog) {
-            ChangelogFragment changelogFragment = new ChangelogFragment();
-            transaction.replace(R.id.include_main_content, changelogFragment);
+            switchFragment( new ChangelogFragment());
         } else if (id == R.id.nav_overview) {
-            MainFragment mainFragment = new MainFragment();
-            transaction.replace(R.id.include_main_content, mainFragment);
+            switchFragment(new MainFragment());
         } else if (id == R.id.nav_info) {
-            InfoFragment infoFragment = new InfoFragment();
-            transaction.replace(R.id.include_main_content, infoFragment);
+            switchFragment(new InfoFragment());
         } else if (id == R.id.nav_player) {
-            PlayerFragment playerFragment = new PlayerFragment();
-            transaction.replace(R.id.include_main_content, playerFragment);
+            switchFragment(new PlayerFragment());
         } else if (id == R.id.nav_settings) {
-            SettingsFragment settingsFragment = new SettingsFragment();
-            currFragment = settingsFragment;
-            transaction.replace(R.id.include_main_content, settingsFragment);
+            switchFragment(new SettingsFragment());
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
             startActivity(browserIntent);
@@ -136,13 +123,19 @@ public class MainActivity extends AppCompatActivity
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/RealLifeRPGCommunity/"));
             startActivity(browserIntent);
         }
+        return true;
+    }
 
+    public void switchFragment(Fragment newFragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.include_main_content, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        currentFragment = newFragment;
     }
 
     @Override
@@ -193,7 +186,7 @@ public class MainActivity extends AppCompatActivity
                 IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                 if(result != null){
                     Singleton.getInstance().setScanResponse(result.getContents());
-                    ((SettingsFragment)currFragment).onFragmentInteraction(MainActivity.class,Uri.parse("scan_response"));
+                    ((SettingsFragment)currentFragment).onFragmentInteraction(MainActivity.class,Uri.parse("scan_response"));
 
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();

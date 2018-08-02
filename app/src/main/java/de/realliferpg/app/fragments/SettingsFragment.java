@@ -29,7 +29,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
         setPreferencesFromResource(R.xml.preferences, rootKey);
         PreferenceManager.setDefaultValues(Singleton.getInstance().getContext(), R.xml.preferences, false);
 
-
         Preference pref = findPreference("scan_code");
         pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -41,7 +40,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
 
     }
 
-    private void scanCode(){
+    public void scanCode(){
         IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
         intentIntegrator.addExtra(Intents.Scan.BEEP_ENABLED,false);
         intentIntegrator.initiateScan();
