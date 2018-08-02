@@ -6,17 +6,74 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
-        <item name="preferenceTheme">@style/Theme.MyTheme</item>
+        <item name="preferenceTheme">@style/Theme.PrefTheme</item>
 
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+
+
+        <item name="dialogTheme">@style/AppCompatDialog</item>
+        <item name="alertDialogTheme">@style/AppCompatAlert</item>
+        <item name="android:alertDialogTheme">@style/AppCompatAlert</item>
+        <item name="android:dialogTheme">@style/AppCompatDialog</item>
     </style>
 
-    <style name="Theme.MyTheme" parent="@style/PreferenceFixTheme.Light.DarkActionBar">
+    <style name="Theme.PrefTheme" parent="@style/PreferenceThemeOverlay">
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+
+        <item name="android:windowBackground">@color/secondaryColor</item>
+        <item name="android:background">@color/secondaryColor</item>
+        <item name="actionModeBackground">@color/secondaryColor</item>
 
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
+
+        <item name="dialogTheme">@style/AppCompatDialog</item>
+        <item name="alertDialogTheme">@style/AppCompatAlert</item>
+        <item name="android:alertDialogTheme">@style/AppCompatAlert</item>
+        <item name="android:dialogTheme">@style/AppCompatDialog</item>
+    </style>
+
+    <style name="Dialog.Dark" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:windowBackground">@color/secondaryColor</item>
+        <item name="android:background">@color/secondaryColor</item>
+
+    </style>
+
+    <!-- Generic Dialog Theme -->
+    <style name="AppCompatDialog" parent="Theme.AppCompat.Dialog">
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/secondaryColor</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/secondaryColor</item>
+        <item name="android:windowBackground">@color/secondaryColor</item>
+        <item name="background">@color/secondaryColor</item>
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorControlHighlight">@color/secondaryColor</item>
+
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorPrimaryDark">@color/secondaryColor</item>
+    </style>
+
+    <!-- Alert Dialog Theme -->
+    <style name="AppCompatAlert" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/secondaryColor</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/secondaryColor</item>
+        <item name="android:windowBackground">@color/secondaryColor</item>
+        <item name="background">@color/secondaryColor</item>
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorControlHighlight">@color/secondaryColor</item>
+
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorPrimaryDark">@color/secondaryColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
