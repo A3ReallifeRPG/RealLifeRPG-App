@@ -2,6 +2,9 @@ package de.realliferpg.app.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.net.Uri;
@@ -11,6 +14,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -89,27 +96,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    Fragment currFragment;
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -131,6 +121,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.include_main_content, playerFragment);
         } else if (id == R.id.nav_settings) {
             SettingsFragment settingsFragment = new SettingsFragment();
+            currFragment = settingsFragment;
             transaction.replace(R.id.include_main_content, settingsFragment);
         } else if (id == R.id.nav_website) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
@@ -191,5 +182,25 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.include_player_content, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data != null){
+            if(data.getAction().equals("com.google.zxing.client.android.SCAN")){
+                IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                if(result != null){
+                    Singleton.getInstance().setScanResponse(result.getContents());
+                    ((SettingsFragment)currFragment).onFragmentInteraction(MainActivity.class,Uri.parse("scan_response"));
+
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("api_token", result.getContents());
+                    editor.apply();
+                }
+            }
+        }
     }
 }

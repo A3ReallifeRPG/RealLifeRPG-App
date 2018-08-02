@@ -1,32 +1,65 @@
 package de.realliferpg.app.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 
 
+import com.google.zxing.client.android.Intents;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
-
-    public static final String KEY_PREF_API_TOKEN = "pref_api_token";
-
+public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface {
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        PreferenceManager.setDefaultValues(this.getContext(), R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(Singleton.getInstance().getContext(), R.xml.preferences, false);
+
+
+        Preference pref = findPreference("scan_code");
+        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                scanCode();
+                return false;
+            }
+        });
+
+    }
+
+    private void scanCode(){
+        IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
+        intentIntegrator.addExtra(Intents.Scan.BEEP_ENABLED,false);
+        intentIntegrator.initiateScan();
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(KEY_PREF_API_TOKEN)) {
-            // stuff
+    public void onFragmentInteraction(Class type, Uri uri) {
+        if(type.equals(MainActivity.class)){
+            if(uri.toString().equals("scan_response")){
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("api_token", Singleton.getInstance().getScanResponse());
+                editor.apply();
+
+                EditTextPreference connectionPref = (EditTextPreference) findPreference("api_token");
+                connectionPref.setText(Singleton.getInstance().getScanResponse());
+
+            }
         }
     }
-
-
 }

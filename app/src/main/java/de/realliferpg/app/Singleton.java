@@ -23,6 +23,8 @@ public class Singleton {
 
     private PlayerInfo playerInfo;
 
+    private String scanResponse;
+
     public RequestQueue getRequestQueue() {
         if (volleyQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
@@ -49,5 +51,16 @@ public class Singleton {
 
     public void setPlayerInfo(PlayerInfo playerInfo) {
         this.playerInfo = playerInfo;
+    }
+
+    public String getScanResponse() {
+        if(scanResponse == null){
+            scanResponse = "";
+        }
+        return scanResponse;
+    }
+
+    public void setScanResponse(String scanResponse) {
+        this.scanResponse = scanResponse;
     }
 }

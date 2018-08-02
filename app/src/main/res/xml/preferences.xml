@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <EditTextPreference
-        android:inputType="phone"
-        android:key="edit_text_test"
-        android:title="Text"
-        android:summary="Test"/>
+        android:id="@+id/pref_api_token"
+        android:key="api_token"
+        android:title="API Token"
+        android:summary="Player API Token"
+        android:inputType="textPassword"/>
+
+    <Preference
+        android:id="@+id/pref_scan_code"
+        android:key="scan_code"
+        android:title="@string/str_scan"/>
+
 </PreferenceScreen>
