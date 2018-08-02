@@ -193,6 +193,9 @@ public class MainActivity extends AppCompatActivity
         if(uri.toString().equals("open_settings")){
             switchFragment(new SettingsFragment());
         }
+        if(uri.toString().equals("open_error")){
+            switchFragment(new ErrorFragment());
+        }
 
     }
 

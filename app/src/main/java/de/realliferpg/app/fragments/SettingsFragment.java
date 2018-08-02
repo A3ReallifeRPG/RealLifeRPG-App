@@ -50,14 +50,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
     public void onFragmentInteraction(Class type, Uri uri) {
         if(type.equals(MainActivity.class)){
             if(uri.toString().equals("scan_response")){
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("api_token", Singleton.getInstance().getScanResponse());
-                editor.apply();
-
-                EditTextPreference connectionPref = (EditTextPreference) findPreference("api_token");
-                connectionPref.setText(Singleton.getInstance().getScanResponse());
-
+                EditTextPreference tokenPref = (EditTextPreference) findPreference("api_token");
+                tokenPref.setText(Singleton.getInstance().getScanResponse());
             }
         }
     }
