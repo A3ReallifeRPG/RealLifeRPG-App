@@ -220,6 +220,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             });
 
             snackbar.show();
+            Singleton.getInstance().setCurrentSnackbar(snackbar);
         }
     }
 

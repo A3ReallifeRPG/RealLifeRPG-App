@@ -149,6 +149,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void switchFragment(Fragment newFragment){
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        if(newFragment instanceof SettingsFragment){
+            navigationView.setCheckedItem(R.id.nav_settings);
+        }else if(newFragment instanceof  ErrorFragment){
+            for(int i = 0; i < navigationView.getMenu().size(); i++){
+                navigationView.getMenu().getItem(i).setChecked(false);
+            }
+        }
+
+        Singleton.getInstance().dismissSnackbar();
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.include_main_content, newFragment);

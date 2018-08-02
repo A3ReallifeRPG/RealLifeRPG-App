@@ -1,6 +1,7 @@
 package de.realliferpg.app;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,8 @@ public class Singleton {
 
     private RequestQueue volleyQueue;
     private Context context;
+
+    private Snackbar currentSnackbar;
 
     private PlayerInfo playerInfo;
 
@@ -74,5 +77,15 @@ public class Singleton {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public void setCurrentSnackbar(Snackbar currentSnackbar) {
+        this.currentSnackbar = currentSnackbar;
+    }
+
+    public void dismissSnackbar(){
+        if(currentSnackbar != null){
+            currentSnackbar.dismiss();
+        }
     }
 }
