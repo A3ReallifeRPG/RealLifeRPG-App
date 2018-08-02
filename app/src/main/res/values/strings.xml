@@ -125,4 +125,11 @@
     <string name="str_permanent">Permanent</string>
     <string name="str_days">Day(s)</string>
     <string name="str_lastSeen">Last seen</string>
+    <string name="str_cloud_dissconnect">Cloud Disconnected</string>
+    <string name="str_whoops">Whoops</string>
+    <string name="sry_somethign_wrong">Looks like something went wrong</string>
+    <string name="str_no_msg">No Message</string>
+    <string name="str_possible_solutions">Possible solutions</string>
+    <string name="str_check_internet">1. Verify that you are connected to the internet.</string>
+    <string name="str_verify_api">2. Check if you have entered your API Token in the Settings</string>
 </resources>

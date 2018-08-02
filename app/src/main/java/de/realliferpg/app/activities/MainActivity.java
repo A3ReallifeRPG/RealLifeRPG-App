@@ -1,11 +1,13 @@
 package de.realliferpg.app.activities;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import com.google.zxing.integration.android.IntentResult;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
+import de.realliferpg.app.fragments.ErrorFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
@@ -37,6 +40,7 @@ import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
+import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.PlayerInfo;
 
@@ -70,7 +74,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        switchFragment(new MainFragment());
+        switchFragment(new ErrorFragment());
+        /*
+        PreferenceHelper preferenceHelper = new PreferenceHelper();
+        if(preferenceHelper.getPlayerAPIToken().equals("")){
+            switchFragment(new SettingsFragment());
+
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("No API Token");
+            alertDialog.setMessage("You need to scan/copy your API Token from info.realliferpg.de to use most of this App.");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }else{
+            switchFragment(new MainFragment());
+        }*/
 
         View header = navigationView.getHeaderView(0);
         ImageButton imageButton = header.findViewById(R.id.ib_nav_scanCode);
@@ -167,6 +189,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Class type, Uri uri) {
+
+        if(uri.toString().equals("open_settings")){
+            switchFragment(new SettingsFragment());
+        }
 
     }
 

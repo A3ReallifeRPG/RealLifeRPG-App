@@ -1,6 +1,7 @@
 package de.realliferpg.app.helper;
 
 import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 
 import de.realliferpg.app.Constants;
@@ -16,9 +17,11 @@ import de.realliferpg.app.objects.Vehicle;
 public class ApiHelper {
 
     private RequestCallbackInterface callbackInterface;
+    private PreferenceHelper preferenceHelper;
 
     public ApiHelper(RequestCallbackInterface callbackInterface){
         this.callbackInterface = callbackInterface;
+        preferenceHelper = new PreferenceHelper();
     }
 
     public void getChangelog() {
@@ -34,8 +37,7 @@ public class ApiHelper {
     public void getPlayerStats() {
         NetworkHelper networkHelper = new NetworkHelper();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Singleton.getInstance().getContext());
-        String secret = prefs.getString("api_player_key","");
+        String secret = preferenceHelper.getPlayerAPIToken();
 
         networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
     }
