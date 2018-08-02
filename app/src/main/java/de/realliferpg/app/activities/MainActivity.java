@@ -46,8 +46,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
-        ChangelogFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener,
-        PlayerFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
+        ChangelogFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
         PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
 
     private Fragment currentFragment;
@@ -74,8 +73,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        switchFragment(new MainFragment());
-        /*
         PreferenceHelper preferenceHelper = new PreferenceHelper();
         if(preferenceHelper.getPlayerAPIToken().equals("")){
             switchFragment(new SettingsFragment());
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity
             alertDialog.show();
         }else{
             switchFragment(new MainFragment());
-        }*/
+        }
 
         View header = navigationView.getHeaderView(0);
         ImageButton imageButton = header.findViewById(R.id.ib_nav_scanCode);
@@ -120,30 +117,45 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_imprint) {
-            switchFragment(new ImprintFragment());
-        } else if (id == R.id.nav_changelog) {
-            switchFragment( new ChangelogFragment());
-        } else if (id == R.id.nav_overview) {
-            switchFragment(new MainFragment());
-        } else if (id == R.id.nav_info) {
-            switchFragment(new InfoFragment());
-        } else if (id == R.id.nav_player) {
-            switchFragment(new PlayerFragment());
-        } else if (id == R.id.nav_settings) {
-            switchFragment(new SettingsFragment());
-        } else if (id == R.id.nav_website) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
-            startActivity(browserIntent);
-        } else if (id == R.id.nav_forum) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forum.realliferpg.de"));
-            startActivity(browserIntent);
-        } else if (id == R.id.nav_twitter) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/A3ReallifeRPG"));
-            startActivity(browserIntent);
-        } else if (id == R.id.nav_facebook) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/RealLifeRPGCommunity/"));
-            startActivity(browserIntent);
+        switch (id) {
+            case R.id.nav_imprint:
+                switchFragment(new ImprintFragment());
+                break;
+            case R.id.nav_changelog:
+                switchFragment(new ChangelogFragment());
+                break;
+            case R.id.nav_overview:
+                switchFragment(new MainFragment());
+                break;
+            case R.id.nav_info:
+                switchFragment(new InfoFragment());
+                break;
+            case R.id.nav_player:
+                switchFragment(new PlayerFragment());
+                break;
+            case R.id.nav_settings:
+                switchFragment(new SettingsFragment());
+                break;
+            case R.id.nav_website: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
+                startActivity(browserIntent);
+                break;
+            }
+            case R.id.nav_forum: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forum.realliferpg.de"));
+                startActivity(browserIntent);
+                break;
+            }
+            case R.id.nav_twitter: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/A3ReallifeRPG"));
+                startActivity(browserIntent);
+                break;
+            }
+            case R.id.nav_facebook: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/RealLifeRPGCommunity/"));
+                startActivity(browserIntent);
+                break;
+            }
         }
         return true;
     }
@@ -177,8 +189,20 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
         Log.d("MainActivity","Fragment interaction");
 
-        switch (uri.toString()){
-            case "update_login_state":{
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Class type, Uri uri) {
+
+        switch (uri.toString()) {
+            case "open_settings":
+                switchFragment(new SettingsFragment());
+                break;
+            case "open_error":
+                switchFragment(new ErrorFragment());
+                break;
+            case "update_login_state":
                 PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
                 TextView tvInfo = findViewById(R.id.tv_nav_info);
@@ -186,28 +210,20 @@ public class MainActivity extends AppCompatActivity
 
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
-
                 break;
-            }
-            case "fragment_player_change_to_stats": {
-                changePlayerFragment(new PlayerStatsFragment());
-                break;
-            }
-            case "fragment_player_change_to_donation": {
-                changePlayerFragment(new PlayerDonationFragment());
-                break;
-            }
         }
-    }
 
-    @Override
-    public void onFragmentInteraction(Class type, Uri uri) {
-
-        if(uri.toString().equals("open_settings")){
-            switchFragment(new SettingsFragment());
-        }
-        if(uri.toString().equals("open_error")){
-            switchFragment(new ErrorFragment());
+        if(type.equals(PlayerFragment.class)){
+            switch (uri.toString()){
+                case "fragment_player_change_to_stats": {
+                    changePlayerFragment(new PlayerStatsFragment());
+                    break;
+                }
+                case "fragment_player_change_to_donation": {
+                    changePlayerFragment(new PlayerDonationFragment());
+                    break;
+                }
+            }
         }
 
     }
@@ -218,7 +234,6 @@ public class MainActivity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

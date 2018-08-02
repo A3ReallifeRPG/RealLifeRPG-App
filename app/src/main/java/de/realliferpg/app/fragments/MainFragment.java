@@ -125,6 +125,15 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     public void onResponse(Object response, Class type) {
         SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
 
+        TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
+        TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
+        TextView tvPiGUID = view.findViewById(R.id.tv_main_playerInfo_guid);
+
+        TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
+        TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
+        TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
+        TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+
         if (type.equals(Server.Wrapper.class)) {
             Gson gson = new Gson();
 
@@ -174,14 +183,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             PlayerInfo playerInfo = value.data[0];
 
-            TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
-            TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
-            TextView tvPiGUID = view.findViewById(R.id.tv_main_playerInfo_guid);
-
-            TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
-            TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
-            TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
-            TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+            Singleton.getInstance().setPlayerInfo(playerInfo);
+            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("update_login_state"));
 
             tvPiName.setText(playerInfo.name);
             tvPiPID.setText(playerInfo.pid);
@@ -203,6 +206,12 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             if(error.requestReturnClass.equals(PlayerInfo.Wrapper.class)){
                 final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
                 pbPlayer.setVisibility(View.GONE);
+
+                tvPiInfoBank.setText("?");
+                tvPiInfoCash.setText("?");
+                tvPiInfoLevel.setText("?");
+                tvPiInfoSkill.setText("?");
+
             }else if(error.requestReturnClass.equals(Server.Wrapper.class)){
                 final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
                 pbServer.setVisibility(View.GONE);

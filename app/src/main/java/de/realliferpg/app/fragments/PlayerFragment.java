@@ -24,6 +24,7 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
@@ -31,7 +32,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 public class PlayerFragment extends Fragment implements RequestCallbackInterface {
 
     private View view;
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface<PlayerFragment> mListener;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -55,8 +56,6 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
 
-        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_stats"));
-
         if(Singleton.getInstance().getPlayerInfo() == null){
             ApiHelper apiHelper = new ApiHelper(this);
             apiHelper.getPlayerStats();
@@ -71,10 +70,10 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
 
                 switch (item.getItemId()) {
                     case R.id.bnv_player_stats:
-                        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_stats"));
+                        mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("fragment_player_change_to_stats"));
                         break;
                     case R.id.bnv_player_donation:
-                        mListener.onFragmentInteraction(Uri.parse("fragment_player_change_to_donation"));
+                        mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("fragment_player_change_to_donation"));
                         break;
                 }
                 return true;
@@ -86,6 +85,8 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
 
     public void showPlayerInfo(){
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
+
+        mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("fragment_player_change_to_stats"));
 
         ImageView ivProfilePic = view.findViewById(R.id.iv_player_profile);
 
@@ -101,8 +102,8 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -119,26 +120,23 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     public void onResponse(Object response, Class type) {
         if (type.equals(PlayerInfo.Wrapper.class)) {
             Gson gson = new Gson();
-            FormatHelper formatHelper = new FormatHelper();
 
             PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
 
             PlayerInfo playerInfo = value.data[0];
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
-            mListener.onFragmentInteraction(Uri.parse("update_login_state"));
+            mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("update_login_state"));
 
             showPlayerInfo();
+
         } else if (type.equals(CustomNetworkError.class)) {
             CustomNetworkError error = (CustomNetworkError) response;
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);
 
-            snackbar.show();
+            Singleton.getInstance().setErrorMsg(error.toString());
+            mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("open_error"));
+
         }
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
 }
