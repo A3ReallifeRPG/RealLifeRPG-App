@@ -132,4 +132,6 @@
     <string name="str_possible_solutions">Possible solutions</string>
     <string name="str_check_internet">1. Verify that you are connected to the internet.</string>
     <string name="str_verify_api">2. Check if you have entered your API Token in the Settings</string>
+    <string name="str_view">View</string>
+    <string name="str_error_occurred">An error occurred</string>
 </resources>

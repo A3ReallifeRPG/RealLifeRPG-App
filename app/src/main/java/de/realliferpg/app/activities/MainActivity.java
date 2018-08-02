@@ -46,7 +46,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
-        ChangelogFragment.OnFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener,
+        ChangelogFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener,
         PlayerFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
         PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        switchFragment(new ErrorFragment());
+        switchFragment(new MainFragment());
         /*
         PreferenceHelper preferenceHelper = new PreferenceHelper();
         if(preferenceHelper.getPlayerAPIToken().equals("")){

@@ -27,6 +27,7 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
@@ -35,7 +36,7 @@ import de.realliferpg.app.objects.Server;
 
 public class MainFragment extends Fragment implements RequestCallbackInterface {
 
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface<MainFragment> mListener;
 
     private View view;
 
@@ -106,8 +107,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -195,17 +196,31 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             pbPlayer.setVisibility(View.GONE);
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
-            mListener.onFragmentInteraction(Uri.parse("update_login_state"));
+            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("update_login_state"));
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), error.toString(), Snackbar.LENGTH_LONG);
+
+            if(error.requestReturnClass.equals(PlayerInfo.Wrapper.class)){
+                final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+                pbPlayer.setVisibility(View.GONE);
+            }else if(error.requestReturnClass.equals(Server.Wrapper.class)){
+                final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+                pbServer.setVisibility(View.GONE);
+            }
+
+
+            Singleton.getInstance().setErrorMsg(error.toString());
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, 8000);
+
+            snackbar.setAction(R.string.str_view, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onFragmentInteraction(MainFragment.class,Uri.parse("open_error"));
+                }
+            });
 
             snackbar.show();
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

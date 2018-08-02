@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 
 
@@ -45,6 +47,9 @@ public class ErrorFragment extends Fragment {
                 mListener.onFragmentInteraction(ErrorFragment.class,Uri.parse("open_settings"));
             }
         });
+
+        TextView tvErrorMsg = view.findViewById(R.id.tv_error_msg);
+        tvErrorMsg.setText(Singleton.getInstance().getErrorMsg());
 
         return view;
     }

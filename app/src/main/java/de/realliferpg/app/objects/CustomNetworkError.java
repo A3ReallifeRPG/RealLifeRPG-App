@@ -9,6 +9,17 @@ public class CustomNetworkError {
     public String toString() {
         String typeName = requestReturnClass.getName();
         typeName = typeName.replaceAll("de.realliferpg.app.","");
-        return "Error in Request of type " + typeName + " Status code " + statusCode;
+
+        String error = "Error in Request of type " + typeName + " Status code " + statusCode;
+
+        if(statusCode == 404){
+            error += "\n API Token valid ?";
+        }
+
+        if(statusCode == 0){
+            error += "\n Internet connection ?";
+        }
+
+        return error;
     }
 }

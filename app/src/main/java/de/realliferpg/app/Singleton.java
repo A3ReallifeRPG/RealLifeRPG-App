@@ -24,6 +24,7 @@ public class Singleton {
     private PlayerInfo playerInfo;
 
     private String scanResponse;
+    private String errorMsg;
 
     public RequestQueue getRequestQueue() {
         if (volleyQueue == null) {
@@ -62,5 +63,16 @@ public class Singleton {
 
     public void setScanResponse(String scanResponse) {
         this.scanResponse = scanResponse;
+    }
+
+    public String getErrorMsg() {
+        if(scanResponse == null){
+            scanResponse = context.getString(R.string.str_no_msg);
+        }
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }
