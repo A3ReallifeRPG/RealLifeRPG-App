@@ -19,7 +19,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 
 public class ErrorFragment extends Fragment {
 
-    private FragmentInteractionInterface<ErrorFragment> mListener;
+    private FragmentInteractionInterface mListener;
     View view;
 
     public ErrorFragment() {

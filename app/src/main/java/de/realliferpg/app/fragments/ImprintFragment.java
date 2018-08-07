@@ -19,12 +19,13 @@ import java.util.Arrays;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Changelog;
 
 public class ImprintFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface mListener;
 
     public ImprintFragment() {
         // Required empty public constructor
@@ -60,8 +61,8 @@ public class ImprintFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -74,8 +75,4 @@ public class ImprintFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

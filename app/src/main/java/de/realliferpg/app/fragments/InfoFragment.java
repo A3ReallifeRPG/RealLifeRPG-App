@@ -24,9 +24,11 @@ import java.util.Arrays;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.InfoAdapter;
 import de.realliferpg.app.adapter.InfoSpinnerAdapter;
 import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.Shop;
@@ -36,7 +38,7 @@ import de.realliferpg.app.objects.Vehicle;
 
 public class InfoFragment extends Fragment implements RequestCallbackInterface {
 
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface mListener;
     private View view;
 
     private int currentCategory;
@@ -135,8 +137,8 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -167,9 +169,19 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
             pbCategory.setVisibility(View.GONE);
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_info), error.toString(), Snackbar.LENGTH_LONG);
+
+            Singleton.getInstance().setErrorMsg(error.toString());
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_info), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+
+            snackbar.setAction(R.string.str_view, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onFragmentInteraction(InfoFragment.class,Uri.parse("open_error"));
+                }
+            });
 
             snackbar.show();
+            Singleton.getInstance().setCurrentSnackbar(snackbar);
         }else {
             Gson gson = new Gson();
 
@@ -198,18 +210,5 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
 }

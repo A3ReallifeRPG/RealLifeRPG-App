@@ -32,7 +32,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 public class PlayerFragment extends Fragment implements RequestCallbackInterface {
 
     private View view;
-    private FragmentInteractionInterface<PlayerFragment> mListener;
+    private FragmentInteractionInterface mListener;
 
     public PlayerFragment() {
         // Required empty public constructor

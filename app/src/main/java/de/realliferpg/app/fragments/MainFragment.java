@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
@@ -36,7 +37,7 @@ import de.realliferpg.app.objects.Server;
 
 public class MainFragment extends Fragment implements RequestCallbackInterface {
 
-    private FragmentInteractionInterface<MainFragment> mListener;
+    private FragmentInteractionInterface mListener;
 
     private View view;
 
@@ -149,32 +150,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             final ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
-                    String selectedFromList = listView.getItemAtPosition(myItemInt).toString();
-                    Log.d("MainFragment", Arrays.toString(servers.get(myItemInt).Players));
-
-                    AlertDialog ad = new AlertDialog.Builder(view.getContext()).create();
-                    ad.setCancelable(false); // This blocks the 'BACK' button
-
-                    StringBuilder players = new StringBuilder();
-
-                    for(String player: servers.get(myItemInt).Players)
-                    {
-                        players.append("\n").append(player);
-                    }
-                    
-                    ad.setMessage(players.toString());
-                    ad.setButton(getString(R.string.str_close), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    ad.show();
-                }
-            });
         }else if (type.equals(PlayerInfo.Wrapper.class)) {
             Gson gson = new Gson();
             FormatHelper formatHelper = new FormatHelper();
@@ -203,6 +178,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         }else if (type.equals(CustomNetworkError.class)){
             CustomNetworkError error = (CustomNetworkError) response;
 
+            sc.setRefreshing(false);
+
             if(error.requestReturnClass.equals(PlayerInfo.Wrapper.class)){
                 final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
                 pbPlayer.setVisibility(View.GONE);
@@ -219,7 +196,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
 
             Singleton.getInstance().setErrorMsg(error.toString());
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, 8000);
+            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 
             snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                 @Override

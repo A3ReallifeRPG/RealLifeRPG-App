@@ -45,8 +45,8 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ImprintFragment.OnFragmentInteractionListener,
-        ChangelogFragment.OnFragmentInteractionListener, InfoFragment.OnFragmentInteractionListener, PlayerStatsFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener,
+        PlayerStatsFragment.OnFragmentInteractionListener,
         PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
 
     private Fragment currentFragment;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.layout_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.layout_main);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.layout_main);
         drawer.closeDrawer(GravityCompat.START);
         currentFragment = newFragment;
     }
