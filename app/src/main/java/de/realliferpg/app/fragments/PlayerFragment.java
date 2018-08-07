@@ -7,12 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -56,8 +58,8 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
 
+        final ApiHelper apiHelper = new ApiHelper(this);
         if(Singleton.getInstance().getPlayerInfo() == null){
-            ApiHelper apiHelper = new ApiHelper(this);
             apiHelper.getPlayerStats();
         }else{
             showPlayerInfo();
@@ -80,6 +82,15 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
             }
         });
 
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
+        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
+        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                apiHelper.getPlayerStats();
+            }
+        });
+
         return view;
     }
 
@@ -87,6 +98,9 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
         mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("fragment_player_change_to_stats"));
+
+        BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
+        bnv.setSelectedItemId(R.id.bnv_player_stats);
 
         ImageView ivProfilePic = view.findViewById(R.id.iv_player_profile);
 
@@ -127,6 +141,9 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
             mListener.onFragmentInteraction(PlayerFragment.class,Uri.parse("update_login_state"));
+
+            SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
+            sc.setRefreshing(false);
 
             showPlayerInfo();
 

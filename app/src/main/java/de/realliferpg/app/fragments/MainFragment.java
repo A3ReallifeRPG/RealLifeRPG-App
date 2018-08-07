@@ -80,7 +80,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         pbPlayer.setVisibility(View.VISIBLE);
         pbServer.setVisibility(View.VISIBLE);
 
-        SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -99,8 +99,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 listView.setAdapter(null);
             }
         });
-
-
 
         return view;
     }
@@ -124,7 +122,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
     @Override
     public void onResponse(Object response, Class type) {
-        SwipeRefreshLayout sc = view.findViewById(R.id.sc_main);
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
         TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
         TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
