@@ -5,9 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 
@@ -33,7 +36,6 @@ import de.realliferpg.app.objects.CustomNetworkError;
 
 public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
 
-    private ExpandableListView listView;
     private FragmentInteractionInterface mListener;
     private View view;
 
@@ -59,11 +61,24 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
         this.view = inflater.inflate(R.layout.fragment_changelog, container, false);
 
-        ApiHelper apiHelper = new ApiHelper(this);
+        final ApiHelper apiHelper = new ApiHelper(this);
         apiHelper.getChangelog();
 
-        ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
+        final ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
         pbChangelog.setVisibility(View.VISIBLE);
+
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_changelog);
+        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
+        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                apiHelper.getChangelog();
+                pbChangelog.setVisibility(View.VISIBLE);
+
+                ExpandableListView listView = view.findViewById(R.id.lv_changelog_main);
+                listView.setAdapter((BaseExpandableListAdapter)null);
+            }
+        });
 
         return view;
     }
@@ -72,6 +87,9 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     @Override
     public void onResponse(Object response, Class type) {
 
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_changelog);
+        sc.setRefreshing(false);
+
         if (type.equals(Changelog.Wrapper.class)) {
 
             Gson gson = new Gson();
@@ -79,7 +97,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
             ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
 
-            listView = view.findViewById(R.id.lv_changelog_main);
+            final ExpandableListView listView = view.findViewById(R.id.lv_changelog_main);
 
             ArrayList<Changelog> temp = new ArrayList<>();
 
