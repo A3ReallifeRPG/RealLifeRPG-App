@@ -180,6 +180,11 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
                 }
             });
 
+            ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
+            pbCategory.setVisibility(View.GONE);
+            ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
+            pbContent.setVisibility(View.GONE);
+
             snackbar.show();
             Singleton.getInstance().setCurrentSnackbar(snackbar);
         }else {
