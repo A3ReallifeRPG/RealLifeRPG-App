@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
@@ -53,6 +54,12 @@ public class ImprintFragment extends Fragment {
         WebView webView = view.findViewById(R.id.wv_imprint_main);
         webView.loadUrl("file:///android_res/raw/imprint.html");
 
+        TextView tv = view.findViewById(R.id.tv_imprint_debug);
+        if(BuildConfig.DEBUG){
+            tv.setText("DEBUG");
+        }else{
+            tv.setText("RELEASE");
+        }
 
         return view;
     }
