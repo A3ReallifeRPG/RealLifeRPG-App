@@ -19,15 +19,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.firebase.crash.FirebaseCrash;
-import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -84,8 +81,8 @@ public class MainActivity extends AppCompatActivity
             switchFragment(new SettingsFragment());
 
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("No API Token");
-            alertDialog.setMessage("You need to scan/copy your API Token from info.realliferpg.de to use most of this App.");
+            alertDialog.setTitle(getString(R.string.str_noApiToken));
+            alertDialog.setMessage(getString(R.string.str_noApiTokenInfo));
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -104,7 +101,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 SettingsFragment settingsFragment = new SettingsFragment();
                 switchFragment(settingsFragment);
-
             }
         });
     }

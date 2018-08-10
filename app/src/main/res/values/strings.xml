@@ -142,4 +142,6 @@
     <string name="str_qrScannerInfo">Scan Code on info.realliferpg.de       For help check settings</string>
     <string name="str_crashlyticsEnabled">Thank you for sending crash data</string>
     <string name="str_crashlyticsDisabled">Change will be active after restart</string>
+    <string name="str_noApiTokenInfo">You need to scan/copy your API Token from info.realliferpg.de to use most of this App.</string>
+    <string name="str_noApiToken">No API Token</string>
 </resources>
