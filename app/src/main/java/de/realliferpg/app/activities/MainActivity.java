@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case "enable_crashlytics":
                 PreferenceHelper preferenceHelper = new PreferenceHelper();
-                if(preferenceHelper.isCrashlyticsEnabled()){
+                if(preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG){
                     Fabric.with(this, new Crashlytics());
                 }
                 break;
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity
 
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("api_token", result.getContents());
+                    editor.putString("pref_api_token", result.getContents());
                     editor.apply();
                 }
             }
