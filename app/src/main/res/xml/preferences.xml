@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
-        android:id="@+id/pref_api_token"
-        android:icon="@drawable/ic_lock_open"
-        android:inputType="textPassword"
-        android:key="api_token"
-        android:summary="Player API Token"
-        android:title="API Token" />
+    <PreferenceCategory android:title="@string/str_apiSettings">
 
-    <Preference
-        android:id="@+id/pref_scan_code"
-        android:icon="@drawable/ic_linked_camera"
-        android:key="scan_code"
-        android:title="@string/str_scan" />
-    <Preference
-        android:id="@+id/pref_scan_code_help"
-        android:icon="@drawable/ic_info_filled"
-        android:key="scan_code_help"
-        android:title="@string/str_helpScan" />
+
+        <EditTextPreference
+            android:id="@+id/pref_api_token"
+            android:icon="@drawable/ic_lock_open"
+            android:inputType="textPassword"
+            android:key="api_token"
+            android:summary="Player API Token"
+            android:title="API Token" />
+        <Preference
+            android:id="@+id/pref_scan_code"
+            android:icon="@drawable/ic_linked_camera"
+            android:key="scan_code"
+            android:title="@string/str_scan" />
+        <Preference
+            android:id="@+id/pref_scan_code_help"
+            android:icon="@drawable/ic_info_filled"
+            android:key="scan_code_help"
+            android:title="@string/str_helpScan" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/str_firebaseSettings">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_warning"
+            android:key="pref_crashlytics"
+            android:summary="@string/str_info_crashReporting"
+            android:title="@string/str_crashReporting" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -13,6 +13,10 @@ public class PreferenceHelper {
     }
 
     public String getPlayerAPIToken(){
-        return prefs.getString("api_token","");
+        return prefs.getString("pref_api_token","");
+    }
+
+    public boolean isCrashlyticsEnabled(){
+        return prefs.getBoolean("pref_crashlytics",false);
     }
 }

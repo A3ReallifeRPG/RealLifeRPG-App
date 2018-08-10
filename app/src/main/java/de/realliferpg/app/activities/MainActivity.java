@@ -25,6 +25,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -43,6 +45,7 @@ import de.realliferpg.app.fragments.SettingsFragment;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.PlayerInfo;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -55,8 +58,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Singleton.getInstance().setContext(getApplicationContext());
+
+        PreferenceHelper preferenceHelper = new PreferenceHelper();
+        if(preferenceHelper.isCrashlyticsEnabled()){
+            Fabric.with(this, new Crashlytics());
+        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -73,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        PreferenceHelper preferenceHelper = new PreferenceHelper();
         if(preferenceHelper.getPlayerAPIToken().equals("")){
             switchFragment(new SettingsFragment());
 
@@ -210,6 +216,12 @@ public class MainActivity extends AppCompatActivity
 
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
+                break;
+            case "enable_crashlytics":
+                PreferenceHelper preferenceHelper = new PreferenceHelper();
+                if(preferenceHelper.isCrashlyticsEnabled()){
+                    Fabric.with(this, new Crashlytics());
+                }
                 break;
         }
 

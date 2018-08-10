@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "787322883825",
+    "firebase_url": "https://realliferpgapp-adc9e.firebaseio.com",
+    "project_id": "realliferpgapp-adc9e",
+    "storage_bucket": "realliferpgapp-adc9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787322883825:android:160677ba3b00a5bc",
+        "android_client_info": {
+          "package_name": "de.realliferpg.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787322883825-o0jpfc13hquk3dumsv143053p14l60ig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "de.realliferpg.app",
+            "certificate_hash": "0a12f25355cafbf64727746c28bc26b4ee8553af"
+          }
+        },
+        {
+          "client_id": "787322883825-g4libkfnf1qgrd24g875f3ndblparib3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_fWbcXsTcHy-1RooRg82Q07XH1cLnHWs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787322883825-g4libkfnf1qgrd24g875f3ndblparib3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

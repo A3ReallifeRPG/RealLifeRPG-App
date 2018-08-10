@@ -135,4 +135,11 @@
     <string name="str_view">View</string>
     <string name="str_error_occurred">An error occurred</string>
     <string name="str_helpScan">Help Scanning Code</string>
+    <string name="str_apiSettings">API Settings</string>
+    <string name="str_firebaseSettings">Firebase Settings</string>
+    <string name="str_crashReporting">Crash Reporting</string>
+    <string name="str_info_crashReporting">Send Log when App crashes</string>
+    <string name="str_qrScannerInfo">Scan Code on info.realliferpg.de       For help check settings</string>
+    <string name="str_crashlyticsEnabled">Thank you for sending crash data</string>
+    <string name="str_crashlyticsDisabled">Change will be active after restart</string>
 </resources>
