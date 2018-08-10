@@ -29,11 +29,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
         setPreferencesFromResource(R.xml.preferences, rootKey);
         PreferenceManager.setDefaultValues(Singleton.getInstance().getContext(), R.xml.preferences, false);
 
-        Preference pref = findPreference("scan_code");
-        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        Preference prefScan = findPreference("scan_code");
+        prefScan.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 scanCode();
+                return false;
+            }
+        });
+
+        Preference prefScanHelp = findPreference("scan_code_help");
+        prefScanHelp.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.realliferpg.de/index.php?title=RealLifeRPG_App"));
+                startActivity(browserIntent);
                 return false;
             }
         });
@@ -43,6 +53,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
     public void scanCode(){
         IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
         intentIntegrator.addExtra(Intents.Scan.BEEP_ENABLED,false);
+        intentIntegrator.setPrompt("Scan Code on info.realliferpg.de\n      For help check settings");
+        intentIntegrator.setOrientationLocked(false);
         intentIntegrator.initiateScan();
     }
 

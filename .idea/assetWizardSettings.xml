@@ -69,7 +69,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/F:/Programme/android-studio-stable/plugins/android/lib/android.jar!/images/material_design_icons/file/ic_cloud_off_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/F:/Programme/android-studio-stable/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_lock_open_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -79,7 +79,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_cloud_off" />
+                            <entry key="outputName" value="ic_lock_open" />
                             <entry key="sourceFile" value="C:\Users\vabene1111" />
                           </map>
                         </option>

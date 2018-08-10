@@ -3,14 +3,21 @@
 
     <EditTextPreference
         android:id="@+id/pref_api_token"
+        android:icon="@drawable/ic_lock_open"
+        android:inputType="textPassword"
         android:key="api_token"
-        android:title="API Token"
         android:summary="Player API Token"
-        android:inputType="textPassword"/>
+        android:title="API Token" />
 
     <Preference
         android:id="@+id/pref_scan_code"
+        android:icon="@drawable/ic_linked_camera"
         android:key="scan_code"
-        android:title="@string/str_scan"/>
+        android:title="@string/str_scan" />
+    <Preference
+        android:id="@+id/pref_scan_code_help"
+        android:icon="@drawable/ic_info_filled"
+        android:key="scan_code_help"
+        android:title="@string/str_helpScan" />
 
 </PreferenceScreen>
