@@ -2,6 +2,9 @@
   <dictionary name="vabene1111">
     <words>
       <w>changelogs</w>
+      <w>playerstats</w>
+      <w>shoptypes</w>
+      <w>snackbar</w>
     </words>
   </dictionary>
 </component>
