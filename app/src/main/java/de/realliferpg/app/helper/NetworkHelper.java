@@ -28,19 +28,19 @@ public class NetworkHelper {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("NetworkHelper","Error in response");
+                        Log.d("NetworkHelper", "Error in response");
                         CustomNetworkError customNetworkError = new CustomNetworkError();
                         customNetworkError.requestReturnClass = type;
-                        if(error.networkResponse != null){
+                        if (error.networkResponse != null) {
                             customNetworkError.statusCode = error.networkResponse.statusCode;
                         }
                         customNetworkError.msg = error.getMessage();
 
-                        callback.onResponse(customNetworkError,CustomNetworkError.class);
+                        callback.onResponse(customNetworkError, CustomNetworkError.class);
                     }
                 });
 
         Singleton.getInstance().addToRequestQueue(jsonObjectRequest);
-        Log.d("","");
+        Log.d("", "");
     }
 }

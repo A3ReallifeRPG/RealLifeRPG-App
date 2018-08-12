@@ -1,38 +1,38 @@
 package de.realliferpg.app.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
+import io.fabric.sdk.android.Fabric;
 
 
 public class MainFragment extends Fragment implements RequestCallbackInterface {
@@ -103,25 +103,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof FragmentInteractionInterface) {
-            mListener = (FragmentInteractionInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onResponse(Object response, Class type) {
+    private void handleResponse(Object response, Class type){
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
         TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
@@ -205,6 +187,37 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             snackbar.show();
             Singleton.getInstance().setCurrentSnackbar(snackbar);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onResponse(Object response, Class type)  {
+        try{
+            handleResponse(response,type);
+        }catch (Exception e){
+            PreferenceHelper preferenceHelper = new PreferenceHelper();
+            if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
+                Crashlytics.logException(e);
+            }
+            Singleton.getInstance().setErrorMsg(e.getMessage());
+            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("open_error"));
         }
     }
 

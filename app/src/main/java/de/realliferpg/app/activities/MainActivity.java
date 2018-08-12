@@ -45,7 +45,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface{
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface {
 
     private Fragment currentFragment;
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         Singleton.getInstance().setContext(getApplicationContext());
 
         PreferenceHelper preferenceHelper = new PreferenceHelper();
-        if(preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG){
+        if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
         }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         // Load Main fragment
-        if(preferenceHelper.getPlayerAPIToken().equals("")){
+        if (preferenceHelper.getPlayerAPIToken().equals("")) {
             switchFragment(new SettingsFragment());
 
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
                         }
                     });
             alertDialog.show();
-        }else{
+        } else {
             switchFragment(new MainFragment());
         }
 
@@ -160,14 +160,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void switchFragment(Fragment newFragment){
+    public void switchFragment(Fragment newFragment) {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        if(newFragment instanceof SettingsFragment){
+        if (newFragment instanceof SettingsFragment) {
             navigationView.setCheckedItem(R.id.nav_settings);
-        }else if(newFragment instanceof  ErrorFragment){
-            for(int i = 0; i < navigationView.getMenu().size(); i++){
+        } else if (newFragment instanceof ErrorFragment) {
+            for (int i = 0; i < navigationView.getMenu().size(); i++) {
                 navigationView.getMenu().getItem(i).setChecked(false);
             }
         }
@@ -177,7 +177,16 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.include_main_content, newFragment);
-        transaction.addToBackStack(null);
+
+        boolean addToBack = true;
+
+        if (currentFragment == null && newFragment instanceof MainFragment) {
+            addToBack = false;
+        }
+
+        if (addToBack) {
+            transaction.addToBackStack(null);
+        }
         transaction.commit();
 
         DrawerLayout drawer = findViewById(R.id.layout_main);
@@ -206,14 +215,14 @@ public class MainActivity extends AppCompatActivity
                 break;
             case "enable_crashlytics":
                 PreferenceHelper preferenceHelper = new PreferenceHelper();
-                if(preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG){
+                if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
                     Fabric.with(this, new Crashlytics());
                 }
                 break;
         }
 
-        if(type.equals(PlayerFragment.class)){
-            switch (uri.toString()){
+        if (type.equals(PlayerFragment.class)) {
+            switch (uri.toString()) {
                 case "fragment_player_change_to_stats": {
                     changePlayerFragment(new PlayerStatsFragment());
                     break;
@@ -227,22 +236,21 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    void changePlayerFragment(Fragment fragment){
+    void changePlayerFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.include_player_content, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data != null){
-            if(data.getAction().equals("com.google.zxing.client.android.SCAN")){
+        if (data != null) {
+            if (data.getAction().equals("com.google.zxing.client.android.SCAN")) {
                 IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-                if(result != null){
+                if (result != null) {
                     Singleton.getInstance().setScanResponse(result.getContents());
-                    ((SettingsFragment)currentFragment).onFragmentInteraction(MainActivity.class,Uri.parse("scan_response"));
+                    ((SettingsFragment) currentFragment).onFragmentInteraction(MainActivity.class, Uri.parse("scan_response"));
 
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();
