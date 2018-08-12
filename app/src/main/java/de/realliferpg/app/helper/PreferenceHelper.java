@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import de.realliferpg.app.Singleton;
 
 public class PreferenceHelper {
-    SharedPreferences prefs;
+    private SharedPreferences prefs;
 
     public PreferenceHelper(){
         prefs = PreferenceManager.getDefaultSharedPreferences(Singleton.getInstance().getContext());

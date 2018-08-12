@@ -17,12 +17,13 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PlayerStatsFragment extends Fragment {
 
     private View view;
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface mListener;
 
     public PlayerStatsFragment() {
         // Required empty public constructor
@@ -46,7 +47,12 @@ public class PlayerStatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player_stats, container, false);
 
-        showPlayerInfo();
+        if(Singleton.getInstance().getPlayerInfo() == null){
+            Singleton.getInstance().setErrorMsg("PlayerStatsFragment Error Code #1");
+            mListener.onFragmentInteraction(PlayerStatsFragment.class,Uri.parse("open_error"));
+        }else {
+            showPlayerInfo();
+        }
 
         return view;
     }
@@ -79,8 +85,8 @@ public class PlayerStatsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -92,9 +98,4 @@ public class PlayerStatsFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
 }

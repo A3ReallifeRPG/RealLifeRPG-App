@@ -90,7 +90,7 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
             status = holder.context.getString(R.string.str_deleted);
         }else if(donation.duration == -1){
             status = holder.context.getString(R.string.str_permanent);
-        }else if (donation.duration == 0){
+        }else if (donation.days_left == 0){
             status = holder.context.getString(R.string.str_expired);
         }else{
             status = donation.days_left + " " + holder.context.getString(R.string.str_days);

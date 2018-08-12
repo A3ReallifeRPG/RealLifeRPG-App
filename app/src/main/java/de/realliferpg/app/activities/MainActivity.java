@@ -45,9 +45,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        PlayerStatsFragment.OnFragmentInteractionListener,
-        PlayerDonationFragment.OnFragmentInteractionListener, FragmentInteractionInterface{
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface{
 
     private Fragment currentFragment;
 
@@ -185,13 +183,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.layout_main);
         drawer.closeDrawer(GravityCompat.START);
         currentFragment = newFragment;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.d("MainActivity","Fragment interaction");
-
-
     }
 
     @Override

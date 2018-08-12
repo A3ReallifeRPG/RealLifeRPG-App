@@ -22,6 +22,7 @@ import de.realliferpg.app.adapter.DonationListAdapter;
 import de.realliferpg.app.adapter.InfoAdapter;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Donation;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Vehicle;
@@ -29,17 +30,14 @@ import de.realliferpg.app.objects.Vehicle;
 public class PlayerDonationFragment extends Fragment {
 
     private View view;
-    private OnFragmentInteractionListener mListener;
+    private FragmentInteractionInterface mListener;
 
     public PlayerDonationFragment() {
         // Required empty public constructor
     }
 
     public static PlayerDonationFragment newInstance() {
-        PlayerDonationFragment fragment = new PlayerDonationFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new PlayerDonationFragment();
     }
 
     @Override
@@ -53,13 +51,17 @@ public class PlayerDonationFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player_donations, container, false);
 
-        showPlayerInfo();
+        if(Singleton.getInstance().getPlayerInfo() == null){
+            Singleton.getInstance().setErrorMsg("PlayerDonationFragment Error Code #1");
+            mListener.onFragmentInteraction(PlayerStatsFragment.class,Uri.parse("open_error"));
+        }else {
+            showPlayerInfo();
+        }
 
         return view;
     }
 
     public void showPlayerInfo(){
-        FormatHelper formatHelper = new FormatHelper();
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_p_donation);
@@ -76,8 +78,8 @@ public class PlayerDonationFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof FragmentInteractionInterface) {
+            mListener = (FragmentInteractionInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -88,10 +90,6 @@ public class PlayerDonationFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
 }
