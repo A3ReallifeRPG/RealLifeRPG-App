@@ -28,6 +28,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import de.realliferpg.app.BuildConfig;
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         Singleton.getInstance().setContext(getApplicationContext());
 
         PreferenceHelper preferenceHelper = new PreferenceHelper();
-        if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
+        if (preferenceHelper.isCrashlyticsEnabled() && !Constants.IS_DEBUG) {
             Fabric.with(this, new Crashlytics());
         }
 

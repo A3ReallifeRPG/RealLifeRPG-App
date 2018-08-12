@@ -213,7 +213,9 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             handleResponse(response,type);
         }catch (Exception e){
             PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
+            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
+                Crashlytics.log(1, "crash_on_response_response", response.toString());
+                Crashlytics.log(1, "crash_on_response_type", type.toString());
                 Crashlytics.logException(e);
             }
             Singleton.getInstance().setErrorMsg(e.getMessage());

@@ -19,4 +19,5 @@ public class Constants {
 
 
     public static final int ERROR_SNACKBAR_DURATION = 5000;
+    public static final boolean IS_DEBUG = false;//BuildConfig.DEBUG;
 }
