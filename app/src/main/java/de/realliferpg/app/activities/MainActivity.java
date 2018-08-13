@@ -251,7 +251,9 @@ public class MainActivity extends AppCompatActivity
                 IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                 if (result != null) {
                     Singleton.getInstance().setScanResponse(result.getContents());
-                    ((SettingsFragment) currentFragment).onFragmentInteraction(MainActivity.class, Uri.parse("scan_response"));
+                    if(currentFragment instanceof SettingsFragment){
+                        ((SettingsFragment) currentFragment).onFragmentInteraction(MainActivity.class, Uri.parse("scan_response"));
+                    }
 
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                     SharedPreferences.Editor editor = preferences.edit();

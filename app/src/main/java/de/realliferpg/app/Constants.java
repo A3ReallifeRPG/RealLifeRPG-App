@@ -17,7 +17,6 @@ public class Constants {
     public static final int CATEGORY_SHOP = 2;
     public static final int CATEGORY_LICENSE = 3;
 
-
     public static final int ERROR_SNACKBAR_DURATION = 5000;
     public static final boolean IS_DEBUG = BuildConfig.DEBUG;
 }

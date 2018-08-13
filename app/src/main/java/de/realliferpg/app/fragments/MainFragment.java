@@ -47,9 +47,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
 
-        fragment.setArguments(args);
         return fragment;
     }
 
