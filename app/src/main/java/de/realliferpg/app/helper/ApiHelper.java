@@ -1,8 +1,9 @@
 package de.realliferpg.app.helper;
 
-import android.content.SharedPreferences;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.Singleton;
@@ -22,6 +23,36 @@ public class ApiHelper {
     public ApiHelper(RequestCallbackInterface callbackInterface){
         this.callbackInterface = callbackInterface;
         preferenceHelper = new PreferenceHelper();
+    }
+
+    public Object handleResponse(Object response, Class<?> type){
+        Gson gson = new Gson();
+
+        if(type.equals(PlayerInfo.Wrapper.class)){
+            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
+            PlayerInfo playerInfo = value.data[0];
+            playerInfo.requested_at = value.requested_at;
+            Singleton.getInstance().setPlayerInfo(playerInfo);
+            return playerInfo;
+        }else if(type.equals(Server.Wrapper.class)){
+            Server.Wrapper value = gson.fromJson(response.toString(), Server.Wrapper.class);
+            final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
+            Singleton.getInstance().setServerList(servers);
+            return servers;
+        }
+
+        return response;
+    }
+
+    private boolean checkCache(Class<?> type){
+        long sysTime = (int) (System.currentTimeMillis() / 1000L);
+
+        if(type.equals(PlayerInfo.class)){
+            PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
+            return playerInfo != null && (sysTime - playerInfo.requested_at) < 30; // TODO define cache intervals somewhere
+        }
+
+        return false;
     }
 
     public void getChangelog() {

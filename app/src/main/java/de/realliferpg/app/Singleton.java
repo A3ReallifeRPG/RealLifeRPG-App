@@ -7,7 +7,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
 import de.realliferpg.app.objects.PlayerInfo;
+import de.realliferpg.app.objects.Server;
 
 public class Singleton {
     private static final Singleton instance = new Singleton();
@@ -25,11 +28,12 @@ public class Singleton {
     private Snackbar currentSnackbar;
 
     private PlayerInfo playerInfo;
+    private ArrayList<Server> serverList;
 
     private String scanResponse;
     private String errorMsg;
 
-    public RequestQueue getRequestQueue() {
+    private RequestQueue getRequestQueue() {
         if (volleyQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
@@ -87,5 +91,13 @@ public class Singleton {
         if(currentSnackbar != null){
             currentSnackbar.dismiss();
         }
+    }
+
+    public ArrayList<Server> getServerList() {
+        return serverList;
+    }
+
+    public void setServerList(ArrayList<Server> serverList) {
+        this.serverList = serverList;
     }
 }

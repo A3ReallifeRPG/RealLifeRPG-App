@@ -40,13 +40,15 @@ import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
+import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.PlayerInfo;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface, RequestCallbackInterface {
 
     private Fragment currentFragment;
 
@@ -261,6 +263,27 @@ public class MainActivity extends AppCompatActivity
                     editor.apply();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onResponse(Object response, Class<?> type) {
+        try{
+            ApiHelper apiHelper = new ApiHelper(this);
+            Object result = apiHelper.handleResponse(response,type);
+
+            if(result != null){
+                ((RequestCallbackInterface) currentFragment).onResponse(result,type);
+            }
+        }catch (Exception e){
+            PreferenceHelper preferenceHelper = new PreferenceHelper();
+            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
+                Crashlytics.log(1, "crash_on_response_response", response.toString());
+                Crashlytics.log(1, "crash_on_response_type", type.toString());
+                Crashlytics.logException(e);
+            }
+            Singleton.getInstance().setErrorMsg(e.getMessage());
+            switchFragment(new ErrorFragment());
         }
     }
 }

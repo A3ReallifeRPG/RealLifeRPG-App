@@ -13,26 +13,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
-import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
-import io.fabric.sdk.android.Fabric;
 
 
 public class MainFragment extends Fragment implements RequestCallbackInterface {
@@ -46,9 +39,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     }
 
     public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
-
-        return fragment;
+        return new MainFragment();
     }
 
     @Override
@@ -62,7 +53,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        final ApiHelper apiHelper = new ApiHelper(this);
+        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getServers();
         apiHelper.getPlayerStats();
 
@@ -101,7 +92,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         return view;
     }
 
-    private void handleResponse(Object response, Class type){
+    @Override
+    public void onResponse(Object result, Class type) {
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
         TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
@@ -114,11 +106,8 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
 
         if (type.equals(Server.Wrapper.class)) {
-            Gson gson = new Gson();
 
-            Server.Wrapper value = gson.fromJson(response.toString(), Server.Wrapper.class);
-
-            final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
+            final ArrayList<Server> servers = Singleton.getInstance().getServerList();
 
             ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
@@ -128,16 +117,12 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             final ListView listView = view.findViewById(R.id.lv_main_serverList);
             listView.setAdapter(adapter);
             sc.setRefreshing(false);
-        }else if (type.equals(PlayerInfo.Wrapper.class)) {
-            Gson gson = new Gson();
+        } else if (type.equals(PlayerInfo.Wrapper.class)) {
+
             FormatHelper formatHelper = new FormatHelper();
 
-            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
-
-            PlayerInfo playerInfo = value.data[0];
-
-            Singleton.getInstance().setPlayerInfo(playerInfo);
-            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("update_login_state"));
+            PlayerInfo playerInfo = (PlayerInfo) result;
+            mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
 
             tvPiName.setText(playerInfo.name);
             tvPiPID.setText(playerInfo.pid);
@@ -145,20 +130,20 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
             tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
             tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
-            tvPiInfoLevel.setText(String.valueOf( playerInfo.level));
-            tvPiInfoSkill.setText(String.valueOf( playerInfo.skillpoint));
+            tvPiInfoLevel.setText(String.valueOf(playerInfo.level));
+            tvPiInfoSkill.setText(String.valueOf(playerInfo.skillpoint));
 
             final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
             pbPlayer.setVisibility(View.GONE);
 
             Singleton.getInstance().setPlayerInfo(playerInfo);
-            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("update_login_state"));
-        }else if (type.equals(CustomNetworkError.class)){
-            CustomNetworkError error = (CustomNetworkError) response;
+            mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
+        } else if (type.equals(CustomNetworkError.class)) {
+            CustomNetworkError error = (CustomNetworkError) result;
 
             sc.setRefreshing(false);
 
-            if(error.requestReturnClass.equals(PlayerInfo.Wrapper.class)){
+            if (error.requestReturnClass.equals(PlayerInfo.Wrapper.class)) {
                 final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
                 pbPlayer.setVisibility(View.GONE);
 
@@ -167,7 +152,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 tvPiInfoLevel.setText("?");
                 tvPiInfoSkill.setText("?");
 
-            }else if(error.requestReturnClass.equals(Server.Wrapper.class)){
+            } else if (error.requestReturnClass.equals(Server.Wrapper.class)) {
                 final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
                 pbServer.setVisibility(View.GONE);
             }
@@ -179,7 +164,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onFragmentInteraction(MainFragment.class,Uri.parse("open_error"));
+                    mListener.onFragmentInteraction(MainFragment.class, Uri.parse("open_error"));
                 }
             });
 
@@ -203,22 +188,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onResponse(Object response, Class type)  {
-        try{
-            handleResponse(response,type);
-        }catch (Exception e){
-            PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
-                Crashlytics.log(1, "crash_on_response_response", response.toString());
-                Crashlytics.log(1, "crash_on_response_type", type.toString());
-                Crashlytics.logException(e);
-            }
-            Singleton.getInstance().setErrorMsg(e.getMessage());
-            mListener.onFragmentInteraction(MainFragment.class,Uri.parse("open_error"));
-        }
     }
 
 }

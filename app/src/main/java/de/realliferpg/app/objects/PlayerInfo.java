@@ -1,9 +1,10 @@
 package de.realliferpg.app.objects;
 
 public class PlayerInfo {
+
     public class Wrapper{
         public PlayerInfo[] data;
-        public String requested_at;
+        public long requested_at;
     }
 
     public int id;
@@ -54,6 +55,8 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
+
+    public long requested_at;
 
     @Override
     public String toString() {
