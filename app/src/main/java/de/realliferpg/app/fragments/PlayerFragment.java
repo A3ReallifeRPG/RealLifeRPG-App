@@ -135,43 +135,25 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     }
 
     @Override
-    public void onResponse(Object response, Class type) {
-        try {
-            if (type.equals(PlayerInfo.Wrapper.class)) {
-                Gson gson = new Gson();
+    public void onResponse(RequestTypeEnum type, Object response) {
 
-                PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
-
-                PlayerInfo playerInfo = value.data[0];
-
-                Singleton.getInstance().setPlayerInfo(playerInfo);
+        switch (type){
+            case PLAYER:
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("update_login_state"));
 
                 SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
                 sc.setRefreshing(false);
 
                 showPlayerInfo();
-
-            } else if (type.equals(CustomNetworkError.class)) {
+                break;
+            case NETWORK_ERROR:
                 CustomNetworkError error = (CustomNetworkError) response;
 
                 Singleton.getInstance().setErrorMsg(error.toString());
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("open_error"));
-
-            }
-        } catch (Exception e) {
-            PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
-                Crashlytics.logException(e);
-            }
-            Singleton.getInstance().setErrorMsg(e.getMessage());
-            mListener.onFragmentInteraction(MainFragment.class, Uri.parse("open_error"));
+                break;
         }
 
     }
 
-    @Override
-    public void onResponse(RequestTypeEnum type, Object object) {
-
-    }
 }

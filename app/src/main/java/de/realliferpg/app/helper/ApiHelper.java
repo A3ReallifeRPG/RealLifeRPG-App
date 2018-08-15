@@ -72,7 +72,7 @@ public class ApiHelper {
 
     public void getChangelog() {
         NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_CHANGELOG,callbackInterface,Changelog.Wrapper.class);
+        networkHelper.doJSONRequest(Constants.URL_CHANGELOG,callbackInterface,RequestTypeEnum.CHANGELOG);
     }
 
     public void getServers() {
@@ -92,9 +92,9 @@ public class ApiHelper {
         NetworkHelper networkHelper = new NetworkHelper();
 
         if(shopType == Constants.CATEGORY_SHOP){
-            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_ITEMS,callbackInterface,Shop.Wrapper.class);
+            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_ITEMS,callbackInterface,RequestTypeEnum.SHOP);
         }else if(shopType == Constants.CATEGORY_VEHICLE){
-            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_VEHICLES,callbackInterface,Shop.Wrapper.class);
+            networkHelper.doJSONRequest(Constants.URL_SHOPTYPES_VEHICLES,callbackInterface,RequestTypeEnum.SHOP);
         }
     }
 
@@ -102,9 +102,9 @@ public class ApiHelper {
         NetworkHelper networkHelper = new NetworkHelper();
 
         if(shopType == Constants.CATEGORY_SHOP){
-            networkHelper.doJSONRequest(Constants.URL_SHOP_ITEMS + shop,callbackInterface,ShopEntry.Wrapper.class);
+            networkHelper.doJSONRequest(Constants.URL_SHOP_ITEMS + shop,callbackInterface,RequestTypeEnum.SHOP_INFO_ITEM);
         }else if(shopType == Constants.CATEGORY_VEHICLE){
-            networkHelper.doJSONRequest(Constants.URL_SHOP_VEHICLES + shop,callbackInterface,Vehicle.Wrapper.class);
+            networkHelper.doJSONRequest(Constants.URL_SHOP_VEHICLES + shop,callbackInterface,RequestTypeEnum.SHOP_INFO_VEHICLE);
         }
     }
 

@@ -287,25 +287,4 @@ public class MainActivity extends AppCompatActivity
             switchFragment(new ErrorFragment());
         }
     }
-
-    @Override
-    public void onResponse(Object response, Class<?> type) {
-        try{
-            ApiHelper apiHelper = new ApiHelper(this);
-            Object result = apiHelper.handleResponse(response,type);
-
-            if(result != null){
-                ((RequestCallbackInterface) currentFragment).onResponse(result,type);
-            }
-        }catch (Exception e){
-            PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
-                Crashlytics.log(1, "crash_on_response_response", response.toString());
-                Crashlytics.log(1, "crash_on_response_type", type.toString());
-                Crashlytics.logException(e);
-            }
-            Singleton.getInstance().setErrorMsg(e.getMessage());
-            switchFragment(new ErrorFragment());
-        }
-    }
 }

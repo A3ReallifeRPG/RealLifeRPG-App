@@ -152,72 +152,71 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
         mListener = null;
     }
 
+    private void updateShopInfo(RequestTypeEnum type, Object result){
+        RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(llM);
+
+        if(type == RequestTypeEnum.SHOP_INFO_VEHICLE) {
+            ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) result; //TODO cleanup
+
+            InfoAdapter<Vehicle> infoAdapter = new InfoAdapter<>(vehicles);
+            recyclerView.setAdapter(infoAdapter);
+        } else if(type == RequestTypeEnum.SHOP_INFO_ITEM){
+            ArrayList<ShopEntry> vehicles = (ArrayList<ShopEntry>) result; //TODO cleanup
+
+            InfoAdapter<ShopEntry> infoAdapter = new InfoAdapter<>(vehicles);
+            recyclerView.setAdapter(infoAdapter);
+        }
+
+        ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
+        pbContent.setVisibility(View.GONE);
+    }
+
     @Override
-    public void onResponse(Object response, Class type) {
-        if (type.equals(Shop.Wrapper.class)) {
-            Gson gson = new Gson();
+    public void onResponse(RequestTypeEnum type, Object result) {
+        ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
+        ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
+        Spinner shopSelect = view.findViewById(R.id.sp_info_select);
 
-            Shop.Wrapper value = gson.fromJson(response.toString(), Shop.Wrapper.class);
-            final ArrayList<Shop> shops = new ArrayList<>(Arrays.asList(value.data));
 
-            Spinner shopSelect = view.findViewById(R.id.sp_info_select);
+        switch (type){
+            case SHOP:
+                final ArrayList<Shop> shops = (ArrayList<Shop>) result; //TODO cleanup
 
-            InfoSpinnerAdapter spinnerArrayAdapter = new InfoSpinnerAdapter(view.getContext(), shops);
+                InfoSpinnerAdapter spinnerArrayAdapter = new InfoSpinnerAdapter(view.getContext(), shops);
 
-            shopSelect.setAdapter(spinnerArrayAdapter);
+                shopSelect.setAdapter(spinnerArrayAdapter);
 
-            ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
-            pbCategory.setVisibility(View.GONE);
-        }else if (type.equals(CustomNetworkError.class)){
-            CustomNetworkError error = (CustomNetworkError) response;
+                pbCategory.setVisibility(View.GONE);
+            case SHOP_INFO_ITEM:
+                updateShopInfo(RequestTypeEnum.SHOP_INFO_ITEM,result);
+                break;
+            case SHOP_INFO_VEHICLE:
+                updateShopInfo(RequestTypeEnum.SHOP_INFO_VEHICLE,result);
+                break;
+            case NETWORK_ERROR:
+                CustomNetworkError error = (CustomNetworkError) result;
 
-            Singleton.getInstance().setErrorMsg(error.toString());
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_info), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Singleton.getInstance().setErrorMsg(error.toString());
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_info), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 
-            snackbar.setAction(R.string.str_view, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onFragmentInteraction(InfoFragment.class,Uri.parse("open_error"));
-                }
-            });
+                snackbar.setAction(R.string.str_view, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onFragmentInteraction(InfoFragment.class,Uri.parse("open_error"));
+                    }
+                });
 
-            ProgressBar pbCategory = view.findViewById(R.id.pb_info_category);
-            pbCategory.setVisibility(View.GONE);
-            ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
-            pbContent.setVisibility(View.GONE);
+                pbCategory.setVisibility(View.GONE);
+                pbContent.setVisibility(View.GONE);
 
-            snackbar.show();
-            Singleton.getInstance().setCurrentSnackbar(snackbar);
-        }else {
-            Gson gson = new Gson();
-
-            RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
-            recyclerView.setHasFixedSize(true);
-
-            LinearLayoutManager llM = new LinearLayoutManager(view.getContext());
-            recyclerView.setLayoutManager(llM);
-
-            if(type.equals(Vehicle.Wrapper.class)){
-                Vehicle.Wrapper value = gson.fromJson(response.toString(), Vehicle.Wrapper.class);
-                ArrayList<Vehicle> vehicles = new ArrayList<>(Arrays.asList(value.data));
-
-                InfoAdapter<Vehicle> infoAdapter = new InfoAdapter<>(vehicles);
-                recyclerView.setAdapter(infoAdapter);
-            } else if(type.equals(ShopEntry.Wrapper.class)){
-                ShopEntry.Wrapper value = gson.fromJson(response.toString(), ShopEntry.Wrapper.class);
-                ArrayList<ShopEntry> vehicles = new ArrayList<>(Arrays.asList(value.data));
-
-                InfoAdapter<ShopEntry> infoAdapter = new InfoAdapter<>(vehicles);
-                recyclerView.setAdapter(infoAdapter);
-            }
-
-            ProgressBar pbContent = view.findViewById(R.id.pb_info_content);
-            pbContent.setVisibility(View.GONE);
+                snackbar.show();
+                Singleton.getInstance().setCurrentSnackbar(snackbar);
+                break;
         }
     }
 
-    @Override
-    public void onResponse(RequestTypeEnum type, Object object) {
-
-    }
 }

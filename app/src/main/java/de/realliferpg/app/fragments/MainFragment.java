@@ -95,6 +95,9 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
     @Override
     public void onResponse(RequestTypeEnum type, Object result) {
+        final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+        final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
         TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
@@ -122,7 +125,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 tvPiInfoLevel.setText(String.valueOf(playerInfo.level));
                 tvPiInfoSkill.setText(String.valueOf(playerInfo.skillpoint));
 
-                final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+
                 pbPlayer.setVisibility(View.GONE);
 
                 Singleton.getInstance().setPlayerInfo(playerInfo);
@@ -133,57 +136,43 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
 
                 ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
-                final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
                 pbServer.setVisibility(View.GONE);
 
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
                 listView.setAdapter(adapter);
                 sc.setRefreshing(false);
                 break;
-        }
-    }
+            case NETWORK_ERROR:
+                CustomNetworkError error = (CustomNetworkError) result;
 
-    @Override
-    public void onResponse(Object result, Class type) {
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
+                sc.setRefreshing(false);
 
-        TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
-        TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
-        TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
-        TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+                if (error.requestReturnClass.equals(PlayerInfo.Wrapper.class)) {
+                    pbPlayer.setVisibility(View.GONE);
 
-        if (type.equals(CustomNetworkError.class)) {
-            CustomNetworkError error = (CustomNetworkError) result;
+                    tvPiInfoBank.setText("?");
+                    tvPiInfoCash.setText("?");
+                    tvPiInfoLevel.setText("?");
+                    tvPiInfoSkill.setText("?");
 
-            sc.setRefreshing(false);
-
-            if (error.requestReturnClass.equals(PlayerInfo.Wrapper.class)) {
-                final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
-                pbPlayer.setVisibility(View.GONE);
-
-                tvPiInfoBank.setText("?");
-                tvPiInfoCash.setText("?");
-                tvPiInfoLevel.setText("?");
-                tvPiInfoSkill.setText("?");
-
-            } else if (error.requestReturnClass.equals(Server.Wrapper.class)) {
-                final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
-                pbServer.setVisibility(View.GONE);
-            }
-
-
-            Singleton.getInstance().setErrorMsg(error.toString());
-            Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
-
-            snackbar.setAction(R.string.str_view, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onFragmentInteraction(MainFragment.class, Uri.parse("open_error"));
+                } else if (error.requestReturnClass.equals(Server.Wrapper.class)) {
+                    pbServer.setVisibility(View.GONE);
                 }
-            });
 
-            snackbar.show();
-            Singleton.getInstance().setCurrentSnackbar(snackbar);
+
+                Singleton.getInstance().setErrorMsg(error.toString());
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+
+                snackbar.setAction(R.string.str_view, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onFragmentInteraction(MainFragment.class, Uri.parse("open_error"));
+                    }
+                });
+
+                snackbar.show();
+                Singleton.getInstance().setCurrentSnackbar(snackbar);
+                break;
         }
     }
 

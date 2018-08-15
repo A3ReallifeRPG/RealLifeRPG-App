@@ -16,34 +16,6 @@ import de.realliferpg.app.objects.CustomNetworkError;
 
 public class NetworkHelper {
 
-    public void doJSONRequest(String url, final RequestCallbackInterface callback, final Class type) {
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        callback.onResponse(response, type);
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("NetworkHelper", "Error in response");
-                        CustomNetworkError customNetworkError = new CustomNetworkError();
-                        customNetworkError.requestReturnClass = type;
-                        if (error.networkResponse != null) {
-                            customNetworkError.statusCode = error.networkResponse.statusCode;
-                        }
-                        customNetworkError.msg = error.getMessage();
-
-                        callback.onResponse(customNetworkError, CustomNetworkError.class);
-                    }
-                });
-
-        Singleton.getInstance().addToRequestQueue(jsonObjectRequest);
-    }
-
     public void doJSONRequest(String url, final RequestCallbackInterface callback, final RequestTypeEnum type) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -51,7 +23,7 @@ public class NetworkHelper {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        callback.onResponse(type,response);
+                        callback.onResponse(type, response);
                     }
                 }, new Response.ErrorListener() {
 
@@ -65,7 +37,7 @@ public class NetworkHelper {
                         }
                         customNetworkError.msg = error.getMessage();
 
-                        callback.onResponse(customNetworkError, CustomNetworkError.class);
+                        callback.onResponse(RequestTypeEnum.NETWORK_ERROR, customNetworkError);
                     }
                 });
 
