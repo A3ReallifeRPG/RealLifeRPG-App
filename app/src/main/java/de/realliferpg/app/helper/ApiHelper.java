@@ -2,6 +2,8 @@ package de.realliferpg.app.helper;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,8 +15,8 @@ import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
-import de.realliferpg.app.objects.ShopEntry;
-import de.realliferpg.app.objects.Vehicle;
+import de.realliferpg.app.objects.ShopItem;
+import de.realliferpg.app.objects.ShopVehicle;
 
 public class ApiHelper {
 
@@ -26,7 +28,7 @@ public class ApiHelper {
         preferenceHelper = new PreferenceHelper();
     }
 
-    public Object handleResponse(RequestTypeEnum type, Object response){
+    public boolean handleResponse(RequestTypeEnum type, JSONObject response){
         Gson gson = new Gson();
 
         switch (type){
@@ -35,28 +37,35 @@ public class ApiHelper {
                 PlayerInfo playerInfo = playerWrapper.data[0];
                 playerInfo.requested_at = playerWrapper.requested_at;
                 Singleton.getInstance().setPlayerInfo(playerInfo);
-                return playerInfo;
+                return true;
             case SERVER:
                 Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
                 final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(serverWrapper.data));
                 Singleton.getInstance().setServerList(servers);
-                return servers;
+                return true;
+            case CHANGELOG:
+                Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
+                ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+                Singleton.getInstance().setChangelogList(changelogs);
+                return true;
+            case SHOP:
+                Shop.Wrapper shop = gson.fromJson(response.toString(), Shop.Wrapper.class);
+                final ArrayList<Shop> shops = new ArrayList<>(Arrays.asList(shop.data));
+                Singleton.getInstance().setShopList(shops);
+                return true;
+            case SHOP_INFO_ITEM:
+                ShopItem.Wrapper shopWrapper = gson.fromJson(response.toString(), ShopItem.Wrapper.class);
+                ArrayList<ShopItem> shopEntries = new ArrayList<>(Arrays.asList(shopWrapper.data));
+                Singleton.getInstance().setShopItemList(shopEntries);
+                return true;
+            case SHOP_INFO_VEHICLE:
+                ShopVehicle.Wrapper vehicleWrapper = gson.fromJson(response.toString(), ShopVehicle.Wrapper.class);
+                ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
+                Singleton.getInstance().setShopVehicleList(shopVehicles);
+                return true;
         }
 
-        return response;
-    }
-
-    public Object handleResponse(Object response, Class<?> type){
-        Gson gson = new Gson();
-
-        if(type.equals(Changelog.Wrapper.class)){
-            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
-            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
-            Singleton.getInstance().setChangelogList(changelogs);
-            return changelogs;
-        }
-
-        return response;
+        return false;
     }
 
     private boolean checkCache(Class<?> type){

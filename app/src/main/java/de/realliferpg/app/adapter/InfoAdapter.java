@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
-import de.realliferpg.app.objects.Shop;
-import de.realliferpg.app.objects.ShopEntry;
-import de.realliferpg.app.objects.Vehicle;
+import de.realliferpg.app.objects.ShopItem;
+import de.realliferpg.app.objects.ShopVehicle;
 
 public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder> {
     private ArrayList<T> dataArray;
@@ -55,15 +54,15 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
         FormatHelper formatHelper = new FormatHelper();
         Object object = dataArray.get(position);
 
-        if (object instanceof Vehicle) {
-            Vehicle vehicle = (Vehicle) object;
+        if (object instanceof ShopVehicle) {
+            ShopVehicle shopVehicle = (ShopVehicle) object;
 
-            holder.tvHead.setText(vehicle.name);
-            holder.tvSub.setText("V-Items: " + vehicle.v_space + " kg\nLevel: " + vehicle.level);
+            holder.tvHead.setText(shopVehicle.name);
+            holder.tvSub.setText("V-Items: " + shopVehicle.v_space + " kg\nLevel: " + shopVehicle.level);
 
-            holder.tvRight.setText(formatHelper.formatCurrency(vehicle.price));
-        } else if (object instanceof ShopEntry) {
-            ShopEntry shop = (ShopEntry) object;
+            holder.tvRight.setText(formatHelper.formatCurrency(shopVehicle.price));
+        } else if (object instanceof ShopItem) {
+            ShopItem shop = (ShopItem) object;
 
             holder.tvHead.setText(shop.name);
             holder.tvSub.setText("Level: " + shop.level);

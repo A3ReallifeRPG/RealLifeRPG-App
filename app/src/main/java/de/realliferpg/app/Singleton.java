@@ -10,8 +10,12 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
+import de.realliferpg.app.objects.Shop;
+import de.realliferpg.app.objects.ShopItem;
+import de.realliferpg.app.objects.ShopVehicle;
 
 public class Singleton {
     private static final Singleton instance = new Singleton();
@@ -31,6 +35,11 @@ public class Singleton {
     private PlayerInfo playerInfo;
     private ArrayList<Server> serverList;
     private ArrayList<Changelog> changelogList;
+    private ArrayList<Shop> shopList;
+    private ArrayList<ShopVehicle> shopVehicleList;
+    private ArrayList<ShopItem> shopItemList;
+
+    private CustomNetworkError networkError;
 
     private String scanResponse;
     private String errorMsg;
@@ -109,5 +118,37 @@ public class Singleton {
 
     public void setChangelogList(ArrayList<Changelog> changelogList) {
         this.changelogList = changelogList;
+    }
+
+    public ArrayList<Shop> getShopList() {
+        return shopList;
+    }
+
+    public void setShopList(ArrayList<Shop> shopList) {
+        this.shopList = shopList;
+    }
+
+    public ArrayList<ShopVehicle> getShopVehicleList() {
+        return shopVehicleList;
+    }
+
+    public void setShopVehicleList(ArrayList<ShopVehicle> shopVehicleList) {
+        this.shopVehicleList = shopVehicleList;
+    }
+
+    public ArrayList<ShopItem> getShopItemList() {
+        return shopItemList;
+    }
+
+    public void setShopItemList(ArrayList<ShopItem> shopItemList) {
+        this.shopItemList = shopItemList;
+    }
+
+    public CustomNetworkError getNetworkError() {
+        return networkError;
+    }
+
+    public void setNetworkError(CustomNetworkError networkError) {
+        this.networkError = networkError;
     }
 }

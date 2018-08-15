@@ -27,6 +27,8 @@ import com.crashlytics.android.Crashlytics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONObject;
+
 import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -42,6 +44,7 @@ import de.realliferpg.app.fragments.PlayerStatsFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
@@ -268,13 +271,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResponse(RequestTypeEnum type, Object response) {
+    public void onResponse(RequestTypeEnum type, JSONObject response) {
         try{
             ApiHelper apiHelper = new ApiHelper(this);
-            Object result = apiHelper.handleResponse(type,response);
+            boolean result = apiHelper.handleResponse(type,response);
 
-            if(result != null){
-                ((RequestCallbackInterface) currentFragment).onResponse(type,result);
+            if(result){
+                ((CallbackNotifyInterface) currentFragment).onCallback(type);
+            }else{
+                // TODO handle this case, should not happen but you never know
             }
         }catch (Exception e){
             PreferenceHelper preferenceHelper = new PreferenceHelper();

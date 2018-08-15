@@ -21,6 +21,7 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
@@ -29,7 +30,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
 
-public class MainFragment extends Fragment implements RequestCallbackInterface {
+public class MainFragment extends Fragment implements CallbackNotifyInterface {
 
     private FragmentInteractionInterface mListener;
 
@@ -94,7 +95,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     }
 
     @Override
-    public void onResponse(RequestTypeEnum type, Object result) {
+    public void onCallback(RequestTypeEnum type) {
         final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
         final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
 
@@ -113,7 +114,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
             case PLAYER:
                 FormatHelper formatHelper = new FormatHelper();
 
-                PlayerInfo playerInfo = (PlayerInfo) result;
+                PlayerInfo playerInfo = (PlayerInfo) Singleton.getInstance().getPlayerInfo();
                 mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
 
                 tvPiName.setText(playerInfo.name);
@@ -143,7 +144,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
                 sc.setRefreshing(false);
                 break;
             case NETWORK_ERROR:
-                CustomNetworkError error = (CustomNetworkError) result;
+                CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 sc.setRefreshing(false);
 

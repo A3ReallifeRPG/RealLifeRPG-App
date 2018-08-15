@@ -9,23 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.DonationListAdapter;
-import de.realliferpg.app.adapter.InfoAdapter;
-import de.realliferpg.app.adapter.ServerListAdapter;
-import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Donation;
 import de.realliferpg.app.objects.PlayerInfo;
-import de.realliferpg.app.objects.Vehicle;
 
 public class PlayerDonationFragment extends Fragment {
 

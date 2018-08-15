@@ -3,9 +3,9 @@ package de.realliferpg.app.objects;
 /**
  * Item Shop entry object
  */
-public class ShopEntry {
+public class ShopItem {
     public class Wrapper{
-        public ShopEntry[] data;
+        public ShopItem[] data;
         public String requested_at;
     }
 

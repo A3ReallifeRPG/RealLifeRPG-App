@@ -37,7 +37,9 @@ public class NetworkHelper {
                         }
                         customNetworkError.msg = error.getMessage();
 
-                        callback.onResponse(RequestTypeEnum.NETWORK_ERROR, customNetworkError);
+                        // TODO better handling since multiple simultaneous requests could override this error
+                        Singleton.getInstance().setNetworkError(customNetworkError);
+                        callback.onResponse(RequestTypeEnum.NETWORK_ERROR, null);
                     }
                 });
 

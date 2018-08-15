@@ -1,8 +1,8 @@
 package de.realliferpg.app.objects;
 
-public class Vehicle {
+public class ShopVehicle {
     public class Wrapper{
-        public Vehicle[] data;
+        public ShopVehicle[] data;
         public String requested_at;
     }
 

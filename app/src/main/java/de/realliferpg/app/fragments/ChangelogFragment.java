@@ -29,13 +29,14 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.ChangelogAdapter;
 import de.realliferpg.app.helper.ApiHelper;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CustomNetworkError;
 
-public class ChangelogFragment extends Fragment implements RequestCallbackInterface {
+public class ChangelogFragment extends Fragment implements CallbackNotifyInterface {
 
     private FragmentInteractionInterface mListener;
     private View view;
@@ -45,10 +46,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     }
 
     public static ChangelogFragment newInstance() {
-        ChangelogFragment fragment = new ChangelogFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new ChangelogFragment();
     }
 
     @Override
@@ -85,7 +83,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
     }
 
     @Override
-    public void onResponse(RequestTypeEnum type, Object result) {
+    public void onCallback(RequestTypeEnum type) {
         ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_changelog);
         sc.setRefreshing(false);
@@ -134,7 +132,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 });
                 break;
             case NETWORK_ERROR:
-                CustomNetworkError error = (CustomNetworkError) result;
+                CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbChangelog.setVisibility(View.GONE);
 

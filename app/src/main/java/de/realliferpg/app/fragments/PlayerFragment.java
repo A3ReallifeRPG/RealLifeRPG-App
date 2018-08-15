@@ -29,13 +29,14 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 
-public class PlayerFragment extends Fragment implements RequestCallbackInterface {
+public class PlayerFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
     private FragmentInteractionInterface mListener;
@@ -62,7 +63,7 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
 
-        final ApiHelper apiHelper = new ApiHelper(this);
+        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         if (Singleton.getInstance().getPlayerInfo() == null) {
             apiHelper.getPlayerStats();
         } else {
@@ -135,7 +136,7 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
     }
 
     @Override
-    public void onResponse(RequestTypeEnum type, Object response) {
+    public void onCallback(RequestTypeEnum type) {
 
         switch (type){
             case PLAYER:
@@ -147,7 +148,7 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
                 showPlayerInfo();
                 break;
             case NETWORK_ERROR:
-                CustomNetworkError error = (CustomNetworkError) response;
+                CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 Singleton.getInstance().setErrorMsg(error.toString());
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("open_error"));
