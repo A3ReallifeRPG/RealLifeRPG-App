@@ -9,6 +9,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
+import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
@@ -29,6 +30,7 @@ public class Singleton {
 
     private PlayerInfo playerInfo;
     private ArrayList<Server> serverList;
+    private ArrayList<Changelog> changelogList;
 
     private String scanResponse;
     private String errorMsg;
@@ -99,5 +101,13 @@ public class Singleton {
 
     public void setServerList(ArrayList<Server> serverList) {
         this.serverList = serverList;
+    }
+
+    public ArrayList<Changelog> getChangelogList() {
+        return changelogList;
+    }
+
+    public void setChangelogList(ArrayList<Changelog> changelogList) {
+        this.changelogList = changelogList;
     }
 }

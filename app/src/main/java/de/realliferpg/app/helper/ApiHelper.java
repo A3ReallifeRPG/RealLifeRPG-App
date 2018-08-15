@@ -39,6 +39,11 @@ public class ApiHelper {
             final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
             Singleton.getInstance().setServerList(servers);
             return servers;
+        }else if(type.equals(Changelog.Wrapper.class)){
+            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
+            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+            Singleton.getInstance().setChangelogList(changelogs);
+            return changelogs;
         }
 
         return response;

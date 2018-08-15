@@ -61,7 +61,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
         this.view = inflater.inflate(R.layout.fragment_changelog, container, false);
 
-        final ApiHelper apiHelper = new ApiHelper(this);
+        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getChangelog();
 
         final ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
@@ -85,17 +85,14 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
 
 
     @Override
-    public void onResponse(Object response, Class type) {
+    public void onResponse(Object result, Class type) {
 
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_changelog);
         sc.setRefreshing(false);
 
         if (type.equals(Changelog.Wrapper.class)) {
 
-            Gson gson = new Gson();
-            Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
-
-            ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+            ArrayList<Changelog> changelogs =  Singleton.getInstance().getChangelogList();
 
             final ExpandableListView listView = view.findViewById(R.id.lv_changelog_main);
 
@@ -137,7 +134,7 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
                 }
             });
         }else if(type.equals(CustomNetworkError.class)){
-            CustomNetworkError error = (CustomNetworkError) response;
+            CustomNetworkError error = (CustomNetworkError) result;
 
             ProgressBar pbChangelog = view.findViewById(R.id.pb_changelog_main);
             pbChangelog.setVisibility(View.GONE);
