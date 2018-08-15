@@ -44,6 +44,7 @@ import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.PlayerInfo;
 import io.fabric.sdk.android.Fabric;
 
@@ -263,6 +264,27 @@ public class MainActivity extends AppCompatActivity
                     editor.apply();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onResponse(RequestTypeEnum type, Object response) {
+        try{
+            ApiHelper apiHelper = new ApiHelper(this);
+            Object result = apiHelper.handleResponse(type,response);
+
+            if(result != null){
+                ((RequestCallbackInterface) currentFragment).onResponse(type,result);
+            }
+        }catch (Exception e){
+            PreferenceHelper preferenceHelper = new PreferenceHelper();
+            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
+                Crashlytics.log(1, "crash_on_response_response", response.toString());
+                Crashlytics.log(1, "crash_on_response_type", type.toString());
+                Crashlytics.logException(e);
+            }
+            Singleton.getInstance().setErrorMsg(e.getMessage());
+            switchFragment(new ErrorFragment());
         }
     }
 

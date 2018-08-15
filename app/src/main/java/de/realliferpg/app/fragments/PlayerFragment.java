@@ -31,6 +31,7 @@ import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 
@@ -169,4 +170,8 @@ public class PlayerFragment extends Fragment implements RequestCallbackInterface
 
     }
 
+    @Override
+    public void onResponse(RequestTypeEnum type, Object object) {
+
+    }
 }

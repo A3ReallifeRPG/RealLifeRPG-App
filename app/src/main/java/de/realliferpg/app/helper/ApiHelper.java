@@ -8,6 +8,7 @@ import java.util.Arrays;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
@@ -25,21 +26,30 @@ public class ApiHelper {
         preferenceHelper = new PreferenceHelper();
     }
 
+    public Object handleResponse(RequestTypeEnum type, Object response){
+        Gson gson = new Gson();
+
+        switch (type){
+            case PLAYER:
+                PlayerInfo.Wrapper playerWrapper = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
+                PlayerInfo playerInfo = playerWrapper.data[0];
+                playerInfo.requested_at = playerWrapper.requested_at;
+                Singleton.getInstance().setPlayerInfo(playerInfo);
+                return playerInfo;
+            case SERVER:
+                Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
+                final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(serverWrapper.data));
+                Singleton.getInstance().setServerList(servers);
+                return servers;
+        }
+
+        return response;
+    }
+
     public Object handleResponse(Object response, Class<?> type){
         Gson gson = new Gson();
 
-        if(type.equals(PlayerInfo.Wrapper.class)){
-            PlayerInfo.Wrapper value = gson.fromJson(response.toString(), PlayerInfo.Wrapper.class);
-            PlayerInfo playerInfo = value.data[0];
-            playerInfo.requested_at = value.requested_at;
-            Singleton.getInstance().setPlayerInfo(playerInfo);
-            return playerInfo;
-        }else if(type.equals(Server.Wrapper.class)){
-            Server.Wrapper value = gson.fromJson(response.toString(), Server.Wrapper.class);
-            final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(value.data));
-            Singleton.getInstance().setServerList(servers);
-            return servers;
-        }else if(type.equals(Changelog.Wrapper.class)){
+        if(type.equals(Changelog.Wrapper.class)){
             Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
             ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
             Singleton.getInstance().setChangelogList(changelogs);
@@ -67,7 +77,7 @@ public class ApiHelper {
 
     public void getServers() {
         NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,Server.Wrapper.class);
+        networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,RequestTypeEnum.SERVER);
     }
 
     public void getPlayerStats() {
@@ -75,7 +85,7 @@ public class ApiHelper {
 
         String secret = preferenceHelper.getPlayerAPIToken();
 
-        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,PlayerInfo.Wrapper.class);
+        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret,callbackInterface,RequestTypeEnum.PLAYER);
     }
 
     public void getShops(int shopType) {

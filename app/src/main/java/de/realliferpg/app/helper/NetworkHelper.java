@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 
 public class NetworkHelper {
@@ -41,6 +42,33 @@ public class NetworkHelper {
                 });
 
         Singleton.getInstance().addToRequestQueue(jsonObjectRequest);
-        Log.d("", "");
+    }
+
+    public void doJSONRequest(String url, final RequestCallbackInterface callback, final RequestTypeEnum type) {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        callback.onResponse(type,response);
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("NetworkHelper", "Error in response");
+                        CustomNetworkError customNetworkError = new CustomNetworkError();
+
+                        if (error.networkResponse != null) {
+                            customNetworkError.statusCode = error.networkResponse.statusCode;
+                        }
+                        customNetworkError.msg = error.getMessage();
+
+                        callback.onResponse(customNetworkError, CustomNetworkError.class);
+                    }
+                });
+
+        Singleton.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 }

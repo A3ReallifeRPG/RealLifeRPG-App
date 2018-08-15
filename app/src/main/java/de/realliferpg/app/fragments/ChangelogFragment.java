@@ -31,6 +31,7 @@ import de.realliferpg.app.adapter.ChangelogAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CustomNetworkError;
 
@@ -181,4 +182,8 @@ public class ChangelogFragment extends Fragment implements RequestCallbackInterf
         mListener = null;
     }
 
+    @Override
+    public void onResponse(RequestTypeEnum type, Object object) {
+
+    }
 }

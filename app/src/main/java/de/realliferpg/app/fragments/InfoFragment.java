@@ -30,6 +30,7 @@ import de.realliferpg.app.adapter.InfoSpinnerAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.Shop;
 import de.realliferpg.app.objects.ShopEntry;
@@ -215,5 +216,8 @@ public class InfoFragment extends Fragment implements RequestCallbackInterface {
         }
     }
 
+    @Override
+    public void onResponse(RequestTypeEnum type, Object object) {
 
+    }
 }

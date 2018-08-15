@@ -23,6 +23,7 @@ import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
@@ -93,7 +94,7 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
     }
 
     @Override
-    public void onResponse(Object result, Class type) {
+    public void onResponse(RequestTypeEnum type, Object result) {
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
         TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
@@ -105,40 +106,53 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
         TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
 
-        if (type.equals(Server.Wrapper.class)) {
+        switch (type){
+            case PLAYER:
+                FormatHelper formatHelper = new FormatHelper();
 
-            final ArrayList<Server> servers = Singleton.getInstance().getServerList();
+                PlayerInfo playerInfo = (PlayerInfo) result;
+                mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
 
-            ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
+                tvPiName.setText(playerInfo.name);
+                tvPiPID.setText(playerInfo.pid);
+                tvPiGUID.setText(playerInfo.guid);
 
-            final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
-            pbServer.setVisibility(View.GONE);
+                tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
+                tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
+                tvPiInfoLevel.setText(String.valueOf(playerInfo.level));
+                tvPiInfoSkill.setText(String.valueOf(playerInfo.skillpoint));
 
-            final ListView listView = view.findViewById(R.id.lv_main_serverList);
-            listView.setAdapter(adapter);
-            sc.setRefreshing(false);
-        } else if (type.equals(PlayerInfo.Wrapper.class)) {
+                final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
+                pbPlayer.setVisibility(View.GONE);
 
-            FormatHelper formatHelper = new FormatHelper();
+                Singleton.getInstance().setPlayerInfo(playerInfo);
+                mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
+                break;
+            case SERVER:
+                final ArrayList<Server> servers = Singleton.getInstance().getServerList();
 
-            PlayerInfo playerInfo = (PlayerInfo) result;
-            mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
+                ServerListAdapter adapter = new ServerListAdapter(view.getContext(), servers);
 
-            tvPiName.setText(playerInfo.name);
-            tvPiPID.setText(playerInfo.pid);
-            tvPiGUID.setText(playerInfo.guid);
+                final ProgressBar pbServer = view.findViewById(R.id.pb_main_server);
+                pbServer.setVisibility(View.GONE);
 
-            tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
-            tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
-            tvPiInfoLevel.setText(String.valueOf(playerInfo.level));
-            tvPiInfoSkill.setText(String.valueOf(playerInfo.skillpoint));
+                final ListView listView = view.findViewById(R.id.lv_main_serverList);
+                listView.setAdapter(adapter);
+                sc.setRefreshing(false);
+                break;
+        }
+    }
 
-            final ProgressBar pbPlayer = view.findViewById(R.id.pb_main_player);
-            pbPlayer.setVisibility(View.GONE);
+    @Override
+    public void onResponse(Object result, Class type) {
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
 
-            Singleton.getInstance().setPlayerInfo(playerInfo);
-            mListener.onFragmentInteraction(MainFragment.class, Uri.parse("update_login_state"));
-        } else if (type.equals(CustomNetworkError.class)) {
+        TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
+        TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
+        TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
+        TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+
+        if (type.equals(CustomNetworkError.class)) {
             CustomNetworkError error = (CustomNetworkError) result;
 
             sc.setRefreshing(false);
@@ -189,5 +203,6 @@ public class MainFragment extends Fragment implements RequestCallbackInterface {
         super.onDetach();
         mListener = null;
     }
+
 
 }
