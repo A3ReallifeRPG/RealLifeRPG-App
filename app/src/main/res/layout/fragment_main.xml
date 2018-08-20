@@ -73,7 +73,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="2dp"
-                    android:text="@string/str_playerInfo"
+                    android:text="@string/str_player_info"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
