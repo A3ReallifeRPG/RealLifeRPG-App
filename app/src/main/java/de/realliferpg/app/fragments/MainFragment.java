@@ -148,7 +148,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
 
                 sc.setRefreshing(false);
 
-                if (error.requestReturnClass.equals(PlayerInfo.Wrapper.class)) {
+                if (error.requestType == RequestTypeEnum.PLAYER) {
                     pbPlayer.setVisibility(View.GONE);
 
                     tvPiInfoBank.setText("?");
@@ -156,7 +156,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                     tvPiInfoLevel.setText("?");
                     tvPiInfoSkill.setText("?");
 
-                } else if (error.requestReturnClass.equals(Server.Wrapper.class)) {
+                } else if (error.requestType == RequestTypeEnum.SERVER) {
                     pbServer.setVisibility(View.GONE);
                 }
 

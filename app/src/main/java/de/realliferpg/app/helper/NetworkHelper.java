@@ -32,6 +32,8 @@ public class NetworkHelper {
                         Log.d("NetworkHelper", "Error in response");
                         CustomNetworkError customNetworkError = new CustomNetworkError();
 
+                        customNetworkError.requestType = type;
+
                         if (error.networkResponse != null) {
                             customNetworkError.statusCode = error.networkResponse.statusCode;
                         }

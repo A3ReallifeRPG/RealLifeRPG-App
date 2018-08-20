@@ -63,6 +63,8 @@ public class ApiHelper {
                 ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
                 Singleton.getInstance().setShopVehicleList(shopVehicles);
                 return true;
+            case NETWORK_ERROR:
+                return true;
         }
 
         return false;
