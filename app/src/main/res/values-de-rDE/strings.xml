@@ -60,4 +60,5 @@
     <string name="str_noApiTokenInfo">Du musst dein API Token scannen bzw. von info.realliferpg.de kopieren um die App zu benutzen.</string>
     <string name="str_noApiToken">Kein API Token</string>
     <string name="str_communicate">Kommunikation</string>
+    <string name="str_license_info">Lizenz Info ansehen</string>
 </resources>

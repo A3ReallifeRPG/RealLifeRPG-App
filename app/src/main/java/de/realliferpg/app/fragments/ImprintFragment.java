@@ -35,14 +35,6 @@ public class ImprintFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ImprintFragment newInstance() {
-        ImprintFragment fragment = new ImprintFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +47,8 @@ public class ImprintFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_imprint, container, false);
 
         WebView webView = view.findViewById(R.id.wv_imprint_main);
-        webView.loadUrl("file:///android_res/raw/imprint.html");
+        webView.loadUrl("file:///android_asset/imprint.html");
+        webView.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
 
         TextView tv = view.findViewById(R.id.tv_imprint_debug);
         if(BuildConfig.DEBUG){
