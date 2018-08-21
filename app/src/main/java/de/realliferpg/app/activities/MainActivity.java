@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -219,6 +220,12 @@ public class MainActivity extends AppCompatActivity
 
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
+
+                if(playerInfo.pid.equals("76561198091182707")){
+                    ImageView ivNavHead = findViewById(R.id.iv_nav_icon);
+                    ivNavHead.setImageResource(R.drawable.backwasch);
+                }
+
                 break;
             case "enable_crashlytics":
                 PreferenceHelper preferenceHelper = new PreferenceHelper();
