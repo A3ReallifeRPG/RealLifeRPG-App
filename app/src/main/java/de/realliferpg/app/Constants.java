@@ -4,7 +4,9 @@ public class Constants {
 
     public static final String URL_CHANGELOG = "https://api.realliferpg.de/v1/changelog";
     public static final String URL_SERVER = "https://api.realliferpg.de/v1/servers";
+    public static final String URL_SERVERLOG = "https://api.realliferpg.de/v1/servers/log";
     public static final String URL_PLAYERSTATS = "https://api.realliferpg.de/v1/player/";
+    public static final String URL_CURRENTMARKETPRICES = "https://api.realliferpg.de/v1/market/1";
 
     // Shop Info
     public static final String URL_SHOPTYPES_ITEMS = "https://api.realliferpg.de/v1/info/items_shoptypes";
