@@ -42,6 +42,7 @@ import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
+import de.realliferpg.app.fragments.PlayersListFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_player:
                 switchFragment(new PlayerFragment());
+                break;
+            case R.id.nav_playerslist:
+                switchFragment(new PlayersListFragment());
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());

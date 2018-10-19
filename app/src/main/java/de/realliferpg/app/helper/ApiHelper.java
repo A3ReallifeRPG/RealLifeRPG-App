@@ -43,10 +43,16 @@ public class ApiHelper {
                 final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(serverWrapper.data));
                 Singleton.getInstance().setServerList(servers);
                 return true;
+            case SERVER_LOGS:
+                // TODO
+                return true;
             case CHANGELOG:
                 Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
                 ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
                 Singleton.getInstance().setChangelogList(changelogs);
+                return true;
+            case CURRENT_MARKET_PRICES:
+                // TODO
                 return true;
             case SHOP:
                 Shop.Wrapper shop = gson.fromJson(response.toString(), Shop.Wrapper.class);
@@ -119,4 +125,8 @@ public class ApiHelper {
         }
     }
 
+    public void getPlayersList() {
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,RequestTypeEnum.SERVER);
+    }
 }

@@ -61,4 +61,5 @@
     <string name="str_noApiToken">Kein API Token</string>
     <string name="str_communicate">Kommunikation</string>
     <string name="str_license_info">Lizenz Info ansehen</string>
+    <string name="str_players">Spielerliste</string>
 </resources>
