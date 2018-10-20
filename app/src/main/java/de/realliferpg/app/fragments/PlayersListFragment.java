@@ -3,34 +3,28 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.adapter.ChangelogAdapter;
 import de.realliferpg.app.adapter.PlayersListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
-import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.Server;
 
@@ -59,11 +53,12 @@ public class PlayersListFragment extends Fragment implements CallbackNotifyInter
 
         final ProgressBar pbLoadPlayersList = view.findViewById(R.id.pb_playerslist);
         pbLoadPlayersList.setVisibility(View.VISIBLE);
+        final ExpandableListView listPlayers = view.findViewById(R.id.lv_playersList);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getPlayersList();
 
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_playerslist);
+        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_playerslist);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -72,8 +67,21 @@ public class PlayersListFragment extends Fragment implements CallbackNotifyInter
 
                 pbLoadPlayersList.setVisibility(View.VISIBLE);
 
-                final ExpandableListView listPlayers = view.findViewById(R.id.lv_playersList);
                 listPlayers.setAdapter((BaseExpandableListAdapter) null);
+            }
+        });
+
+        listPlayers.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRow = (listPlayers == null || listPlayers.getChildCount() == 0) ?
+                        0 : listPlayers.getChildAt(0).getTop();
+                sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
 
@@ -127,14 +135,14 @@ public class PlayersListFragment extends Fragment implements CallbackNotifyInter
                 });
                 break;
             case NETWORK_ERROR:
-                // TODO
+                // TODO Testen
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbListPlayers.setVisibility(View.GONE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
-                // TODO Was ist eine Snackbar?
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_changelog), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_playerslist), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override

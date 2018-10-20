@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -50,7 +51,6 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        // TODO
         String child = "";
         Server server = servers.get(groupPosition);
 
@@ -81,12 +81,43 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Server server = (Server) getGroup(groupPosition);
 
+        final ViewHolder viewHolder;
+
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_group_playerslist,null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.position = groupPosition;
+
+            viewHolder.tvPlayersGroupInfo = convertView.findViewById(R.id.tv_playerslist_info);
+            viewHolder.tvServerHead = convertView.findViewById(R.id.tv_playerslist_grouphead);
+            viewHolder.pbCountPlayers = convertView.findViewById(R.id.pb_playerslist_count);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        viewHolder.position = groupPosition;
+
+        String title = server.Servername + " - " + server.Playercount + "/" + server.Slots;
+        viewHolder.tvServerHead.setText(title);
+
+        double progress = ((double) server.Playercount / (double) server.Slots) * 100;
+
+        viewHolder.pbCountPlayers.setProgress((int) progress);
+
+        viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
+                "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
+                        "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) + "'>COP " + server.Cops +
+                        "</font> - <font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>MED " + server.Medics +
+                        "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC " + server.Adac +
+                        "</font>"));
+
+        convertView.setTag(viewHolder);
+
+
+        /*
         TextView tv_groupCount = convertView.findViewById(R.id.tv_playerslist_group_playerscount);
         TextView tv_groupHeader = convertView.findViewById(R.id.tv_playerslist_group_header);
 
@@ -98,7 +129,7 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setText(itemHeader);
         tv_groupCount.setText(itemCount);
-
+*/
         return convertView;
     }
 
@@ -121,5 +152,12 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    static class ViewHolder {
+        TextView tvServerHead;
+        TextView tvPlayersGroupInfo;
+        ProgressBar pbCountPlayers;
+        int position;
     }
 }
