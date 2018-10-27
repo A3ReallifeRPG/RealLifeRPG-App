@@ -114,11 +114,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.layout_main);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // TODO beim Zurückgehen laden die Controls nichts, daher wird vorerst der "Zurück"-Button disabled
+            /*
+            if (count == 0) {
+                super.onBackPressed();
+            } else if (count == 1) {
+                finish();
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
+            */
         }
     }
 
