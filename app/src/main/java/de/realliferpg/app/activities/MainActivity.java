@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -230,9 +231,11 @@ public class MainActivity extends AppCompatActivity
             case "update_login_state":
                 PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
+                ImageView ivProfilePic = findViewById(R.id.iv_nav_icon);
                 TextView tvInfo = findViewById(R.id.tv_nav_info);
                 TextView tvHead = findViewById(R.id.tv_nav_head);
 
+                Picasso.get().load(playerInfo.avatar_full).into(ivProfilePic);
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
 
