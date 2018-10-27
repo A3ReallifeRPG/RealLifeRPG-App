@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CustomNetworkError;
+import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
@@ -38,6 +39,7 @@ public class Singleton {
     private ArrayList<Shop> shopList;
     private ArrayList<ShopVehicle> shopVehicleList;
     private ArrayList<ShopItem> shopItemList;
+    private ArrayList<MarketItem> marketPriceslist;
 
     private CustomNetworkError networkError;
 
@@ -150,5 +152,12 @@ public class Singleton {
 
     public void setNetworkError(CustomNetworkError networkError) {
         this.networkError = networkError;
+    }
+
+    public ArrayList<MarketItem> getMarketPrices() { return marketPriceslist;
+    }
+
+    public void setMarketItemList(ArrayList<MarketItem> marketItems) {
+        this.marketPriceslist = marketItems;
     }
 }

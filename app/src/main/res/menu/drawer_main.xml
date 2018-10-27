@@ -28,6 +28,11 @@
             android:icon="@drawable/ic_clipboard"
             android:title="@string/str_changelog" />
 
+        <item
+            android:id="@+id/nav_marketprices"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="@string/str_market" />
+
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/nav_group_share">

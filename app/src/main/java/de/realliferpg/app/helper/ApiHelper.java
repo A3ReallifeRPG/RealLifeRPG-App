@@ -12,6 +12,7 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
@@ -48,11 +49,14 @@ public class ApiHelper {
                 return true;
             case CHANGELOG:
                 Changelog.Wrapper value = gson.fromJson(response.toString(), Changelog.Wrapper.class);
-                ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
+                final ArrayList<Changelog> changelogs = new ArrayList<>(Arrays.asList(value.data));
                 Singleton.getInstance().setChangelogList(changelogs);
                 return true;
             case CURRENT_MARKET_PRICES:
-                // TODO
+                // TODO Werte von Server 2
+                MarketItem.Wrapper marketItemWrapper = gson.fromJson(response.toString(), MarketItem.Wrapper.class);
+                final ArrayList<MarketItem> marketItems = new ArrayList<>(Arrays.asList(marketItemWrapper.data));
+                Singleton.getInstance().setMarketItemList(marketItems);
                 return true;
             case SHOP:
                 Shop.Wrapper shop = gson.fromJson(response.toString(), Shop.Wrapper.class);
@@ -61,12 +65,12 @@ public class ApiHelper {
                 return true;
             case SHOP_INFO_ITEM:
                 ShopItem.Wrapper shopWrapper = gson.fromJson(response.toString(), ShopItem.Wrapper.class);
-                ArrayList<ShopItem> shopEntries = new ArrayList<>(Arrays.asList(shopWrapper.data));
+                final ArrayList<ShopItem> shopEntries = new ArrayList<>(Arrays.asList(shopWrapper.data));
                 Singleton.getInstance().setShopItemList(shopEntries);
                 return true;
             case SHOP_INFO_VEHICLE:
                 ShopVehicle.Wrapper vehicleWrapper = gson.fromJson(response.toString(), ShopVehicle.Wrapper.class);
-                ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
+                final ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
                 Singleton.getInstance().setShopVehicleList(shopVehicles);
                 return true;
             case NETWORK_ERROR:
@@ -128,5 +132,11 @@ public class ApiHelper {
     public void getPlayersList() {
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.doJSONRequest(Constants.URL_SERVER,callbackInterface,RequestTypeEnum.SERVER);
+    }
+
+    public void getMarketPrices() {
+        // TODO Werte von Server 2
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.doJSONRequest(Constants.URL_CURRENTMARKETPRICES,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
     }
 }

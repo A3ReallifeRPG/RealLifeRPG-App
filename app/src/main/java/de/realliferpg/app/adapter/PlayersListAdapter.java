@@ -116,20 +116,6 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
         convertView.setTag(viewHolder);
 
-
-        /*
-        TextView tv_groupCount = convertView.findViewById(R.id.tv_playerslist_group_playerscount);
-        TextView tv_groupHeader = convertView.findViewById(R.id.tv_playerslist_group_header);
-
-
-        tv_groupHeader.setTypeface(null, Typeface.BOLD);
-
-        String itemHeader = "Server " + server.Id;
-        String itemCount = Integer.toString(server.Playercount);
-
-        tv_groupHeader.setText(itemHeader);
-        tv_groupCount.setText(itemCount);
-*/
         return convertView;
     }
 

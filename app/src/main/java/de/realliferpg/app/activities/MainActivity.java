@@ -40,6 +40,7 @@ import de.realliferpg.app.fragments.ErrorFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
+import de.realliferpg.app.fragments.MarketFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
@@ -156,6 +157,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_playerslist:
                 switchFragment(new PlayersListFragment());
+                break;
+            case R.id.nav_marketprices:
+                switchFragment(new MarketFragment());
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
