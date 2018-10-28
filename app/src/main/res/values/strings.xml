@@ -69,4 +69,9 @@
     <string name="str_noApiToken">No API Token</string>
     <string name="str_communicate">Communicate</string>
     <string name="str_license_info">View License Info</string>
+    <string name="str_playerslist">Players List</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

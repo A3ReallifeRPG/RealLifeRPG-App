@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -41,6 +42,7 @@ import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
+import de.realliferpg.app.fragments.PlayersListFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
@@ -112,11 +114,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.layout_main);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // TODO beim Zurückgehen laden die Controls nichts, daher wird vorerst der "Zurück"-Button disabled
+            /*
+            if (count == 0) {
+                super.onBackPressed();
+            } else if (count == 1) {
+                finish();
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
+            */
         }
     }
 
@@ -139,6 +152,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_player:
                 switchFragment(new PlayerFragment());
+                break;
+            case R.id.nav_playerslist:
+                switchFragment(new PlayersListFragment());
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
@@ -219,6 +235,12 @@ public class MainActivity extends AppCompatActivity
 
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
+
+                if(playerInfo.pid.equals("76561198091182707")){
+                    ImageView ivNavHead = findViewById(R.id.iv_nav_icon);
+                    ivNavHead.setImageResource(R.drawable.backwasch);
+                }
+
                 break;
             case "enable_crashlytics":
                 PreferenceHelper preferenceHelper = new PreferenceHelper();
