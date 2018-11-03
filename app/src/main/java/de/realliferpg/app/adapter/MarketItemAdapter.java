@@ -34,6 +34,7 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
             viewHolder = new ViewHolder();
 
             viewHolder.tvMarketItemName = convertView.findViewById(R.id.tv_list_marketitem_name);
+            System.out.println(viewHolder.tvMarketItemName.getText());
             viewHolder.tvMarketItemPrice = convertView.findViewById(R.id.tv_list_marketitem_price);
             viewHolder.ivMarketItem = convertView.findViewById(R.id.iv_list_marketitem);
 

@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -114,6 +116,12 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
         switch (type) {
             case CURRENT_MARKET_PRICES:
                 ArrayList<MarketItem> marketPrices = Singleton.getInstance().getMarketPrices();
+                Collections.sort(marketPrices, new Comparator<MarketItem>() {
+                    @Override
+                    public int compare(MarketItem o1, MarketItem o2) {
+                        return o1.localized.compareTo(o2.localized);
+                    }
+                });
                 final ListView listMarketPrices = view.findViewById(R.id.lv_market);
 
                 MarketItemAdapter listAdapter = new MarketItemAdapter(view.getContext(), marketPrices);
