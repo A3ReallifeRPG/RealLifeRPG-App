@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
             viewHolder = new ViewHolder();
 
             viewHolder.tvMarketItemName = convertView.findViewById(R.id.tv_list_marketitem_name);
-            System.out.println(viewHolder.tvMarketItemName.getText());
             viewHolder.tvMarketItemPrice = convertView.findViewById(R.id.tv_list_marketitem_price);
             viewHolder.ivMarketItem = convertView.findViewById(R.id.iv_list_marketitem);
 
@@ -47,12 +47,19 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
         viewHolder.tvMarketItemName.setText(marketItem.localized);
 
         FormatHelper formatHelper = new FormatHelper();
-        String formattedPrice = formatHelper.formatCurrency(marketItem.price);
-
+        String formattedPriceServer1 = formatHelper.formatCurrency(marketItem.price);
         // TODO Werte von Server 2
-        String marketPrices = "Server 1: " + formattedPrice;
+        String formattedPriceServer2 = formatHelper.formatCurrency(0);
+
+        String marketPrices = "Server 1: " + formattedPriceServer1 + "\nServer 2: " + formattedPriceServer2;
 
         viewHolder.tvMarketItemPrice.setText(marketPrices);
+
+        String icCurrentMarketItem = "market_" + marketItem.item;
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(icCurrentMarketItem, "drawable", context.getPackageName());
+        viewHolder.ivMarketItem.setImageResource(resourceId);
+
 
         convertView.setTag(viewHolder);
 

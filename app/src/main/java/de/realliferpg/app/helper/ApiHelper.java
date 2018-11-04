@@ -137,6 +137,6 @@ public class ApiHelper {
     public void getMarketPrices() {
         // TODO Werte von Server 2
         NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_CURRENTMARKETPRICES,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
+        networkHelper.doJSONRequest(Constants.URL_CURRENTMARKETPRICES_SERVER_1,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
     }
 }
