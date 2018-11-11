@@ -53,7 +53,7 @@ public class ApiHelper {
                 Singleton.getInstance().setChangelogList(changelogs);
                 return true;
             case CURRENT_MARKET_PRICES:
-                // TODO Werte von Server 2
+                // TODO neues MarketPrices Item
                 MarketItem.Wrapper marketItemWrapper = gson.fromJson(response.toString(), MarketItem.Wrapper.class);
                 final ArrayList<MarketItem> marketItems = new ArrayList<>(Arrays.asList(marketItemWrapper.data));
                 Singleton.getInstance().setMarketItemList(marketItems);
@@ -135,8 +135,7 @@ public class ApiHelper {
     }
 
     public void getMarketPrices() {
-        // TODO Werte von Server 2
         NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_CURRENTMARKETPRICES_SERVER_1,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
+        networkHelper.doJSONRequest(Constants.URL_MARKETPRICES,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
     }
 }

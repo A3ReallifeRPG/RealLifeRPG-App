@@ -6,6 +6,7 @@ public class Constants {
     public static final String URL_SERVER = "https://api.realliferpg.de/v1/servers";
     public static final String URL_SERVERLOG = "https://api.realliferpg.de/v1/servers/log";
     public static final String URL_PLAYERSTATS = "https://api.realliferpg.de/v1/player/";
+    public static final String URL_MARKETPRICES = "https://api.realliferpg.de/v1/market_all";
     public static final String URL_CURRENTMARKETPRICES_SERVER_1 = "https://api.realliferpg.de/v1/market/1";
     public static final String URL_CURRENTMARKETPRICES_SERVER_2 = "https://api.realliferpg.de/v1/market/2";
     public static final String URL_CURRENTMARKETPRICES_SERVER_3 = "https://api.realliferpg.de/v1/market/3";
