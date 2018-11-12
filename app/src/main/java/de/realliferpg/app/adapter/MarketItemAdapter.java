@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.MarketItem;
 
 public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
@@ -35,7 +36,8 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
             viewHolder = new ViewHolder();
 
             viewHolder.tvMarketItemName = convertView.findViewById(R.id.tv_list_marketitem_name);
-            viewHolder.tvMarketItemPrice = convertView.findViewById(R.id.tv_list_marketitem_price);
+            viewHolder.tvMarketItemPrice1 = convertView.findViewById(R.id.tv_list_marketitem_price1);
+            viewHolder.tvMarketItemPrice2 = convertView.findViewById(R.id.tv_list_marketitem_price2);
             viewHolder.ivMarketItem = convertView.findViewById(R.id.iv_list_marketitem);
 
         } else {
@@ -44,22 +46,21 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
 
         MarketItem marketItem = getItem(position);
 
-        viewHolder.tvMarketItemName.setText(marketItem.localized);
+        viewHolder.tvMarketItemName.setText(marketItem.name);
 
         FormatHelper formatHelper = new FormatHelper();
-        String formattedPriceServer1 = formatHelper.formatCurrency(marketItem.price);
-        // TODO Werte von Server 2
-        String formattedPriceServer2 = formatHelper.formatCurrency(0);
+        String formattedPriceServer1 = formatHelper.formatCurrency(marketItem.priceServer1);
+        String formattedPriceServer2 = formatHelper.formatCurrency(marketItem.priceServer2);
 
         String marketPrices = "Server 1: " + formattedPriceServer1 + "\nServer 2: " + formattedPriceServer2;
 
-        viewHolder.tvMarketItemPrice.setText(marketPrices);
+        viewHolder.tvMarketItemPrice1.setText(formattedPriceServer1);
+        viewHolder.tvMarketItemPrice2.setText(formattedPriceServer2);
 
-        String icCurrentMarketItem = "market_" + marketItem.item;
+        String icCurrentMarketItem = "market_" + marketItem.classname;
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(icCurrentMarketItem, "drawable", context.getPackageName());
         viewHolder.ivMarketItem.setImageResource(resourceId);
-
 
         convertView.setTag(viewHolder);
 
@@ -69,6 +70,7 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
     static class ViewHolder {
         ImageView ivMarketItem;
         TextView tvMarketItemName;
-        TextView tvMarketItemPrice;
+        TextView tvMarketItemPrice1;
+        TextView tvMarketItemPrice2;
     }
 }

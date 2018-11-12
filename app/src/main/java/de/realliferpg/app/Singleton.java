@@ -1,5 +1,6 @@
 package de.realliferpg.app;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.MarketItem;
+import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
@@ -39,7 +41,7 @@ public class Singleton {
     private ArrayList<Shop> shopList;
     private ArrayList<ShopVehicle> shopVehicleList;
     private ArrayList<ShopItem> shopItemList;
-    private ArrayList<MarketItem> marketPriceslist;
+    private ArrayList<MarketServerObject> marketServerObjects;
 
     private CustomNetworkError networkError;
 
@@ -154,10 +156,30 @@ public class Singleton {
         this.networkError = networkError;
     }
 
-    public ArrayList<MarketItem> getMarketPrices() { return marketPriceslist;
+    public ArrayList<MarketItem> getMarketPrices() {
+        ArrayList<MarketItem> marketItems = new ArrayList<MarketItem>();
+
+        MarketServerObject dataServer1 =  this.marketServerObjects.get(0);
+        MarketServerObject dataServer2 =  this.marketServerObjects.get(1);
+        int counter = 0;
+
+        for (MarketServerObject.Item item : dataServer1.market) {
+            MarketItem temp = new MarketItem();
+            temp.classname = item.item;
+            temp.created_at = item.created_at;
+            temp.name = item.localized;
+            temp.priceServer1 = item.price;
+            // Um nicht zwei foreach-Schleifen zu gehen, wird durch den Counter auf das entsprechende Element aus den Daten von Server 2 zugegriffen
+            temp.priceServer2 = dataServer2.market[counter].price;
+            temp.updated_at = item.updated_at;
+            counter++;
+            marketItems.add(temp);
+        }
+
+        return marketItems;
     }
 
-    public void setMarketItemList(ArrayList<MarketItem> marketItems) {
-        this.marketPriceslist = marketItems;
+    public void setMarketItemList(ArrayList<MarketServerObject> marketServerObjects) {
+        this.marketServerObjects = marketServerObjects;
     }
 }

@@ -28,6 +28,7 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.MarketItem;
+import de.realliferpg.app.objects.MarketServerObject;
 
 public class MarketFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -119,7 +120,7 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
                 Collections.sort(marketPrices, new Comparator<MarketItem>() {
                     @Override
                     public int compare(MarketItem o1, MarketItem o2) {
-                        return o1.localized.compareTo(o2.localized);
+                        return o1.name.compareTo(o2.name);
                     }
                 });
                 final ListView listMarketPrices = view.findViewById(R.id.lv_market);

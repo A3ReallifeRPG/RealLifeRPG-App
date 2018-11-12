@@ -13,6 +13,7 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.MarketItem;
+import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
@@ -54,9 +55,9 @@ public class ApiHelper {
                 return true;
             case CURRENT_MARKET_PRICES:
                 // TODO neues MarketPrices Item
-                MarketItem.Wrapper marketItemWrapper = gson.fromJson(response.toString(), MarketItem.Wrapper.class);
-                final ArrayList<MarketItem> marketItems = new ArrayList<>(Arrays.asList(marketItemWrapper.data));
-                Singleton.getInstance().setMarketItemList(marketItems);
+                MarketServerObject.Wrapper marketItemWrapper = gson.fromJson(response.toString(), MarketServerObject.Wrapper.class);
+                final ArrayList<MarketServerObject> marketServerObjects = new ArrayList<>(Arrays.asList(marketItemWrapper.data));
+                Singleton.getInstance().setMarketItemList(marketServerObjects);
                 return true;
             case SHOP:
                 Shop.Wrapper shop = gson.fromJson(response.toString(), Shop.Wrapper.class);
