@@ -66,4 +66,7 @@
     <string name="str_license_info">Lizenzinfo ansehen</string>
     <string name="str_playerslist">Spielerliste</string>
     <string name="str_market">Marktpreise</string>
+    <string name="str_server1">Server 1</string>
+    <string name="str_server2">Server 2</string>
+
 </resources>

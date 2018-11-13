@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
-                android:text="Server 1"
+                android:text="@string/str_server1"
                 android:gravity="left"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
-                android:text="Server 2"
+                android:text="@string/str_server2"
                 android:gravity="left"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
@@ -77,7 +77,7 @@
 
             <TextView
                 android:id="@+id/tv_list_marketitem_price1"
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/tv_list_marketitem_price2"
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
