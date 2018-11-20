@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -39,6 +40,7 @@ import de.realliferpg.app.fragments.ErrorFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
+import de.realliferpg.app.fragments.MarketFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
@@ -156,6 +158,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_playerslist:
                 switchFragment(new PlayersListFragment());
                 break;
+            case R.id.nav_marketprices:
+                switchFragment(new MarketFragment());
+                break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
                 break;
@@ -230,9 +235,11 @@ public class MainActivity extends AppCompatActivity
             case "update_login_state":
                 PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
+                ImageView ivProfilePic = findViewById(R.id.iv_nav_icon);
                 TextView tvInfo = findViewById(R.id.tv_nav_info);
                 TextView tvHead = findViewById(R.id.tv_nav_head);
 
+                Picasso.get().load(playerInfo.avatar_full).into(ivProfilePic);
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
 

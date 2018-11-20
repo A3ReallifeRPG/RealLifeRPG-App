@@ -2,14 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl_main_playerslist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondaryColor"
-    tools:context=".fragments.MainFragment">
+    tools:context=".fragments.MarketFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/srl_main_playerslist"
+        android:id="@+id/srl_main_market"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,37 +20,37 @@
             android:layout_height="wrap_content">
 
             <android.support.constraint.Guideline
-                android:id="@+id/gl_main_div"
+                android:id="@+id/gl_main_market"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="1" />
 
             <TextView
-                android:id="@+id/tv_playersList_head"
+                android:id="@+id/tv_market_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="@string/str_playerslist"
+                android:text="@string/str_market"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ExpandableListView
-                android:id="@+id/lv_playersList"
+            <ListView
+                android:id="@+id/lv_market"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/gl_main_div"
+                app:layout_constraintBottom_toTopOf="@+id/gl_main_market"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_playersList_head"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_market_head"/>
 
             <ProgressBar
-                android:id="@+id/pb_playerslist"
+                android:id="@+id/pb_market"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +58,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/lv_playersList"
+                app:layout_constraintBottom_toBottomOf="@+id/lv_market"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -68,6 +66,5 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
 
 </android.support.constraint.ConstraintLayout>
