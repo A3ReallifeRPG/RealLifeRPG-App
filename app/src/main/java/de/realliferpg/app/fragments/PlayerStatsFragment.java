@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.adapter.PlayersFractionAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
@@ -54,6 +57,9 @@ public class PlayerStatsFragment extends Fragment {
             showPlayerInfo();
         }
 
+        final ListView listViewFractions = view.findViewById(R.id.lv_fractionen);
+        listViewFractions.setAdapter(null);
+
         return view;
     }
 
@@ -80,6 +86,11 @@ public class PlayerStatsFragment extends Fragment {
 
         tvLastSeen.setText(formatHelper.toDateTime(formatHelper.getApiDate(playerInfo.last_seen.date)));
         tvSkillpoint.setText(String.valueOf(playerInfo.skillpoint));
+
+        //TODO: wird nicht angezeigt
+        ListView listFractions = view.findViewById(R.id.lv_fractionen);
+        PlayersFractionAdapter listAdapter = new PlayersFractionAdapter(this.getContext(), playerInfo);
+        listFractions.setAdapter(listAdapter);
     }
 
     @Override
