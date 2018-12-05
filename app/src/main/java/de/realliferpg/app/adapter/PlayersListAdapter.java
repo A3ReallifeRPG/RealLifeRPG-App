@@ -1,7 +1,6 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.realliferpg.app.R;
-import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.objects.Server;
 
 
