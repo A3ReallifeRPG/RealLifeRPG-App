@@ -248,7 +248,7 @@ public class PlayersFractionListAdapter extends BaseExpandableListAdapter {
                     tempSymbol = FractionMappingHelper.getCopRankSymbolAsString(this.fractionInfo.coplevel);
                     break;
                 case JUSTIZ:
-                    tempSymbol = FractionMappingHelper.getJustizRankSymbolAsString(this.fractionInfo.justizlevel);
+                    tempSymbol = FractionMappingHelper.getJustizRankSymbolAsString(this.fractionInfo.coplevel);
                     break;
                 case MEDIC:
                     tempSymbol = FractionMappingHelper.getMedicRankSymbolAsString(this.fractionInfo.mediclevel);

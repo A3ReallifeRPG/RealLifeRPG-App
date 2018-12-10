@@ -7,9 +7,9 @@ public class FractionMappingHelper {
         // TODO: ersetzen mit localized Strings
         switch (coplevel) {
             case 0:
-                return "Praktikant";  // cop-level 0
+                return "Kein Rang";  // cop-level 0
             case 1:
-                return "Justiz"; // cop-level 1
+                return "Justizbeamter"; // cop-level 1
             case 2:
                 return "Polizeimeisteranwärter";  // cop-level 2
             case 3:
@@ -51,7 +51,7 @@ public class FractionMappingHelper {
         // TODO: ersetzen mit localized Strings
         switch (mediclevel) {
             case 0:
-                return "Praktikant";  // medic-level 0
+                return "Kein Rang";  // medic-level 0
             case 1:
                 return "Ersthelfer"; // medic-level 1
             case 2:
@@ -80,7 +80,7 @@ public class FractionMappingHelper {
         // TODO: ersetzen mit localized Strings
         switch (raclevel) {
             case 0:
-                return "Praktikant";  // adac-level 0
+                return "Kein Rang";  // adac-level 0
             case 1:
                 return "Azubi"; // adac-level 1
             case 2:
