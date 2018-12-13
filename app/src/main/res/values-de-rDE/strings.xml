@@ -68,5 +68,49 @@
     <string name="str_market">Marktpreise</string>
     <string name="str_server1">Server 1</string>
     <string name="str_server2">Server 2</string>
+    <!-- Raenge der Justiz -->
+    <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->
+    <!-- Raenge der Cops -->
+    <string name="str_cop00">Kein Rang</string>
+    <string name="str_cop01">Polizeimeisteranwärter</string> <!-- C1, cop-level 2 -->
+    <string name="str_cop02">Polizeimeister</string> <!-- C2, cop-level 3 -->
+    <string name="str_cop03">Polizeiobermeister</string> <!-- C3, cop-level 4 -->
+    <string name="str_cop04">Polizeihauptmeister</string> <!-- C4, cop-level 5 -->
+    <string name="str_cop05">Polizeihauptmeister mit Amtszulage</string> <!-- C5, cop-level 6 -->
+    <string name="str_cop06">Polizeikommissaranwärter</string> <!-- C6, cop-level 7 -->
+    <string name="str_cop07">Polizeikommissar</string> <!-- C7, cop-level 8 -->
+    <string name="str_cop08">Polizeioberkommissar</string> <!-- C8, cop-level 9 -->
+    <string name="str_cop09">Polizeihauptkommissar</string> <!-- C9, cop-level 10 -->
+    <string name="str_cop10">Erster Polizeihauptkommissar</string> <!-- C10, cop-level 11 -->
+    <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 12 -->
+    <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 13 -->
+    <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 14 -->
+    <string name="str_cop14">Leitender Polizeidirektor</string> <!-- C14, cop-level 15 -->
+    <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 16 -->
+    <!-- Raenge der Medics -->
+    <string name="str_med00">Kein Rang</string>
+    <string name="str_med01">Ersthelfer</string> <!-- medic-level 1 -->
+    <string name="str_med02">Rettungshelfer</string> <!-- medic-level 2 -->
+    <string name="str_med03">Rettungssanitäter</string> <!-- medic-level 3 -->
+    <string name="str_med04">Notfallhelfer</string> <!-- medic-level 4 -->
+    <string name="str_med05">Notfallsanitäter</string> <!-- medic-level 5 -->
+    <string name="str_med06">Notarzt</string> <!-- medic-level 6 -->
+    <string name="str_med07">Ausbilder</string> <!-- medic-level 7 -->
+    <string name="str_med08">Co-Leiter</string> <!-- medic-level 8 -->
+    <string name="str_med09">Leiter</string> <!-- medic-level 9 -->
+    <!-- Raenge des RAC -->
+    <string name="str_rac00">Kein Rang</string>
+    <string name="str_rac01">Azubi</string> <!-- R1, adac-level 1 -->
+    <string name="str_rac02">Geselle</string> <!-- R2, adac-level 2 -->
+    <string name="str_rac03">Mechaniker</string> <!-- R3, adac-level 3 -->
+    <string name="str_rac04">Mechatroniker</string> <!-- R4, adac-level 4 -->
+    <string name="str_rac05">Techniker</string> <!-- R5, adac-level 5 -->
+    <string name="str_rac06">Meister</string> <!-- R6, adac-level 6 -->
+    <string name="str_rac07">Ingenieur</string> <!-- R7, adac-level 7 -->
+    <string name="str_rac08">Co-Leiter</string> <!-- R8, adac-level 8 -->
+    <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
+
+
+
 
 </resources>

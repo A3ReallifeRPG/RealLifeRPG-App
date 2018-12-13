@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            // TODO beim Zurückgehen laden die Controls nichts, daher wird vorerst der "Zurück"-Button disabled
+            // TODO beim Zurückgehen laden die Controls nicht, daher wird vorerst der "Zurück"-Button disabled
             /*
             if (count == 0) {
                 super.onBackPressed();

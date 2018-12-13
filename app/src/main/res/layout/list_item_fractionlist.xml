@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/secondaryColor">
+
+    <ImageView
+        android:id="@+id/iv_fractionlist_ranksymbol"
+        android:layout_width="24px"
+        android:layout_height="24px"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_fractionlist_rank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/str_placeholder"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/iv_fractionlist_ranksymbol"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
