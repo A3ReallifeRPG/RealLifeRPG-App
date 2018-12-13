@@ -135,7 +135,6 @@ public class PlayersListFragment extends Fragment implements CallbackNotifyInter
                 });
                 break;
             case NETWORK_ERROR:
-                // TODO Testen
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbListPlayers.setVisibility(View.GONE);
