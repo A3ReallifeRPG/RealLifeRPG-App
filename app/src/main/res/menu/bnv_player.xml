@@ -13,11 +13,12 @@
         android:icon="@drawable/ic_shopping_cart"
         android:title="@string/str_donations"
         app:showAsAction="ifRoom" />
+    <!--
     <item
         android:id="@+id/bnv_player_buildings"
         android:enabled="true"
         android:icon="@drawable/ic_buildings"
         android:title="@string/str_buildings"
         app:showAsAction="ifRoom" />
-
+    -->
 </menu>

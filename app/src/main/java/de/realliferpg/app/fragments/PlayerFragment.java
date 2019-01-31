@@ -82,9 +82,11 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                     case R.id.bnv_player_donation:
                         mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_donation"));
                         break;
+                        /*
                     case R.id.bnv_player_buildings:
                         mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_buildings"));
                         break;
+                        */
                 }
                 return true;
             }
