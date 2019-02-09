@@ -74,6 +74,7 @@
     <string name="str_market">Market Prices</string>
     <string name="str_server1">Server 1</string>
     <string name="str_server2">Server 2</string>
+    <string name="str_buildings">Buildings</string>
     <!-- Die Raenge klingen auf englisch seltsam -->
     <!-- Raenge der Justiz -->
     <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->
