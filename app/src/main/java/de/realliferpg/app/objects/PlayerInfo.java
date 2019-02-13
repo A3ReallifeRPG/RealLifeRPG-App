@@ -46,7 +46,7 @@ public class PlayerInfo {
     public int server_id;
     public String updated_at;
     public String created_at;
-    public String last_seen;
+    public ApiDateTime last_seen;
 
     public String avatar;
     public String avatar_full;

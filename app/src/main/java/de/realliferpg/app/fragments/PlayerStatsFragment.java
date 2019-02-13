@@ -84,7 +84,7 @@ public class PlayerStatsFragment extends Fragment {
         tvLevelNext.setText(String.valueOf(playerInfo.level + 1));
         pbLevel.setProgress(playerInfo.level_progress);
 
-        tvLastSeen.setText(formatHelper.toDateTime(formatHelper.getApiDate(playerInfo.last_seen)));
+        tvLastSeen.setText(formatHelper.toDateTime(formatHelper.getApiDate(playerInfo.last_seen.date)));
         tvSkillpoint.setText(String.valueOf(playerInfo.skillpoint));
 
         final ExpandableListView listViewFractions = view.findViewById(R.id.lv_fractionen);
