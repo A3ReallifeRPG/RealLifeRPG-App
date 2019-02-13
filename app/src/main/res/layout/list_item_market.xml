@@ -77,7 +77,7 @@
 
             <TextView
                 android:id="@+id/tv_list_marketitem_price1"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/tv_list_marketitem_price2"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"

@@ -55,6 +55,8 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
+    public String[] houses;
+    public String[] buildings;
 
     public long requested_at;
 

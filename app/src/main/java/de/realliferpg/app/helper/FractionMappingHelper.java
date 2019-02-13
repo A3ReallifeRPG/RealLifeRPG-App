@@ -67,9 +67,9 @@ public class FractionMappingHelper {
             case 7:
                 return "Ausbilder";  // medic-level 7
             case 8:
-                return "Co-Leiter";  // medic-level 8
+                return "(Co-)Leiter";  // medic-level 8
             case 9:
-                return "Leiter";  // medic-level 9
+                return "Leiter";  // medic-level 9; gibts wohl nicht (gleiche Rechte wie der Co-Leiter)
             default:
                 return "Kein Rang";
         }
@@ -96,7 +96,7 @@ public class FractionMappingHelper {
             case 7:
                 return "Ingenieur";  // adac-level 7
             case 8:
-                return "Co-Leiter";  // adac-level 8
+                return "(Co-)Leiter";  // adac-level 8
             case 9:
                 return "Leiter";  // adac-level 9
             default:
