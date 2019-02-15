@@ -41,6 +41,7 @@ import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.MarketFragment;
+import de.realliferpg.app.fragments.PlayerBuildingsFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
@@ -243,11 +244,6 @@ public class MainActivity extends AppCompatActivity
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
 
-                if(playerInfo.pid.equals("76561198091182707")){
-                    ImageView ivNavHead = findViewById(R.id.iv_nav_icon);
-                    ivNavHead.setImageResource(R.drawable.backwasch);
-                }
-
                 break;
             case "enable_crashlytics":
                 PreferenceHelper preferenceHelper = new PreferenceHelper();
@@ -265,6 +261,10 @@ public class MainActivity extends AppCompatActivity
                 }
                 case "fragment_player_change_to_donation": {
                     changePlayerFragment(new PlayerDonationFragment());
+                    break;
+                }
+                case "fragment_player_change_to_buildings": {
+                    changePlayerFragment(new PlayerBuildingsFragment());
                     break;
                 }
             }
