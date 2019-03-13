@@ -20,9 +20,7 @@
             android:id="@+id/cl_main_market"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="2dp"
+            android:layout_margin="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_main_serverHead">
@@ -34,7 +32,8 @@
                 android:layout_height="40dp"
                 android:layout_margin="4dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_list_marketitem_name"
@@ -53,56 +52,80 @@
                 android:id="@+id/tv_list_marketitem_server1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
                 android:text="@string/str_server1"
                 android:gravity="left"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_list_marketitem_price1"
                 app:layout_constraintRight_toLeftOf="@id/tv_list_marketitem_price1"/>
 
             <TextView
                 android:id="@+id/tv_list_marketitem_server2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
                 android:text="@string/str_server2"
                 android:gravity="left"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_list_marketitem_price2"
                 app:layout_constraintRight_toLeftOf="@id/tv_list_marketitem_price2"/>
 
             <TextView
-                android:id="@+id/tv_list_marketitem_price1"
-                android:layout_width="60dp"
+                android:id="@+id/tv_list_marketitem_server3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
-                android:text="@string/str_placeholder"
+                android:text="@string/str_server3"
+                android:gravity="left"
+                android:textColor="@color/secondaryDarkColor"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tv_list_marketitem_price3"
+                app:layout_constraintRight_toLeftOf="@id/tv_list_marketitem_price3"/>
+
+            <TextView
+                android:id="@+id/tv_list_marketitem_price1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="4dp"
                 android:gravity="right"
+                android:text="@string/str_placeholder"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/iv_list_marketitem" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_list_marketitem_price2"
-                android:layout_width="60dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_margin = "4dp"
                 android:layout_alignParentRight="true"
-                android:text="@string/str_placeholder"
+                android:layout_margin="4dp"
                 android:gravity="right"
+                android:text="@string/str_placeholder"
+                android:textColor="@color/secondaryDarkColor"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_list_marketitem_price1" />
+
+            <TextView
+                android:id="@+id/tv_list_marketitem_price3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="4dp"
+                android:gravity="right"
+                android:text="@string/str_placeholder"
                 android:textColor="@color/secondaryDarkColor"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/iv_list_marketitem"
-                app:layout_constraintTop_toBottomOf="@id/tv_list_marketitem_price1" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_list_marketitem_price2" />
 
 
         </android.support.constraint.ConstraintLayout>
