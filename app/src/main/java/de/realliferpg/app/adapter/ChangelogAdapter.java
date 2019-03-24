@@ -25,9 +25,9 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<Changelog> changelogs;
 
-    public ChangelogAdapter(Context context, ArrayList<Changelog> changelogs) {
-        this.context = context;
-        this.changelogs = changelogs;
+    public ChangelogAdapter(Context _context, ArrayList<Changelog> _changelogs) {
+        this.context = _context;
+        this.changelogs = _changelogs;
     }
 
     @Override

@@ -22,10 +22,10 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
     Context context;
     int[] serversOnline;
 
-    public MarketItemAdapter(Context context, ArrayList<MarketItem> items, int[] servers) {
-        super(context, 0, items);
-        this.context = context;
-        this.serversOnline = servers;
+    public MarketItemAdapter(Context _context, ArrayList<MarketItem> _items, int[] _servers) {
+        super(_context, 0, _items);
+        this.context = _context;
+        this.serversOnline = _servers;
     }
 
     @Override

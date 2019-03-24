@@ -46,7 +46,7 @@ public class PlayerInfo {
     public int server_id;
     public String updated_at;
     public String created_at;
-    public String last_seen;
+    public ApiDateTime last_seen;
 
     public String avatar;
     public String avatar_full;
@@ -55,8 +55,10 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
-    public String[] houses;
-    public String[] buildings;
+    // Fertige Häuser
+    public House[] houses;
+    // Bauwerke
+    public Building[] buildings;
 
     public long requested_at;
 
