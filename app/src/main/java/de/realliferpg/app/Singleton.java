@@ -161,6 +161,7 @@ public class Singleton {
 
         MarketServerObject dataServer1 =  this.marketServerObjects.get(0);
         MarketServerObject dataServer2 =  this.marketServerObjects.get(1);
+        MarketServerObject dataServer3 =  this.marketServerObjects.get(2);
         int counter = 0;
 
         for (MarketServerObject.Item item : dataServer1.market) {
@@ -169,8 +170,9 @@ public class Singleton {
             temp.created_at = item.created_at;
             temp.name = item.localized;
             temp.priceServer1 = item.price;
-            // Um nicht zwei foreach-Schleifen zu gehen, wird durch den Counter auf das entsprechende Element aus den Daten von Server 2 zugegriffen
+            // Um nicht zwei foreach-Schleifen zu gehen, wird durch den Counter auf das entsprechende Element aus den Daten von Server 2 & 3 zugegriffen
             temp.priceServer2 = dataServer2.market[counter].price;
+            temp.priceServer3 = dataServer3.market[counter].price;
             temp.updated_at = item.updated_at;
             counter++;
             marketItems.add(temp);

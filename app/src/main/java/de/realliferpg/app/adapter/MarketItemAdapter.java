@@ -58,22 +58,16 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
         String formattedPriceServer2 = formatHelper.formatCurrency(marketItem.priceServer2);
         String formattedPriceServer3 = formatHelper.formatCurrency(marketItem.priceServer3);
 
-        //String marketPrices = "Server 1: " + formattedPriceServer1 + "\nServer 2: " + formattedPriceServer2 + "\nServer 3: " + formattedPriceServer3;
-
         viewHolder.tvMarketItemPrice1.setText(formattedPriceServer1);
         viewHolder.tvMarketItemPrice2.setText(formattedPriceServer2);
         viewHolder.tvMarketItemPrice3.setText(formattedPriceServer3);
 
-        viewHolder.tvMarketItemTextServer3.setVisibility(View.INVISIBLE);
-        viewHolder.tvMarketItemPrice3.setVisibility(View.INVISIBLE);
-
-        viewHolder.tvMarketItemTextServer3.setHeight(0);
-        viewHolder.tvMarketItemPrice3.setHeight(0);
-
-        if (serversOnline.length == 3 && serversOnline[2] == 0)
+        if (serversOnline.length < 3 || serversOnline[2] == 0)
         {
-            viewHolder.tvMarketItemTextServer3.setVisibility(View.VISIBLE);
-            viewHolder.tvMarketItemPrice3.setVisibility(View.VISIBLE);
+            viewHolder.tvMarketItemTextServer3.setVisibility(View.INVISIBLE);
+            viewHolder.tvMarketItemPrice3.setVisibility(View.INVISIBLE);
+            viewHolder.tvMarketItemTextServer3.setHeight(0);
+            viewHolder.tvMarketItemPrice3.setHeight(0);
         }
 
         String icCurrentMarketItem = "market_" + marketItem.classname;
