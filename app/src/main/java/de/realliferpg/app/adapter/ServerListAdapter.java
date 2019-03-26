@@ -18,9 +18,9 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
     Context context;
 
-    public ServerListAdapter(Context context, ArrayList<Server> users) {
-        super(context, 0, users);
-        this.context = context;
+    public ServerListAdapter(Context _context, ArrayList<Server> _users) {
+        super(_context, 0, _users);
+        this.context = _context;
     }
 
     @Override

@@ -55,8 +55,10 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
-    public String[] houses;
-    public String[] buildings;
+    // Fertige Häuser
+    public House[] houses;
+    // Bauwerke
+    public Building[] buildings;
 
     public long requested_at;
 

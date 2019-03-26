@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -29,6 +30,7 @@ import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.MarketServerObject;
+import de.realliferpg.app.objects.Server;
 
 public class MarketFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -59,6 +61,7 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getMarketPrices();
+        apiHelper.getServers();
 
         final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_market);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -66,6 +69,7 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
             @Override
             public void onRefresh() {
                 apiHelper.getMarketPrices();
+                apiHelper.getServers();
 
                 pbLoadMarketPrices.setVisibility(View.VISIBLE);
 
@@ -117,6 +121,7 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
         switch (type) {
             case CURRENT_MARKET_PRICES:
                 ArrayList<MarketItem> marketPrices = Singleton.getInstance().getMarketPrices();
+                ArrayList<Server> serverListe = Singleton.getInstance().getServerList();
                 Collections.sort(marketPrices, new Comparator<MarketItem>() {
                     @Override
                     public int compare(MarketItem o1, MarketItem o2) {
@@ -125,7 +130,9 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
                 });
                 final ListView listMarketPrices = view.findViewById(R.id.lv_market);
 
-                MarketItemAdapter listAdapter = new MarketItemAdapter(view.getContext(), marketPrices);
+                int[] serversOnline = GetServersOnline(serverListe);
+
+                MarketItemAdapter listAdapter = new MarketItemAdapter(view.getContext(), marketPrices, serversOnline);
 
                 listMarketPrices.setAdapter(listAdapter);
 
@@ -153,5 +160,19 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 break;
         }
+    }
+
+    private int[] GetServersOnline(ArrayList<Server> servers){
+        int[] serverOnline = {};
+        for (Server server : servers) {
+            serverOnline = addElement(serverOnline, server.online);
+        }
+        return serverOnline;
+    }
+
+    private int[] addElement(int[] a, int e) {
+        a  = Arrays.copyOf(a, a.length + 1);
+        a[a.length - 1] = e;
+        return a;
     }
 }

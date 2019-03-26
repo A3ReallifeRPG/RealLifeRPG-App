@@ -15,9 +15,9 @@ import de.realliferpg.app.objects.Shop;
 public class InfoSpinnerAdapter extends ArrayAdapter<Shop> {
     Context context;
 
-    public InfoSpinnerAdapter(Context context, ArrayList<Shop> shops) {
-        super(context, 0, shops);
-        this.context = context;
+    public InfoSpinnerAdapter(Context _context, ArrayList<Shop> _shops) {
+        super(_context, 0, _shops);
+        this.context = _context;
     }
 
     @Override
