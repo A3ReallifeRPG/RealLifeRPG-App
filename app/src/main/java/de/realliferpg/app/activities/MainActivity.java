@@ -17,22 +17,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import de.realliferpg.app.BuildConfig;
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.fragments.ChangelogFragment;
@@ -54,7 +50,6 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.PlayerInfo;
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface, RequestCallbackInterface {
@@ -68,9 +63,6 @@ public class MainActivity extends AppCompatActivity
         Singleton.getInstance().setContext(getApplicationContext());
 
         PreferenceHelper preferenceHelper = new PreferenceHelper();
-        if (preferenceHelper.isCrashlyticsEnabled() && !Constants.IS_DEBUG) {
-            Fabric.with(this, new Crashlytics());
-        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -243,13 +235,6 @@ public class MainActivity extends AppCompatActivity
                 Picasso.get().load(playerInfo.avatar_full).into(ivProfilePic);
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
-
-                break;
-            case "enable_crashlytics":
-                PreferenceHelper preferenceHelper = new PreferenceHelper();
-                if (preferenceHelper.isCrashlyticsEnabled() && !BuildConfig.DEBUG) {
-                    Fabric.with(this, new Crashlytics());
-                }
                 break;
         }
 
@@ -311,12 +296,6 @@ public class MainActivity extends AppCompatActivity
                 // TODO handle this case, should not happen but you never know
             }
         }catch (Exception e){
-            PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if (preferenceHelper.isCrashlyticsEnabled() && Constants.IS_DEBUG) {
-                Crashlytics.log(1, "crash_on_response_response", response.toString());
-                Crashlytics.log(1, "crash_on_response_type", type.toString());
-                Crashlytics.logException(e);
-            }
             Singleton.getInstance().setErrorMsg(e.getMessage());
             switchFragment(new ErrorFragment());
         }

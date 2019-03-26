@@ -13,9 +13,7 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
-import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.MarketItem;
-import io.fabric.sdk.android.InitializationCallback;
 
 public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
 

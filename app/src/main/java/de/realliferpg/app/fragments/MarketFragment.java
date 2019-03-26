@@ -29,7 +29,6 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.MarketItem;
-import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.Server;
 
 public class MarketFragment extends Fragment implements CallbackNotifyInterface {

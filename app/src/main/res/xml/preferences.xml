@@ -24,14 +24,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/str_firebaseSettings">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_warning"
-            android:key="pref_crashlytics"
-            android:summary="@string/str_info_crashReporting"
-            android:title="@string/str_crashReporting" />
-    </PreferenceCategory>
-
 </PreferenceScreen>

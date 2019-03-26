@@ -10,19 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;

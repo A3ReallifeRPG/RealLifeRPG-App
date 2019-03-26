@@ -12,7 +12,6 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.Changelog;
-import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;

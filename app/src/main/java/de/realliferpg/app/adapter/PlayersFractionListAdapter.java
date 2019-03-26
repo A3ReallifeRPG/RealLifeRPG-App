@@ -2,7 +2,6 @@ package de.realliferpg.app.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
 import de.realliferpg.app.objects.FractionInfo;
-import de.realliferpg.app.objects.PlayerInfo;
 
 
 public class PlayersFractionListAdapter extends BaseExpandableListAdapter {

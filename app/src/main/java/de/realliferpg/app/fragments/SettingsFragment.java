@@ -1,29 +1,20 @@
 package de.realliferpg.app.fragments;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 
-
-import com.crashlytics.android.Crashlytics;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -31,7 +22,6 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import io.fabric.sdk.android.Fabric;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface, SharedPreferences.OnSharedPreferenceChangeListener {
 

@@ -7,21 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.PlayersFractionListAdapter;
-import de.realliferpg.app.adapter.PlayersListAdapter;
 import de.realliferpg.app.helper.FormatHelper;
-import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.FractionInfo;
 import de.realliferpg.app.objects.PlayerInfo;
 

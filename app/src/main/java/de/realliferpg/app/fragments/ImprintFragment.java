@@ -2,7 +2,6 @@ package de.realliferpg.app.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,19 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.R;
-import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.RequestCallbackInterface;
-import de.realliferpg.app.objects.Changelog;
 
 public class ImprintFragment extends Fragment {
 
