@@ -22,9 +22,9 @@ public class PlayersFractionListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private FractionInfo fractionInfo;
 
-    public PlayersFractionListAdapter(Context context, FractionInfo fractioninfo) {
-        this.context = context;
-        this.fractionInfo = fractioninfo;
+    public PlayersFractionListAdapter(Context _context, FractionInfo _fractioninfo) {
+        this.context = _context;
+        this.fractionInfo = _fractioninfo;
     }
 
     @Override

@@ -39,8 +39,8 @@ public class DonationListAdapter extends RecyclerView.Adapter<DonationListAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of donations)
-    public DonationListAdapter(ArrayList<Donation> dataArray) {
-        this.donations = dataArray;
+    public DonationListAdapter(ArrayList<Donation> _donations) {
+        this.donations = _donations;
     }
 
     @NonNull

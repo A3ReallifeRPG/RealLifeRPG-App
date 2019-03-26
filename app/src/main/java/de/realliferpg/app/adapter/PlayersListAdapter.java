@@ -21,9 +21,9 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<Server> servers;
 
-    public PlayersListAdapter(Context context, ArrayList<Server> servers) {
-        this.context = context;
-        this.servers = servers;
+    public PlayersListAdapter(Context _context, ArrayList<Server> _servers) {
+        this.context = _context;
+        this.servers = _servers;
     }
 
     @Override
@@ -33,12 +33,7 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        int count = 0;
-        Server server = servers.get(i);
-
-        count += server.Players.length;
-
-        return count;
+        return servers.get(i).Players.length;
     }
 
     @Override
@@ -48,15 +43,9 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        String child = "";
-        Server server = servers.get(groupPosition);
-
-        String[] sortedPlayers = server.Players;
+        String[] sortedPlayers = servers.get(groupPosition).Players;
         Arrays.sort(sortedPlayers);
-
-        child = sortedPlayers[childPosition];
-
-        return child;
+        return sortedPlayers[childPosition];
     }
 
     @Override

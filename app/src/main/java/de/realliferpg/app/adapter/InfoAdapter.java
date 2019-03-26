@@ -16,7 +16,7 @@ import de.realliferpg.app.objects.ShopItem;
 import de.realliferpg.app.objects.ShopVehicle;
 
 public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder> {
-    private ArrayList<T> dataArray;
+    private ArrayList<T> info;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvHead, tvSub, tvRight;
@@ -35,9 +35,9 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
 
     }
 
-    // Provide a suitable constructor (depends on the kind of dataArray)
-    public InfoAdapter(ArrayList<T> dataArray) {
-        this.dataArray = dataArray;
+    // Provide a suitable constructor (depends on the kind of info)
+    public InfoAdapter(ArrayList<T> _infos) {
+        this.info = _infos;
     }
 
     @NonNull
@@ -52,7 +52,7 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FormatHelper formatHelper = new FormatHelper();
-        Object object = dataArray.get(position);
+        Object object = info.get(position);
 
         if (object instanceof ShopVehicle) {
             ShopVehicle shopVehicle = (ShopVehicle) object;
@@ -71,9 +71,9 @@ public class InfoAdapter<T> extends RecyclerView.Adapter<InfoAdapter.ViewHolder>
         }
     }
 
-    // Return the size of your dataArray (invoked by the layout manager)
+    // Return the size of your info (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return dataArray.size();
+        return info.size();
     }
 }
