@@ -76,7 +76,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         viewHolder.position = groupPosition;
 
         viewHolder.tvBezeichnung.setText("ID: " + houses[groupPosition].id);
-        viewHolder.tvBezahlteTage.setText("Gewartet für: " + houses[groupPosition].payed_for + " Tage");
+        viewHolder.tvBezahlteTage.setText("Gewartet für: " + (int) houses[groupPosition].payed_for / 24 + " Tage");
 
         convertView.setTag(viewHolder);
 
