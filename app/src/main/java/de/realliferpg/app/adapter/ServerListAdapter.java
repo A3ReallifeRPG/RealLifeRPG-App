@@ -53,12 +53,20 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
         viewHolder.pbPlayers.setProgress((int) progress);
 
-        viewHolder.tvPlayerInfo.setText(Html.fromHtml(
-                "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
-                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) + "'>COP " + server.Cops +
-                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorMed) + "'> MED " + server.Medics +
-                "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC " + server.Adac +
-            "</font>"));
+        if (server.Servername.toLowerCase().contains("realliferpg 7.0 server") && !server.Servername.toLowerCase().contains("gungame")) {
+            // Arma 3 Server
+            viewHolder.tvPlayerInfo.setText(Html.fromHtml(
+                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
+                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) + "'>COP " + server.Cops +
+                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>MED " + server.Medics +
+                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC " + server.Adac +
+                            "</font>"));
+        }
+        else {
+            // anderer Server
+            viewHolder.tvPlayerInfo.setText(Html.fromHtml(
+                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>Spieler " + server.Playercount));
+        }
 
         convertView.setTag(viewHolder);
 
