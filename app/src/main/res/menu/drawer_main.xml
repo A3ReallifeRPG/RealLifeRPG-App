@@ -33,6 +33,11 @@
             android:icon="@drawable/ic_shopping_cart"
             android:title="@string/str_market" />
 
+        <item
+            android:id="@+id/nav_rechnertool"
+            android:icon="@drawable/ic_tune"
+            android:title="@string/str_rechnertool" />
+
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/nav_group_share">
