@@ -7,7 +7,7 @@
     tools:context=".fragments.MarketFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/srl_main_market"
+        android:id="@+id/srl_rechner"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,13 +20,20 @@
             android:layout_height="wrap_content">
 
             <android.support.constraint.Guideline
-                android:id="@+id/gl_main_market"
+                android:id="@+id/gl_rechner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="1" />
 
-
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bnv_rechner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+                app:menu="@menu/bnv_rechner" />
 
         </android.support.constraint.ConstraintLayout>
 

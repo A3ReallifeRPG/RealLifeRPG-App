@@ -19,6 +19,11 @@ public class Constants {
     public static final int CATEGORY_SHOP = 2;
     public static final int CATEGORY_LICENSE = 3;
 
+    public static final int CATEGORY_CALC_VEHICLES = 1;
+    public static final int CATEGORY_CALC_GUNS = 2;
+    public static final int CATEGORY_CALC_SELL = 3;
+    public static final int CATEGORY_CALC_SUM = 4;
+
     public static final int ERROR_SNACKBAR_DURATION = 5000;
     public static final boolean IS_DEBUG = BuildConfig.DEBUG;
 }

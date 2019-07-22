@@ -77,6 +77,12 @@
     <string name="str_server2">Server 2</string>
     <string name="str_server3">Server 3</string>
     <string name="str_buildings">Buildings</string>
+
+    <string name="str_calc_vehicles">Vehicles</string>
+    <string name="str_calc_guns">Guns</string>
+    <string name="str_calc_sell">Sell items</string>
+    <string name="str_calc_sum">Total</string>
+
     <!-- Die Raenge klingen auf englisch seltsam -->
     <!-- Raenge der Justiz -->
     <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->

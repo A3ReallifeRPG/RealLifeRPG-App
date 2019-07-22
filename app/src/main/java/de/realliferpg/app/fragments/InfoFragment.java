@@ -79,9 +79,6 @@ public class InfoFragment extends Fragment implements CallbackNotifyInterface {
                     case R.id.bnv_info_shops:
                         currentCategory = Constants.CATEGORY_SHOP;
                         break;
-                    //case R.id.action_info_licenses:
-                        //currentCategory = Constants.CATEGORY_LICENSE;
-                        //break;
                 }
                 onCategoryChanged();
                 return true;

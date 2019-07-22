@@ -1,21 +1,35 @@
 package de.realliferpg.app.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 
+import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.Shop;
 
 public class RechnerToolFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
     private FragmentInteractionInterface mListener;
+    private int currentCategory;
 
     public RechnerToolFragment() {
         // Required empty public constructor
@@ -24,47 +38,39 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_rechnertool, container, false);
+        this.view = inflater.inflate(R.layout.fragment_rechnertool, container, false);
+        currentCategory = Constants.CATEGORY_CALC_VEHICLES;
 
-        /*
-        final ProgressBar pbLoadMarketPrices = view.findViewById(R.id.pb_market);
-        pbLoadMarketPrices.setVisibility(View.VISIBLE);
-        final ListView listMarketPrices = view.findViewById(R.id.lv_market);
-
-        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
-        apiHelper.getMarketPrices();
-        apiHelper.getServers();
-
-        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_market);
-        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
-        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        BottomNavigationView bnv = view.findViewById(R.id.bnv_rechner);
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onRefresh() {
-                apiHelper.getMarketPrices();
-                apiHelper.getServers();
-
-                pbLoadMarketPrices.setVisibility(View.VISIBLE);
-
-                listMarketPrices.setAdapter(null);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bnv_calc_vehicles:
+                        currentCategory = Constants.CATEGORY_CALC_VEHICLES;
+                        mListener.onFragmentInteraction(RechnerToolFragment.class, Uri.parse("fragment_calc_change_to_vehicles"));
+                        break;
+                    case R.id.bnv_calc_guns:
+                        currentCategory = Constants.CATEGORY_CALC_GUNS;
+                        mListener.onFragmentInteraction(RechnerToolFragment.class, Uri.parse("fragment_calc_change_to_guns"));
+                        break;
+                    case R.id.bnv_calc_sell:
+                        currentCategory = Constants.CATEGORY_CALC_SELL;
+                        mListener.onFragmentInteraction(RechnerToolFragment.class, Uri.parse("fragment_calc_change_to_sell"));
+                        break;
+                    case R.id.bnv_calc_sum:
+                        currentCategory = Constants.CATEGORY_CALC_SUM;
+                        mListener.onFragmentInteraction(RechnerToolFragment.class, Uri.parse("fragment_calc_change_to_sum"));
+                        break;
+                }
+                return true;
             }
         });
 
-        listMarketPrices.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+        SwipeRefreshLayout srl = view.findViewById(R.id.srl_rechner);
+        srl.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
 
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (listMarketPrices == null || listMarketPrices.getChildCount() == 0) ?
-                        0 : listMarketPrices.getChildAt(0).getTop();
-                sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
-            }
-        });
-        */
         return view;
-
     }
 
     @Override
