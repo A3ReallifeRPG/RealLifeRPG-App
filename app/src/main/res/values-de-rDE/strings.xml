@@ -119,7 +119,42 @@
     <string name="str_rac08">Co-Leiter</string> <!-- R8, adac-level 8 -->
     <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
 
-
+    <!-- Marktgegenstaende -->
+    <string name="aluminum_r">Aluminium</string>
+    <string name="apple">Apfel</string>
+    <string name="apple_juice">Apfelsaft</string>
+    <string name="barley_r">Gerstenmehl</string>
+    <string name="barley_u">Gerste</string>
+    <string name="beer">Bier</string>
+    <string name="bread">Brot</string>
+    <string name="clay_r">Lehm</string>
+    <string name="coal_r">Kohle</string>
+    <string name="cocaine_r">Kokain</string>
+    <string name="copper_r">Kupfer</string>
+    <string name="crab">Krabbe</string>
+    <string name="diamond_r">Diamand</string>
+    <string name="fish_r">Fisch</string>
+    <string name="heroin_r">Heroin</string>
+    <string name="honey_r">Honig</string>
+    <string name="iron_r">Eisen</string>
+    <string name="lsd">LSD</string>
+    <string name="meat_r">Fleisch</string>
+    <string name="oil_r">Öl</string>
+    <string name="plastic">Plastik</string>
+    <string name="potato">Kartoffel</string>
+    <string name="roll">Brötchen</string>
+    <string name="rum">Rum</string>
+    <string name="salt_r">Salz</string>
+    <string name="sand_r">Glas</string>
+    <string name="steel">Stahl</string>
+    <string name="sugar_r">Zucker</string>
+    <string name="sugar_u">Zuckerrübe</string>
+    <string name="tobacco_r">Tabak</string>
+    <string name="vodka">Vodka</string>
+    <string name="weed_r">Weed</string>
+    <string name="wheat_r">Weizenmehl</string>
+    <string name="wheat_u">Weizen</string>
+    <string name="wood_r">Holz</string>
 
 
 </resources>

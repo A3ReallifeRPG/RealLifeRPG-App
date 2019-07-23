@@ -126,6 +126,44 @@
     <string name="str_rac08">Co-Leiter</string> <!-- R8, adac-level 8 -->
     <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
 
+    <!-- Market items -->
+    <string name="aluminum_r">aluminum</string>
+    <string name="apple">apple</string>
+    <string name="apple_juice">apple juice</string>
+    <string name="barley_r">barley flour</string>
+    <string name="barley_u">barley</string>
+    <string name="beer">beer</string>
+    <string name="bread">bread</string>
+    <string name="clay_r">clay</string>
+    <string name="coal_r">coal</string>
+    <string name="cocaine_r">cocaine</string>
+    <string name="copper_r">copper</string>
+    <string name="crab">crab</string>
+    <string name="diamond_r">diamond</string>
+    <string name="fish_r">fish</string>
+    <string name="heroin_r">heroin</string>
+    <string name="honey_r">honey</string>
+    <string name="iron_r">iron</string>
+    <string name="lsd">lsd</string>
+    <string name="meat_r">meat</string>
+    <string name="oil_r">oil</string>
+    <string name="plastic">plastic</string>
+    <string name="potato">potato</string>
+    <string name="roll">roll</string>
+    <string name="rum">rum</string>
+    <string name="salt_r">salt</string>
+    <string name="sand_r">glas</string>
+    <string name="steel">steel</string>
+    <string name="sugar_r">sugar</string>
+    <string name="sugar_u">sugar beet</string>
+    <string name="tobacco_r">tobacco</string>
+    <string name="vodka">vodka</string>
+    <string name="weed_r">weed</string>
+    <string name="wheat_r">wheat fluour</string>
+    <string name="wheat_u">wheat</string>
+    <string name="wood_r">wood</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
