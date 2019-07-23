@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +14,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
+import de.realliferpg.app.Singleton;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.CustomNetworkError;
+import de.realliferpg.app.objects.MarketItem;
+import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
 
 public class RechnerToolFragment extends Fragment implements CallbackNotifyInterface {
@@ -35,11 +45,19 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
         // Required empty public constructor
     }
 
+    public static RechnerToolFragment newInstance() {
+        RechnerToolFragment fragment = new RechnerToolFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_rechnertool, container, false);
         currentCategory = Constants.CATEGORY_CALC_VEHICLES;
+        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_rechner);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,6 +87,12 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
 
         SwipeRefreshLayout srl = view.findViewById(R.id.srl_rechner);
         srl.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                apiHelper.getPlayerStats();
+            }
+        });
 
         return view;
     }
@@ -92,10 +116,10 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
 
     @Override
     public void onCallback(RequestTypeEnum type) {
-        /*
-        ProgressBar pbMarketPrices = view.findViewById(R.id.pb_market);
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_market);
-        sc.setRefreshing(false);
+
+        //ProgressBar pbMarketPrices = view.findViewById(R.id.pb_market);
+        SwipeRefreshLayout srl = view.findViewById(R.id.srl_rechner);
+        srl.setRefreshing(false);
 
         switch (type) {
             case CURRENT_MARKET_PRICES:
@@ -107,6 +131,7 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
                         return o1.name.compareTo(o2.name);
                     }
                 });
+                /*
                 final ListView listMarketPrices = view.findViewById(R.id.lv_market);
 
                 int[] serversOnline = GetServersOnline(serverListe);
@@ -116,13 +141,13 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
                 listMarketPrices.setAdapter(listAdapter);
 
                 pbMarketPrices.setVisibility(View.GONE);
-
+*/
                 break;
             case NETWORK_ERROR:
                 // TODO Testen
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
-                pbMarketPrices.setVisibility(View.GONE);
+                //pbMarketPrices.setVisibility(View.GONE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
@@ -138,7 +163,8 @@ public class RechnerToolFragment extends Fragment implements CallbackNotifyInter
                 snackbar.show();
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 break;
-                */
+
         }
     }
+}
 
