@@ -13,70 +13,45 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
-import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.CBSData;
 
-public class ChangelogAdapter extends BaseExpandableListAdapter {
+public class CBSListAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<Changelog> changelogs;
+    private ArrayList<CBSData> _cbsData;
 
-    public ChangelogAdapter(Context _context, ArrayList<Changelog> _changelogs) {
+    public CBSListAdapter(Context _context, ArrayList<CBSData> _cbsData) {
         this.context = _context;
-        this.changelogs = _changelogs;
+        this._cbsData = _cbsData;
     }
 
     @Override
     public int getGroupCount() {
-        return changelogs.size();
+        return _cbsData.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
         int count = 0;
-        Changelog changelog = changelogs.get(i);
+        CBSData cbsData = _cbsData.get(i);
 
-        count += changelog.change_mission.length;
-        count += changelog.change_map.length;
-        count += changelog.change_mod.length;
 
-        if( !changelog.note.equals("")){
-            count++;
-        }
 
         return count;
     }
 
     @Override
     public Object getGroup(int i) {
-        return changelogs.get(i);
+        return _cbsData.get(i);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        String child;
-        Changelog changelog = changelogs.get(groupPosition);
+        String child = null;
+        CBSData cbsData = _cbsData.get(groupPosition);
 
 
-        if(childPosition < changelog.change_mission.length){
 
-            child = "&bull;" +changelog.change_mission[childPosition];
-        }else{
-            int offsetMission = changelog.change_mission.length;
-            if((childPosition - offsetMission) < changelog.change_map.length){
-                child = "&bull;" +changelog.change_map[(childPosition - offsetMission)];
-            }else {
-                int offsetMap =  childPosition - changelog.change_mission.length - changelog.change_map.length;
-                if(offsetMap < changelog.change_mod.length) {
-                    child = "&bull;" + changelog.change_mod[offsetMap];
-                } else{
 
-                    child = "<i><font color='red'>" + changelog.note + "</font></i>";
-                }
-            }
-        }
-
-        if(child.contains("<b>")){
-            child = child.replace("&bull;","");
-        }
 
         return child;
     }
@@ -100,7 +75,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         FormatHelper formatHelper = new FormatHelper();
 
-        Changelog changelog = (Changelog) getGroup(groupPosition);
+        CBSData cbsData = (CBSData) getGroup(groupPosition);
 
         if(convertView == null)
         {
@@ -114,10 +89,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setTypeface(null, Typeface.BOLD);
 
-        String itemHeader = "v" + changelog.version;
-
-        tv_groupHeader.setText(itemHeader);
-        tv_groupSubtitle.setText(formatHelper.toDateTime(formatHelper.getApiDate(changelog.release_at)));
+        String itemHeader = cbsData.title;
 
         return convertView;
     }

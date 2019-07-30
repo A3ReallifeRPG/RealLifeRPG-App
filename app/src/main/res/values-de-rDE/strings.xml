@@ -112,7 +112,7 @@
     <string name="str_rac08">Co-Leiter</string> <!-- R8, adac-level 8 -->
     <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
 
-
+    <string name="str_cbs">CBS</string>
 
 
 </resources>
