@@ -31,12 +31,8 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        int count = 0;
-        CBSData cbsData = _cbsData.get(i);
-
-
-
-        return count;
+        // TODO: anzahl unterelemente
+        return 1;
     }
 
     @Override
@@ -49,7 +45,7 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
         String child = null;
         CBSData cbsData = _cbsData.get(groupPosition);
 
-
+        // TODO ?
 
 
 
@@ -73,7 +69,6 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        FormatHelper formatHelper = new FormatHelper();
 
         CBSData cbsData = (CBSData) getGroup(groupPosition);
 
@@ -91,7 +86,14 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setText(cbsData.title);
 
-        tv_groupSubtitle.setText(cbsData.finished == 1 ? "abgeschlossen" : "in Arbeit");
+        String status = "";
+        if (cbsData.finished == 1){
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>abgeschlossen";
+        } else {
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>in Arbeit";
+        }
+
+        tv_groupSubtitle.setText(Html.fromHtml(status));
 
         return convertView;
     }
@@ -99,6 +101,8 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String childText = (String)getChild(groupPosition,childPosition);
+
+        // TODO wie soll Unterelement aussehen
 
         if(convertView == null)
         {
