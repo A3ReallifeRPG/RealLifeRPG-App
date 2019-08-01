@@ -79,7 +79,7 @@ public class ApiHelper {
                 CBSData.Wrapper cbsWrapper = gson.fromJson(response.toString(), CBSData.Wrapper.class);
                 final ArrayList<CBSData> cbsData = new ArrayList<>(Arrays.asList(cbsWrapper.data));
                 Singleton.getInstance().setCBSData(cbsData);
-                break;
+                return true;
             case NETWORK_ERROR:
                 return true;
         }

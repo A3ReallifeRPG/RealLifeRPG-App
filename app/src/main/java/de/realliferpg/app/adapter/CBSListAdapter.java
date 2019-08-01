@@ -89,7 +89,9 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setTypeface(null, Typeface.BOLD);
 
-        String itemHeader = cbsData.title;
+        tv_groupHeader.setText(cbsData.title);
+
+        tv_groupSubtitle.setText(cbsData.finished == 1 ? "abgeschlossen" : "in Arbeit");
 
         return convertView;
     }

@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 
@@ -26,7 +27,7 @@ import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.CustomNetworkError;
 
-public class CBSFragment extends Fragment {
+public class CBSFragment extends Fragment implements CallbackNotifyInterface{
 
     private FragmentInteractionInterface mListener;
     private View view;
@@ -48,36 +49,79 @@ public class CBSFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_cbs, container, false);
+        this.view = inflater.inflate(R.layout.fragment_cbs, container, false);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
-        if (Singleton.getInstance().getCBSData() == null) {
-            apiHelper.getCBSData();
-        } else {
-            showCBSData();
-        }
+        apiHelper.getCBSData();
 
-        /*
+        final ProgressBar pbChangelog = view.findViewById(R.id.pb_cbs_main);
+        pbChangelog.setVisibility(View.VISIBLE);
+
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_cbs);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 apiHelper.getCBSData();
+                pbChangelog.setVisibility(View.VISIBLE);
+
+                ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
+
+                expandableListView.setAdapter((ExpandableListAdapter) null);
             }
         });
-        */
 
         return view;
     }
 
-    private void showCBSData(){
-        ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
+    @Override
+    public void onCallback(RequestTypeEnum type) {
+        ProgressBar pbCBS = view.findViewById(R.id.pb_cbs_main);
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_cbs);
+        sc.setRefreshing(false);
 
-        ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
+        switch (type) {
+            case CBS:
+                ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
 
-        CBSListAdapter cbsListAdapter = new CBSListAdapter(this.getContext(), cbsData);
-        expandableListView.setAdapter(cbsListAdapter);
+                final ExpandableListView listView = view.findViewById(R.id.lv_cbs_main);
+
+                CBSListAdapter listAdapter = new CBSListAdapter(this.getContext(), cbsData);
+                listView.setAdapter(listAdapter);
+
+                pbCBS.setVisibility(View.GONE);
+
+                // collapse all but selected item
+                listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                    int previousItem = -1;
+
+                    @Override
+                    public void onGroupExpand(int groupPosition) {
+                        if (groupPosition != previousItem)
+                            listView.collapseGroup(previousItem);
+                        previousItem = groupPosition;
+                    }
+                });
+                break;
+            case NETWORK_ERROR:
+                CustomNetworkError error = Singleton.getInstance().getNetworkError();
+
+                pbCBS.setVisibility(View.GONE);
+
+                Singleton.getInstance().setErrorMsg(error.toString());
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_changelog), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+
+                snackbar.setAction(R.string.str_view, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onFragmentInteraction(ChangelogFragment.class, Uri.parse("open_error"));
+                    }
+                });
+
+                snackbar.show();
+                Singleton.getInstance().setCurrentSnackbar(snackbar);
+                break;
+        }
     }
 
     @Override
