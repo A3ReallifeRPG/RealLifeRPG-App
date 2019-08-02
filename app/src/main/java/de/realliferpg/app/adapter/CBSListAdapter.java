@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,12 +45,9 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        String child = null;
-        CBSData cbsData = _cbsData.get(groupPosition);
+        CBSData child = null;
 
-        // TODO ?
-
-
+        child = _cbsData.get(groupPosition);
 
         return child;
     }
@@ -75,7 +75,7 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
+            convertView = inflater.inflate(R.layout.list_item_group_cbs,null);
         }
 
         TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_changelog_group_subtitle);
@@ -100,18 +100,22 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition,childPosition);
-
-        // TODO wie soll Unterelement aussehen
+        final CBSData cbsData = (CBSData) getChild(groupPosition,childPosition);
 
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_changeloglititem,null);
+            convertView = inflater.inflate(R.layout.list_item_cbs,null);
         }
 
-        TextView text_changelog_listitem = convertView.findViewById(R.id.tv_changelog_listitem);
-        text_changelog_listitem.setText(Html.fromHtml(childText));
+
+        TextView text_cbs_listitem = convertView.findViewById(R.id.tv_cbs_listitem);
+        text_cbs_listitem.setText(cbsData.desc + "\n\n"); // \n sind Platzhalter
+
+        ImageView imageView_cbs = convertView.findViewById(R.id.iv_cbs_profile);
+        Picasso.get().load(cbsData.image).into(imageView_cbs);
+        //imageView_cbs.setBackgroundColor(convertView.getResources().getColor(R.color.colorMed));
+
 
         return convertView;
     }

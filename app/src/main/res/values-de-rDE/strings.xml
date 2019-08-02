@@ -113,6 +113,7 @@
     <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
 
     <string name="str_cbs">CBS</string>
+    <string name="str_cbspicture">CBS-Bild</string>
 
 
 </resources>
