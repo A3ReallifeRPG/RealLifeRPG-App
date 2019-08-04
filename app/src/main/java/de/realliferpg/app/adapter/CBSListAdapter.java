@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
@@ -109,8 +111,13 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
         }
 
 
-        TextView text_cbs_listitem = convertView.findViewById(R.id.tv_cbs_listitem);
-        text_cbs_listitem.setText(cbsData.desc + "\n\n"); // \n sind Platzhalter
+        TextView text_cbs_desc = convertView.findViewById(R.id.tv_cbs_desc);
+        TextView text_cbs_money_value = convertView.findViewById(R.id.tv_cbs_money_value);
+
+        text_cbs_desc.setText(cbsData.desc + "\n"); // \n sind Platzhalter
+
+        FormatHelper formatHelper = new FormatHelper();
+        text_cbs_money_value.setText(formatHelper.formatCurrency(cbsData.amount) + "/" + formatHelper.formatCurrency(cbsData.funding_required)+ "\n");
 
         ImageView imageView_cbs = convertView.findViewById(R.id.iv_cbs_profile);
         Picasso.get().load(cbsData.image).into(imageView_cbs);

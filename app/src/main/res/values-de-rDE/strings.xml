@@ -114,6 +114,7 @@
 
     <string name="str_cbs">CBS</string>
     <string name="str_cbspicture">CBS-Bild</string>
+    <string name="str_cbs_money_label">Geldspenden</string>
 
 
 </resources>
