@@ -38,6 +38,11 @@
             android:icon="@drawable/ic_location_city"
             android:title="@string/str_cbs" />
 
+        <item
+            android:id="@+id/nav_rechnertool"
+            android:icon="@drawable/ic_tune"
+            android:title="@string/str_rechnertool" />
+
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/nav_group_share">

@@ -155,6 +155,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_location_city_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_whatshot_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -165,6 +166,7 @@
                         <option name="values">
                           <map>
                             <entry key="outputName" value="ic_location_city_black_24dp" />
+                            <entry key="outputName" value="ic_whatshot_black_24dp" />
                             <entry key="sourceFile" value="C:\Users\vabene1111" />
                           </map>
                         </option>
