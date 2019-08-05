@@ -12,6 +12,8 @@ public class Constants {
     public static final String URL_SHOPTYPES_ITEMS = "https://api.realliferpg.de/v1/info/items_shoptypes";
     public static final String URL_SHOPTYPES_VEHICLES = "https://api.realliferpg.de/v1/info/vehicles_shoptypes";
 
+    public static final String URL_CBS = "https://api.realliferpg.de/v1/cbs";
+
     public static final String URL_SHOP_ITEMS = "https://api.realliferpg.de/v1/info/items/";
     public static final String URL_SHOP_VEHICLES = "https://api.realliferpg.de/v1/info/vehicles/";
 
