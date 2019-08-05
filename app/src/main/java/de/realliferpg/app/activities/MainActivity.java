@@ -162,8 +162,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_cbs:
                 switchFragment(new CBSFragment());
-            case R.id.nav_rechnertool:
-                switchFragment(new RechnerToolFragment());
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
