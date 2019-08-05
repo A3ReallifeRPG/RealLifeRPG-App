@@ -20,6 +20,7 @@
         android:layout_marginLeft="8dp"
         android:contentDescription="@string/str_cbspicture"
         android:src="@mipmap/ic_launcher_round"
+        android:adjustViewBounds="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
