@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.fragments.CBSFragment;
 import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.ErrorFragment;
 import de.realliferpg.app.fragments.ImprintFragment;
@@ -42,6 +43,11 @@ import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
 import de.realliferpg.app.fragments.PlayersListFragment;
+import de.realliferpg.app.fragments.RechnerGunsFragment;
+import de.realliferpg.app.fragments.RechnerSellFragment;
+import de.realliferpg.app.fragments.RechnerSumFragment;
+import de.realliferpg.app.fragments.RechnerToolFragment;
+import de.realliferpg.app.fragments.RechnerVehiclesFragment;
 import de.realliferpg.app.fragments.SettingsFragment;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
@@ -154,6 +160,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_marketprices:
                 switchFragment(new MarketFragment());
                 break;
+            case R.id.nav_cbs:
+                switchFragment(new CBSFragment());
+                break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
                 break;
@@ -255,11 +264,39 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        if (type.equals(RechnerToolFragment.class)){
+            switch (uri.toString()){
+                case "fragment_calc_change_to_vehicles": {
+                    changeRechnerFragment(new RechnerVehiclesFragment());
+                    break;
+                }
+                case "fragment_calc_change_to_guns": {
+                    changeRechnerFragment(new RechnerGunsFragment());
+                    break;
+                }
+                case "fragment_calc_change_to_sell": {
+                    changeRechnerFragment(new RechnerSellFragment());
+                    break;
+                }
+                case "fragment_calc_change_to_sum": {
+                    changeRechnerFragment(new RechnerSumFragment());
+                    break;
+                }
+
+            }
+        }
+
     }
 
     void changePlayerFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.include_player_content, fragment);
+        transaction.commit();
+    }
+
+    void changeRechnerFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.include_calc_content, fragment);
         transaction.commit();
     }
 

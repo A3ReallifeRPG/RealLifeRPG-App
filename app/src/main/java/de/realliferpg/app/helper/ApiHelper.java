@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.security.cert.CertPathBuilderSpi;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ import de.realliferpg.app.Constants;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.PlayerInfo;
@@ -72,6 +74,11 @@ public class ApiHelper {
                 ShopVehicle.Wrapper vehicleWrapper = gson.fromJson(response.toString(), ShopVehicle.Wrapper.class);
                 final ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
                 Singleton.getInstance().setShopVehicleList(shopVehicles);
+                return true;
+            case CBS:
+                CBSData.Wrapper cbsWrapper = gson.fromJson(response.toString(), CBSData.Wrapper.class);
+                final ArrayList<CBSData> cbsData = new ArrayList<>(Arrays.asList(cbsWrapper.data));
+                Singleton.getInstance().setCBSData(cbsData);
                 return true;
             case NETWORK_ERROR:
                 return true;
@@ -137,5 +144,10 @@ public class ApiHelper {
     public void getMarketPrices() {
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.doJSONRequest(Constants.URL_MARKETPRICES,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
+    }
+
+    public void getCBSData(){
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.doJSONRequest(Constants.URL_CBS, callbackInterface, RequestTypeEnum.CBS);
     }
 }

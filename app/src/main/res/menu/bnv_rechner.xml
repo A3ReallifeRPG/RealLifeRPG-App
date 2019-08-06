@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bnv_calc_vehicles"
+        android:enabled="true"
+        android:icon="@drawable/ic_car"
+        android:title="@string/str_calc_vehicles"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bnv_calc_guns"
+        android:enabled="true"
+        android:icon="@drawable/ic_fire"
+        android:title="@string/str_calc_guns"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bnv_calc_sell"
+        android:enabled="true"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="@string/str_calc_sell"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bnv_calc_sum"
+        android:enabled="true"
+        android:icon="@drawable/ic_tune"
+        android:title="@string/str_calc_sum"
+        app:showAsAction="ifRoom" />
+</menu>

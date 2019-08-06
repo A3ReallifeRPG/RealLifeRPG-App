@@ -12,12 +12,19 @@ public class Constants {
     public static final String URL_SHOPTYPES_ITEMS = "https://api.realliferpg.de/v1/info/items_shoptypes";
     public static final String URL_SHOPTYPES_VEHICLES = "https://api.realliferpg.de/v1/info/vehicles_shoptypes";
 
+    public static final String URL_CBS = "https://api.realliferpg.de/v1/cbs";
+
     public static final String URL_SHOP_ITEMS = "https://api.realliferpg.de/v1/info/items/";
     public static final String URL_SHOP_VEHICLES = "https://api.realliferpg.de/v1/info/vehicles/";
 
     public static final int CATEGORY_VEHICLE = 1;
     public static final int CATEGORY_SHOP = 2;
     public static final int CATEGORY_LICENSE = 3;
+
+    public static final int CATEGORY_CALC_VEHICLES = 1;
+    public static final int CATEGORY_CALC_GUNS = 2;
+    public static final int CATEGORY_CALC_SELL = 3;
+    public static final int CATEGORY_CALC_SUM = 4;
 
     public static final int ERROR_SNACKBAR_DURATION = 5000;
     public static final boolean IS_DEBUG = BuildConfig.DEBUG;

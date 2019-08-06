@@ -108,7 +108,7 @@ public class ChangelogAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.list_item_group_changelog,null);
         }
 
-        TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_cahngelog_group_subtitle);
+        TextView tv_groupSubtitle = convertView.findViewById(R.id.tv_changelog_group_subtitle);
         TextView tv_groupHeader = convertView.findViewById(R.id.tv_changelog_group_header);
 
 
