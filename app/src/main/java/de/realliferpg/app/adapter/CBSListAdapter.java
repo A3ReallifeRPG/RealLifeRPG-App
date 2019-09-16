@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -15,9 +16,11 @@ import com.squareup.picasso.Picasso;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
+import de.realliferpg.app.helper.StringHelper;
 import de.realliferpg.app.objects.CBSData;
 
 public class CBSListAdapter extends BaseExpandableListAdapter {
@@ -121,8 +124,20 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         ImageView imageView_cbs = convertView.findViewById(R.id.iv_cbs_profile);
         Picasso.get().load(cbsData.image).into(imageView_cbs);
-        //imageView_cbs.setBackgroundColor(convertView.getResources().getColor(R.color.colorMed));
 
+        TextView text_cbs_ressources = convertView.findViewById(R.id.tv_cbs_res);
+
+        StringHelper stringHelper = new StringHelper();
+        String ressourcen = "";
+
+        for (Map.Entry<String, Integer> entry : cbsData.required.entrySet()) {
+            String ressource_name = entry.getKey();
+            int required = entry.getValue();
+            int delivered = cbsData.delivered.get(ressource_name);
+            ressourcen += stringHelper.getRessourceName(context, ressource_name) + "\t\t\t\t\t\t\t" + delivered + "/" + required + "\n";
+        }
+
+        text_cbs_ressources.setText(ressourcen);
 
         return convertView;
     }

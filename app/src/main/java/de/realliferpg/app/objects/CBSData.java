@@ -1,5 +1,7 @@
 package de.realliferpg.app.objects;
 
+import java.util.Map;
+
 public class CBSData {
 
     public class Wrapper{
@@ -18,4 +20,7 @@ public class CBSData {
     public int map_pos_x;
     public int map_pos_y;
     public int amount;
+
+    public Map<String, Integer> required;
+    public Map<String, Integer> delivered;
 }
