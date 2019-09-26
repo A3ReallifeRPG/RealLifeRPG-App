@@ -17,7 +17,7 @@ import static android.support.v4.os.ConfigurationCompat.getLocales;
 
 public class StringHelper {
 
-    public String getRessourceName(Context context, String input){
+    public static String getRessourceName(Context context, String input){
 
         String ressourceName = "";
 

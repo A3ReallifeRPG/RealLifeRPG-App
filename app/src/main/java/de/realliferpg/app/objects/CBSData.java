@@ -1,5 +1,6 @@
 package de.realliferpg.app.objects;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CBSData {
@@ -23,4 +24,6 @@ public class CBSData {
 
     public Map<String, Integer> required;
     public Map<String, Integer> delivered;
+
+    public ArrayList<RessourceInfo> ressourceInfo = new ArrayList<>();
 }
