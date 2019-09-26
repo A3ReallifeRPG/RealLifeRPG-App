@@ -7,18 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.CBSHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.objects.CBSData;
+import de.realliferpg.app.objects.CBSRessourceGridView;
+import de.realliferpg.app.objects.RessourceInfo;
 
 public class CBSListAdapter extends BaseExpandableListAdapter {
     private Context context;
@@ -88,9 +91,12 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setText(cbsData.title);
 
-        String status = "";
+        String status = ""; // TODO localize
         if (cbsData.finished == 1){
             status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>abgeschlossen";
+        } else if (cbsData.amount == cbsData.funding_required)
+        {
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>finanziert - es werden Ressourcen benötigt";
         } else {
             status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>in Arbeit";
         }
@@ -107,9 +113,8 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_cbs,null);
+            convertView = inflater.inflate(R.layout.list_item_cbs,  null);
         }
-
 
         TextView text_cbs_desc = convertView.findViewById(R.id.tv_cbs_desc);
         TextView text_cbs_money_value = convertView.findViewById(R.id.tv_cbs_money_value);
@@ -121,8 +126,12 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         ImageView imageView_cbs = convertView.findViewById(R.id.iv_cbs_profile);
         Picasso.get().load(cbsData.image).into(imageView_cbs);
-        //imageView_cbs.setBackgroundColor(convertView.getResources().getColor(R.color.colorMed));
 
+        // setze RessourceInfo für Liste in einzelnen CBS-Projekten
+        CBSHelper.setRessourceInfo(cbsData);
+
+        CBSRessourceGridView gv_ressources = convertView.findViewById(R.id.gv_cbs_res);
+        gv_ressources.setAdapter(new CBSRessourcesGridViewAdapter(this.context, cbsData.ressourceInfo));
 
         return convertView;
     }
@@ -131,4 +140,5 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 }
