@@ -1,112 +1,115 @@
 package de.realliferpg.app.helper;
 
+import android.content.Context;
+
+import de.realliferpg.app.R;
+
 public class FractionMappingHelper {
 
-    public static String getCopRankAsString(int coplevel) {
+    public static String getCopRankAsString(Context context, int coplevel) {
 
         // TODO: ersetzen mit localized Strings
         switch (coplevel) {
             case 0:
-                return "Kein Rang";  // cop-level 0
+                return context.getResources().getString(R.string.str_cop00); // "Kein Rang"  // cop-level 0
             case 1:
-                return "Justizbeamter"; // cop-level 1
+                return context.getResources().getString(R.string.str_justiz); // "Justizbeamter"; // cop-level 1
             case 2:
-                return "Polizeimeisteranwärter";  // cop-level 2
+                return context.getResources().getString(R.string.str_cop01); // "Polizeimeisteranwärter";  // cop-level 2
             case 3:
-                return "Polizeimeister";  // cop-level 3
+                return context.getResources().getString(R.string.str_cop02); // "Polizeimeister";  // cop-level 3
             case 4:
-                return "Polizeiobermeister";  // cop-level 4
+                return context.getResources().getString(R.string.str_cop03); // "Polizeiobermeister";  // cop-level 4
             case 5:
-                return "Polizeihauptmeister";  // cop-level 5
+                return context.getResources().getString(R.string.str_cop04); // "Polizeihauptmeister";  // cop-level 5
             case 6:
-                return "Polizeihauptmeister mit Amtszulage";  // cop-level 6
+                return context.getResources().getString(R.string.str_cop05); // "Polizeihauptmeister mit Amtszulage";  // cop-level 6
             case 7:
-                return "Polizeikommissaranwärter";  // cop-level 7
+                return context.getResources().getString(R.string.str_cop06); // "Polizeikommissaranwärter";  // cop-level 7
             case 8:
-                return "Polizeikommissar";  // cop-level 8
+                return context.getResources().getString(R.string.str_cop07); // "Polizeikommissar";  // cop-level 8
             case 9:
-                return "Polizeioberkommissar";  // cop-level 9
+                return context.getResources().getString(R.string.str_cop08); // "Polizeioberkommissar";  // cop-level 9
             case 10:
-                return "Polizeihauptkommissar";  // cop-level 10
+                return context.getResources().getString(R.string.str_cop09); // "Polizeihauptkommissar";  // cop-level 10
             case 11:
-                return "Erster Polizeihauptkommissar";  // cop-level 11
+                return context.getResources().getString(R.string.str_cop10); // "Erster Polizeihauptkommissar";  // cop-level 11
             case 12:
-                return "Polizeirat";  // cop-level 12
+                return context.getResources().getString(R.string.str_cop11); // "Polizeirat";  // cop-level 12
             case 13:
-                return "Polizeioberrat";  // cop-level 13
+                return context.getResources().getString(R.string.str_cop12); // "Polizeioberrat";  // cop-level 13
             case 14:
-                return "Polizeidirektor";  // cop-level 14
+                return context.getResources().getString(R.string.str_cop13); // "Polizeidirektor";  // cop-level 14
             case 15:
-                return "Leitender Polizeidirektor";  // cop-level 15
+                return context.getResources().getString(R.string.str_cop14); // "Leitender Polizeidirektor";  // cop-level 15
             case 16:
-                return "Polizeipräsident";  // cop-level 16
+                return context.getResources().getString(R.string.str_cop15); // "Polizeipräsident";  // cop-level 16
             default:
-                return "Kein Rang";
+                return context.getResources().getString(R.string.str_cop00); // "Kein Rang";
         }
 
     }
 
-    public static String getMedicRankAsString(int mediclevel) {
+    public static String getMedicRankAsString(Context context, int mediclevel) {
 
         // TODO: ersetzen mit localized Strings
         switch (mediclevel) {
             case 0:
-                return "Kein Rang";  // medic-level 0
+                return context.getResources().getString(R.string.str_med00); // "Kein Rang";  // medic-level 0
             case 1:
-                return "Ersthelfer"; // medic-level 1
+                return context.getResources().getString(R.string.str_med01); // "Ersthelfer"; // medic-level 1
             case 2:
-                return "Rettungshelfer";  // medic-level 2
+                return context.getResources().getString(R.string.str_med02); // "Rettungshelfer";  // medic-level 2
             case 3:
-                return "Rettungssanitäter";  // medic-level 3
+                return context.getResources().getString(R.string.str_med03); // "Rettungssanitäter";  // medic-level 3
             case 4:
-                return "Notfallhelfer";  // medic-level 4
+                return context.getResources().getString(R.string.str_med04); // "Notfallhelfer";  // medic-level 4
             case 5:
-                return "Notfallsanitäter";  // medic-level 5
+                return context.getResources().getString(R.string.str_med05); // "Notfallsanitäter";  // medic-level 5
             case 6:
-                return "Notarzt";  // medic-level 6
+                return context.getResources().getString(R.string.str_med06); // "Notarzt";  // medic-level 6
             case 7:
-                return "Ausbilder";  // medic-level 7
+                return context.getResources().getString(R.string.str_med07); // "Ausbilder";  // medic-level 7
             case 8:
-                return "(Co-)Leiter";  // medic-level 8
+                return context.getResources().getString(R.string.str_med08); // "(Co-)Leiter";  // medic-level 8
             case 9:
-                return "Leiter";  // medic-level 9; gibts wohl nicht (gleiche Rechte wie der Co-Leiter)
+                return context.getResources().getString(R.string.str_med09); // "Leiter";  // medic-level 9; gibts wohl nicht (gleiche Rechte wie der Co-Leiter)
             default:
-                return "Kein Rang";
+                return context.getResources().getString(R.string.str_med00); // "Kein Rang";
         }
     }
 
-    public static String getRacRankAsString(int raclevel) {
+    public static String getRacRankAsString(Context context, int raclevel) {
 
         // TODO: ersetzen mit localized Strings
         switch (raclevel) {
             case 0:
-                return "Kein Rang";  // adac-level 0
+                return context.getResources().getString(R.string.str_rac00); // "Kein Rang";  // adac-level 0
             case 1:
-                return "Azubi"; // adac-level 1
+                return context.getResources().getString(R.string.str_rac01); // "Azubi"; // adac-level 1
             case 2:
-                return "Geselle";  // adac-level 2
+                return context.getResources().getString(R.string.str_rac02); // "Geselle";  // adac-level 2
             case 3:
-                return "Mechaniker";  // adac-level 3
+                return context.getResources().getString(R.string.str_rac03); // "Mechaniker";  // adac-level 3
             case 4:
-                return "Mechatroniker";  // adac-level 4
+                return context.getResources().getString(R.string.str_rac04); // "Mechatroniker";  // adac-level 4
             case 5:
-                return "Techniker";  // adac-level 5
+                return context.getResources().getString(R.string.str_rac05); // "Techniker";  // adac-level 5
             case 6:
-                return "Meister";  // adac-level 6
+                return context.getResources().getString(R.string.str_rac06); // "Meister";  // adac-level 6
             case 7:
-                return "Ingenieur";  // adac-level 7
+                return context.getResources().getString(R.string.str_rac07); // "Ingenieur";  // adac-level 7
             case 8:
-                return "(Co-)Leiter";  // adac-level 8
+                return context.getResources().getString(R.string.str_rac08); // "(Co-)Leiter";  // adac-level 8
             case 9:
-                return "Leiter";  // adac-level 9
+                return context.getResources().getString(R.string.str_rac09); // "Leiter";  // adac-level 9
             default:
-                return "Kein Rang";
+                return context.getResources().getString(R.string.str_rac00); // "Kein Rang";
         }
     }
 
     public static String getCopRankSymbolAsString(int coplevel) {
 
-        // TODO: fehlende Bilder ersetzen
         switch (coplevel) {
             case 0:
                 return "cop_00";  // cop-level 0
@@ -150,13 +153,11 @@ public class FractionMappingHelper {
 
     public static String getJustizRankSymbolAsString(int justizlevel) {
 
-        // TODO: fehlende Bilder ersetzen
         return "Kein Rang";
     }
 
     public static String getMedicRankSymbolAsString(int mediclevel) {
 
-        // TODO: fehlende Bilder ersetzen
         switch (mediclevel) {
             case 0:
                 return "medic_00";  // cop-level 0
@@ -185,7 +186,6 @@ public class FractionMappingHelper {
 
     public static String getRacRankSymbolAsString(int raclevel) {
 
-        // TODO: fehlende Bilder ersetzen
         switch (raclevel) {
             case 0:
                 return "rac_00";  // cop-level 0

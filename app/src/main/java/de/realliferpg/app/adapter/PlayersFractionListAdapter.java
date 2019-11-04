@@ -218,23 +218,23 @@ public class PlayersFractionListAdapter extends BaseExpandableListAdapter {
         switch (childFraction) {
             case COP:
                 if (this.fractionInfo.coplevel == 1) {// coplevel 1 bedeutet Justizler
-                    fraction_rankname = FractionMappingHelper.getCopRankAsString(0);
+                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.context, 0);
                 } else {
-                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.fractionInfo.coplevel);
+                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.context, this.fractionInfo.coplevel);
                 }
                 break;
             case JUSTIZ:
                 if (this.fractionInfo.coplevel == 1) {// coplevel 1 bedeutet Justizler
-                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.fractionInfo.coplevel);
+                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.context, this.fractionInfo.coplevel);
                 } else {
-                    fraction_rankname = FractionMappingHelper.getCopRankAsString(0);
+                    fraction_rankname = FractionMappingHelper.getCopRankAsString(this.context, 0);
                 }
                 break;
             case MEDIC:
-                fraction_rankname = FractionMappingHelper.getMedicRankAsString(this.fractionInfo.mediclevel);
+                fraction_rankname = FractionMappingHelper.getMedicRankAsString(this.context, this.fractionInfo.mediclevel);
                 break;
             case RAC:
-                fraction_rankname = FractionMappingHelper.getRacRankAsString(this.fractionInfo.raclevel);
+                fraction_rankname = FractionMappingHelper.getRacRankAsString(this.context, this.fractionInfo.raclevel);
                 break;
             case NONE:
                 fraction_rankname = "Kein Rang";
