@@ -64,6 +64,7 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
 
         if (serversOnline.length < 3 || serversOnline[2] == 0)
         {
+            // Server 3 wird nicht angezeigt
             viewHolder.tvMarketItemTextServer3.setVisibility(View.INVISIBLE);
             viewHolder.tvMarketItemPrice3.setVisibility(View.INVISIBLE);
             viewHolder.tvMarketItemTextServer3.setHeight(0);
