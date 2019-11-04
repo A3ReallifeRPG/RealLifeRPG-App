@@ -160,5 +160,6 @@
     <string name="wheat_u">Weizen</string>
     <string name="wood_r">Holz</string>
 
+    <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
 
 </resources>
