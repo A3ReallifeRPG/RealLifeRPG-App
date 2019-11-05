@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentInteractionInterface, RequestCallbackInterface {
 
     private Fragment currentFragment;
+    boolean doubleBackToExitPressedOnce = false;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -115,14 +118,34 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finish();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, R.string.str_back_again_to_exit, Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+
+
+
+        /*
         int count = getSupportFragmentManager().getBackStackEntryCount();
+
         DrawerLayout drawer = findViewById(R.id.layout_main);
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             // TODO beim Zurückgehen laden die Controls nicht, daher wird vorerst der "Zurück"-Button disabled
-            /*
+
             if (count == 0) {
                 super.onBackPressed();
             } else if (count == 1) {
@@ -130,8 +153,9 @@ public class MainActivity extends AppCompatActivity
             } else {
                 getSupportFragmentManager().popBackStack();
             }
-            */
+
         }
+        */
     }
 
     @Override

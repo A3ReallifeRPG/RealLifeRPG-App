@@ -164,7 +164,12 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
     private int[] GetServersOnline(ArrayList<Server> servers){
         int[] serverOnline = {};
         for (Server server : servers) {
-            serverOnline = addElement(serverOnline, server.online);
+            if (server.Servername.contains("Gungame")) {
+                // Gungame-Server ignorieren
+                serverOnline = addElement(serverOnline, 0);
+            } else {
+                serverOnline = addElement(serverOnline, server.online);
+            }
         }
         return serverOnline;
     }

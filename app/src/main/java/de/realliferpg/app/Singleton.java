@@ -178,8 +178,13 @@ public class Singleton {
             temp.name = item.localized;
             temp.priceServer1 = item.price;
             // Um nicht zwei foreach-Schleifen zu gehen, wird durch den Counter auf das entsprechende Element aus den Daten von Server 2 & 3 zugegriffen
-            temp.priceServer2 = dataServer2.market[counter].price;
-            temp.priceServer3 = dataServer3.market[counter].price;
+            // Wenn neue Items hinzugefügt werden, dann kann es sein, dass Server 2 die Änderungen hat, Server 3 aber nicht -> für den dann nicht weiter durch die Liste iterieren
+            if (dataServer2.market.length > counter) {
+                temp.priceServer2 = dataServer2.market[counter].price;
+            }
+            if (dataServer3.market.length > counter) {
+                temp.priceServer3 = dataServer3.market[counter].price;
+            }
             temp.updated_at = item.updated_at;
             counter++;
             marketItems.add(temp);
