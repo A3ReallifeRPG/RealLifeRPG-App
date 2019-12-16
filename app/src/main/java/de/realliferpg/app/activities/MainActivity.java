@@ -210,6 +210,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(browserIntent);
                 break;
             }
+            case R.id.nav_polDashboard:{
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.polizei-nordholm.de/"));
+                startActivity(browserIntent);
+                break;
+            }
         }
         return true;
     }
@@ -268,6 +273,11 @@ public class MainActivity extends AppCompatActivity
                 Picasso.get().load(playerInfo.avatar_full).into(ivProfilePic);
                 tvHead.setText(R.string.str_logged_in);
                 tvInfo.setText(playerInfo.name);
+
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                if (playerInfo != null && Integer.parseInt(playerInfo.coplevel) > 1){
+                    navigationView.getMenu().findItem(R.id.nav_polDashboard).setVisible(true);
+                }
                 break;
         }
 

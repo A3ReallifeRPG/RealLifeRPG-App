@@ -24,6 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -46,6 +47,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,7 +57,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_buildings" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="D:\Daten\Spieldaten\ReallifeRPG\POL\pol_logo_test1.png" />
+                                      <entry key="outputName" value="ic_pol_logo" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -154,7 +158,6 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_location_city_black_24dp.xml" />
                                       <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_whatshot_black_24dp.xml" />
                                     </map>
                                   </option>
@@ -165,9 +168,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_location_city_black_24dp" />
-                            <entry key="outputName" value="ic_whatshot_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\vabene1111" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_pollogo_simple" />
+                            <entry key="sourceFile" value="D:\Daten\Downloads\pollogo_simple.svg" />
                           </map>
                         </option>
                       </PersistentState>

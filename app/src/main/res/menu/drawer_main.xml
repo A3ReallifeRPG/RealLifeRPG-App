@@ -38,6 +38,12 @@
             android:icon="@drawable/ic_location_city"
             android:title="@string/str_cbs" />
 
+        <item
+            android:id="@+id/nav_polDashboard"
+            android:icon="@drawable/ic_pol_logo"
+            android:title="@string/str_polDashboard"
+            android:visible="false" />
+
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/nav_group_share">
