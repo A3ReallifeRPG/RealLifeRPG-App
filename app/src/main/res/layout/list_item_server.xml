@@ -38,7 +38,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pb_list_server" />
+                app:layout_constraintTop_toBottomOf="@+id/pb_list_server"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/tv_list_server_head"
@@ -50,7 +51,8 @@
                 android:textColor="@color/primaryTextColor"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="4dp" />
 
             <ProgressBar
                 android:id="@+id/pb_list_server"
@@ -66,5 +68,4 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_list_server_head" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
-
 </android.support.constraint.ConstraintLayout>

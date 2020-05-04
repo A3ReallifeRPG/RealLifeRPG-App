@@ -7,23 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
-import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.PlayersFractionListAdapter;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.objects.FractionInfo;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PlayerStatsFragment extends Fragment {
 
     private View view;
     private FragmentInteractionInterface mListener;
-    private FractionInfo fractionInfo;
 
     public PlayerStatsFragment() {
         // Required empty public constructor
@@ -81,21 +81,14 @@ public class PlayerStatsFragment extends Fragment {
         tvLastSeen.setText(formatHelper.toDateTime(formatHelper.getApiDate(playerInfo.last_seen.date)));
         tvSkillpoint.setText(String.valueOf(playerInfo.skillpoint));
 
-        final ExpandableListView listViewFractions = view.findViewById(R.id.lv_fractionen);
-        this.fractionInfo = new FractionInfo(Integer.parseInt(playerInfo.coplevel), Integer.parseInt(playerInfo.mediclevel), Integer.parseInt(playerInfo.adaclevel));
-        PlayersFractionListAdapter listAdapter = new PlayersFractionListAdapter(this.getContext(), this.fractionInfo);
+        final ListView listViewFractions = view.findViewById(R.id.lv_fractionen);
+        ArrayList<Integer> fractionLevels = new ArrayList<>();
+        fractionLevels.add(Integer.parseInt(playerInfo.coplevel));
+        fractionLevels.add(Integer.parseInt(playerInfo.coplevel)); // justiz
+        fractionLevels.add(Integer.parseInt(playerInfo.mediclevel));
+        fractionLevels.add(Integer.parseInt(playerInfo.adaclevel));
+        PlayersFractionListAdapter listAdapter = new PlayersFractionListAdapter(this.getContext(), fractionLevels);
         listViewFractions.setAdapter(listAdapter);
-
-        listViewFractions.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousItem = -1;
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                if (groupPosition != previousItem)
-                    listViewFractions.collapseGroup(previousItem);
-                previousItem = groupPosition;
-            }
-        });
     }
 
     @Override

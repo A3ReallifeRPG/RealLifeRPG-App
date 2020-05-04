@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/secondaryColor">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_main_market"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
     <ImageView
         android:id="@+id/iv_p_stats_bank"
         android:layout_width="48dp"
@@ -154,11 +161,15 @@
         app:layout_constraintTop_toTopOf="@+id/lbl_p_stats_last_seen" />
 
 
-        <ExpandableListView
+        <ListView
             android:id="@+id/lv_fractionen"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_market"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lbl_p_stats_last_seen" />
 
 </android.support.constraint.ConstraintLayout>
