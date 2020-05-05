@@ -7,6 +7,7 @@
         android:icon="@drawable/ic_chart"
         android:title="@string/str_stats"
         app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/bnv_player_donation"
         android:enabled="true"
@@ -18,5 +19,12 @@
         android:enabled="true"
         android:icon="@drawable/ic_buildings"
         android:title="@string/str_buildings"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bnv_player_vehicles"
+        android:enabled="true"
+        android:icon="@drawable/ic_vehicle"
+        android:title="@string/str_vehicles"
         app:showAsAction="ifRoom" />
 </menu>

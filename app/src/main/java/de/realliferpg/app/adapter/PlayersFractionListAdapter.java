@@ -72,7 +72,7 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
 
         viewHolder.tv_fraction_name.setText(getTextFromEnum(fractionEnum));
         viewHolder.tv_fraction_rank.setText(getRankName(fractionEnum, level));
-        viewHolder.iv_fraction_symbol.setImageResource(getImageResourceFromEnum(fractionEnum));
+        viewHolder.iv_fraction_symbol.setImageResource(FractionMappingHelper.getImageResourceFromEnum(this.context, fractionEnum));
         viewHolder.iv_fraction_ranksymbol.setImageResource(getRankSymbol(fractionEnum, level));
 
         convertView.setTag(viewHolder);
@@ -103,36 +103,6 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
         }
 
         return fraction_name;
-    }
-
-    private int getImageResourceFromEnum(FractionEnum fraction) {
-
-        Resources resources = context.getResources();
-        String tempfractionSymbol = "";
-        int fraction_symbol = 0;
-
-        switch (fraction) {
-            case COP:
-                tempfractionSymbol = "fraction_cop";
-                break;
-            case JUSTIZ:
-                tempfractionSymbol = "fraction_justiz";
-                break;
-            case MEDIC:
-                tempfractionSymbol = "fraction_medic";
-                break;
-            case RAC:
-                tempfractionSymbol = "fraction_rac";
-                break;
-            case NONE:
-                // sollte hier nie reinlaufen, aber man weiß ja nie...
-                tempfractionSymbol = "backwasch";
-                break;
-        }
-
-        fraction_symbol = resources.getIdentifier(tempfractionSymbol, "drawable", context.getPackageName());
-
-        return fraction_symbol;
     }
 
     private String getRankName(FractionEnum fractionEnum, int level) {

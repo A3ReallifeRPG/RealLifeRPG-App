@@ -59,6 +59,8 @@ public class PlayerInfo {
     public House[] houses;
     // Bauwerke
     public Building[] buildings;
+    // Fahrzeuge je nach Typ
+    public VehicleGroup[] vehiclesByType;
 
     public long requested_at;
 

@@ -44,6 +44,7 @@ import de.realliferpg.app.fragments.PlayerBuildingsFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
 import de.realliferpg.app.fragments.PlayerStatsFragment;
+import de.realliferpg.app.fragments.PlayerVehiclesFragment;
 import de.realliferpg.app.fragments.PlayersListFragment;
 import de.realliferpg.app.fragments.RechnerGunsFragment;
 import de.realliferpg.app.fragments.RechnerSellFragment;
@@ -293,6 +294,10 @@ public class MainActivity extends AppCompatActivity
                 }
                 case "fragment_player_change_to_buildings": {
                     changePlayerFragment(new PlayerBuildingsFragment());
+                    break;
+                }
+                case "fragment_player_change_to_vehicles": {
+                    changePlayerFragment(new PlayerVehiclesFragment());
                     break;
                 }
             }

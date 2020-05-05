@@ -60,6 +60,8 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
             showPlayerInfo();
         }
 
+        apiHelper.getPlayerVehicles();
+
         BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -75,6 +77,9 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                     case R.id.bnv_player_buildings:
                         mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_buildings"));
                         break;
+                    case R.id.bnv_player_vehicles:
+                        mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_vehicles"));
+                        break;
                 }
                 return true;
             }
@@ -86,6 +91,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
             @Override
             public void onRefresh() {
                 apiHelper.getPlayerStats();
+                apiHelper.getPlayerVehicles();
             }
         });
 

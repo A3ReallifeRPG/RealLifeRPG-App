@@ -42,7 +42,7 @@ public class PlayerBuildingsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_player_buildings, container, false);
 
         if(Singleton.getInstance().getPlayerInfo() == null){
-            Singleton.getInstance().setErrorMsg("PlayerDonationFragment Error Code #1");
+            Singleton.getInstance().setErrorMsg("PlayerBuildingsFragment Error Code #1");
             mListener.onFragmentInteraction(PlayerBuildingsFragment.class, Uri.parse("open_error"));
         }else {
             showPlayerInfo();

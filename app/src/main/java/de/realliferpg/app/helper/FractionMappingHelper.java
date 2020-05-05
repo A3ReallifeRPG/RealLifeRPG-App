@@ -1,10 +1,66 @@
 package de.realliferpg.app.helper;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.interfaces.FractionEnum;
 
 public class FractionMappingHelper {
+
+    public static int getImageResourceFromEnum(Context context, FractionEnum fraction) {
+
+        Resources resources = context.getResources();
+        String tempfractionSymbol = "";
+        int fraction_symbol = 0;
+
+        switch (fraction) {
+            case COP:
+                tempfractionSymbol = "fraction_cop";
+                break;
+            case JUSTIZ:
+                tempfractionSymbol = "fraction_justiz";
+                break;
+            case MEDIC:
+                tempfractionSymbol = "fraction_medic";
+                break;
+            case RAC:
+                tempfractionSymbol = "fraction_rac";
+                break;
+            case NONE:
+                // sollte hier nie reinlaufen, aber man weiß ja nie...
+                tempfractionSymbol = "";
+                break;
+        }
+
+        if (tempfractionSymbol == "")
+            return -1;
+
+        fraction_symbol = resources.getIdentifier(tempfractionSymbol, "drawable", context.getPackageName());
+
+        return fraction_symbol;
+    }
+
+    public static FractionEnum getFractionFromSide(String fractionEnum, int coplevel){
+        switch (fractionEnum) {
+            case "GUER": // Medic
+                return FractionEnum.MEDIC;
+            case "WEST": // Pol & Justiz
+                if (coplevel == 0) // war mal bei Justiz/Pol
+                    return FractionEnum.NONE;
+                if (coplevel == 1)
+                {
+                    return FractionEnum.JUSTIZ;
+                } else {
+                    return FractionEnum.COP;
+                }
+            case "EAST":
+                return FractionEnum.RAC;
+            case "CIV":
+                return FractionEnum.NONE;
+        }
+        return FractionEnum.NONE;
+    }
 
     public static String getCopRankAsString(Context context, int coplevel) {
 

@@ -12,6 +12,7 @@ import de.realliferpg.app.Constants;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.interfaces.VehicleEnum;
 import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.MarketServerObject;
@@ -20,6 +21,9 @@ import de.realliferpg.app.objects.Server;
 import de.realliferpg.app.objects.Shop;
 import de.realliferpg.app.objects.ShopItem;
 import de.realliferpg.app.objects.ShopVehicle;
+import de.realliferpg.app.objects.Vehicle;
+import de.realliferpg.app.objects.VehicleGroup;
+import de.realliferpg.app.objects.VehiclesInfo;
 
 public class ApiHelper {
 
@@ -41,6 +45,13 @@ public class ApiHelper {
                 playerInfo.requested_at = playerWrapper.requested_at;
                 Singleton.getInstance().setPlayerInfo(playerInfo);
                 return true;
+            case PLAYER_VEHICLES:
+                VehiclesInfo.Wrapper vehiclesInfoWrapper = gson.fromJson(response.toString(), VehiclesInfo.Wrapper.class);
+                Vehicle[] vehicles = vehiclesInfoWrapper.data;
+                PlayerInfo playerInfoSecond = Singleton.getInstance().getPlayerInfo();
+                playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
+                Singleton.getInstance().setPlayerInfo(playerInfoSecond);
+                break;
             case SERVER:
                 Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
                 final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(serverWrapper.data));
@@ -85,6 +96,34 @@ public class ApiHelper {
         }
 
         return false;
+    }
+
+    private VehicleGroup[] SortVehiclesByType(Vehicle[] vehicles) {
+        VehicleGroup vehicleGroupCar = new VehicleGroup();
+        vehicleGroupCar.type = VehicleEnum.CAR;
+        vehicleGroupCar.vehicles = new ArrayList<Vehicle>();
+        VehicleGroup vehicleGroupShip = new VehicleGroup();
+        vehicleGroupShip.type = VehicleEnum.SHIP;
+        vehicleGroupShip.vehicles = new ArrayList<Vehicle>();
+        VehicleGroup vehicleGroupPlane = new VehicleGroup();
+        vehicleGroupPlane.type = VehicleEnum.AIR;
+        vehicleGroupPlane.vehicles = new ArrayList<Vehicle>();
+
+        for (Vehicle veh : vehicles) {
+            switch (veh.type.toLowerCase()){
+                case "car":
+                    vehicleGroupCar.vehicles.add(veh);
+                    break;
+                case "air":
+                    vehicleGroupPlane.vehicles.add(veh);
+                    break;
+                case "ship":
+                    vehicleGroupShip.vehicles.add(veh);
+                    break;
+            }
+        }
+
+        return new VehicleGroup[]{vehicleGroupCar, vehicleGroupPlane, vehicleGroupShip};
     }
 
     private boolean checkCache(Class<?> type){
@@ -149,5 +188,11 @@ public class ApiHelper {
     public void getCBSData(){
         NetworkHelper networkHelper = new NetworkHelper();
         networkHelper.doJSONRequest(Constants.URL_CBS, callbackInterface, RequestTypeEnum.CBS);
+    }
+
+    public void getPlayerVehicles() {
+        NetworkHelper networkHelper = new NetworkHelper();
+        String secret = preferenceHelper.getPlayerAPIToken();
+        networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret + "/vehicles",callbackInterface,RequestTypeEnum.PLAYER_VEHICLES);
     }
 }
