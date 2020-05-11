@@ -168,7 +168,10 @@ public class Singleton {
 
         MarketServerObject dataServer1 =  this.marketServerObjects.get(0);
         MarketServerObject dataServer2 =  this.marketServerObjects.get(1);
-        MarketServerObject dataServer3 =  this.marketServerObjects.get(2);
+        MarketServerObject dataServer3 = null;
+        if (this.marketServerObjects.size() > 2)
+            dataServer3 =  this.marketServerObjects.get(2);
+
         int counter = 0;
 
         for (MarketServerObject.Item item : dataServer1.market) {
@@ -182,7 +185,7 @@ public class Singleton {
             if (dataServer2.market.length > counter) {
                 temp.priceServer2 = dataServer2.market[counter].price;
             }
-            if (dataServer3.market.length > counter) {
+            if (dataServer3 != null && dataServer3.market.length > counter) {
                 temp.priceServer3 = dataServer3.market[counter].price;
             }
             temp.updated_at = item.updated_at;
