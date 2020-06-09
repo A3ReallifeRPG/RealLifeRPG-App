@@ -42,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/iv_fraction"
-                android:layout_width="32px"
-                android:layout_height="32px"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_margin="4dp"
                 app:layout_constraintRight_toRightOf="parent"
