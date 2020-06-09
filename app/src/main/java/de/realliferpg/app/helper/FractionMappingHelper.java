@@ -67,7 +67,7 @@ public class FractionMappingHelper {
         // TODO: ersetzen mit localized Strings
         switch (coplevel) {
             case 0:
-                return context.getResources().getString(R.string.str_cop00); // "Kein Rang"  // cop-level 0
+                return context.getResources().getString(R.string.str_noRank); // "Kein Rang"  // cop-level 0
             case 1:
                 return context.getResources().getString(R.string.str_justiz); // "Justizbeamter"; // cop-level 1
             case 2:
@@ -101,37 +101,42 @@ public class FractionMappingHelper {
             case 16:
                 return context.getResources().getString(R.string.str_cop15); // "Polizeipräsident";  // cop-level 16
             default:
-                return context.getResources().getString(R.string.str_cop00); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
         }
 
     }
 
     public static String getMedicRankAsString(Context context, int mediclevel) {
 
-        // TODO: ersetzen mit localized Strings
         switch (mediclevel) {
             case 0:
-                return context.getResources().getString(R.string.str_med00); // "Kein Rang";  // medic-level 0
+                return context.getResources().getString(R.string.str_noRank);
             case 1:
-                return context.getResources().getString(R.string.str_med01); // "Ersthelfer"; // medic-level 1
+                return context.getResources().getString(R.string.str_med01);
             case 2:
-                return context.getResources().getString(R.string.str_med02); // "Rettungshelfer";  // medic-level 2
+                return context.getResources().getString(R.string.str_med02);
             case 3:
-                return context.getResources().getString(R.string.str_med03); // "Rettungssanitäter";  // medic-level 3
+                return context.getResources().getString(R.string.str_med03);
             case 4:
-                return context.getResources().getString(R.string.str_med04); // "Notfallhelfer";  // medic-level 4
+                return context.getResources().getString(R.string.str_med04);
             case 5:
-                return context.getResources().getString(R.string.str_med05); // "Notfallsanitäter";  // medic-level 5
+                return context.getResources().getString(R.string.str_med05);
             case 6:
-                return context.getResources().getString(R.string.str_med06); // "Notarzt";  // medic-level 6
+                return context.getResources().getString(R.string.str_med06);
             case 7:
-                return context.getResources().getString(R.string.str_med07); // "Ausbilder";  // medic-level 7
+                return context.getResources().getString(R.string.str_med07);
             case 8:
-                return context.getResources().getString(R.string.str_med08); // "(Co-)Leiter";  // medic-level 8
+                return context.getResources().getString(R.string.str_med08);
             case 9:
-                return context.getResources().getString(R.string.str_med09); // "Leiter";  // medic-level 9; gibts wohl nicht (gleiche Rechte wie der Co-Leiter)
+                return context.getResources().getString(R.string.str_med09);
+            case 10:
+                return context.getResources().getString(R.string.str_med10);
+            case 11:
+                return context.getResources().getString(R.string.str_med11);
+            case 12:
+                return context.getResources().getString(R.string.str_med12);
             default:
-                return context.getResources().getString(R.string.str_med00); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
         }
     }
 
@@ -140,7 +145,7 @@ public class FractionMappingHelper {
         // TODO: ersetzen mit localized Strings
         switch (raclevel) {
             case 0:
-                return context.getResources().getString(R.string.str_rac00); // "Kein Rang";  // adac-level 0
+                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";  // adac-level 0
             case 1:
                 return context.getResources().getString(R.string.str_rac01); // "Azubi"; // adac-level 1
             case 2:
@@ -160,7 +165,7 @@ public class FractionMappingHelper {
             case 9:
                 return context.getResources().getString(R.string.str_rac09); // "Leiter";  // adac-level 9
             default:
-                return context.getResources().getString(R.string.str_rac00); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
         }
     }
 
@@ -216,25 +221,31 @@ public class FractionMappingHelper {
 
         switch (mediclevel) {
             case 0:
-                return "medic_00";  // cop-level 0
+                return "medic_00";
             case 1:
-                return "medic_01"; // cop-level 1
+                return "medic_01";
             case 2:
-                return "medic_02";  // cop-level 2
+                return "medic_02";
             case 3:
-                return "medic_03";  // cop-level 3
+                return "medic_03";
             case 4:
-                return "medic_04";  // cop-level 4
+                return "medic_04";
             case 5:
-                return "medic_05";  // cop-level 5
+                return "medic_05";
             case 6:
-                return "medic_06";  // cop-level 6
+                return "medic_06";
             case 7:
-                return "medic_07";  // cop-level 7
+                return "medic_07";
             case 8:
-                return "medic_08";  // cop-level 8
+                return "medic_08";
             case 9:
-                return "medic_09";  // cop-level 9
+                return "medic_09";
+            case 10:
+                return "medic_10";
+            case 11:
+                return "medic_11";
+            case 12:
+                return "medic_12";
             default:
                 return "Kein Rang";
         }
