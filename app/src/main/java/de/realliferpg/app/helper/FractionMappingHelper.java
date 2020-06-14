@@ -29,7 +29,7 @@ public class FractionMappingHelper {
                 break;
             case NONE:
                 // sollte hier nie reinlaufen, aber man weiß ja nie...
-                tempfractionSymbol = "";
+                tempfractionSymbol = "realliferpg_logo";
                 break;
         }
 
