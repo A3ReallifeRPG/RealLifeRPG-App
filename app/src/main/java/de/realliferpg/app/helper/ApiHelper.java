@@ -110,6 +110,9 @@ public class ApiHelper {
         vehicleGroupPlane.vehicles = new ArrayList<Vehicle>();
 
         for (Vehicle veh : vehicles) {
+            if (veh.vehicle_data.name.toLowerCase().contains("quest"))
+                continue;
+
             switch (veh.type.toLowerCase()){
                 case "car":
                     vehicleGroupCar.vehicles.add(veh);

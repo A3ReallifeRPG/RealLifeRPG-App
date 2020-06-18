@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/iv_fraction"
-                android:layout_width="32px"
-                android:layout_height="32px"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_margin="4dp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -50,15 +51,15 @@
 
             <ImageView
                 android:id="@+id/iv_fractionlist_ranksymbol"
-                android:layout_width="24px"
-                android:layout_height="24px"
+                android:layout_width="25dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_fractionlist_fraction"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_fractionlist_fraction" />
 
             <TextView
                 android:id="@+id/tv_fractionlist_rank"
