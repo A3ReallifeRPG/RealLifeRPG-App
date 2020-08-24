@@ -4,16 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.adapter.VehiclesListAdapter;
+import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
@@ -53,7 +57,32 @@ public class PlayerVehiclesFragment extends Fragment {
     }
 
     public void showPlayerInfo(){
-        ExpandableListView expandableListView = view.findViewById(R.id.elv_vehicles);
+        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.srl_player_vehicle);
+        final ExpandableListView expandableListView = view.findViewById(R.id.elv_vehicles);
+        final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
+
+        swipeRefreshLayout.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                apiHelper.getPlayerStats();
+                apiHelper.getPlayerVehicles();
+            }
+        });
+        swipeRefreshLayout.setEnabled(false);
+
+        expandableListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRowVerticalPosition = (expandableListView == null || expandableListView.getChildCount() == 0) ? 0 : expandableListView.getChildAt(0).getTop();
+                swipeRefreshLayout.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
+            }
+        });
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 

@@ -29,6 +29,7 @@ import de.realliferpg.app.objects.PlayerInfo;
 public class PlayerFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
+    private View viewPlayerVehicles;
     private FragmentInteractionInterface mListener;
 
     public PlayerFragment() {
@@ -52,6 +53,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
+        viewPlayerVehicles = inflater.inflate(R.layout.fragment_player_vehicles, container, false);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         if (Singleton.getInstance().getPlayerInfo() == null) {
@@ -84,17 +86,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                 return true;
             }
         });
-
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
-        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
-        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                apiHelper.getPlayerStats();
-                apiHelper.getPlayerVehicles();
-            }
-        });
-
+        
         return view;
     }
 
@@ -141,7 +133,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
             case PLAYER:
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("update_login_state"));
 
-                SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
+                SwipeRefreshLayout sc = viewPlayerVehicles.findViewById(R.id.srl_player_vehicle);
                 sc.setRefreshing(false);
 
                 showPlayerInfo();
