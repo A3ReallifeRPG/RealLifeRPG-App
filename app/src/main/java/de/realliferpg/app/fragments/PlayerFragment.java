@@ -31,6 +31,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
     private View view;
     private View viewPlayerVehicles;
     private FragmentInteractionInterface mListener;
+    private int lastAction;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -83,6 +84,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                         mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_vehicles"));
                         break;
                 }
+                lastAction = item.getItemId();
                 return true;
             }
         });
@@ -93,10 +95,28 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
     public void showPlayerInfo() {
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
-        mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_stats"));
+        switch (lastAction) {
+            default:
+            case R.id.bnv_player_stats:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_stats"));
+                lastAction = R.id.bnv_player_stats;
+                break;
+            case R.id.bnv_player_donation:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_donation"));
+                lastAction = R.id.bnv_player_donation;
+                break;
+            case R.id.bnv_player_buildings:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_buildings"));
+                lastAction = R.id.bnv_player_buildings;
+                break;
+            case R.id.bnv_player_vehicles:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_vehicles"));
+                lastAction = R.id.bnv_player_vehicles;
+                break;
+        }
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
-        bnv.setSelectedItemId(R.id.bnv_player_stats);
+        bnv.setSelectedItemId(lastAction);
 
         ImageView ivProfilePic = view.findViewById(R.id.iv_player_profile);
 
