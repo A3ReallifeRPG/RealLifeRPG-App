@@ -139,6 +139,10 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             vehicleName += " - zerstört";
         }
+        else if (vehicle.alive == 1 && vehicle.impound == 0 && vehicle.disabled == 0)
+        {
+            viewHolderChild.tvVehicleName.setPaintFlags(0);
+        }
 
         viewHolderChild.tvVehicleName.setText(vehicleName);
 

@@ -151,7 +151,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
         switch (type){
             case PLAYER:
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("update_login_state"));
-                
+
                 showPlayerInfo();
                 break;
             case NETWORK_ERROR:
