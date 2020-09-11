@@ -59,11 +59,10 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         if (Singleton.getInstance().getPlayerInfo() == null) {
             apiHelper.getPlayerStats();
+            apiHelper.getPlayerVehicles();
         } else {
             showPlayerInfo();
         }
-
-        apiHelper.getPlayerVehicles();
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -152,10 +151,7 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
         switch (type){
             case PLAYER:
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("update_login_state"));
-
-                SwipeRefreshLayout sc = viewPlayerVehicles.findViewById(R.id.srl_player_vehicle);
-                sc.setRefreshing(false);
-
+                
                 showPlayerInfo();
                 break;
             case NETWORK_ERROR:

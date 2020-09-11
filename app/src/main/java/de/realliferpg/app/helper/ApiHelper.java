@@ -1,5 +1,7 @@
 package de.realliferpg.app.helper;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -51,7 +53,7 @@ public class ApiHelper {
                 PlayerInfo playerInfoSecond = Singleton.getInstance().getPlayerInfo();
                 playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
                 Singleton.getInstance().setPlayerInfo(playerInfoSecond);
-                break;
+                return true;
             case SERVER:
                 Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
                 final ArrayList<Server> servers = new ArrayList<>(Arrays.asList(serverWrapper.data));
