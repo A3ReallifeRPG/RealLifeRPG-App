@@ -5,5 +5,8 @@ public class Vehicle {
     public String side;
     public String type;
     public String plate;
+    public int alive;
+    public int impound;
+    public int disabled;
     public VehicleData vehicle_data;
 }

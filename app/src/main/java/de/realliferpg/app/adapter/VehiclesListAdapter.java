@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.VehicleEnum;
+import de.realliferpg.app.objects.Vehicle;
 import de.realliferpg.app.objects.VehicleGroup;
 
 public class VehiclesListAdapter extends BaseExpandableListAdapter {
@@ -114,11 +116,35 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
 
         viewHolderChild.position = childPosition;
 
-        int imageFraction = FractionMappingHelper.getImageResourceFromEnum(this.context, (FractionMappingHelper.getFractionFromSide(this.vehiclesByType[groupPosition].vehicles.get(childPosition).side, copLevel)));
+        Vehicle vehicle = this.vehiclesByType[groupPosition].vehicles.get(childPosition);
+
+        int imageFraction = FractionMappingHelper.getImageResourceFromEnum(this.context, (FractionMappingHelper.getFractionFromSide(vehicle.side, copLevel)));
 
         if (imageFraction != -1)
             viewHolderChild.ivVehiclesFraction.setImageResource(imageFraction);
-        viewHolderChild.tvVehicleName.setText(this.vehiclesByType[groupPosition].vehicles.get(childPosition).vehicle_data.name);
+
+        String vehicleName = vehicle.vehicle_data.name;
+
+        if (vehicle.alive == 0) // verkauft == 0
+        {
+            viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            vehicleName += " - verkauft";
+        }
+        else if (vehicle.impound == 1) // beschlagnahmt == 1
+        {
+            viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            vehicleName += " - beschlagnahmt";
+        } else if (vehicle.disabled == 1) // zerstört == 1
+        {
+            viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            vehicleName += " - zerstört";
+        }
+        else if (vehicle.alive == 1 && vehicle.impound == 0 && vehicle.disabled == 0)
+        {
+            viewHolderChild.tvVehicleName.setPaintFlags(0);
+        }
+
+        viewHolderChild.tvVehicleName.setText(vehicleName);
 
         convertView.setTag(viewHolderChild);
 

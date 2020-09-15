@@ -7,109 +7,93 @@
     android:background="@color/secondaryColor"
     tools:context=".fragments.PlayerFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/srl_info"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/iv_player_profile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/str_profilePicture"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintBottom_toTopOf="@+id/gl_player_horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/gl_player_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_player_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_player_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
 
+        <TextView
+            android:id="@+id/tv_player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/str_placeholder"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
+            app:layout_constraintTop_toTopOf="@+id/iv_player_profile" />
 
-            <ImageView
-                android:id="@+id/iv_player_profile"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:contentDescription="@string/str_profilePicture"
-                android:src="@mipmap/ic_launcher_round"
-                app:layout_constraintBottom_toTopOf="@+id/gl_player_horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/gl_player_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/tv_player_pid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/str_placeholder"
+            android:textColor="@color/primaryColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_player_profile"
+            app:layout_constraintStart_toEndOf="@+id/lbl_player_pid"
+            app:layout_constraintTop_toBottomOf="@+id/tv_player_name" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/gl_player_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.15" />
+        <TextView
+            android:id="@+id/lbl_player_pid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/str_pid"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_player_profile"
+            app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/tv_player_name" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/gl_player_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bnv_player"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bnv_player" />
 
-            <TextView
-                android:id="@+id/tv_player_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/str_placeholder"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
-                app:layout_constraintTop_toTopOf="@+id/iv_player_profile" />
+        <include
+            android:id="@+id/include_player_content"
+            layout="@layout/content_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_player"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_player_horizontal" />
 
-            <TextView
-                android:id="@+id/tv_player_pid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/str_placeholder"
-                android:textColor="@color/primaryColor"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_player_profile"
-                app:layout_constraintStart_toEndOf="@+id/lbl_player_pid"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name" />
-
-            <TextView
-                android:id="@+id/lbl_player_pid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/str_pid"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_player_profile"
-                app:layout_constraintStart_toStartOf="@+id/gl_player_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name" />
-
-            <android.support.design.widget.BottomNavigationView
-                android:id="@+id/bnv_player"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/bnv_player" />
-
-            <include
-                android:id="@+id/include_player_content"
-                layout="@layout/content_main"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/bnv_player"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/gl_player_horizontal" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

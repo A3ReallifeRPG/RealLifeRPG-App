@@ -58,6 +58,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getServers();
         apiHelper.getPlayerStats();
+        apiHelper.getPlayerVehicles();
 
         final TextView tvPiName = view.findViewById(R.id.tv_main_playerInfo_name);
         final TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
@@ -78,6 +79,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
             public void onRefresh() {
                 apiHelper.getServers();
                 apiHelper.getPlayerStats();
+                apiHelper.getPlayerVehicles();
 
                 pbPlayer.setVisibility(View.VISIBLE);
                 pbServer.setVisibility(View.VISIBLE);

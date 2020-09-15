@@ -29,7 +29,9 @@ import de.realliferpg.app.objects.PlayerInfo;
 public class PlayerFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
+    private View viewPlayerVehicles;
     private FragmentInteractionInterface mListener;
+    private int lastAction;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -52,15 +54,15 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
+        viewPlayerVehicles = inflater.inflate(R.layout.fragment_player_vehicles, container, false);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         if (Singleton.getInstance().getPlayerInfo() == null) {
             apiHelper.getPlayerStats();
+            apiHelper.getPlayerVehicles();
         } else {
             showPlayerInfo();
         }
-
-        apiHelper.getPlayerVehicles();
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,30 +83,39 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                         mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_vehicles"));
                         break;
                 }
+                lastAction = item.getItemId();
                 return true;
             }
         });
-
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
-        sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
-        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                apiHelper.getPlayerStats();
-                apiHelper.getPlayerVehicles();
-            }
-        });
-
+        
         return view;
     }
 
     public void showPlayerInfo() {
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
-        mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_stats"));
+        switch (lastAction) {
+            default:
+            case R.id.bnv_player_stats:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_stats"));
+                lastAction = R.id.bnv_player_stats;
+                break;
+            case R.id.bnv_player_donation:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_donation"));
+                lastAction = R.id.bnv_player_donation;
+                break;
+            case R.id.bnv_player_buildings:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_buildings"));
+                lastAction = R.id.bnv_player_buildings;
+                break;
+            case R.id.bnv_player_vehicles:
+                mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("fragment_player_change_to_vehicles"));
+                lastAction = R.id.bnv_player_vehicles;
+                break;
+        }
 
         BottomNavigationView bnv = view.findViewById(R.id.bnv_player);
-        bnv.setSelectedItemId(R.id.bnv_player_stats);
+        bnv.setSelectedItemId(lastAction);
 
         ImageView ivProfilePic = view.findViewById(R.id.iv_player_profile);
 
@@ -140,9 +151,6 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
         switch (type){
             case PLAYER:
                 mListener.onFragmentInteraction(PlayerFragment.class, Uri.parse("update_login_state"));
-
-                SwipeRefreshLayout sc = view.findViewById(R.id.srl_info);
-                sc.setRefreshing(false);
 
                 showPlayerInfo();
                 break;

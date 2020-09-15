@@ -52,7 +52,6 @@ public class PlayerBuildingsFragment extends Fragment {
     }
 
     public void showPlayerInfo(){
-        // TODO: Gebäude anzeigen
         ExpandableListView expandableListView = view.findViewById(R.id.elv_buildings);
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();

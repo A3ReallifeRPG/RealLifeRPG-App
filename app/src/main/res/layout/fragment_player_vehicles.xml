@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/secondaryColor">
 
-    <ExpandableListView
-        android:id="@+id/elv_vehicles"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <ExpandableListView
+            android:id="@+id/elv_vehicles"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
