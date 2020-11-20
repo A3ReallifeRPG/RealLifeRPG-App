@@ -28,7 +28,12 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return this.vehiclesByType.length;
+        int length = 0;
+
+        if (this.vehiclesByType != null)
+            length = this.vehiclesByType.length;
+
+        return length;
     }
 
     @Override

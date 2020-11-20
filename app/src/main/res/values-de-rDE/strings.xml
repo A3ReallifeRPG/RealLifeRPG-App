@@ -168,5 +168,6 @@
     <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
+    <string name="str_noData">Solltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
 
 </resources>
