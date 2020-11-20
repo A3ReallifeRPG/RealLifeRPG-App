@@ -70,9 +70,7 @@ public class PlayerVehiclesFragment extends Fragment {
             final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
             apiHelper.getPlayerVehicles();
         }
-
-        playerInfo.vehiclesByType = null;
-
+        
         VehiclesListAdapter vehiclesListAdapter = new VehiclesListAdapter(this.getContext(), playerInfo.vehiclesByType, Integer.parseInt(Singleton.getInstance().getPlayerInfo().coplevel));
         expandableListView.setAdapter(vehiclesListAdapter);
 
