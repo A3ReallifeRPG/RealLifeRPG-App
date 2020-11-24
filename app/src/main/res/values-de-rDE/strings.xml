@@ -169,5 +169,8 @@
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
     <string name="str_noData">Solltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
+    <string name="str_days_maintenance">Erinnerung an Wartung</string>
+    <string name="str_new_value">Neuer Wert:</string>
+    <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! sie muss zwischen 0 and 20 liegen!</string>
 
 </resources>

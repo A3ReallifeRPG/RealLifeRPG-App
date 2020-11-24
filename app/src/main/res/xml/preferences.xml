@@ -3,7 +3,6 @@
 
     <PreferenceCategory android:title="@string/str_apiSettings">
 
-
         <EditTextPreference
             android:id="@+id/pref_api_token"
             android:icon="@drawable/ic_lock_open"
@@ -21,7 +20,12 @@
             android:icon="@drawable/ic_info_filled"
             android:key="scan_code_help"
             android:title="@string/str_helpScan" />
-
+        <EditTextPreference
+            android:id="@+id/pref_days_maintenance"
+            android:icon="@drawable/ic_location_city"
+            android:key="days_maintenance"
+            android:title="@string/str_days_maintenance"
+            android:defaultValue=""/>
     </PreferenceCategory>
 
 </PreferenceScreen>

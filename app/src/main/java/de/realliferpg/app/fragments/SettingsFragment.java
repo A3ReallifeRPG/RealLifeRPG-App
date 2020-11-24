@@ -12,6 +12,7 @@ import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -26,6 +27,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface, SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String KEY_PREF_CRASHLYTICS = "pref_crashlytics";
+    public static final Integer MAX_DAYS_MAINTENANCE = 20;
 
     private FragmentInteractionInterface mListener;
 
@@ -53,6 +55,25 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
 
+        Preference prefDaysMaintenance = findPreference("days_maintenance");
+
+        prefDaysMaintenance.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                changeTitleAndShowCurrentValue(preference);
+                return false;
+            }
+        });
+
+        prefDaysMaintenance.setOnPreferenceChangeListener( new Preference.OnPreferenceChangeListener() {
+
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                getDaysForMaintenanceReminder(preference, newValue);
+                return false;
+            }
+        });
+
     }
 
     public void scanCode(){
@@ -63,21 +84,80 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
         intentIntegrator.initiateScan();
     }
 
+    public void changeTitleAndShowCurrentValue(Preference preference){
+        if (preference instanceof EditTextPreference)
+        {
+            // Aktuellen Wert anzeigen
+            EditTextPreference editTextPreference =  (EditTextPreference)preference;
+
+            SharedPreferences sharedPreferences =  getPreferenceScreen().getSharedPreferences();
+            String savedValue = sharedPreferences.getString(preference.getKey(), "");
+
+            editTextPreference.setText(savedValue);
+        }
+    }
+
+    public void getDaysForMaintenanceReminder(Preference preference, Object newValue){
+        if (preference instanceof EditTextPreference)
+        {
+            // Behandlung des neuen Werts
+            EditTextPreference editTextPreference =  (EditTextPreference)preference;
+            String days = newValue.toString();
+
+            // Prüfen, ob das einem Intwert entspricht (und max. 20)
+            days = days.trim();
+            boolean use = true;
+
+            if (days.length() > 2) {
+                use = false;
+            }
+
+            String regex = "\\d+";
+
+            if (use && !days.matches(regex)) {
+                // falls es keine Zahl ist
+                use = false;
+            }
+
+            if (use && Integer.valueOf(days) > MAX_DAYS_MAINTENANCE) {
+                use = false;
+            }
+
+            if (use) {
+                Toast.makeText(this.getContext(), getString(R.string.str_new_value) + " " + days, Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(preference.getKey(), days);
+                editor.commit();
+            }
+            else {
+                Toast.makeText(this.getContext(), getString(R.string.str_no_valid_number_days_maintenance), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
         if (key.equals(KEY_PREF_CRASHLYTICS)) {
 
             PreferenceHelper preferenceHelper = new PreferenceHelper();
-            if(preferenceHelper.isCrashlyticsEnabled()){
+            if (preferenceHelper.isCrashlyticsEnabled()) {
                 Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsEnabled, Constants.ERROR_SNACKBAR_DURATION);
                 snackbar.show();
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 mListener.onFragmentInteraction(SettingsFragment.class, Uri.parse("enable_crashlytics"));
-            }else{
+            }
+            else {
                 Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsDisabled, Constants.ERROR_SNACKBAR_DURATION);
                 snackbar.show();
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
             }
+        }
+        else if (key.equals("days_maintenance"))
+        {
+            /*Snackbar snackbar = Snackbar.make(getView(), "Bla", Constants.ERROR_SNACKBAR_DURATION);
+            snackbar.show();*/
         }
     }
 
