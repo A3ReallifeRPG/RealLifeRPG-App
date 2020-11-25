@@ -177,7 +177,7 @@
 
     <string name="str_back_again_to_exit">Press BACK again to exit.</string>
     <string name="str_noData">If you expect data, please change the tab and then change back here again.</string>
-    <string name="str_days_maintenance">Reminder for Maintenance</string>
+    <string name="str_days_maintenance">Reminder for Maintenance (in days)</string>
     <string name="str_new_value">New value:</string>
     <string name="str_no_valid_number_days_maintenance">No valid number! Must between 0 and 20!</string>
 
