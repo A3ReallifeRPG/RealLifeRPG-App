@@ -91,7 +91,7 @@ public class PlayerBuildingsFragment extends Fragment {
         BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), houses, buildings);
         expandableListView.setAdapter(buildingsListAdapter);
 
-        if (playerInfo.houses == null && playerInfo.buildings == null){
+        if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0)){
             tvKeineDaten.setVisibility(View.VISIBLE);
             expandableListView.setVisibility(View.INVISIBLE);
         } else {

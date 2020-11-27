@@ -69,7 +69,7 @@ public class PlayerDonationFragment extends Fragment {
         DonationListAdapter donationListAdapter = new DonationListAdapter(donations);
         recyclerView.setAdapter(donationListAdapter);
 
-        if (playerInfo.donations == null){
+        if (playerInfo.donations == null || playerInfo.donations.length == 0){
             tvKeineDaten.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
         } else {
