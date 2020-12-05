@@ -112,7 +112,7 @@ public class ApiHelper {
         vehicleGroupPlane.vehicles = new ArrayList<Vehicle>();
 
         for (Vehicle veh : vehicles) {
-            if (veh.vehicle_data.name.toLowerCase().contains("quest") || veh.vehicle_data.name.toLowerCase().contains("tgx_garbage"))
+            if (veh.vehicle_data.name.toLowerCase().contains("quest") || veh.alive == -1)
                 continue;
 
             switch (veh.type.toLowerCase()){
