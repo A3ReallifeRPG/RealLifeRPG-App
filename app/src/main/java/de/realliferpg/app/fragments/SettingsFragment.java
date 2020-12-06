@@ -55,6 +55,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
 
+        /*
         Preference prefDaysMaintenance = findPreference("days_maintenance");
 
         prefDaysMaintenance.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -73,7 +74,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
                 return false;
             }
         });
-
+        */
     }
 
     public void scanCode(){
