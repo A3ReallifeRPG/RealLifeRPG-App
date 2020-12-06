@@ -181,5 +181,9 @@
     <string name="str_days_maintenance">Reminder for Maintenance (in days)</string>
     <string name="str_new_value">New value:</string>
     <string name="str_no_valid_number_days_maintenance">No valid number! Must between 0 and 20!</string>
+    <string name="str_plate">Plate:</string>
+    <string name="str_veh_sold">sold</string>
+    <string name="str_veh_impound">impounded</string>
+    <string name="str_veh_disabled">destroyed</string>
 
 </resources>

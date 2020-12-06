@@ -173,5 +173,10 @@
     <string name="str_days_maintenance">Erinnerung an Wartung (in Tagen)</string>
     <string name="str_new_value">Neuer Wert:</string>
     <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! Sie muss zwischen 0 and 20 liegen!</string>
+    <string name="str_plate">Kennzeichen:</string>
+    <string name="str_veh_sold">verkauft</string>
+    <string name="str_veh_impound">beschlagnahmt</string>
+    <string name="str_veh_disabled">zerstört</string>
+
 
 </resources>

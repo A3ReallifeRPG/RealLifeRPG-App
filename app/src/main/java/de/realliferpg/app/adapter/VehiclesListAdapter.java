@@ -115,6 +115,8 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
 
             viewHolderChild.tvVehicleName = convertView.findViewById(R.id.tv_vehicle_name);
             viewHolderChild.ivVehiclesFraction = convertView.findViewById(R.id.iv_vehicle_fraction);
+            viewHolderChild.tvVehiclePlate = convertView.findViewById(R.id.tv_vehicle_plate);
+            viewHolderChild.tvVehicleKM = convertView.findViewById(R.id.tv_vehicle_km);
         } else {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
@@ -133,16 +135,16 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         if (vehicle.alive == 0) // verkauft == 0
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            vehicleName += " - verkauft";
+            vehicleName += " - " + context.getString(R.string.str_veh_sold);
         }
         else if (vehicle.impound == 1) // beschlagnahmt == 1
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            vehicleName += " - beschlagnahmt";
+            vehicleName += " - " + context.getString(R.string.str_veh_impound);
         } else if (vehicle.disabled == 1) // zerstört == 1
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            vehicleName += " - zerstört";
+            vehicleName += " - " + context.getString(R.string.str_veh_disabled);
         }
         else if (vehicle.alive == 1 && vehicle.impound == 0 && vehicle.disabled == 0)
         {
@@ -150,6 +152,8 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         }
 
         viewHolderChild.tvVehicleName.setText(vehicleName);
+        viewHolderChild.tvVehiclePlate.setText(context.getString(R.string.str_plate) + " " + formatPlate(vehicle.plate));
+        viewHolderChild.tvVehicleKM.setText(vehicle.kilometer + " km / " + vehicle.kilometer_total + " km total");
 
         convertView.setTag(viewHolderChild);
 
@@ -161,6 +165,17 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    private String formatPlate(String plate){
+        if (plate.length() == 8)
+        {
+            return String.format("%s %s %s", plate.substring(0,2), plate.substring(2,4), plate.substring(4, 8));
+        }
+        else
+        {
+            return plate;
+        }
+    }
+
     static class ViewHolder {
         TextView tvVehicleCategory;
         int position;
@@ -169,6 +184,8 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     static class ViewHolderChild {
         TextView tvVehicleName;
         ImageView ivVehiclesFraction;
+        TextView tvVehiclePlate;
+        TextView tvVehicleKM;
         int position;
     }
 }
