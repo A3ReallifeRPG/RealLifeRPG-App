@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 
 
-public class ErrorFragment extends Fragment {
+public class ErrorFragment extends Fragment implements CallbackNotifyInterface {
 
     private FragmentInteractionInterface mListener;
     View view;
@@ -68,4 +70,8 @@ public class ErrorFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCallback(RequestTypeEnum type) {
+
+    }
 }
