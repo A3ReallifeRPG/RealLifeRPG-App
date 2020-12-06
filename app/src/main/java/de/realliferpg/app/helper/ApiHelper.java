@@ -51,8 +51,11 @@ public class ApiHelper {
                 VehiclesInfo.Wrapper vehiclesInfoWrapper = gson.fromJson(response.toString(), VehiclesInfo.Wrapper.class);
                 Vehicle[] vehicles = vehiclesInfoWrapper.data;
                 PlayerInfo playerInfoSecond = Singleton.getInstance().getPlayerInfo();
-                playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
-                Singleton.getInstance().setPlayerInfo(playerInfoSecond);
+                if (playerInfoSecond != null)
+                {
+                    playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
+                    Singleton.getInstance().setPlayerInfo(playerInfoSecond);
+                }
                 return true;
             case SERVER:
                 Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
