@@ -66,42 +66,40 @@ public class FractionMappingHelper {
 
         // TODO: ersetzen mit localized Strings
         switch (coplevel) {
-            case 0:
-                return context.getResources().getString(R.string.str_noRank); // "Kein Rang"  // cop-level 0
             case 1:
-                return context.getResources().getString(R.string.str_justiz); // "Justizbeamter"; // cop-level 1
+                return context.getResources().getString(R.string.str_justiz);
             case 2:
-                return context.getResources().getString(R.string.str_cop01); // "Polizeimeisteranwärter";  // cop-level 2
+                return context.getResources().getString(R.string.str_cop0a);
             case 3:
-                return context.getResources().getString(R.string.str_cop02); // "Polizeimeister";  // cop-level 3
+                return context.getResources().getString(R.string.str_cop01);
             case 4:
-                return context.getResources().getString(R.string.str_cop03); // "Polizeiobermeister";  // cop-level 4
+                return context.getResources().getString(R.string.str_cop02);
             case 5:
-                return context.getResources().getString(R.string.str_cop04); // "Polizeihauptmeister";  // cop-level 5
+                return context.getResources().getString(R.string.str_cop03);
             case 6:
-                return context.getResources().getString(R.string.str_cop05); // "Polizeihauptmeister mit Amtszulage";  // cop-level 6
+                return context.getResources().getString(R.string.str_cop04);
             case 7:
-                return context.getResources().getString(R.string.str_cop06); // "Polizeikommissaranwärter";  // cop-level 7
+                return context.getResources().getString(R.string.str_cop05);
             case 8:
-                return context.getResources().getString(R.string.str_cop07); // "Polizeikommissar";  // cop-level 8
+                return context.getResources().getString(R.string.str_cop06);
             case 9:
-                return context.getResources().getString(R.string.str_cop08); // "Polizeioberkommissar";  // cop-level 9
+                return context.getResources().getString(R.string.str_cop07);
             case 10:
-                return context.getResources().getString(R.string.str_cop09); // "Polizeihauptkommissar";  // cop-level 10
+                return context.getResources().getString(R.string.str_cop08);
             case 11:
-                return context.getResources().getString(R.string.str_cop10); // "Erster Polizeihauptkommissar";  // cop-level 11
+                return context.getResources().getString(R.string.str_cop09);
             case 12:
-                return context.getResources().getString(R.string.str_cop11); // "Polizeirat";  // cop-level 12
+                return context.getResources().getString(R.string.str_cop10);
             case 13:
-                return context.getResources().getString(R.string.str_cop12); // "Polizeioberrat";  // cop-level 13
+                return context.getResources().getString(R.string.str_cop11);
             case 14:
-                return context.getResources().getString(R.string.str_cop13); // "Polizeidirektor";  // cop-level 14
+                return context.getResources().getString(R.string.str_cop12);
             case 15:
-                return context.getResources().getString(R.string.str_cop14); // "Leitender Polizeidirektor";  // cop-level 15
+                return context.getResources().getString(R.string.str_cop13);
             case 16:
-                return context.getResources().getString(R.string.str_cop15); // "Polizeipräsident";  // cop-level 16
+                return context.getResources().getString(R.string.str_cop15);
             default:
-                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank);
         }
 
     }
@@ -109,8 +107,6 @@ public class FractionMappingHelper {
     public static String getMedicRankAsString(Context context, int mediclevel) {
 
         switch (mediclevel) {
-            case 0:
-                return context.getResources().getString(R.string.str_noRank);
             case 1:
                 return context.getResources().getString(R.string.str_med01);
             case 2:
@@ -136,7 +132,7 @@ public class FractionMappingHelper {
             case 12:
                 return context.getResources().getString(R.string.str_med12);
             default:
-                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank);
         }
     }
 
@@ -144,28 +140,26 @@ public class FractionMappingHelper {
 
         // TODO: ersetzen mit localized Strings
         switch (raclevel) {
-            case 0:
-                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";  // adac-level 0
             case 1:
-                return context.getResources().getString(R.string.str_rac01); // "Azubi"; // adac-level 1
+                return context.getResources().getString(R.string.str_rac01);
             case 2:
-                return context.getResources().getString(R.string.str_rac02); // "Geselle";  // adac-level 2
+                return context.getResources().getString(R.string.str_rac02);
             case 3:
-                return context.getResources().getString(R.string.str_rac03); // "Mechaniker";  // adac-level 3
+                return context.getResources().getString(R.string.str_rac03);
             case 4:
-                return context.getResources().getString(R.string.str_rac04); // "Mechatroniker";  // adac-level 4
+                return context.getResources().getString(R.string.str_rac04);
             case 5:
-                return context.getResources().getString(R.string.str_rac05); // "Techniker";  // adac-level 5
+                return context.getResources().getString(R.string.str_rac05);
             case 6:
-                return context.getResources().getString(R.string.str_rac06); // "Meister";  // adac-level 6
+                return context.getResources().getString(R.string.str_rac06);
             case 7:
-                return context.getResources().getString(R.string.str_rac07); // "Ingenieur";  // adac-level 7
+                return context.getResources().getString(R.string.str_rac07);
             case 8:
-                return context.getResources().getString(R.string.str_rac08); // "(Co-)Leiter";  // adac-level 8
+                return context.getResources().getString(R.string.str_rac08);
             case 9:
-                return context.getResources().getString(R.string.str_rac09); // "Leiter";  // adac-level 9
+                return context.getResources().getString(R.string.str_rac09);
             default:
-                return context.getResources().getString(R.string.str_noRank); // "Kein Rang";
+                return context.getResources().getString(R.string.str_noRank);
         }
     }
 
@@ -173,39 +167,40 @@ public class FractionMappingHelper {
 
         switch (coplevel) {
             case 0:
-                return "cop_00";  // cop-level 0
+                return "cop_00";
             case 1:
-                return "cop_01"; // cop-level 1
+                return "cop_0a";
             case 2:
-                return "cop_02";  // cop-level 2
+                return "cop_01";
             case 3:
-                return "cop_03";  // cop-level 3
+                return "cop_02";
             case 4:
-                return "cop_04";  // cop-level 4
+                return "cop_03";
             case 5:
-                return "cop_05";  // cop-level 5
+                return "cop_04";
             case 6:
-                return "cop_06";  // cop-level 6
+                return "cop_05";
             case 7:
-                return "cop_07";  // cop-level 7
+                return "cop_06";
             case 8:
-                return "cop_08";  // cop-level 8
+                return "cop_07";
             case 9:
-                return "cop_09";  // cop-level 9
+                return "cop_08";
             case 10:
-                return "cop_10";  // cop-level 10
+                return "cop_09";
             case 11:
-                return "cop_11";  // cop-level 11
+                return "cop_10";
             case 12:
-                return "cop_12";  // cop-level 12
+                return "cop_11";
             case 13:
-                return "cop_13";  // cop-level 13
+                return "cop_12";
             case 14:
-                return "cop_14";  // cop-level 14
+                return "cop_13";
             case 15:
-                return "cop_15";  // cop-level 15
+                return "cop_14";
             case 16:
-                return "cop_16";  // cop-level 16
+                return "cop_15";
+
             default:
                 return "Kein Rang";
         }
