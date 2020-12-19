@@ -1,7 +1,9 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,12 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.Format;
+import java.util.Formatter;
+import java.util.Locale;
+
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.VehicleEnum;
 import de.realliferpg.app.objects.Vehicle;
@@ -110,7 +117,7 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final ViewHolderChild viewHolderChild;
-        
+
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_vehicleslist, null);
@@ -141,8 +148,7 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             vehicleName += " - " + context.getString(R.string.str_veh_sold);
-        }
-        else if (vehicle.impound == 1) // beschlagnahmt == 1
+        } else if (vehicle.impound == 1) // beschlagnahmt == 1
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             vehicleName += " - " + context.getString(R.string.str_veh_impound);
@@ -150,15 +156,15 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         {
             viewHolderChild.tvVehicleName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             vehicleName += " - " + context.getString(R.string.str_veh_disabled);
-        }
-        else if (vehicle.alive == 1 && vehicle.impound == 0 && vehicle.disabled == 0)
-        {
+        } else if (vehicle.alive == 1 && vehicle.impound == 0 && vehicle.disabled == 0) {
             viewHolderChild.tvVehicleName.setPaintFlags(0);
         }
 
+        FormatHelper formatHelper = new FormatHelper();
+
         viewHolderChild.tvVehicleName.setText(vehicleName);
-        viewHolderChild.tvVehiclePlate.setText(context.getString(R.string.str_plate) + " " + formatPlate(vehicle.plate));
-        viewHolderChild.tvVehicleKM.setText(vehicle.kilometer + " km / " + vehicle.kilometer_total + " km total");
+        viewHolderChild.tvVehiclePlate.setText(context.getString(R.string.str_plate) + " " + formatHelper.formatPlate(vehicle.plate));
+        viewHolderChild.tvVehicleKM.setText(context.getString(R.string.str_mileage) + " " + formatHelper.formatKilometer(vehicle.kilometer_total) + " km");
 
         convertView.setTag(viewHolderChild);
 
@@ -168,17 +174,6 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
-    }
-
-    private String formatPlate(String plate){
-        if (plate.length() == 8)
-        {
-            return String.format("%s %s %s", plate.substring(0,2), plate.substring(2,4), plate.substring(4, 8));
-        }
-        else
-        {
-            return plate;
-        }
     }
 
     static class ViewHolder {

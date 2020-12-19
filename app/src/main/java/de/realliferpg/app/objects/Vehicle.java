@@ -8,7 +8,6 @@ public class Vehicle {
     public int alive;
     public int impound;
     public int disabled;
-    public int kilometer;
     public int kilometer_total;
     public VehicleData vehicle_data;
 }

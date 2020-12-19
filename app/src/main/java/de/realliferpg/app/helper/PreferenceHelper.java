@@ -19,4 +19,10 @@ public class PreferenceHelper {
     public boolean isCrashlyticsEnabled(){
         return prefs.getBoolean("pref_crashlytics",false);
     }
+
+    public boolean showSold() { return prefs.getBoolean("pref_vehicleList_sold", false);}
+
+    public boolean showDestroyed() { return prefs.getBoolean("pref_vehicleList_destroyed", false);}
+
+    public boolean showImpounded() { return prefs.getBoolean("pref_vehicleList_impounded", false);}
 }

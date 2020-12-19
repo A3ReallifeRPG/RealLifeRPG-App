@@ -9,7 +9,7 @@
             android:inputType="textPassword"
             android:key="api_token"
             android:summary="Player API Token"
-            android:title="API Token" />
+            android:title="@string/str_api_token" />
         <Preference
             android:id="@+id/pref_scan_code"
             android:icon="@drawable/ic_linked_camera"
@@ -28,6 +28,31 @@
             android:title="@string/str_days_maintenance"
             android:defaultValue=""/>
             -->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/str_vehiclesListSettings">
+
+        <SwitchPreference
+            android:id="@+id/pref_vehicleList_sold"
+            android:key="pref_vehicleList_sold"
+            android:summaryOff="@string/str_dont_show"
+            android:summaryOn="@string/str_show"
+            android:title="@string/str_vehicleList_sold" />
+            />
+        <SwitchPreference
+            android:id="@+id/pref_vehicleList_destroyed"
+            android:key="pref_vehicleList_destroyed"
+            android:summaryOff="@string/str_dont_show"
+            android:summaryOn="@string/str_show"
+            android:title="@string/str_vehicleList_destroyed" />
+        />
+        <SwitchPreference
+            android:id="@+id/pref_vehicleList_impounded"
+            android:key="pref_vehicleList_impounded"
+            android:summaryOff="@string/str_dont_show"
+            android:summaryOn="@string/str_show"
+            android:title="@string/str_vehicleList_impound" />
+        />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

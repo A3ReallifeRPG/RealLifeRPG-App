@@ -8,7 +8,9 @@ import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
@@ -21,10 +23,14 @@ import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.activities.MainActivity;
+import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestCallbackInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface, SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface, SharedPreferences.OnSharedPreferenceChangeListener, CallbackNotifyInterface {
 
     public static final String KEY_PREF_CRASHLYTICS = "pref_crashlytics";
     public static final Integer MAX_DAYS_MAINTENANCE = 20;
@@ -75,6 +81,34 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
         */
+
+        // Preferences for vehicle list
+        Preference prefVehicleSold = findPreference("pref_vehicleList_sold");
+        prefVehicleSold.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                switchSettingsVehicleList(preference);
+                return true;
+            }
+        });
+
+        Preference prefVehicleDestroyed = findPreference("pref_vehicleList_destroyed");
+        prefVehicleDestroyed.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                switchSettingsVehicleList(preference);
+                return true;
+            }
+        });
+
+        Preference prefVehicleImpounded = findPreference("pref_vehicleList_impounded");
+        prefVehicleImpounded.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                switchSettingsVehicleList(preference);
+                return true;
+            }
+        });
     }
 
     public void scanCode(){
@@ -83,6 +117,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
         intentIntegrator.setPrompt(getString(R.string.str_qrScannerInfo));
         intentIntegrator.setOrientationLocked(false);
         intentIntegrator.initiateScan();
+    }
+
+    private void switchSettingsVehicleList(Preference preference){
+        if (preference instanceof SwitchPreference)
+        {
+            final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
+            apiHelper.getPlayerVehicles();
+        }
     }
 
     public void changeTitleAndShowCurrentValue(Preference preference){
@@ -196,5 +238,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
         super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onCallback(RequestTypeEnum type) {
+        
     }
 }
