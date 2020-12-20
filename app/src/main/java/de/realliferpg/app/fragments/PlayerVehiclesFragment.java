@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -59,6 +60,7 @@ public class PlayerVehiclesFragment extends Fragment {
 
     public void showPlayerInfo(){
         final ExpandableListView expandableListView = view.findViewById(R.id.elv_vehicles);
+        final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenVehicle);
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
@@ -71,6 +73,14 @@ public class PlayerVehiclesFragment extends Fragment {
 
         VehiclesListAdapter vehiclesListAdapter = new VehiclesListAdapter(this.getContext(), playerInfo.vehiclesByType, Integer.parseInt(Singleton.getInstance().getPlayerInfo().coplevel));
         expandableListView.setAdapter(vehiclesListAdapter);
+
+        if (playerInfo.vehiclesByType == null){
+            tvKeineDaten.setVisibility(View.VISIBLE);
+            expandableListView.setVisibility(View.INVISIBLE);
+        } else {
+            tvKeineDaten.setVisibility(View.INVISIBLE);
+            expandableListView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

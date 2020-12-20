@@ -1,12 +1,12 @@
 package de.realliferpg.app.helper;
 
-import android.util.Log;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.security.cert.CertPathBuilderSpi;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -51,8 +51,11 @@ public class ApiHelper {
                 VehiclesInfo.Wrapper vehiclesInfoWrapper = gson.fromJson(response.toString(), VehiclesInfo.Wrapper.class);
                 Vehicle[] vehicles = vehiclesInfoWrapper.data;
                 PlayerInfo playerInfoSecond = Singleton.getInstance().getPlayerInfo();
-                playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
-                Singleton.getInstance().setPlayerInfo(playerInfoSecond);
+                if (playerInfoSecond != null)
+                {
+                    playerInfoSecond.vehiclesByType = this.SortVehiclesByType(vehicles);
+                    Singleton.getInstance().setPlayerInfo(playerInfoSecond);
+                }
                 return true;
             case SERVER:
                 Server.Wrapper serverWrapper = gson.fromJson(response.toString(), Server.Wrapper.class);
@@ -112,7 +115,7 @@ public class ApiHelper {
         vehicleGroupPlane.vehicles = new ArrayList<Vehicle>();
 
         for (Vehicle veh : vehicles) {
-            if (veh.vehicle_data.name.toLowerCase().contains("quest"))
+            if (veh.vehicle_data.name.toLowerCase().contains("quest") || veh.alive == -1 || !showVehicle(veh))
                 continue;
 
             switch (veh.type.toLowerCase()){
@@ -129,6 +132,28 @@ public class ApiHelper {
         }
 
         return new VehicleGroup[]{vehicleGroupCar, vehicleGroupPlane, vehicleGroupShip};
+    }
+
+    private boolean showVehicle(Vehicle veh){
+        boolean showVehicle = false;
+
+        if (veh.alive == 0 && preferenceHelper.showSold()) // verkauft == 0
+        {
+            showVehicle = true;
+        }
+        else if (veh.impound == 1 && preferenceHelper.showImpounded()) // beschlagnahmt == 1
+        {
+            showVehicle = true;
+        }
+        else if (veh.disabled == 1 && preferenceHelper.showDestroyed()) // zerstört == 1
+        {
+            showVehicle = true;
+        }
+        else if (veh.alive == 1 && veh.impound == 0 && veh.disabled == 0) {
+            showVehicle = true;
+        }
+
+        return showVehicle;
     }
 
     private boolean checkCache(Class<?> type){

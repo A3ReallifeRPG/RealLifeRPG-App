@@ -25,16 +25,16 @@ import de.realliferpg.app.objects.RessourceInfo;
 
 public class CBSListAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<CBSData> _cbsData;
+    private ArrayList<CBSData> cbsData;
 
     public CBSListAdapter(Context _context, ArrayList<CBSData> _cbsData) {
         this.context = _context;
-        this._cbsData = _cbsData;
+        this.cbsData = _cbsData;
     }
 
     @Override
     public int getGroupCount() {
-        return _cbsData.size();
+        return cbsData.size();
     }
 
     @Override
@@ -45,14 +45,14 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int i) {
-        return _cbsData.get(i);
+        return cbsData.get(i);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         CBSData child = null;
 
-        child = _cbsData.get(groupPosition);
+        child = cbsData.get(groupPosition);
 
         return child;
     }

@@ -93,7 +93,7 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
         viewHolder.pbCountPlayers.setProgress((int) progress);
 
-        if (server.Servername.toLowerCase().contains("realliferpg 7.0 server") && !server.Servername.toLowerCase().contains("gungame")) {
+        if (server.Servername.toLowerCase().contains("realliferpg") && !server.Servername.toLowerCase().contains("gungame")) {
             // Arma 3 Server
             viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
                     "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +

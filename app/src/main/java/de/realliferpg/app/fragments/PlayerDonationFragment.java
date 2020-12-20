@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,7 @@ public class PlayerDonationFragment extends Fragment {
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_p_donation);
+        final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenDonations);
 
         ArrayList<Donation> donations = new ArrayList<>(Arrays.asList(playerInfo.donations));
 
@@ -66,6 +68,14 @@ public class PlayerDonationFragment extends Fragment {
 
         DonationListAdapter donationListAdapter = new DonationListAdapter(donations);
         recyclerView.setAdapter(donationListAdapter);
+
+        if (playerInfo.donations == null || playerInfo.donations.length == 0){
+            tvKeineDaten.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+        } else {
+            tvKeineDaten.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

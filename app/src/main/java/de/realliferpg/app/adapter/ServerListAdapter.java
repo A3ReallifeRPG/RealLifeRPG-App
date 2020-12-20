@@ -53,7 +53,7 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
         viewHolder.pbPlayers.setProgress((int) progress);
 
-        if (server.Servername.toLowerCase().contains("realliferpg 7.0 server") && !server.Servername.toLowerCase().contains("gungame")) {
+        if (server.Servername.toLowerCase().contains("realliferpg") && !server.Servername.toLowerCase().contains("gungame")) {
             // Arma 3 Server
             viewHolder.tvPlayerInfo.setText(Html.fromHtml(
                     "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +

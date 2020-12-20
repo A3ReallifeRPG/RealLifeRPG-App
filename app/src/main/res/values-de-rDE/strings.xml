@@ -26,7 +26,6 @@
     <string name="str_skillpoint">Skillpunkt(e)</string>
     <string name="str_forum">Forum</string>
     <string name="str_logged_in">Eingeloggt als</string>
-    <string name="str_scan">QR-Code scannen</string>
     <string name="str_player_info">Spielerinfo</string>
     <string name="str_profilePicture">Profilbild</string>
     <string name="str_close">Schließen</string>
@@ -54,9 +53,6 @@
     <string name="str_verify_api">2. Prüfe, ob du deinen Spieler-API-Token in den Einstellungen hinterlegt hast.</string>
     <string name="str_view">Details</string>
     <string name="str_error_occurred">Ein Fehler ist aufgetreten</string>
-    <string name="str_helpScan">API-Token-Hilfe</string>
-    <string name="str_apiSettings">API-Einstellungen</string>
-    <string name="str_firebaseSettings">Firebase-Einstellungen</string>
     <string name="str_info_crashReporting">Logs senden, wenn App crashed</string>
     <string name="str_qrScannerInfo">Scanne den Code auf info.realliferpg.de\\n       Hilfe für mehr Infos</string>
     <string name="str_crashlyticsEnabled">Danke, dass du uns mit deinen Crash-Daten hilfst.</string>
@@ -83,20 +79,20 @@
     <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->
 
     <!-- Raenge der Cops -->
-    <string name="str_cop01">Polizeimeisteranwärter</string> <!-- C1, cop-level 2 -->
-    <string name="str_cop02">Polizeimeister</string> <!-- C2, cop-level 3 -->
-    <string name="str_cop03">Polizeiobermeister</string> <!-- C3, cop-level 4 -->
-    <string name="str_cop04">Polizeihauptmeister</string> <!-- C4, cop-level 5 -->
-    <string name="str_cop05">Polizeihauptmeister m.Z.</string> <!-- C5, cop-level 6 -->
-    <string name="str_cop06">Polizeikommissaranwärter</string> <!-- C6, cop-level 7 -->
-    <string name="str_cop07">Polizeikommissar</string> <!-- C7, cop-level 8 -->
-    <string name="str_cop08">Polizeioberkommissar</string> <!-- C8, cop-level 9 -->
-    <string name="str_cop09">Polizeihauptkommissar</string> <!-- C9, cop-level 10 -->
-    <string name="str_cop10">Erster Polizeihauptkommissar</string> <!-- C10, cop-level 11 -->
-    <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 12 -->
-    <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 13 -->
-    <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 14 -->
-    <string name="str_cop14">Leitender Polizeidirektor</string> <!-- C14, cop-level 15 -->
+    <string name="str_cop0a">Polizeianwärter</string> <!-- C1, cop-level 2 -->
+    <string name="str_cop01">Polizeiwachtmeister</string> <!-- C2, cop-level 3 -->
+    <string name="str_cop02">Polizeimeister</string> <!-- C2, cop-level 4 -->
+    <string name="str_cop03">Polizeiobermeister</string> <!-- C3, cop-level 5 -->
+    <string name="str_cop04">Polizeihauptmeister</string> <!-- C4, cop-level 6 -->
+    <string name="str_cop05">Polizeihauptmeister m.Z.</string> <!-- C5, cop-level 7 -->
+    <string name="str_cop06">Polizeikommissaranwärter</string> <!-- C6, cop-level 8 -->
+    <string name="str_cop07">Polizeikommissar</string> <!-- C7, cop-level 9 -->
+    <string name="str_cop08">Polizeioberkommissar</string> <!-- C8, cop-level 10 -->
+    <string name="str_cop09">Polizeihauptkommissar</string> <!-- C9, cop-level 11 -->
+    <string name="str_cop10">Erster Polizeihauptkommissar</string> <!-- C10, cop-level 12 -->
+    <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 13 -->
+    <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 14 -->
+    <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 15 -->
     <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 16 -->
 
     <!-- Raenge der Medics -->
@@ -168,5 +164,33 @@
     <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
+    <string name="str_noDataChangeTab">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
+    <string name="str_noData">Keine Daten vorhanden.</string>
+    <string name="str_days_maintenance">Erinnerung an Wartung (in Tagen)</string>
+    <string name="str_new_value">Neuer Wert:</string>
+    <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! Sie muss zwischen 0 and 20 liegen!</string>
+    <string name="str_plate">Kennzeichen:</string>
+    <string name="str_mileage">Kilometerstand:</string>
+    <string name="str_veh_sold">verkauft</string>
+    <string name="str_veh_impound">beschlagnahmt</string>
+    <string name="str_veh_disabled">zerstört</string>
+
+    <!-- Settings -->
+    <string name="str_apiSettings">API-Einstellungen</string>
+    <string name="str_firebaseSettings">Firebase-Einstellungen</string>
+    <string name="str_api_token">API-Token</string>
+    <string name="str_scan">QR-Code scannen</string>
+    <string name="str_helpScan">API-Token-Hilfe</string>
+    <string name="str_vehiclesListSettings">Einstellungen zur Fahrzeugliste</string>
+    <string name="str_dont_show">nicht anzeigen</string>
+    <string name="str_show">anzeigen</string>
+    <string name="str_vehicleList_sold">verkaufte Fahrzeuge</string>
+    <string name="str_vehicleList_destroyed">zerstörte Fahrzeuge</string>
+    <string name="str_vehicleList_impound">beschlagnahmte Fahrzeuge</string>
+
+
+
+
+    <!--<string name=""></string>-->
 
 </resources>

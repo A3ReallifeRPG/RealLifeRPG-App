@@ -162,7 +162,6 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                     pbServer.setVisibility(View.GONE);
                 }
 
-
                 Singleton.getInstance().setErrorMsg(error.toString());
                 Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 

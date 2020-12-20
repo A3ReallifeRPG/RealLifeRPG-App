@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,8 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
                              Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_cbs, container, false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenCBS);
+        final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getCBSData();
@@ -70,6 +73,16 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
                 expandableListView.setAdapter((ExpandableListAdapter) null);
             }
         });
+
+        ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
+
+        if (cbsData == null || cbsData.isEmpty()){
+            tvKeineDaten.setVisibility(View.VISIBLE);
+            expandableListView.setVisibility(View.INVISIBLE);
+        } else {
+            tvKeineDaten.setVisibility(View.INVISIBLE);
+            expandableListView.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

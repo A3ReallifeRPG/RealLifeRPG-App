@@ -21,6 +21,23 @@ public class FormatHelper {
         return format.format(input) + " $";
     }
 
+    public String formatPlate(String plate){
+        if (plate.length() == 8)
+        {
+            return String.format("%s %s %s", plate.substring(0,2), plate.substring(2,4), plate.substring(4, 8));
+        }
+        else
+        {
+            return plate;
+        }
+    }
+
+    public String formatKilometer(int input){
+        DecimalFormat format = (DecimalFormat)DecimalFormat.getNumberInstance(Locale.GERMAN);
+
+        return format.format(input);
+    }
+
     public String toDateTime(Date input){
 
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");

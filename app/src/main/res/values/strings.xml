@@ -29,7 +29,6 @@
     <string name="str_skillpoint">Skillpoint(s)</string>
     <string name="str_forum">Forum</string>
     <string name="str_logged_in">Logged in as</string>
-    <string name="str_scan">Scan QR Code</string>
     <string name="str_player_info">Player Info</string>
     <string name="str_profilePicture">Profile Picture</string>
     <string name="str_pid" translatable="false">PID</string>
@@ -58,9 +57,6 @@
     <string name="str_verify_api">2. Check if you have entered your API Token in the settings.</string>
     <string name="str_view">View</string>
     <string name="str_error_occurred">An error occurred</string>
-    <string name="str_helpScan">Help scanning Code</string>
-    <string name="str_apiSettings">API settings</string>
-    <string name="str_firebaseSettings">Firebase settings</string>
     <string name="str_crashReporting" translatable="false">Crash Reporting</string>
     <string name="str_info_crashReporting">Send Log when app crashes</string>
     <string name="str_qrScannerInfo">Scan code on info.realliferpg.de       For help check settings</string>
@@ -90,20 +86,20 @@
     <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->
 
     <!-- Raenge der Cops -->
-    <string name="str_cop01">Polizeimeisteranwärter</string> <!-- C1, cop-level 2 -->
-    <string name="str_cop02">Polizeimeister</string> <!-- C2, cop-level 3 -->
-    <string name="str_cop03">Polizeiobermeister</string> <!-- C3, cop-level 4 -->
-    <string name="str_cop04">Polizeihauptmeister</string> <!-- C4, cop-level 5 -->
-    <string name="str_cop05">Polizeihauptmeister m.Z.</string> <!-- C5, cop-level 6 -->
-    <string name="str_cop06">Polizeikommissaranwärter</string> <!-- C6, cop-level 7 -->
-    <string name="str_cop07">Polizeikommissar</string> <!-- C7, cop-level 8 -->
-    <string name="str_cop08">Polizeioberkommissar</string> <!-- C8, cop-level 9 -->
-    <string name="str_cop09">Polizeihauptkommissar</string> <!-- C9, cop-level 10 -->
-    <string name="str_cop10">Erster Polizeihauptkommissar</string> <!-- C10, cop-level 11 -->
-    <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 12 -->
-    <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 13 -->
-    <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 14 -->
-    <string name="str_cop14">Leitender Polizeidirektor</string> <!-- C14, cop-level 15 -->
+    <string name="str_cop0a">Polizeianwärter</string> <!-- C1, cop-level 2 -->
+    <string name="str_cop01">Polizeiwachtmeister</string> <!-- C2, cop-level 3 -->
+    <string name="str_cop02">Polizeimeister</string> <!-- C2, cop-level 4 -->
+    <string name="str_cop03">Polizeiobermeister</string> <!-- C3, cop-level 5 -->
+    <string name="str_cop04">Polizeihauptmeister</string> <!-- C4, cop-level 6 -->
+    <string name="str_cop05">Polizeihauptmeister m.Z.</string> <!-- C5, cop-level 7 -->
+    <string name="str_cop06">Polizeikommissaranwärter</string> <!-- C6, cop-level 8 -->
+    <string name="str_cop07">Polizeikommissar</string> <!-- C7, cop-level 9 -->
+    <string name="str_cop08">Polizeioberkommissar</string> <!-- C8, cop-level 10 -->
+    <string name="str_cop09">Polizeihauptkommissar</string> <!-- C9, cop-level 11 -->
+    <string name="str_cop10">Erster Polizeihauptkommissar</string> <!-- C10, cop-level 12 -->
+    <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 13 -->
+    <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 14 -->
+    <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 15 -->
     <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 16 -->
 
     <!-- Raenge der Medics -->
@@ -176,7 +172,33 @@
     <string name="str_polDashboard">Dashboard Police Nordholm</string>
 
     <string name="str_back_again_to_exit">Press BACK again to exit.</string>
+    <string name="str_noDataChangeTab">No data.\n\nIf you expect data, please change the tab and then change back here again.</string>
+    <string name="str_noData">No data.</string>
+    <string name="str_days_maintenance">Reminder for Maintenance (in days)</string>
+    <string name="str_new_value">New value:</string>
+    <string name="str_no_valid_number_days_maintenance">No valid number! Must between 0 and 20!</string>
+    <string name="str_plate">Plate:</string>
+    <string name="str_mileage">Mileage:</string>
+    <string name="str_veh_sold">sold</string>
+    <string name="str_veh_impound">impounded</string>
+    <string name="str_veh_disabled">destroyed</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Settings -->
+    <string name="str_apiSettings">API Settings</string>
+    <string name="str_firebaseSettings">Firebase Settings</string>
+    <string name="str_api_token">API Token</string>
+    <string name="str_scan">Scan QR Code</string>
+    <string name="str_helpScan">Help scanning Code</string>
+    <string name="str_vehiclesListSettings">Vehicle List Settings</string>
+    <string name="str_dont_show">do not show</string>
+    <string name="str_show">show</string>
+    <string name="str_vehicleList_sold">sold vehicles</string>
+    <string name="str_vehicleList_destroyed">destroyed vehicles</string>
+    <string name="str_vehicleList_impound">impounded vehicles</string>
+
+
+
+
+    <!--<string name=""></string>-->
+
 </resources>

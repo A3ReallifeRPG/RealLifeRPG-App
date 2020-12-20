@@ -3,7 +3,6 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,13 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.RequestTypeEnum;
 
 
-public class ErrorFragment extends Fragment {
+public class ErrorFragment extends Fragment implements CallbackNotifyInterface {
 
     private FragmentInteractionInterface mListener;
     View view;
@@ -49,7 +49,12 @@ public class ErrorFragment extends Fragment {
         });
 
         TextView tvErrorMsg = view.findViewById(R.id.tv_error_msg);
-        tvErrorMsg.setText(Singleton.getInstance().getErrorMsg());
+        if (!tvErrorMsg.getText().toString().contains("No Message") && !tvErrorMsg.getText().toString().contains("Keine Nachricht")){
+            tvErrorMsg.setText(tvErrorMsg.getText().toString() + " || " + Singleton.getInstance().getErrorMsg());
+        }
+        else {
+            tvErrorMsg.setText(Singleton.getInstance().getErrorMsg());
+        }
 
         return view;
     }
@@ -65,4 +70,8 @@ public class ErrorFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCallback(RequestTypeEnum type) {
+
+    }
 }

@@ -24,7 +24,12 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return this.houses.length;
+        int length = 0;
+
+        if (this.houses != null)
+            length = this.houses.length;
+
+        return length;
     }
 
     @Override
