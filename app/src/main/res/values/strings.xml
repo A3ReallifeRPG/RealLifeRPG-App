@@ -196,6 +196,8 @@
     <string name="str_vehicleList_destroyed">destroyed vehicles</string>
     <string name="str_vehicleList_impound">impounded vehicles</string>
 
+    <string name="str_buildingsList_buildingPayedFor">Payed for {0} day(s).</string>
+
 
 
 

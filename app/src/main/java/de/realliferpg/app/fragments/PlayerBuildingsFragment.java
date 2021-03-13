@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.io.Console;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
+import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Building;
+import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Rental;
@@ -64,7 +68,7 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-        /*
+
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 1;
@@ -87,10 +91,23 @@ public class PlayerBuildingsFragment extends Fragment {
         hausFuenf.payed_for = 30;
         House[] DummyDatenHaeuser = new House[]{hausEins, hausZwei, hausDrei, hausVier, hausFuenf};
         houses = DummyDatenHaeuser;
-        */
+
         // -----------------------------
 
-        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), houses, buildings, rentals);
+        BuildingGroup[] buildingByType = new BuildingGroup[3];
+
+        buildingByType[0] = new BuildingGroup();
+        buildingByType[1] = new BuildingGroup();
+        buildingByType[2] = new BuildingGroup();
+
+        buildingByType[0].type = BuildingEnum.HOUSE;
+        buildingByType[0].buildings = houses;
+        buildingByType[1].type = BuildingEnum.BUILDING;
+        buildingByType[1].buildings = buildings;
+        buildingByType[2].type = BuildingEnum.RENTAL;
+        buildingByType[2].buildings = rentals;
+
+        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), buildingByType);
         expandableListView.setAdapter(buildingsListAdapter);
 
         if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0) && (playerInfo.rentals == null || playerInfo.rentals.length == 0)){

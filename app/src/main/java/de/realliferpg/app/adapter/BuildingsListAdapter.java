@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,45 +9,46 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import de.realliferpg.app.R;
-import de.realliferpg.app.objects.Building;
-import de.realliferpg.app.objects.House;
-import de.realliferpg.app.objects.Rental;
+import de.realliferpg.app.interfaces.BuildingEnum;
+import de.realliferpg.app.interfaces.IBuilding;
+import de.realliferpg.app.objects.BuildingGroup;
 
 public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private House[] houses;
-    private Building[] buildings; // eher uninteressant bisher, daher nicht angezeigt
-    private Rental[] rentals;
+    private BuildingGroup[] buildingByType;
 
-    public BuildingsListAdapter(Context _context, House[] _houses, Building[] _buildings, Rental[] _rentals){
+    public BuildingsListAdapter(Context _context, BuildingGroup[] _buildingByType){
         this.context = _context;
-        this.houses = _houses;
-        this.buildings = _buildings;
-        this.rentals = _rentals;
+        this.buildingByType = _buildingByType;
     }
 
     @Override
     public int getGroupCount() {
         int length = 0;
 
-        if (this.houses != null)
-            length = this.houses.length;
+        if (this.buildingByType != null)
+            length = this.buildingByType.length;
 
         return length;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.houses[groupPosition].players.length;
+        int count = 0;
+
+        if (this.buildingByType != null && this.buildingByType[groupPosition].buildings != null)
+            count = this.buildingByType[groupPosition].buildings.length;
+
+        return count;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.houses[groupPosition];
+        return this.buildingByType[groupPosition];
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) { return this.houses[groupPosition].players[childPosition]; }
+    public Object getChild(int groupPosition, int childPosition) { return this.buildingByType[groupPosition].buildings[childPosition]; }
 
     @Override
     public long getGroupId(int groupPosition) {
@@ -66,7 +68,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
-         
+
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -75,35 +77,64 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
             viewHolder = new ViewHolder();
             viewHolder.position = groupPosition;
 
-            viewHolder.tvBezeichnung = convertView.findViewById(R.id.tv_buildings_name);
-            viewHolder.tvBezahlteTage = convertView.findViewById(R.id.tv_buildings_played_for);
+            viewHolder.tvBuildingCategory = convertView.findViewById(R.id.tv_buildings_category);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.position = groupPosition;
-
-        viewHolder.tvBezeichnung.setText("ID: " + houses[groupPosition].id);
-        viewHolder.tvBezahlteTage.setText("Gewartet für: " + (int) houses[groupPosition].payed_for / 24 + " Tage");
+        viewHolder.tvBuildingCategory.setText(this.getTypeOfBuilding(buildingByType[groupPosition].type));
 
         convertView.setTag(viewHolder);
 
         return convertView;
+    }
 
+    private String getTypeOfBuilding(BuildingEnum type) {
+        switch (type.name().toLowerCase()){
+            case "house":
+                return "Haus";
+            case "building":
+                return "im Bau";
+            case "rental":
+                return "Appartment";
+        }
+        return "Anderes";
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition,childPosition);
+        final ViewHolderChild viewHolderChild;
 
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_buildingslist,null);
+
+            viewHolderChild = new ViewHolderChild();
+            viewHolderChild.position = childPosition;
+
+            viewHolderChild.tvBezeichnung = convertView.findViewById(R.id.tv_building_name);
+            viewHolderChild.tvBezahlteTage = convertView.findViewById(R.id.tv_building_played_for);
+        } else {
+            viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
 
-        TextView text_buildings_players = convertView.findViewById(R.id.tv_buildings_players);
-        text_buildings_players.setText(childText);
+        viewHolderChild.position = childPosition;
+
+        IBuilding building = this.buildingByType[groupPosition].buildings[childPosition];
+        String buildingName = "ID: " +Integer.toString(building.getId());
+
+        if (building.getDisabled() != 0) // 0 heißt aktiv
+        {
+            viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            buildingName += " - inaktiv";
+        }
+
+        viewHolderChild.tvBezeichnung.setText(buildingName);
+        viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayed_for() / 24)));
+
+        convertView.setTag(viewHolderChild);
 
         return convertView;
     }
@@ -114,6 +145,11 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     }
 
     static class ViewHolder {
+        TextView tvBuildingCategory;
+        int position;
+    }
+
+    static class ViewHolderChild {
         TextView tvBezeichnung;
         TextView tvBezahlteTage;
         int position;
