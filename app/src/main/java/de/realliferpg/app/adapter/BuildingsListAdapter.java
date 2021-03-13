@@ -10,16 +10,19 @@ import android.widget.TextView;
 import de.realliferpg.app.R;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.House;
+import de.realliferpg.app.objects.Rental;
 
 public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private House[] houses;
-    private Building[] buildings;
+    private Building[] buildings; // eher uninteressant bisher, daher nicht angezeigt
+    private Rental[] rentals;
 
-    public BuildingsListAdapter(Context _context, House[] _houses, Building[] _buildings){
+    public BuildingsListAdapter(Context _context, House[] _houses, Building[] _buildings, Rental[] _rentals){
         this.context = _context;
         this.houses = _houses;
         this.buildings = _buildings;
+        this.rentals = _rentals;
     }
 
     @Override
@@ -63,7 +66,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
-
+         
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

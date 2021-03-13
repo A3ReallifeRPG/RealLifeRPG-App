@@ -17,6 +17,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
+import de.realliferpg.app.objects.Rental;
 
 public class PlayerBuildingsFragment extends Fragment {
 
@@ -60,6 +61,7 @@ public class PlayerBuildingsFragment extends Fragment {
 
         House[] houses = playerInfo.houses;
         Building[] buildings = playerInfo.buildings;
+        Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
         /*
@@ -88,10 +90,10 @@ public class PlayerBuildingsFragment extends Fragment {
         */
         // -----------------------------
 
-        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), houses, buildings);
+        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), houses, buildings, rentals);
         expandableListView.setAdapter(buildingsListAdapter);
 
-        if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0)){
+        if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0) && (playerInfo.rentals == null || playerInfo.rentals.length == 0)){
             tvKeineDaten.setVisibility(View.VISIBLE);
             expandableListView.setVisibility(View.INVISIBLE);
         } else {
