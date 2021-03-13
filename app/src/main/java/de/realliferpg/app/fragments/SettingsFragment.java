@@ -61,7 +61,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
 
-        /*
         Preference prefDaysMaintenance = findPreference("days_maintenance");
 
         prefDaysMaintenance.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -80,7 +79,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
                 return false;
             }
         });
-        */
 
         // Preferences for vehicle list
         Preference prefVehicleSold = findPreference("pref_vehicleList_sold");
