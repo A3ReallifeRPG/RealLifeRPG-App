@@ -94,11 +94,11 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private String getTypeOfBuilding(BuildingEnum type) {
         switch (type.name().toLowerCase()){
             case "house":
-                return Resources.getSystem().getString(R.string.str_house);
+                return context.getResources().getString(R.string.str_house);
             case "building":
-                return Resources.getSystem().getString(R.string.str_building);
+                return context.getResources().getString(R.string.str_building);
             case "rental":
-                return Resources.getSystem().getString(R.string.str_rental);
+                return context.getResources().getString(R.string.str_rental);
         }
         return null;
     }
@@ -129,7 +129,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            buildingName += Resources.getSystem().getString(R.string.str_inactive);
+            buildingName += context.getResources().getString(R.string.str_inactive);
         }
 
         viewHolderChild.tvBezeichnung.setText(buildingName);
