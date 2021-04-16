@@ -90,7 +90,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
         String defaultNumber = getDefaultNumber(playerInfo.phones);
 
-        String textOwnPhoneNumber = playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum) ? context.getResources().getString(R.string.str_multiple_phonenumbers) + defaultNumber : context.getResources().getString(R.string.str_own_phonenumber) + defaultNumber;
+        String textOwnPhoneNumber = playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum) ? context.getResources().getString(R.string.str_multiple_phonenumbers) + " " + defaultNumber : context.getResources().getString(R.string.str_own_phonenumber) + " " + getNumberFormSide(playerInfo.phones, fractionEnum);
         viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
 
         convertView.setTag(viewHolder);
@@ -100,19 +100,23 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        /*final String childText = (String)getChild(groupPosition,childPosition);
+        Phonebook phoneBookEntry = playerInfo.phonebooks[groupPosition].phonebook[childPosition];
 
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_playerslist,null);
+            convertView = inflater.inflate(R.layout.list_item_phonebook,null);
         }
 
-        TextView text_playerslist_listitem = convertView.findViewById(R.id.tv_playerslist_listitem);
-        text_playerslist_listitem.setText(Html.fromHtml(childText));
+        TextView tvName = convertView.findViewById(R.id.tv_phonebook_name);
+        TextView tvNumber = convertView.findViewById(R.id.tv_phonebook_number);
+        TextView tvIban = convertView.findViewById(R.id.tv_phonebook_iban);
 
-        return convertView;*/
-        return null;
+        tvName.setText(context.getResources().getString(R.string.str_name) + " " + phoneBookEntry.name);
+        tvNumber.setText(context.getResources().getString(R.string.str_number) + " " + phoneBookEntry.number);
+        tvIban.setText(context.getResources().getString(R.string.str_iban) + " " + phoneBookEntry.iban);
+
+        return convertView;
     }
 
     @Override
@@ -129,7 +133,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")){
                 continue;
             }
-            if (phone.side == FractionMappingHelper.getSideFromFractionEnum(fractionEnum)){
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))){
                 continue;
             }
             count++;
@@ -147,7 +151,22 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
        return "0";
     }
 
-    static class ViewHolder {
+    private String getNumberFormSide(Phone[] phones, FractionEnum fractionEnum) {
+        for (Phone phone : phones){
+            if (phone.disabled != 0){
+                continue;
+            }
+            if (phone.note.matches("default")){
+                continue;
+            }
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))){
+                return phone.phone;
+            }
+        }
+        return "0";
+    }
+
+    private static class ViewHolder {
         TextView tvSide;
         TextView tvOwnNumbers;
         int position;
