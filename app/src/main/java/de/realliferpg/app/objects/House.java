@@ -15,9 +15,10 @@ public class House implements IBuilding {
     }
 
     @Override
-    public int getPayed_for() {
-        return payed_for;
-    }
+    public int getPayedForDays() { return (int)(payed_for/24); }
+
+    @Override
+    public int getPayedForHours() { return payed_for; }
 
     @Override
     public int getDisabled() {

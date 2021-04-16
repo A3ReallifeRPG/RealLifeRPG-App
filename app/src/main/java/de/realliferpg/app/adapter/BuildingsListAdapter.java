@@ -93,11 +93,11 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private String getTypeOfBuilding(BuildingEnum type) {
         switch (type.name().toLowerCase()){
             case "house":
-                return "Haus";
+                return "Haus"; // TODO Ressource str...
             case "building":
-                return "im Bau";
+                return "Gebäude"; // TODO Ressource str...
             case "rental":
-                return "Appartment";
+                return "Appartment"; // TODO Ressource str...
         }
         return "Anderes";
     }
@@ -128,11 +128,11 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            buildingName += " - inaktiv";
+            buildingName += " - inaktiv"; // TODO Ressource str...
         }
 
         viewHolderChild.tvBezeichnung.setText(buildingName);
-        viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayed_for() / 24)));
+        viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayedForDays())));
 
         convertView.setTag(viewHolderChild);
 
