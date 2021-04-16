@@ -124,7 +124,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         viewHolderChild.position = childPosition;
 
         IBuilding building = this.buildingByType[groupPosition].buildings[childPosition];
-        String buildingName = "ID: " +Integer.toString(building.getId());
+        String buildingName = "ID: " + Integer.toString(building.getId());
 
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {

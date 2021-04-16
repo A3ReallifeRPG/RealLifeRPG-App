@@ -137,7 +137,7 @@ public class PlayerBuildingsFragment extends Fragment {
             for (IBuilding building : buildingGroup.buildings){
                 if (building.getPayedForDays() <= daysForReminderMaintenance && groupName != BuildingEnum.BUILDING){
                     int messageID = groupName == BuildingEnum.HOUSE ? R.string.str_maintainance_house : R.string.str_maintainance_rental;
-                    String message = MessageFormat.format(getString(messageID), getBuildingTypeName(groupName), building.getId(), building.getPayedForDays(), building.getPayedForHours());
+                    String message = MessageFormat.format(getString(messageID), getBuildingTypeName(groupName), Integer.toString(building.getId()), building.getPayedForDays(), building.getPayedForHours());
                     Toast.makeText(this.getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
                 }
             }
