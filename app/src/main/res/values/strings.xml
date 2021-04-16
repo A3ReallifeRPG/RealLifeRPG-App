@@ -212,6 +212,12 @@
     <string name="str_financed">financed - resources are needed</string>
     <string name="str_wip">in progress</string>
 
+    <!-- Phonebook -->
+    <string name="str_phonebook">Phonebook</string>
+    <string name="str_name">Name: </string>
+    <string name="str_number">Number: </string>
+    <string name="str_iban">IBAN: </string>
+
     <!--<string name=""></string>-->
 
 </resources>

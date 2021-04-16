@@ -158,7 +158,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_directions_car_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/D:/Programme/AndroidStudio/plugins/android/lib/android.jar!/images/material/icons/materialicons/contacts/baseline_contacts_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -168,7 +168,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_vehicle" />
+                            <entry key="outputName" value="ic_contacts_list" />
                             <entry key="sourceFile" value="D:\Daten\Downloads\pollogo_simple.svg" />
                           </map>
                         </option>
