@@ -23,7 +23,7 @@
         <EditTextPreference
             android:id="@+id/pref_days_maintenance"
             android:icon="@drawable/ic_location_city"
-            android:key="days_maintenance"
+            android:key="pref_days_maintenance"
             android:title="@string/str_days_maintenance"
             android:defaultValue=""/>
     </PreferenceCategory>

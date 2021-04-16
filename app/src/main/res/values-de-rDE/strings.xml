@@ -189,6 +189,7 @@
     <string name="str_vehicleList_impound">beschlagnahmte Fahrzeuge</string>
 
     <string name="str_buildingsList_buildingPayedFor">Bezahlt für {0} Tag(e).</string>
+    <string name="str_setReminder">Wartungserinnerung</string>
 
 
     <!--<string name=""></string>-->

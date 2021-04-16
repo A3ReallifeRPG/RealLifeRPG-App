@@ -197,6 +197,7 @@
     <string name="str_vehicleList_impound">impounded vehicles</string>
 
     <string name="str_buildingsList_buildingPayedFor">Payed for {0} day(s).</string>
+    <string name="str_setReminder">Remind me of maintenance</string>
 
 
 

@@ -61,7 +61,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
 
-        Preference prefDaysMaintenance = findPreference("days_maintenance");
+        Preference prefDaysMaintenance = findPreference("pref_days_maintenance");
 
         prefDaysMaintenance.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -195,7 +195,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
             }
         }
-        else if (key.equals("days_maintenance"))
+        else if (key.equals("pref_days_maintenance"))
         {
             /*Snackbar snackbar = Snackbar.make(getView(), "Bla", Constants.ERROR_SNACKBAR_DURATION);
             snackbar.show();*/
