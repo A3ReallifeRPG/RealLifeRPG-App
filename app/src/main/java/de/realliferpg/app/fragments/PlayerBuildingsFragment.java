@@ -135,12 +135,29 @@ public class PlayerBuildingsFragment extends Fragment {
         for (BuildingGroup buildingGroup : buildingsByType){
             BuildingEnum groupName = buildingGroup.type;
             for (IBuilding building : buildingGroup.buildings){
-                if (building.getPayedForDays() <= daysForReminderMaintenance){
-                    String message = MessageFormat.format("Payed {0} with id {1} for {2} days ({3} hours).", groupName.toString(), building.getId(), building.getPayedForDays(), building.getPayedForHours()); // TODO Ressource str...
+                if (building.getPayedForDays() <= daysForReminderMaintenance && groupName != BuildingEnum.BUILDING){
+                    int messageID = groupName == BuildingEnum.HOUSE ? R.string.str_maintainance_house : R.string.str_maintainance_rental;
+                    String message = MessageFormat.format(getString(messageID), getBuildingTypeName(groupName), building.getId(), building.getPayedForDays(), building.getPayedForHours());
                     Toast.makeText(this.getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
                 }
             }
         }
+    }
+
+    private String getBuildingTypeName(BuildingEnum buildingEnum){
+        int id = 0;
+        switch (buildingEnum.toString().toUpperCase()){
+            case "HOUSE":
+                id = R.string.str_house;
+                break;
+            case "RENTAL":
+                id = R.string.str_rental;
+                break;
+            case "BUILDING":
+                id = R.string.str_building;
+                break;
+        }
+        return getString(id);
     }
 
     @Override

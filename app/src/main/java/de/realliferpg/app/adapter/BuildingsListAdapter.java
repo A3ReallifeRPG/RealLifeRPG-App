@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,13 +94,13 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private String getTypeOfBuilding(BuildingEnum type) {
         switch (type.name().toLowerCase()){
             case "house":
-                return "Haus"; // TODO Ressource str...
+                return Resources.getSystem().getString(R.string.str_house);
             case "building":
-                return "Gebäude"; // TODO Ressource str...
+                return Resources.getSystem().getString(R.string.str_building);
             case "rental":
-                return "Appartment"; // TODO Ressource str...
+                return Resources.getSystem().getString(R.string.str_rental);
         }
-        return "Anderes";
+        return null;
     }
 
     @Override
@@ -128,7 +129,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            buildingName += " - inaktiv"; // TODO Ressource str...
+            buildingName += Resources.getSystem().getString(R.string.str_inactive);
         }
 
         viewHolderChild.tvBezeichnung.setText(buildingName);

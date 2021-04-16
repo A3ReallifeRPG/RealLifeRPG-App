@@ -139,7 +139,6 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
 
                 break;
             case NETWORK_ERROR:
-                // TODO Testen
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbMarketPrices.setVisibility(View.GONE);

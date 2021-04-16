@@ -64,7 +64,6 @@ public class FractionMappingHelper {
 
     public static String getCopRankAsString(Context context, int coplevel) {
 
-        // TODO: ersetzen mit localized Strings
         switch (coplevel) {
             case 1:
                 return context.getResources().getString(R.string.str_justiz);
@@ -138,7 +137,6 @@ public class FractionMappingHelper {
 
     public static String getRacRankAsString(Context context, int raclevel) {
 
-        // TODO: ersetzen mit localized Strings
         switch (raclevel) {
             case 1:
                 return context.getResources().getString(R.string.str_rac01);

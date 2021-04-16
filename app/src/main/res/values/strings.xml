@@ -199,8 +199,18 @@
     <string name="str_buildingsList_buildingPayedFor">Payed for {0} day(s).</string>
     <string name="str_setReminder">Remind me of maintenance</string>
 
+    <!-- Buildings -->
+    <string name="str_house">House</string>
+    <string name="str_rental">Rental</string>
+    <string name="str_building">Building</string>
+    <string name="str_maintainance_house">Maintained {0} with id {1} for {2} days ({3} hours).</string>
+    <string name="str_maintainance_rental">Payed {0} with id {1} for {2} days ({3} hours).</string>
+    <string name="str_inactive"> - inactive</string>
 
-
+    <!-- CBS -->
+    <string name="str_completed">completed</string>
+    <string name="str_financed">financed - resources are needed</string>
+    <string name="str_wip">in progress</string>
 
     <!--<string name=""></string>-->
 

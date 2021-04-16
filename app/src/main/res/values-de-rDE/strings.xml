@@ -191,6 +191,18 @@
     <string name="str_buildingsList_buildingPayedFor">Bezahlt für {0} Tag(e).</string>
     <string name="str_setReminder">Wartungserinnerung</string>
 
+    <!-- Buildings -->
+    <string name="str_house">Haus</string>
+    <string name="str_rental">Appartment</string>
+    <string name="str_building">Gebäude</string>
+    <string name="str_maintainance_house">{0} mit ID {1} ist für {2} Tage ({3} Stunden) gewartet.</string>
+    <string name="str_maintainance_rental">{0} mit ID {1} ist für {2} Tage ({3} Stunden) bezahlt.</string>
+    <string name="str_inactive"> - inaktiv</string>
+
+    <!-- CBS -->
+    <string name="str_completed">abgeschlossen</string>
+    <string name="str_financed">finanziert - es werden Ressourcen benötigt</string>
+    <string name="str_wip">in Arbeit</string>
 
     <!--<string name=""></string>-->
 
