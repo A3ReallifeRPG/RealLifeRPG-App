@@ -50,7 +50,7 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
 
         viewHolder.position = position;
 
-        FractionEnum fractionEnum = FractionEnum.NONE;
+        FractionEnum fractionEnum = FractionEnum.CIV;
 
         switch (position) {
             case 0: // 0 = Cops
@@ -66,11 +66,11 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
                 fractionEnum =  FractionEnum.RAC;
                 break;
             default:
-                fractionEnum =  FractionEnum.NONE;
+                fractionEnum =  FractionEnum.CIV;
                 break;
         }
 
-        viewHolder.tv_fraction_name.setText(getTextFromEnum(fractionEnum));
+        viewHolder.tv_fraction_name.setText(FractionMappingHelper.getFractionNameFromEnum(this.context, fractionEnum));
         viewHolder.tv_fraction_rank.setText(getRankName(fractionEnum, level));
         viewHolder.iv_fraction_symbol.setImageResource(FractionMappingHelper.getImageResourceFromEnum(this.context, fractionEnum));
         viewHolder.iv_fraction_ranksymbol.setImageResource(getRankSymbol(fractionEnum, level));
@@ -78,31 +78,6 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
         convertView.setTag(viewHolder);
 
         return convertView;
-    }
-
-    private String getTextFromEnum(FractionEnum fractionEnum) {
-
-        String fraction_name = "";
-
-        switch (fractionEnum) {
-            case COP:
-                fraction_name = "Polizei";
-                break;
-            case JUSTIZ:
-                fraction_name = "Justiz";
-                break;
-            case MEDIC:
-                fraction_name = "Rettungsdienst";
-                break;
-            case RAC:
-                fraction_name = "RealLife Automobil Club";
-                break;
-            case NONE:
-                fraction_name = "Keine Fraktion";
-                break;
-        }
-
-        return fraction_name;
     }
 
     private String getRankName(FractionEnum fractionEnum, int level) {
@@ -129,7 +104,7 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
             case RAC:
                 fraction_rankname = FractionMappingHelper.getRacRankAsString(this.context, level);
                 break;
-            case NONE:
+            case CIV:
                 fraction_rankname = "Kein Rang";
                 break;
         }
@@ -155,7 +130,7 @@ public class PlayersFractionListAdapter extends ArrayAdapter<Integer> {
             case RAC:
                 tempSymbol = FractionMappingHelper.getRacRankSymbolAsString(level);
                 break;
-            case NONE:
+            case CIV:
                 tempSymbol = "backwasch";
                 break;
         }

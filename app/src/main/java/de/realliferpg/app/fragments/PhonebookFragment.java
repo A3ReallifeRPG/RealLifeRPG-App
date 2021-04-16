@@ -53,12 +53,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
         final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
         pbLoadphonebook.setVisibility(View.VISIBLE);
-        final ExpandableListView listPlayers = view.findViewById(R.id.lv_phonebook);
+        final ExpandableListView listPhonebooks = view.findViewById(R.id.lv_phonebook);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
-        if (Singleton.getInstance().getPlayerInfo() == null) {
-            apiHelper.getPlayerStats();
-        }
+        apiHelper.getPlayerStats();
+
 
         final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -69,11 +68,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
                 pbLoadphonebook.setVisibility(View.VISIBLE);
 
-                listPlayers.setAdapter((BaseExpandableListAdapter) null);
+                listPhonebooks.setAdapter((BaseExpandableListAdapter) null);
             }
         });
 
-        listPlayers.setOnScrollListener(new AbsListView.OnScrollListener() {
+        listPhonebooks.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -81,8 +80,8 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (listPlayers == null || listPlayers.getChildCount() == 0) ?
-                        0 : listPlayers.getChildAt(0).getTop();
+                int topRow = (listPhonebooks == null || listPhonebooks.getChildCount() == 0) ?
+                        0 : listPhonebooks.getChildAt(0).getTop();
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
@@ -109,20 +108,19 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
     @Override
     public void onCallback(RequestTypeEnum type) {
-        ProgressBar pbListPlayers = view.findViewById(R.id.pb_phonebook);
+        ProgressBar pblistPhonebooks = view.findViewById(R.id.pb_phonebook);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setRefreshing(false);
 
         switch (type) {
-            case SERVER:
-                ArrayList<Server> servers = Singleton.getInstance().getServerList();
+            case PLAYER:
                 final ExpandableListView listPhoneBooks = view.findViewById(R.id.lv_phonebook);
 
-                PhonebookAdapter listAdapter = new PhonebookAdapter(this.getContext(), servers);
+                PhonebookAdapter listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
 
                 listPhoneBooks.setAdapter(listAdapter);
 
-                pbListPlayers.setVisibility(View.GONE);
+                pblistPhonebooks.setVisibility(View.GONE);
 
                 // collapse all but selected item
                 listPhoneBooks.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -139,7 +137,7 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
-                pbListPlayers.setVisibility(View.GONE);
+                pblistPhonebooks.setVisibility(View.GONE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 

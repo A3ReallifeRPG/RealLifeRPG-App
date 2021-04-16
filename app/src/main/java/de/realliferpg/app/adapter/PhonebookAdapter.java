@@ -13,39 +13,41 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.realliferpg.app.R;
+import de.realliferpg.app.helper.FractionMappingHelper;
+import de.realliferpg.app.interfaces.FractionEnum;
+import de.realliferpg.app.objects.Phone;
+import de.realliferpg.app.objects.Phonebook;
+import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
 
 public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private ArrayList<Server> servers;
+    private PlayerInfo playerInfo;
 
-    public PhonebookAdapter(Context _context, ArrayList<Server> _servers) {
+    public PhonebookAdapter(Context _context, PlayerInfo _playerInfo) {
         this.context = _context;
-        this.servers = _servers;
+        this.playerInfo = _playerInfo;
     }
 
     @Override
     public int getGroupCount() {
-        return servers.size();
+        return playerInfo.phonebooks.length;
     }
 
     @Override
-    public int getChildrenCount(int i) {
-        return servers.get(i).Players.length;
+    public int getChildrenCount(int i) { return playerInfo.phonebooks[i].phonebook.length;
     }
 
     @Override
-    public Object getGroup(int i) {
-        return servers.get(i);
+    public Object getGroup(int i) { return playerInfo.phonebooks[i];
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        String[] sortedPlayers = servers.get(groupPosition).Players;
-        Arrays.sort(sortedPlayers);
-        return sortedPlayers[childPosition];
+        Phonebook[] phoneBook = playerInfo.phonebooks[groupPosition].phonebook;
+        return phoneBook[childPosition];
     }
 
     @Override
@@ -65,48 +67,31 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Server server = (Server) getGroup(groupPosition);
-
         final ViewHolder viewHolder;
 
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_group_playerslist,null);
+            convertView = inflater.inflate(R.layout.list_item_group_phonebook,null);
 
             viewHolder = new ViewHolder();
             viewHolder.position = groupPosition;
 
-            viewHolder.tvPlayersGroupInfo = convertView.findViewById(R.id.tv_playerslist_info);
-            viewHolder.tvServerHead = convertView.findViewById(R.id.tv_playerslist_grouphead);
-            viewHolder.pbCountPlayers = convertView.findViewById(R.id.pb_playerslist_count);
+            viewHolder.tvSide = convertView.findViewById(R.id.tv_phonebook_side);
+            viewHolder.tvOwnNumbers = convertView.findViewById(R.id.tv_phonebook_own_numbers);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.position = groupPosition;
 
-        String title = server.Servername + " - " + server.Playercount + "/" + server.Slots;
-        viewHolder.tvServerHead.setText(title);
+        FractionEnum fractionEnum = FractionMappingHelper.getFractionFromSide(playerInfo.phonebooks[groupPosition].side, Integer.valueOf(playerInfo.coplevel));
+        viewHolder.tvSide.setText(FractionMappingHelper.getFractionNameFromEnum(this.context, fractionEnum));
 
-        double progress = ((double) server.Playercount / (double) server.Slots) * 100;
+        String defaultNumber = getDefaultNumber(playerInfo.phones);
 
-        viewHolder.pbCountPlayers.setProgress((int) progress);
-
-        if (server.Servername.toLowerCase().contains("realliferpg") && !server.Servername.toLowerCase().contains("gungame")) {
-            // Arma 3 Server
-            viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
-                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
-                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorCop) + "'>COP " + server.Cops +
-                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>MED " + server.Medics +
-                            "</font> - <font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>RAC " + server.Adac +
-                            "</font>"));
-        }
-        else {
-            // anderer Server
-            viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
-                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>Spieler " + server.Playercount));
-        }
+        String textOwnPhoneNumber = playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum) ? context.getResources().getString(R.string.str_multiple_phonenumbers) + defaultNumber : context.getResources().getString(R.string.str_own_phonenumber) + defaultNumber;
+        viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
 
         convertView.setTag(viewHolder);
 
@@ -115,7 +100,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition,childPosition);
+        /*final String childText = (String)getChild(groupPosition,childPosition);
 
         if(convertView == null)
         {
@@ -126,7 +111,8 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         TextView text_playerslist_listitem = convertView.findViewById(R.id.tv_playerslist_listitem);
         text_playerslist_listitem.setText(Html.fromHtml(childText));
 
-        return convertView;
+        return convertView;*/
+        return null;
     }
 
     @Override
@@ -134,10 +120,36 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    private boolean playerHasMultipleOwnNumbers(Phone[] phones, FractionEnum fractionEnum){
+        int count = 0;
+        for (Phone phone : phones){
+            if (phone.disabled != 0){
+                continue;
+            }
+            if (phone.note.matches("default")){
+                continue;
+            }
+            if (phone.side == FractionMappingHelper.getSideFromFractionEnum(fractionEnum)){
+                continue;
+            }
+            count++;
+        }
+
+        return count > 1;
+    }
+
+    private String getDefaultNumber(Phone[] phones){
+       for (Phone phone : phones){
+           if (phone.note.matches("default")){
+               return phone.phone;
+           }
+       }
+       return "0";
+    }
+
     static class ViewHolder {
-        TextView tvServerHead;
-        TextView tvPlayersGroupInfo;
-        ProgressBar pbCountPlayers;
+        TextView tvSide;
+        TextView tvOwnNumbers;
         int position;
     }
 }

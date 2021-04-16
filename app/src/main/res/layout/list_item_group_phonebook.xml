@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:background="@color/primaryLightColor">
+
+        <TextView
+            android:id="@+id/tv_phonebook_own_numbers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin = "4dp"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:text="@string/str_placeholder"
+            android:textColor="@color/secondaryDarkColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_side"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/tv_phonebook_side"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:text="@string/str_placeholder"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
