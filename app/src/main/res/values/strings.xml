@@ -74,6 +74,12 @@
     <string name="str_server3">Server 3</string>
     <string name="str_buildings">Buildings</string>
 
+    <string name="str_medic">Medical Rescue Service</string>
+    <string name="str_rac">RealLife Automobil Club</string>
+    <string name="str_cop">Police</string>
+    <string name="str_justiz">Justice</string>
+    <string name="str_civ">Civilian</string>
+
     <string name="str_calc_vehicles">Vehicles</string>
     <string name="str_calc_guns">Guns</string>
     <string name="str_calc_sell">Sell items</string>
@@ -83,7 +89,7 @@
     <string name="str_noRank">Kein Rang</string>
 
     <!-- Raenge der Justiz -->
-    <string name="str_justiz">Justiz</string> <!-- cop-level 1 -->
+    <string name="str_judicial_officer">Justiz</string> <!-- cop-level 1 -->
 
     <!-- Raenge der Cops -->
     <string name="str_cop0a">Polizeianwärter</string> <!-- C1, cop-level 2 -->
@@ -211,6 +217,14 @@
     <string name="str_completed">completed</string>
     <string name="str_financed">financed - resources are needed</string>
     <string name="str_wip">in progress</string>
+
+    <!-- Phonebook -->
+    <string name="str_phonebook">Phonebook</string>
+    <string name="str_name">Name:</string>
+    <string name="str_number">Number:</string>
+    <string name="str_iban">IBAN:</string>
+    <string name="str_multiple_phonenumbers">You have several phone numbers of your own. Default is:</string>
+    <string name="str_own_phonenumber">Your phone number:</string>
 
     <!--<string name=""></string>-->
 

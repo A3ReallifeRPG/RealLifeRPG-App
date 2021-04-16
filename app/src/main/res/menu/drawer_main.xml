@@ -39,6 +39,12 @@
             android:title="@string/str_cbs" />
 
         <item
+            android:id="@+id/nav_phonebook"
+            android:icon="@drawable/ic_contacts_list"
+            android:title="@string/str_phonebook"
+            />
+
+        <item
             android:id="@+id/nav_polDashboard"
             android:icon="@drawable/ic_pol_logo"
             android:title="@string/str_polDashboard"

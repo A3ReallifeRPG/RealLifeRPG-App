@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/secondaryColor">
+
+    <TextView
+        android:id="@+id/tv_phonebook_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="3dp"
+        android:text="@string/str_placeholder"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16dip"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_phonebook_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="3dp"
+        android:text="@string/str_placeholder"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16dip"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_phonebook_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_phonebook_name"/>
+
+    <TextView
+        android:id="@+id/tv_phonebook_iban"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="3dp"
+        android:text="@string/str_placeholder"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16dip"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_number"
+        app:layout_constraintStart_toStartOf="@+id/tv_phonebook_number"
+        app:layout_constraintEnd_toEndOf="@+id/tv_phonebook_number"/>
+
+
+</android.support.constraint.ConstraintLayout>

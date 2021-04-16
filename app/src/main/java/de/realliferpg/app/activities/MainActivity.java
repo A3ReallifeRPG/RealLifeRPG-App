@@ -40,6 +40,7 @@ import de.realliferpg.app.fragments.ImprintFragment;
 import de.realliferpg.app.fragments.InfoFragment;
 import de.realliferpg.app.fragments.MainFragment;
 import de.realliferpg.app.fragments.MarketFragment;
+import de.realliferpg.app.fragments.PhonebookFragment;
 import de.realliferpg.app.fragments.PlayerBuildingsFragment;
 import de.realliferpg.app.fragments.PlayerDonationFragment;
 import de.realliferpg.app.fragments.PlayerFragment;
@@ -185,6 +186,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
+                break;
+            case R.id.nav_phonebook:
+                switchFragment(new PhonebookFragment());
                 break;
             case R.id.nav_website: {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
