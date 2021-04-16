@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -91,14 +92,14 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
         tv_groupHeader.setText(cbsData.title);
 
-        String status = ""; // TODO localize
+        String status = "";
         if (cbsData.finished == 1){
-            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>abgeschlossen";
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>" + context.getResources().getString(R.string.str_completed);
         } else if (cbsData.amount == cbsData.funding_required)
         {
-            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>finanziert - es werden Ressourcen benötigt";
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>" + context.getResources().getString(R.string.str_financed);
         } else {
-            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>in Arbeit";
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>" + context.getResources().getString(R.string.str_wip);
         }
 
         tv_groupSubtitle.setText(Html.fromHtml(status));

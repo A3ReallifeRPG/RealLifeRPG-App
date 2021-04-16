@@ -20,14 +20,12 @@
             android:icon="@drawable/ic_info_filled"
             android:key="scan_code_help"
             android:title="@string/str_helpScan" />
-        <!--
         <EditTextPreference
             android:id="@+id/pref_days_maintenance"
             android:icon="@drawable/ic_location_city"
-            android:key="days_maintenance"
+            android:key="pref_days_maintenance"
             android:title="@string/str_days_maintenance"
             android:defaultValue=""/>
-            -->
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/str_vehiclesListSettings">
 

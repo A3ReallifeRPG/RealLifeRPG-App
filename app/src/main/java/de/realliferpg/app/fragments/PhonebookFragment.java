@@ -3,45 +3,42 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ListView;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.adapter.MarketItemAdapter;
+import de.realliferpg.app.adapter.PhonebookAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.Server;
 
-public class MarketFragment extends Fragment implements CallbackNotifyInterface {
+public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
     private FragmentInteractionInterface mListener;
 
-    public MarketFragment() {
+    public PhonebookFragment() {
         // Required empty public constructor
     }
 
-    public static MarketFragment newInstance() {
-        return new MarketFragment();
+    public static PhonebookFragment newInstance() {
+        return new PhonebookFragment();
     }
 
     @Override
@@ -52,31 +49,30 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_market, container, false);
+        view =  inflater.inflate(R.layout.fragment_phonebooks, container, false);
 
-        final ProgressBar pbLoadMarketPrices = view.findViewById(R.id.pb_market);
-        pbLoadMarketPrices.setVisibility(View.VISIBLE);
-        final ListView listMarketPrices = view.findViewById(R.id.lv_market);
+        final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
+        pbLoadphonebook.setVisibility(View.VISIBLE);
+        final ExpandableListView listPhonebooks = view.findViewById(R.id.lv_phonebook);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
-        apiHelper.getMarketPrices();
-        apiHelper.getServers();
+        apiHelper.getPlayerStats();
 
-        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_market);
+
+        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                apiHelper.getMarketPrices();
-                apiHelper.getServers();
+                apiHelper.getPlayerStats();
 
-                pbLoadMarketPrices.setVisibility(View.VISIBLE);
+                pbLoadphonebook.setVisibility(View.VISIBLE);
 
-                listMarketPrices.setAdapter(null);
+                listPhonebooks.setAdapter((BaseExpandableListAdapter) null);
             }
         });
 
-        listMarketPrices.setOnScrollListener(new AbsListView.OnScrollListener() {
+        listPhonebooks.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -84,14 +80,13 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (listMarketPrices == null || listMarketPrices.getChildCount() == 0) ?
-                        0 : listMarketPrices.getChildAt(0).getTop();
+                int topRow = (listPhonebooks == null || listPhonebooks.getChildCount() == 0) ?
+                        0 : listPhonebooks.getChildAt(0).getTop();
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
 
         return view;
-
     }
 
     @Override
@@ -113,39 +108,40 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
 
     @Override
     public void onCallback(RequestTypeEnum type) {
-        ProgressBar pbMarketPrices = view.findViewById(R.id.pb_market);
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_market);
+        ProgressBar pblistPhonebooks = view.findViewById(R.id.pb_phonebook);
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setRefreshing(false);
 
         switch (type) {
-            case CURRENT_MARKET_PRICES:
-                ArrayList<MarketItem> marketPrices = Singleton.getInstance().getMarketPrices();
-                ArrayList<Server> serverListe = Singleton.getInstance().getServerList();
-                Collections.sort(marketPrices, new Comparator<MarketItem>() {
+            case PLAYER:
+                final ExpandableListView listPhoneBooks = view.findViewById(R.id.lv_phonebook);
+
+                PhonebookAdapter listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
+
+                listPhoneBooks.setAdapter(listAdapter);
+
+                pblistPhonebooks.setVisibility(View.GONE);
+
+                // collapse all but selected item
+                listPhoneBooks.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                    int previousItem = -1;
+
                     @Override
-                    public int compare(MarketItem o1, MarketItem o2) {
-                        return o1.name.compareTo(o2.name);
+                    public void onGroupExpand(int groupPosition) {
+                        if (groupPosition != previousItem)
+                            listPhoneBooks.collapseGroup(previousItem);
+                        previousItem = groupPosition;
                     }
                 });
-                final ListView listMarketPrices = view.findViewById(R.id.lv_market);
-
-                int[] serversOnline = GetServersOnline(serverListe);
-
-                MarketItemAdapter listAdapter = new MarketItemAdapter(view.getContext(), marketPrices, serversOnline);
-
-                listMarketPrices.setAdapter(listAdapter);
-
-                pbMarketPrices.setVisibility(View.GONE);
-
                 break;
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
-                pbMarketPrices.setVisibility(View.GONE);
+                pblistPhonebooks.setVisibility(View.GONE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.srl_main_market), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_phonebook), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override
@@ -158,24 +154,5 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 break;
         }
-    }
-
-    private int[] GetServersOnline(ArrayList<Server> servers){
-        int[] serverOnline = {};
-        for (Server server : servers) {
-            if (server.Servername.contains("Gungame")) {
-                // Gungame-Server ignorieren
-                serverOnline = addElement(serverOnline, 0);
-            } else {
-                serverOnline = addElement(serverOnline, server.online);
-            }
-        }
-        return serverOnline;
-    }
-
-    private int[] addElement(int[] a, int e) {
-        a  = Arrays.copyOf(a, a.length + 1);
-        a[a.length - 1] = e;
-        return a;
     }
 }

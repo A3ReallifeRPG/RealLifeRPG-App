@@ -2,12 +2,11 @@ package de.realliferpg.app.objects;
 
 import de.realliferpg.app.interfaces.IBuilding;
 
-public class House implements IBuilding {
+public class Rental implements IBuilding {
     public int id;
     public int payed_for;
     public int disabled;
-    public String location;
-    public String[] players;
+    public int active;
 
     @Override
     public int getId() {

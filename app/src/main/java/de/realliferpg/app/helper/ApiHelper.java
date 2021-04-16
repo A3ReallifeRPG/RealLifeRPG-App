@@ -71,7 +71,6 @@ public class ApiHelper {
                 Singleton.getInstance().setChangelogList(changelogs);
                 return true;
             case CURRENT_MARKET_PRICES:
-                // TODO neues MarketPrices Item
                 MarketServerObject.Wrapper marketItemWrapper = gson.fromJson(response.toString(), MarketServerObject.Wrapper.class);
                 final ArrayList<MarketServerObject> marketServerObjects = new ArrayList<>(Arrays.asList(marketItemWrapper.data));
                 Singleton.getInstance().setMarketItemList(marketServerObjects);

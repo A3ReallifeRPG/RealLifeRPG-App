@@ -25,4 +25,6 @@ public class PreferenceHelper {
     public boolean showDestroyed() { return prefs.getBoolean("pref_vehicleList_destroyed", false);}
 
     public boolean showImpounded() { return prefs.getBoolean("pref_vehicleList_impounded", false);}
+
+    public int getDaysForReminderMaintenance() { return Integer.valueOf(prefs.getString("pref_days_maintenance", "2"));}
 }

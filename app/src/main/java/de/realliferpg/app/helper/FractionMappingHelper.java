@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import de.realliferpg.app.R;
 import de.realliferpg.app.interfaces.FractionEnum;
 
+import static de.realliferpg.app.interfaces.FractionEnum.MEDIC;
+
 public class FractionMappingHelper {
 
     public static int getImageResourceFromEnum(Context context, FractionEnum fraction) {
@@ -27,7 +29,7 @@ public class FractionMappingHelper {
             case RAC:
                 tempfractionSymbol = "fraction_rac";
                 break;
-            case NONE:
+            case CIV:
                 // sollte hier nie reinlaufen, aber man weiß ja nie...
                 tempfractionSymbol = "realliferpg_logo";
                 break;
@@ -44,10 +46,10 @@ public class FractionMappingHelper {
     public static FractionEnum getFractionFromSide(String fractionEnum, int coplevel){
         switch (fractionEnum) {
             case "GUER": // Medic
-                return FractionEnum.MEDIC;
+                return MEDIC;
             case "WEST": // Pol & Justiz
                 if (coplevel == 0) // war mal bei Justiz/Pol
-                    return FractionEnum.NONE;
+                    return FractionEnum.CIV;
                 if (coplevel == 1)
                 {
                     return FractionEnum.JUSTIZ;
@@ -57,17 +59,33 @@ public class FractionMappingHelper {
             case "EAST":
                 return FractionEnum.RAC;
             case "CIV":
-                return FractionEnum.NONE;
+                return FractionEnum.CIV;
         }
-        return FractionEnum.NONE;
+        return FractionEnum.CIV;
     }
+
+    public static String getFractionNameFromEnum(Context context, FractionEnum fractionEnum){
+        switch (fractionEnum) {
+            case MEDIC:
+                return context.getResources().getString(R.string.str_medic);
+            case RAC:
+                return context.getResources().getString(R.string.str_rac);
+            case COP:
+                return context.getResources().getString(R.string.str_cop);
+            case JUSTIZ:
+                return context.getResources().getString(R.string.str_justiz);
+            case CIV:
+                return context.getResources().getString(R.string.str_civ);
+        }
+        return context.getResources().getString(R.string.str_civ);
+    }
+
 
     public static String getCopRankAsString(Context context, int coplevel) {
 
-        // TODO: ersetzen mit localized Strings
         switch (coplevel) {
             case 1:
-                return context.getResources().getString(R.string.str_justiz);
+                return context.getResources().getString(R.string.str_judicial_officer);
             case 2:
                 return context.getResources().getString(R.string.str_cop0a);
             case 3:
@@ -138,7 +156,6 @@ public class FractionMappingHelper {
 
     public static String getRacRankAsString(Context context, int raclevel) {
 
-        // TODO: ersetzen mit localized Strings
         switch (raclevel) {
             case 1:
                 return context.getResources().getString(R.string.str_rac01);
@@ -272,5 +289,20 @@ public class FractionMappingHelper {
             default:
                 return "Kein Rang";
         }
+    }
+
+    public static String getSideFromFractionEnum(FractionEnum fractionEnum) {
+        switch (fractionEnum) {
+            case MEDIC:
+                return "GUER";
+            case RAC:
+                return "EAST";
+            case COP:
+            case JUSTIZ:
+                return "WEST";
+            case CIV:
+                return "CIV";
+        }
+        return "CIV";
     }
 }

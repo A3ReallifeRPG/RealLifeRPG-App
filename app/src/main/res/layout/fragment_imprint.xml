@@ -8,7 +8,6 @@
     android:background="@color/secondaryColor"
     tools:context=".fragments.ImprintFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tv_imprint_head"
         android:layout_width="wrap_content"

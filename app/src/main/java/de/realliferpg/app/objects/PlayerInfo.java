@@ -59,8 +59,13 @@ public class PlayerInfo {
     public House[] houses;
     // Bauwerke
     public Building[] buildings;
+    // Appartments
+    public Rental[] rentals;
     // Fahrzeuge je nach Typ
     public VehicleGroup[] vehiclesByType;
+
+    public Phone[] phones;
+    public Phonebooks[] phonebooks;
 
     public long requested_at;
 
