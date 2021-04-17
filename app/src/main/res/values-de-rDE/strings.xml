@@ -170,8 +170,9 @@
     <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
-    <string name="str_noDataChangeTab">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
-    <string name="str_noData">Keine Daten vorhanden.</string>
+    <string name="str_no_data_change_tab">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
+    <string name="str_no_data">Keine Daten vorhanden.</string>
+    <string name="str_no_data_refresh">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte aktualisiere die Seite (runterziehen).</string>
     <string name="str_days_maintenance">Erinnerung an Wartung (in Tagen)</string>
     <string name="str_new_value">Neuer Wert:</string>
     <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! Sie muss zwischen 0 and 20 liegen!</string>

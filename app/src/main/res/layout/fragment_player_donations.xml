@@ -20,7 +20,7 @@
         android:id="@+id/tvKeineDatenDonations"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/str_noDataChangeTab"
+        android:text="@string/str_no_data_change_tab"
         android:visibility="invisible"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"

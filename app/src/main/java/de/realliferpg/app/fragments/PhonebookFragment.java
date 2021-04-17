@@ -26,6 +26,7 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.Phone;
+import de.realliferpg.app.objects.PlayerInfo;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -57,8 +58,12 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getPlayerStats();
 
+        PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
+
         final TextView tvDefaultPhoneNumber = view.findViewById(R.id.tv_default_phonenumber);
-        tvDefaultPhoneNumber.setText(getContext().getResources().getString(R.string.str_default_phonenumber) + " " + getDefaultNumber(Singleton.getInstance().getPlayerInfo().phones));
+        tvDefaultPhoneNumber.setText(getContext().getResources().getString(R.string.str_default_phonenumber) + " " + getDefaultNumber(playerInfo.phones));
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_phonebooks);
+        final ExpandableListView lvPhonebooks = view.findViewById(R.id.lv_phonebook);
 
         final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -86,6 +91,14 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
+
+        if (playerInfo.phonebooks == null || playerInfo.phonebooks.length == 0){
+            tvKeineDaten.setVisibility(View.VISIBLE);
+            lvPhonebooks.setVisibility(View.INVISIBLE);
+        } else {
+            tvKeineDaten.setVisibility(View.INVISIBLE);
+            lvPhonebooks.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

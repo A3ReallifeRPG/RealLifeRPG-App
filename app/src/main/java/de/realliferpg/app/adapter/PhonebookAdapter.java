@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;

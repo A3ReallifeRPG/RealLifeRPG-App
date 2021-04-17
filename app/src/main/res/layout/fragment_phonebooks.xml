@@ -77,6 +77,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_no_data_phonebooks"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/str_no_data_refresh"
+                android:visibility="invisible"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
