@@ -13,8 +13,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -26,7 +25,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.Server;
+import de.realliferpg.app.objects.Phone;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -49,7 +48,7 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_phonebooks, container, false);
+        view = inflater.inflate(R.layout.fragment_phonebooks, container, false);
 
         final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
         pbLoadphonebook.setVisibility(View.VISIBLE);
@@ -58,6 +57,8 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getPlayerStats();
 
+        final TextView tvDefaultPhoneNumber = view.findViewById(R.id.tv_default_phonenumber);
+        tvDefaultPhoneNumber.setText(getContext().getResources().getString(R.string.str_default_phonenumber) + " " + getDefaultNumber(Singleton.getInstance().getPlayerInfo().phones));
 
         final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -154,5 +155,14 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 break;
         }
+    }
+
+    private String getDefaultNumber(Phone[] phones) {
+        for (Phone phone : phones) {
+            if (phone.note.matches("default")) {
+                return phone.phone;
+            }
+        }
+        return "0";
     }
 }
