@@ -7,14 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import java.sql.Array;
-import java.util.Arrays;
-
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
-import de.realliferpg.app.objects.Phone;
-import de.realliferpg.app.objects.Phonebook;
+import de.realliferpg.app.objects.PhoneNumbers;
+import de.realliferpg.app.objects.PhonebookEntry;
 import de.realliferpg.app.objects.PlayerInfo;
 
 
@@ -45,7 +42,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Phonebook[] phoneBook = playerInfo.phonebooks[groupPosition].phonebook;
+        PhonebookEntry[] phoneBook = playerInfo.phonebooks[groupPosition].phonebook;
         return phoneBook[childPosition];
     }
 
@@ -102,7 +99,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Phonebook phoneBookEntry = playerInfo.phonebooks[groupPosition].phonebook[childPosition];
+        PhonebookEntry phoneBookEntry = playerInfo.phonebooks[groupPosition].phonebook[childPosition];
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -125,9 +122,9 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private boolean playerHasMultipleOwnNumbers(Phone[] phones, FractionEnum fractionEnum) {
+    private boolean playerHasMultipleOwnNumbers(PhoneNumbers[] phones, FractionEnum fractionEnum) {
         int count = 0;
-        for (Phone phone : phones) {
+        for (PhoneNumbers phone : phones) {
             if (phone.disabled != 0) {
                 continue;
             }
@@ -143,8 +140,8 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return count > 1;
     }
 
-    private String getDefaultNumber(Phone[] phones) {
-        for (Phone phone : phones) {
+    private String getDefaultNumber(PhoneNumbers[] phones) {
+        for (PhoneNumbers phone : phones) {
             if (phone.note.matches("default")) {
                 return phone.phone;
             }
@@ -152,8 +149,8 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return "0";
     }
 
-    private String getNumberFormSide(Phone[] phones, FractionEnum fractionEnum) {
-        for (Phone phone : phones) {
+    private String getNumberFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
+        for (PhoneNumbers phone : phones) {
             if (phone.disabled != 0) {
                 continue;
             }

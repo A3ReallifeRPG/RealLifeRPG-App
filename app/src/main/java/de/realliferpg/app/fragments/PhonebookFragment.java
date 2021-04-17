@@ -25,7 +25,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.Phone;
+import de.realliferpg.app.objects.PhoneNumbers;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
@@ -170,8 +170,8 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         }
     }
 
-    private String getDefaultNumber(Phone[] phones) {
-        for (Phone phone : phones) {
+    private String getDefaultNumber(PhoneNumbers[] phones) {
+        for (PhoneNumbers phone : phones) {
             if (phone.note.matches("default")) {
                 return phone.phone;
             }
