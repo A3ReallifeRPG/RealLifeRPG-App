@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.MessageFormat;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -19,7 +16,6 @@ import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.IBuilding;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.House;
@@ -30,6 +26,7 @@ public class PlayerBuildingsFragment extends Fragment {
 
     private View view;
     private FragmentInteractionInterface mListener;
+    private BuildingGroup[] buildingByType;
 
     public PlayerBuildingsFragment() {
         // Required empty public constructor
@@ -71,7 +68,7 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-/*
+        /*
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 11;
@@ -98,10 +95,10 @@ public class PlayerBuildingsFragment extends Fragment {
         rentalZwei.payed_for = 1234;
         Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
         rentals = dummyRentals;
-*/
+        */
         // -----------------------------
 
-        BuildingGroup[] buildingByType = new BuildingGroup[3];
+        buildingByType = new BuildingGroup[3];
 
         buildingByType[0] = new BuildingGroup();
         buildingByType[1] = new BuildingGroup();
@@ -125,40 +122,6 @@ public class PlayerBuildingsFragment extends Fragment {
             tvKeineDaten.setVisibility(View.INVISIBLE);
             expandableListView.setVisibility(View.VISIBLE);
         }
-
-        showReminder(buildingByType);
-    }
-
-    private void showReminder(BuildingGroup[] buildingsByType){
-        PreferenceHelper prefHelper = new PreferenceHelper();
-        int daysForReminderMaintenance = Integer.valueOf(prefHelper.getDaysForReminderMaintenance());
-
-        for (BuildingGroup buildingGroup : buildingsByType){
-            BuildingEnum groupName = buildingGroup.type;
-            for (IBuilding building : buildingGroup.buildings){
-                if (building.getPayedForDays() <= daysForReminderMaintenance && groupName != BuildingEnum.BUILDING){
-                    int messageID = groupName == BuildingEnum.HOUSE ? R.string.str_maintainance_house : R.string.str_maintainance_rental;
-                    String message = MessageFormat.format(getString(messageID), getBuildingTypeName(groupName), Integer.toString(building.getId()), building.getPayedForDays(), building.getPayedForHours());
-                    Toast.makeText(this.getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }
-
-    private String getBuildingTypeName(BuildingEnum buildingEnum){
-        int id = 0;
-        switch (buildingEnum.toString().toUpperCase()){
-            case "HOUSE":
-                id = R.string.str_house;
-                break;
-            case "RENTAL":
-                id = R.string.str_rental;
-                break;
-            case "BUILDING":
-                id = R.string.str_building;
-                break;
-        }
-        return getString(id);
     }
 
     @Override
