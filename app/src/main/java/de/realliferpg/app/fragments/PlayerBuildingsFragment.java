@@ -71,7 +71,7 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-
+/*
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 11;
@@ -98,7 +98,7 @@ public class PlayerBuildingsFragment extends Fragment {
         rentalZwei.payed_for = 1234;
         Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
         rentals = dummyRentals;
-
+*/
         // -----------------------------
 
         BuildingGroup[] buildingByType = new BuildingGroup[3];
