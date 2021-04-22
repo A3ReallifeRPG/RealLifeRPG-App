@@ -71,15 +71,15 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-        /*
+
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 11;
-        hausEins.payed_for = 30;
+        hausEins.payed_for = 30*24;
         House hausZwei = new House();
         hausZwei.players = new String[]{"Spieler 1", "Spieler 2"};
         hausZwei.id = 12;
-        hausZwei.payed_for = 30;
+        hausZwei.payed_for = 3*24;
         House[] dummyHaeuser = new House[]{hausEins, hausZwei};
         houses = dummyHaeuser;
 
@@ -98,7 +98,7 @@ public class PlayerBuildingsFragment extends Fragment {
         rentalZwei.payed_for = 1234;
         Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
         rentals = dummyRentals;
-        */
+
         // -----------------------------
 
         BuildingGroup[] buildingByType = new BuildingGroup[3];
@@ -114,7 +114,8 @@ public class PlayerBuildingsFragment extends Fragment {
         buildingByType[2].type = BuildingEnum.RENTAL;
         buildingByType[2].buildings = rentals;
 
-        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), buildingByType);
+        PreferenceHelper prefHelper = new PreferenceHelper();
+        BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), buildingByType, Integer.valueOf(prefHelper.getDaysForReminderMaintenance()));
         expandableListView.setAdapter(buildingsListAdapter);
 
         if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0) && (playerInfo.rentals == null || playerInfo.rentals.length == 0)){
