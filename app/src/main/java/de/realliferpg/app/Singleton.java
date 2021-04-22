@@ -1,6 +1,5 @@
 package de.realliferpg.app;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 
 import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.MarketItem;
 import de.realliferpg.app.objects.MarketServerObject;
@@ -44,6 +44,7 @@ public class Singleton {
     private ArrayList<ShopItem> shopItemList;
     private ArrayList<MarketServerObject> marketServerObjects;
     private ArrayList<CBSData> cbsData;
+    private ArrayList<CompanyShops> companyShops;
 
     private CustomNetworkError networkError;
 
@@ -153,6 +154,11 @@ public class Singleton {
     public ArrayList<CBSData> getCBSData(){ return cbsData; }
     public void setCBSData(ArrayList<CBSData> cbsData) {
         this.cbsData = cbsData;
+    }
+
+    public ArrayList<CompanyShops> getCompanyShopsData(){ return companyShops; }
+    public void setCompanyShopsData(ArrayList<CompanyShops> companyShops) {
+        this.companyShops = companyShops;
     }
 
     public CustomNetworkError getNetworkError() {
