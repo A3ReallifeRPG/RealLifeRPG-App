@@ -6,9 +6,9 @@ public class CompanyShops {
         public long requested_at;
     }
 
-    public long industrialAreaID;
+    public long industrial_area_id;
     public Company company;
     private String pos;
-    public Shop[] shops;
+    public ShopCompany[] shops;
 }
 

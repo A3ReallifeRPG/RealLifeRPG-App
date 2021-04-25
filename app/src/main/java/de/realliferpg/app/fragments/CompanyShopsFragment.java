@@ -13,9 +13,6 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -26,7 +23,6 @@ import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
-import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PhoneNumbers;
 
@@ -56,7 +52,6 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         final ProgressBar pbLoadCompanyShop = view.findViewById(R.id.pb_company_shops);
         pbLoadCompanyShop.setVisibility(View.VISIBLE);
         final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
-        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getCompanyShop();
@@ -88,6 +83,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             }
         });
 
+        /*
         ArrayList<CompanyShops> companyShopsData = Singleton.getInstance().getCompanyShopsData();
 
         if (companyShopsData == null || companyShopsData.size() == 0){
@@ -97,6 +93,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             tvKeineDaten.setVisibility(View.INVISIBLE);
             elv_company_shops.setVisibility(View.VISIBLE);
         }
+        */
 
         return view;
     }
@@ -125,9 +122,8 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         sc.setRefreshing(false);
 
         switch (type) {
-            case PLAYER:
+            case COMPANY_SHOPS:
                 final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
-
                 CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), Singleton.getInstance().getCompanyShopsData());
 
                 elv_company_shops.setAdapter(listAdapter);

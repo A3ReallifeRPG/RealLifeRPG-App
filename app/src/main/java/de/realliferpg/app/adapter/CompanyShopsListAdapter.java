@@ -1,6 +1,7 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.realliferpg.app.R;
-import de.realliferpg.app.helper.FractionMappingHelper;
-import de.realliferpg.app.interfaces.FractionEnum;
 import de.realliferpg.app.objects.CompanyShops;
-import de.realliferpg.app.objects.PhoneNumbers;
+import de.realliferpg.app.objects.ShopCompany;
 
 
 public class CompanyShopsListAdapter extends BaseExpandableListAdapter {
@@ -74,14 +73,17 @@ public class CompanyShopsListAdapter extends BaseExpandableListAdapter {
             viewHolder.position = groupPosition;
 
             viewHolder.tvCompanyName = convertView.findViewById(R.id.tv_company_shops_company_name);
-            viewHolder.tvCompanyPhone = convertView.findViewById(R.id.tv_company_shops_phone);
+            viewHolder.tvCompanyIndustrialAreaID = convertView.findViewById(R.id.tv_company_shops_industrial_area_id);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.position = groupPosition;
 
-        // TODO
+        CompanyShops currentCompany = companyShopsData.get(groupPosition);
+
+        viewHolder.tvCompanyName.setText(currentCompany.company.name);
+        viewHolder.tvCompanyIndustrialAreaID.setText(context.getResources().getString(R.string.str_industrial_area_id) + " " + currentCompany.industrial_area_id);
 
         convertView.setTag(viewHolder);
 
@@ -97,17 +99,20 @@ public class CompanyShopsListAdapter extends BaseExpandableListAdapter {
         }
 
         ImageView ivItem = convertView.findViewById(R.id.iv_list_company_shop_item);
+        TextView tvName = convertView.findViewById(R.id.tv_list_company_shop_item_name);
         TextView tvAmount = convertView.findViewById(R.id.tv_company_shops_amount);
         TextView tvPrice = convertView.findViewById(R.id.tv_company_shops_price);
 
-        /*
-        String icCurrentMarketItem = "market_" + shop.classname;
+        ShopCompany currentCompanyShop = companyShopsData.get(groupPosition).shops[childPosition];
+
+        String icCurrentMarketItem = "market_" + currentCompanyShop.item;
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(icCurrentMarketItem, "drawable", context.getPackageName());
-        viewHolder.ivMarketItem.setImageResource(resourceId);
+        ivItem.setImageResource(resourceId);
 
-        ivItem.setI
-         */
+        tvName.setText(currentCompanyShop.item_localized);
+        tvAmount.setText(currentCompanyShop.amount + " " + context.getResources().getString(R.string.str_company_shops_amount));
+        tvPrice.setText(currentCompanyShop.price + " $");
 
         return convertView;
     }
@@ -117,51 +122,9 @@ public class CompanyShopsListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private boolean playerHasMultipleOwnNumbers(PhoneNumbers[] phones, FractionEnum fractionEnum) {
-        int count = 0;
-        for (PhoneNumbers phone : phones) {
-            if (phone.disabled != 0) {
-                continue;
-            }
-            if (phone.note.matches("default")) {
-                continue;
-            }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
-                continue;
-            }
-            count++;
-        }
-
-        return count > 1;
-    }
-
-    private String getDefaultNumber(PhoneNumbers[] phones) {
-        for (PhoneNumbers phone : phones) {
-            if (phone.note.matches("default")) {
-                return phone.phone;
-            }
-        }
-        return "0";
-    }
-
-    private String getNumberFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
-        for (PhoneNumbers phone : phones) {
-            if (phone.disabled != 0) {
-                continue;
-            }
-            if (phone.note.matches("default")) {
-                continue;
-            }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
-                return phone.phone;
-            }
-        }
-        return "0";
-    }
-
     private static class ViewHolder {
         TextView tvCompanyName;
-        TextView tvCompanyPhone;
+        TextView tvCompanyIndustrialAreaID;
         int position;
     }
 }
