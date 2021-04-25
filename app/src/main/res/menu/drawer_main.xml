@@ -7,7 +7,7 @@
 
         <item
             android:id="@+id/nav_overview"
-            android:icon="@drawable/ic_chart"
+            android:icon="@drawable/ic_bubbles"
             android:title="@string/str_overview" />
 
         <item
@@ -30,7 +30,7 @@
 
         <item
             android:id="@+id/nav_marketprices"
-            android:icon="@drawable/ic_shopping_cart"
+            android:icon="@drawable/ic_chart"
             android:title="@string/str_market" />
 
         <item
@@ -43,6 +43,12 @@
             android:icon="@drawable/ic_contacts_list"
             android:title="@string/str_phonebook"
             />
+
+        <item
+            android:id="@+id/nav_companyshops"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="@string/str_company_shops"
+            ></item>
 
         <item
             android:id="@+id/nav_polDashboard"
