@@ -220,6 +220,11 @@
     <string name="str_own_phonenumber">Deine Nummer:</string>
     <string name="str_default_phonenumber">Deine Hauptnummer:</string>
 
+    <!-- Company Shops -->
+    <string name="str_company_shops">Warenankauf</string>
+    <string name="str_industrial_area_id">Industriegebiet:</string>
+    <string name="str_company_shops_amount">Stk.</string>
+
     <!--<string name=""></string>-->
 
 </resources>

@@ -1,8 +1,5 @@
 package de.realliferpg.app.helper;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -17,6 +14,7 @@ import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.interfaces.VehicleEnum;
 import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
+import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.MarketServerObject;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
@@ -94,6 +92,11 @@ public class ApiHelper {
                 CBSData.Wrapper cbsWrapper = gson.fromJson(response.toString(), CBSData.Wrapper.class);
                 final ArrayList<CBSData> cbsData = new ArrayList<>(Arrays.asList(cbsWrapper.data));
                 Singleton.getInstance().setCBSData(cbsData);
+                return true;
+            case COMPANY_SHOPS:
+                CompanyShops.Wrapper companyShopsWrapper = gson.fromJson(response.toString(), CompanyShops.Wrapper.class);
+                final ArrayList<CompanyShops> companyShops = new ArrayList<>(Arrays.asList(companyShopsWrapper.data));
+                Singleton.getInstance().setCompanyShopsData(companyShops);
                 return true;
             case NETWORK_ERROR:
                 return true;
@@ -223,5 +226,10 @@ public class ApiHelper {
         NetworkHelper networkHelper = new NetworkHelper();
         String secret = preferenceHelper.getPlayerAPIToken();
         networkHelper.doJSONRequest(Constants.URL_PLAYERSTATS + secret + "/vehicles",callbackInterface,RequestTypeEnum.PLAYER_VEHICLES);
+    }
+
+    public void getCompanyShop(){
+        NetworkHelper networkHelper = new NetworkHelper();
+        networkHelper.doJSONRequest(Constants.URL_SHOPS_COMPANYS, callbackInterface, RequestTypeEnum.COMPANY_SHOPS);
     }
 }

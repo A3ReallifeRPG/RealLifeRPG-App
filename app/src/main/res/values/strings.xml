@@ -228,6 +228,11 @@
     <string name="str_own_phonenumber">Your phone number:</string>
     <string name="str_default_phonenumber">Your main number:</string>
 
+    <!-- Company Shops -->
+    <string name="str_company_shops">Company Shops</string>
+    <string name="str_industrial_area_id">Industrial Area:</string>
+    <string name="str_company_shops_amount">pcs.</string>
+
     <!--<string name=""></string>-->
 
 </resources>
