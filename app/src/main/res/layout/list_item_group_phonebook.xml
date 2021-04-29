@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_side"
-            android:gravity="center_horizontal" />
+            android:gravity="left" />
 
         <TextView
             android:id="@+id/tv_phonebook_side"
@@ -39,7 +39,8 @@
             android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="left"/>
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

@@ -1,30 +1,24 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
-import de.realliferpg.app.objects.Phone;
-import de.realliferpg.app.objects.Phonebook;
+import de.realliferpg.app.objects.PhoneNumbers;
+import de.realliferpg.app.objects.PhonebookEntry;
 import de.realliferpg.app.objects.PlayerInfo;
-import de.realliferpg.app.objects.Server;
 
 
 public class PhonebookAdapter extends BaseExpandableListAdapter {
 
-    private Context context;
-    private PlayerInfo playerInfo;
+    private final Context context;
+    private final PlayerInfo playerInfo;
 
     public PhonebookAdapter(Context _context, PlayerInfo _playerInfo) {
         this.context = _context;
@@ -37,16 +31,18 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getChildrenCount(int i) { return playerInfo.phonebooks[i].phonebook.length;
+    public int getChildrenCount(int i) {
+        return playerInfo.phonebooks[i].phonebook.length;
     }
 
     @Override
-    public Object getGroup(int i) { return playerInfo.phonebooks[i];
+    public Object getGroup(int i) {
+        return playerInfo.phonebooks[i];
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Phonebook[] phoneBook = playerInfo.phonebooks[groupPosition].phonebook;
+        PhonebookEntry[] phoneBook = playerInfo.phonebooks[groupPosition].phonebook;
         return phoneBook[childPosition];
     }
 
@@ -69,10 +65,9 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
 
-        if(convertView == null)
-        {
-            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_group_phonebook,null);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_item_group_phonebook, null);
 
             viewHolder = new ViewHolder();
             viewHolder.position = groupPosition;
@@ -90,8 +85,12 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
         String defaultNumber = getDefaultNumber(playerInfo.phones);
 
-        String textOwnPhoneNumber = playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum) ? context.getResources().getString(R.string.str_multiple_phonenumbers) + " " + defaultNumber : context.getResources().getString(R.string.str_own_phonenumber) + " " + getNumberFormSide(playerInfo.phones, fractionEnum);
-        viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
+        if (playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum)) {
+            viewHolder.tvOwnNumbers.setVisibility(View.INVISIBLE);
+        } else {
+            String textOwnPhoneNumber = context.getResources().getString(R.string.str_own_phonenumber) + " " + getNumberFormSide(playerInfo.phones, fractionEnum);
+            viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
+        }
 
         convertView.setTag(viewHolder);
 
@@ -100,12 +99,11 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Phonebook phoneBookEntry = playerInfo.phonebooks[groupPosition].phonebook[childPosition];
+        PhonebookEntry phoneBookEntry = playerInfo.phonebooks[groupPosition].phonebook[childPosition];
 
-        if(convertView == null)
-        {
-            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_phonebook,null);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_item_phonebook, null);
         }
 
         TextView tvName = convertView.findViewById(R.id.tv_phonebook_name);
@@ -124,16 +122,16 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private boolean playerHasMultipleOwnNumbers(Phone[] phones, FractionEnum fractionEnum){
+    private boolean playerHasMultipleOwnNumbers(PhoneNumbers[] phones, FractionEnum fractionEnum) {
         int count = 0;
-        for (Phone phone : phones){
-            if (phone.disabled != 0){
+        for (PhoneNumbers phone : phones) {
+            if (phone.disabled != 0) {
                 continue;
             }
-            if (phone.note.matches("default")){
+            if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))){
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
                 continue;
             }
             count++;
@@ -142,24 +140,24 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         return count > 1;
     }
 
-    private String getDefaultNumber(Phone[] phones){
-       for (Phone phone : phones){
-           if (phone.note.matches("default")){
-               return phone.phone;
-           }
-       }
-       return "0";
+    private String getDefaultNumber(PhoneNumbers[] phones) {
+        for (PhoneNumbers phone : phones) {
+            if (phone.note.matches("default")) {
+                return phone.phone;
+            }
+        }
+        return "0";
     }
 
-    private String getNumberFormSide(Phone[] phones, FractionEnum fractionEnum) {
-        for (Phone phone : phones){
-            if (phone.disabled != 0){
+    private String getNumberFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
+        for (PhoneNumbers phone : phones) {
+            if (phone.disabled != 0) {
                 continue;
             }
-            if (phone.note.matches("default")){
+            if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))){
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
                 return phone.phone;
             }
         }

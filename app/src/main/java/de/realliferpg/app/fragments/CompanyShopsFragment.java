@@ -13,12 +13,11 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.adapter.PhonebookAdapter;
+import de.realliferpg.app.adapter.CompanyShopsListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
@@ -26,19 +25,18 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PhoneNumbers;
-import de.realliferpg.app.objects.PlayerInfo;
 
-public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
+public class CompanyShopsFragment extends Fragment implements CallbackNotifyInterface {
 
     private View view;
     private FragmentInteractionInterface mListener;
 
-    public PhonebookFragment() {
+    public CompanyShopsFragment() {
         // Required empty public constructor
     }
 
-    public static PhonebookFragment newInstance() {
-        return new PhonebookFragment();
+    public static CompanyShopsFragment newInstance() {
+        return new CompanyShopsFragment();
     }
 
     @Override
@@ -49,36 +47,29 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_phonebooks, container, false);
+        view = inflater.inflate(R.layout.fragment_companyshops, container, false);
 
-        final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
-        pbLoadphonebook.setVisibility(View.VISIBLE);
-        final ExpandableListView listPhonebooks = view.findViewById(R.id.lv_phonebook);
+        final ProgressBar pbLoadCompanyShop = view.findViewById(R.id.pb_company_shops);
+        pbLoadCompanyShop.setVisibility(View.VISIBLE);
+        final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
-        apiHelper.getPlayerStats();
+        apiHelper.getCompanyShop();
 
-        PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
-
-        final TextView tvDefaultPhoneNumber = view.findViewById(R.id.tv_default_phonenumber);
-        tvDefaultPhoneNumber.setText(getContext().getResources().getString(R.string.str_default_phonenumber) + " " + getDefaultNumber(playerInfo.phones));
-        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_phonebooks);
-        final ExpandableListView lvPhonebooks = view.findViewById(R.id.lv_phonebook);
-
-        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
+        final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_company_shops);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                apiHelper.getPlayerStats();
+                apiHelper.getCompanyShop();
 
-                pbLoadphonebook.setVisibility(View.VISIBLE);
+                pbLoadCompanyShop.setVisibility(View.VISIBLE);
 
-                listPhonebooks.setAdapter((BaseExpandableListAdapter) null);
+                elv_company_shops.setAdapter((BaseExpandableListAdapter) null);
             }
         });
 
-        listPhonebooks.setOnScrollListener(new AbsListView.OnScrollListener() {
+        elv_company_shops.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -86,19 +77,23 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (listPhonebooks == null || listPhonebooks.getChildCount() == 0) ?
-                        0 : listPhonebooks.getChildAt(0).getTop();
+                int topRow = (elv_company_shops == null || elv_company_shops.getChildCount() == 0) ?
+                        0 : elv_company_shops.getChildAt(0).getTop();
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
 
-        if (playerInfo.phonebooks == null || playerInfo.phonebooks.length == 0){
+        /*
+        ArrayList<CompanyShops> companyShopsData = Singleton.getInstance().getCompanyShopsData();
+
+        if (companyShopsData == null || companyShopsData.size() == 0){
             tvKeineDaten.setVisibility(View.VISIBLE);
-            lvPhonebooks.setVisibility(View.INVISIBLE);
+            elv_company_shops.setVisibility(View.INVISIBLE);
         } else {
             tvKeineDaten.setVisibility(View.INVISIBLE);
-            lvPhonebooks.setVisibility(View.VISIBLE);
+            elv_company_shops.setVisibility(View.VISIBLE);
         }
+        */
 
         return view;
     }
@@ -122,28 +117,27 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
     @Override
     public void onCallback(RequestTypeEnum type) {
-        ProgressBar pblistPhonebooks = view.findViewById(R.id.pb_phonebook);
-        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
+        ProgressBar pb_company_shops = view.findViewById(R.id.pb_company_shops);
+        SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_company_shops);
         sc.setRefreshing(false);
 
         switch (type) {
-            case PLAYER:
-                final ExpandableListView listPhoneBooks = view.findViewById(R.id.lv_phonebook);
+            case COMPANY_SHOPS:
+                final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
+                CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), Singleton.getInstance().getCompanyShopsData());
 
-                PhonebookAdapter listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
+                elv_company_shops.setAdapter(listAdapter);
 
-                listPhoneBooks.setAdapter(listAdapter);
-
-                pblistPhonebooks.setVisibility(View.GONE);
+                pb_company_shops.setVisibility(View.GONE);
 
                 // collapse all but selected item
-                listPhoneBooks.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                elv_company_shops.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                     int previousItem = -1;
 
                     @Override
                     public void onGroupExpand(int groupPosition) {
                         if (groupPosition != previousItem)
-                            listPhoneBooks.collapseGroup(previousItem);
+                            elv_company_shops.collapseGroup(previousItem);
                         previousItem = groupPosition;
                     }
                 });
@@ -151,11 +145,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
-                pblistPhonebooks.setVisibility(View.GONE);
+                pb_company_shops.setVisibility(View.GONE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_phonebook), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_company_shops), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override

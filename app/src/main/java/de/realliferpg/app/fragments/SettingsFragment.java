@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
@@ -33,7 +31,7 @@ import de.realliferpg.app.interfaces.RequestTypeEnum;
 public class SettingsFragment extends PreferenceFragmentCompat implements FragmentInteractionInterface, SharedPreferences.OnSharedPreferenceChangeListener, CallbackNotifyInterface {
 
     public static final String KEY_PREF_CRASHLYTICS = "pref_crashlytics";
-    public static final Integer MAX_DAYS_MAINTENANCE = 20;
+    public static final Integer MAX_DAYS_MAINTENANCE = 14;
 
     private FragmentInteractionInterface mListener;
 

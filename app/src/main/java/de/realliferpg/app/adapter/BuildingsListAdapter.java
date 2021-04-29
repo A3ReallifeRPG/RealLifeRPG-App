@@ -1,12 +1,12 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.realliferpg.app.R;
@@ -17,10 +17,12 @@ import de.realliferpg.app.objects.BuildingGroup;
 public class BuildingsListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private BuildingGroup[] buildingByType;
+    private int daysMaintenance;
 
-    public BuildingsListAdapter(Context _context, BuildingGroup[] _buildingByType){
+    public BuildingsListAdapter(Context _context, BuildingGroup[] _buildingByType, int _daysMaintenance) {
         this.context = _context;
         this.buildingByType = _buildingByType;
+        this.daysMaintenance = _daysMaintenance;
     }
 
     @Override
@@ -49,7 +51,9 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) { return this.buildingByType[groupPosition].buildings[childPosition]; }
+    public Object getChild(int groupPosition, int childPosition) {
+        return this.buildingByType[groupPosition].buildings[childPosition];
+    }
 
     @Override
     public long getGroupId(int groupPosition) {
@@ -70,21 +74,27 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
 
-        if(convertView == null)
-        {
-            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_group_buildingslist,null);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_item_group_buildingslist, null);
 
             viewHolder = new ViewHolder();
             viewHolder.position = groupPosition;
 
             viewHolder.tvBuildingCategory = convertView.findViewById(R.id.tv_buildings_category);
+            viewHolder.ivBuildingGroupWarning = convertView.findViewById(R.id.iv_buildings_group_warning);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.position = groupPosition;
         viewHolder.tvBuildingCategory.setText(this.getTypeOfBuilding(buildingByType[groupPosition].type));
+        if (buildingByType[groupPosition].type != BuildingEnum.BUILDING) {
+            viewHolder.ivBuildingGroupWarning.setVisibility(getVisibilityForGroupWarning(buildingByType[groupPosition].buildings));
+        }
+        else {
+            viewHolder.ivBuildingGroupWarning.setVisibility(View.INVISIBLE);
+        }
 
         convertView.setTag(viewHolder);
 
@@ -92,7 +102,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     }
 
     private String getTypeOfBuilding(BuildingEnum type) {
-        switch (type.name().toLowerCase()){
+        switch (type.name().toLowerCase()) {
             case "house":
                 return context.getResources().getString(R.string.str_house);
             case "building":
@@ -103,20 +113,30 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         return null;
     }
 
+    private int getVisibilityForGroupWarning(IBuilding[] buildingGroup) {
+        for (IBuilding building : buildingGroup) {
+            boolean showWarning = building.getPayedForDays() <= daysMaintenance;
+            if (showWarning) {
+                return View.VISIBLE;
+            }
+        }
+        return View.INVISIBLE;
+    }
+
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final ViewHolderChild viewHolderChild;
 
-        if(convertView == null)
-        {
-            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_buildingslist,null);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_item_buildingslist, null);
 
             viewHolderChild = new ViewHolderChild();
             viewHolderChild.position = childPosition;
 
             viewHolderChild.tvBezeichnung = convertView.findViewById(R.id.tv_building_name);
             viewHolderChild.tvBezahlteTage = convertView.findViewById(R.id.tv_building_played_for);
+            viewHolderChild.ivListItemWarning = convertView.findViewById(R.id.iv_buildings_list_item_warning);
         } else {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
@@ -124,7 +144,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         viewHolderChild.position = childPosition;
 
         IBuilding building = this.buildingByType[groupPosition].buildings[childPosition];
-        String buildingName = "ID: " +Integer.toString(building.getId());
+        String buildingName = "ID: " + Integer.toString(building.getId());
 
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {
@@ -134,6 +154,14 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
 
         viewHolderChild.tvBezeichnung.setText(buildingName);
         viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayedForDays())));
+        viewHolderChild.ivListItemWarning.setVisibility(building.getPayedForDays() <= daysMaintenance ? View.VISIBLE : View.INVISIBLE);
+
+        if (buildingByType[groupPosition].type != BuildingEnum.BUILDING) {
+            viewHolderChild.ivListItemWarning.setVisibility(building.getPayedForDays() <= daysMaintenance ? View.VISIBLE : View.INVISIBLE);
+        }
+        else {
+            viewHolderChild.ivListItemWarning.setVisibility(View.INVISIBLE);
+        }
 
         convertView.setTag(viewHolderChild);
 
@@ -147,12 +175,14 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
 
     static class ViewHolder {
         TextView tvBuildingCategory;
+        ImageView ivBuildingGroupWarning;
         int position;
     }
 
     static class ViewHolderChild {
         TextView tvBezeichnung;
         TextView tvBezahlteTage;
+        ImageView ivListItemWarning;
         int position;
     }
 }

@@ -2,5 +2,5 @@ package de.realliferpg.app.objects;
 
 public class Phonebooks {
     public String side;
-    public Phonebook[] phonebook;
+    public PhonebookEntry[] phonebook;
 }

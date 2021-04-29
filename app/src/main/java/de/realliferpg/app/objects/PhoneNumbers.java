@@ -1,6 +1,6 @@
 package de.realliferpg.app.objects;
 
-public class Phone {
+public class PhoneNumbers {
     private String pid;
     public String phone;
     public String note;

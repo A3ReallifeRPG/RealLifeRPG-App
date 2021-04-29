@@ -178,8 +178,9 @@
     <string name="str_polDashboard">Dashboard Police Nordholm</string>
 
     <string name="str_back_again_to_exit">Press BACK again to exit.</string>
-    <string name="str_noDataChangeTab">No data.\n\nIf you expect data, please change the tab and then change back here again.</string>
-    <string name="str_noData">No data.</string>
+    <string name="str_no_data_change_tab">No data.\n\nIf you expect data, please change the tab and then change back here again.</string>
+    <string name="str_no_data">No data.</string>
+    <string name="str_no_data_refresh">No data.\n\nIf you expect data, please refresh (swipe down).</string>
     <string name="str_days_maintenance">Reminder for Maintenance (in days)</string>
     <string name="str_new_value">New value:</string>
     <string name="str_no_valid_number_days_maintenance">No valid number! Must between 0 and 20!</string>
@@ -225,6 +226,12 @@
     <string name="str_iban">IBAN:</string>
     <string name="str_multiple_phonenumbers">You have several phone numbers of your own. Default is:</string>
     <string name="str_own_phonenumber">Your phone number:</string>
+    <string name="str_default_phonenumber">Your main number:</string>
+
+    <!-- Company Shops -->
+    <string name="str_company_shops">Company Shops</string>
+    <string name="str_industrial_area_id">Industrial Area:</string>
+    <string name="str_company_shops_amount">pcs.</string>
 
     <!--<string name=""></string>-->
 

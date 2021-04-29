@@ -1,16 +1,13 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -22,7 +19,6 @@ import de.realliferpg.app.helper.CBSHelper;
 import de.realliferpg.app.helper.FormatHelper;
 import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.CBSRessourceGridView;
-import de.realliferpg.app.objects.RessourceInfo;
 
 public class CBSListAdapter extends BaseExpandableListAdapter {
     private Context context;
@@ -40,7 +36,6 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        // TODO: anzahl unterelemente
         return 1;
     }
 
