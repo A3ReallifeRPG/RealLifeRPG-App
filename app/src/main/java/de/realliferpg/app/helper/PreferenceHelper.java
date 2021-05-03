@@ -26,5 +26,11 @@ public class PreferenceHelper {
 
     public boolean showImpounded() { return prefs.getBoolean("pref_vehicleList_impounded", false);}
 
-    public int getDaysForReminderMaintenance() { return Integer.valueOf(prefs.getString("pref_days_maintenance", "2"));}
+    public int getDaysForReminderMaintenance() {
+        String days = prefs.getString("pref_days_maintenance", "14");
+        if (days == null || days.isEmpty()){
+            days = "14";
+        }
+        return Integer.valueOf(days);
+    }
 }
