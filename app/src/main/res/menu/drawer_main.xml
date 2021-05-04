@@ -14,10 +14,34 @@
             android:id="@+id/nav_player"
             android:icon="@drawable/ic_person"
             android:title="@string/str_player_info" />
+
+        <item
+            android:id="@+id/nav_phonebook"
+            android:icon="@drawable/ic_contacts_list"
+            android:title="@string/str_phonebook"
+            />
+
         <item
             android:id="@+id/nav_playerslist"
             android:icon="@drawable/ic_playerslist"
             android:title="@string/str_playerslist" />
+
+        <item
+            android:id="@+id/nav_companyshops"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="@string/str_company_shops"
+            ></item>
+
+        <item
+            android:id="@+id/nav_cbs"
+            android:icon="@drawable/ic_location_city"
+            android:title="@string/str_cbs" />
+
+        <item
+            android:id="@+id/nav_marketprices"
+            android:icon="@drawable/ic_chart"
+            android:title="@string/str_market" />
+
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_info_filled"
@@ -27,28 +51,6 @@
             android:id="@+id/nav_changelog"
             android:icon="@drawable/ic_clipboard"
             android:title="@string/str_changelog" />
-
-        <item
-            android:id="@+id/nav_marketprices"
-            android:icon="@drawable/ic_chart"
-            android:title="@string/str_market" />
-
-        <item
-            android:id="@+id/nav_cbs"
-            android:icon="@drawable/ic_location_city"
-            android:title="@string/str_cbs" />
-
-        <item
-            android:id="@+id/nav_phonebook"
-            android:icon="@drawable/ic_contacts_list"
-            android:title="@string/str_phonebook"
-            />
-
-        <item
-            android:id="@+id/nav_companyshops"
-            android:icon="@drawable/ic_shopping_cart"
-            android:title="@string/str_company_shops"
-            ></item>
 
         <item
             android:id="@+id/nav_polDashboard"

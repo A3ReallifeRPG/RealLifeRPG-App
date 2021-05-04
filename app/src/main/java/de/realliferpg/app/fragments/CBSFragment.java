@@ -51,9 +51,6 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
                              Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_cbs, container, false);
-        final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenCBS);
-        final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
-
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getCBSData();
 
@@ -74,16 +71,6 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
             }
         });
 
-        ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
-
-        if (cbsData == null || cbsData.isEmpty()){
-            tvKeineDaten.setVisibility(View.VISIBLE);
-            expandableListView.setVisibility(View.INVISIBLE);
-        } else {
-            tvKeineDaten.setVisibility(View.INVISIBLE);
-            expandableListView.setVisibility(View.VISIBLE);
-        }
-
         return view;
     }
 
@@ -96,22 +83,29 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
         switch (type) {
             case CBS:
                 ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
+                final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
+                final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenCBS);
 
-                final ExpandableListView listView = view.findViewById(R.id.lv_cbs_main);
+                if (cbsData == null || cbsData.isEmpty()){
+                    tvKeineDaten.setVisibility(View.VISIBLE);
+                    expandableListView.setVisibility(View.INVISIBLE);
+                } else {
+                    tvKeineDaten.setVisibility(View.INVISIBLE);
+                    expandableListView.setVisibility(View.VISIBLE);
 
-                CBSListAdapter listAdapter = new CBSListAdapter(this.getContext(), cbsData);
-                listView.setAdapter(listAdapter);
-
+                    CBSListAdapter listAdapter = new CBSListAdapter(this.getContext(), cbsData);
+                    expandableListView.setAdapter(listAdapter);
+                }
                 pbCBS.setVisibility(View.GONE);
 
                 // collapse all but selected item
-                listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
                     int previousItem = -1;
 
                     @Override
                     public void onGroupExpand(int groupPosition) {
                         if (groupPosition != previousItem)
-                            listView.collapseGroup(previousItem);
+                            expandableListView.collapseGroup(previousItem);
                         previousItem = groupPosition;
                     }
                 });

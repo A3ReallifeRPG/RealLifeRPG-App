@@ -90,7 +90,7 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
         String status = "";
         if (cbsData.finished == 1){
             status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>" + context.getResources().getString(R.string.str_completed);
-        } else if (cbsData.amount == cbsData.funding_required)
+        } else if (cbsData.amount >= cbsData.funding_required)
         {
             status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>" + context.getResources().getString(R.string.str_financed);
         } else {
