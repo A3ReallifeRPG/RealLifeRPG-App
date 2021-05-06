@@ -106,7 +106,8 @@
     <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 13 -->
     <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 14 -->
     <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 15 -->
-    <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 16 -->
+    <string name="str_cop14">Leitender Polizeidirektor</string> <!-- C14, cop-level 16 -->
+    <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 17 -->
 
     <!-- Raenge der Medics -->
     <string name="str_med01">Sanitätshelfer</string> <!-- medic-level 1 -->
