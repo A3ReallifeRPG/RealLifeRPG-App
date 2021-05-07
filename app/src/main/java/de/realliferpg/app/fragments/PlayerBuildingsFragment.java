@@ -1,19 +1,25 @@
 package de.realliferpg.app.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.helper.PreferenceHelper;
+import de.realliferpg.app.helper.ReminderBroadcastReceiver;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Building;
@@ -21,6 +27,8 @@ import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Rental;
+
+import static android.content.Context.ALARM_SERVICE;
 
 public class PlayerBuildingsFragment extends Fragment {
 
@@ -122,6 +130,31 @@ public class PlayerBuildingsFragment extends Fragment {
             tvKeineDaten.setVisibility(View.INVISIBLE);
             expandableListView.setVisibility(View.VISIBLE);
         }
+
+        Button btnReminder = view.findViewById(R.id.btn_reminder);
+        btnReminder.setOnClickListener(v -> {
+            int daysBefore = 3;
+            long factorHourToMillisec = 60 * 60 * 100;
+
+            Intent intent = new Intent(this.getActivity(), ReminderBroadcastReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), 0, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+            // Houses
+            for (House house : Singleton.getInstance().getPlayerInfo().houses
+                 ) {
+                long plannedTimeInMillis = (house.payed_for - daysBefore) * factorHourToMillisec;
+                alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
+            }
+
+            // Rentals
+            for (Rental rental : Singleton.getInstance().getPlayerInfo().rentals
+                 ) {
+                long plannedTimeInMillis = (rental.payed_for - daysBefore) * factorHourToMillisec;
+                alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
+            }
+
+            Toast.makeText(this.getContext(), this.getContext().getResources().getString(R.string.str_alarms_set), Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override

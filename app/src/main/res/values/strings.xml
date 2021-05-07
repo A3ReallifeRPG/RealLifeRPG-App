@@ -214,6 +214,10 @@
     <string name="str_maintainance_house">Maintained {0} with id {1} for {2} days ({3} hours).</string>
     <string name="str_maintainance_rental">Payed {0} with id {1} for {2} days ({3} hours).</string>
     <string name="str_inactive"> - inactive</string>
+    <string name="str_remind_me">Remind me</string>
+    <string name="str_alarms_set">Reminders set</string>
+    <string name="str_notifications_reminder_maintenance_title">Reminder</string>
+    <string name="str_notifications_reminder_maintenance_content">You have houses to maintain or rent to pay! Open the app for more information.</string>
 
     <!-- CBS -->
     <string name="str_completed">completed</string>

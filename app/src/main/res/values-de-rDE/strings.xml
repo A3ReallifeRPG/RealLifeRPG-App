@@ -206,6 +206,10 @@
     <string name="str_maintainance_house">{0} mit ID {1} ist für {2} Tage ({3} Stunden) gewartet.</string>
     <string name="str_maintainance_rental">{0} mit ID {1} ist für {2} Tage ({3} Stunden) bezahlt.</string>
     <string name="str_inactive"> - inaktiv</string>
+    <string name="str_remind_me">Erinnere mich</string>
+    <string name="str_alarms_set">Erinnerungen gesetzt</string>
+    <string name="str_notifications_reminder_maintenance_title">Erinnerung</string>
+    <string name="str_notifications_reminder_maintenance_content">Du musst ein Haus warten oder ein Appartment bezahlen! Öffne die App für mehr Infos.</string>
 
     <!-- CBS -->
     <string name="str_completed">abgeschlossen</string>
