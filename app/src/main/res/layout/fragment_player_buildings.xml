@@ -28,9 +28,10 @@
     <Button
         android:id="@+id/btn_reminder"
         android:text="@string/str_remind_me"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_margin="8dp"
         android:background="@color/primaryLightColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

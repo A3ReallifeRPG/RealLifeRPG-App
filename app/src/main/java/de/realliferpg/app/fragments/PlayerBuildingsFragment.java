@@ -103,6 +103,10 @@ public class PlayerBuildingsFragment extends Fragment {
         rentalZwei.payed_for = 1234;
         Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
         rentals = dummyRentals;
+
+        playerInfo.houses = houses;
+        playerInfo.buildings = buildings;
+        playerInfo.rentals = rentals;
         */
         // -----------------------------
 
@@ -123,15 +127,18 @@ public class PlayerBuildingsFragment extends Fragment {
         BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), buildingByType, Integer.valueOf(prefHelper.getDaysForReminderMaintenance()));
         expandableListView.setAdapter(buildingsListAdapter);
 
+        Button btnReminder = view.findViewById(R.id.btn_reminder);
+
         if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0) && (playerInfo.rentals == null || playerInfo.rentals.length == 0)){
             tvKeineDaten.setVisibility(View.VISIBLE);
             expandableListView.setVisibility(View.INVISIBLE);
+            btnReminder.setVisibility(View.INVISIBLE);
         } else {
             tvKeineDaten.setVisibility(View.INVISIBLE);
             expandableListView.setVisibility(View.VISIBLE);
+            btnReminder.setVisibility(View.VISIBLE);
         }
 
-        Button btnReminder = view.findViewById(R.id.btn_reminder);
         btnReminder.setOnClickListener(v -> {
             int daysBefore = 3;
             long factorHourToMillisec = 60 * 60 * 100;
@@ -140,16 +147,16 @@ public class PlayerBuildingsFragment extends Fragment {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), 0, intent, 0);
             AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
             // Houses
-            for (House house : Singleton.getInstance().getPlayerInfo().houses
+            for (House house : playerInfo.houses
                  ) {
-                long plannedTimeInMillis = (house.payed_for - daysBefore) * factorHourToMillisec;
+                long plannedTimeInMillis = (house.payed_for - daysBefore) * factorHourToMillisec + 1000;
                 alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
             }
 
             // Rentals
-            for (Rental rental : Singleton.getInstance().getPlayerInfo().rentals
+            for (Rental rental : playerInfo.rentals
                  ) {
-                long plannedTimeInMillis = (rental.payed_for - daysBefore) * factorHourToMillisec;
+                long plannedTimeInMillis = (rental.payed_for - daysBefore) * factorHourToMillisec  + 1000;
                 alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
             }
 
