@@ -15,6 +15,8 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
@@ -27,8 +29,6 @@ import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Rental;
-
-import static android.content.Context.ALARM_SERVICE;
 
 public class PlayerBuildingsFragment extends Fragment {
 
@@ -76,11 +76,11 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-        /*
+/*
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 11;
-        hausEins.payed_for = 30*24;
+        hausEins.payed_for = 2*24;
         House hausZwei = new House();
         hausZwei.players = new String[]{"Spieler 1", "Spieler 2"};
         hausZwei.id = 12;
@@ -107,7 +107,7 @@ public class PlayerBuildingsFragment extends Fragment {
         playerInfo.houses = houses;
         playerInfo.buildings = buildings;
         playerInfo.rentals = rentals;
-        */
+*/
         // -----------------------------
 
         buildingByType = new BuildingGroup[3];
@@ -140,26 +140,37 @@ public class PlayerBuildingsFragment extends Fragment {
         }
 
         btnReminder.setOnClickListener(v -> {
-            int daysBefore = 3;
-            long factorHourToMillisec = 60 * 60 * 100;
+            int daysBefore = 3*24;
+            long factorHourToSec = 60 * 60;
 
             Intent intent = new Intent(this.getActivity(), ReminderBroadcastReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), 0, intent, 0);
-            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+            AlarmManager am = (AlarmManager) this.getContext().getSystemService(Context.ALARM_SERVICE);
+
             // Houses
             for (House house : playerInfo.houses
                  ) {
-                long plannedTimeInMillis = (house.payed_for - daysBefore) * factorHourToMillisec + 1000;
-                alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
+                long plannedTimeInSeconds =  (house.payed_for - daysBefore) * factorHourToSec;
+                if (plannedTimeInSeconds <= 0) { // negative Werte, wenn weniger als 3 Tage, abfangen
+                    plannedTimeInSeconds = 1;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), house.getId(), intent, 0);
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.SECOND, (int) plannedTimeInSeconds);
+                am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
             }
 
             // Rentals
             for (Rental rental : playerInfo.rentals
                  ) {
-                long plannedTimeInMillis = (rental.payed_for - daysBefore) * factorHourToMillisec  + 1000;
-                alarmManager.set(AlarmManager.RTC_WAKEUP, plannedTimeInMillis, pendingIntent);
+                long plannedTimeInSeconds = (rental.payed_for - daysBefore) * factorHourToSec;
+                if (plannedTimeInSeconds <= 0) { // negative Werte, wenn weniger als 3 Tage, abfangen
+                    plannedTimeInSeconds = 1;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), rental.getId(), intent, 0);
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.SECOND, (int) plannedTimeInSeconds);
+                am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
             }
-
             Toast.makeText(this.getContext(), this.getContext().getResources().getString(R.string.str_alarms_set), Toast.LENGTH_LONG).show();
         });
     }
