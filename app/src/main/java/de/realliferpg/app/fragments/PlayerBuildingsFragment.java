@@ -1,19 +1,27 @@
 package de.realliferpg.app.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.helper.PreferenceHelper;
+import de.realliferpg.app.helper.ReminderBroadcastReceiver;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.objects.Building;
@@ -68,11 +76,11 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         // - DummyDaten -----------------------------
-        /*
+/*
         House hausEins = new House();
         hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
         hausEins.id = 11;
-        hausEins.payed_for = 30*24;
+        hausEins.payed_for = 2*24;
         House hausZwei = new House();
         hausZwei.players = new String[]{"Spieler 1", "Spieler 2"};
         hausZwei.id = 12;
@@ -95,7 +103,11 @@ public class PlayerBuildingsFragment extends Fragment {
         rentalZwei.payed_for = 1234;
         Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
         rentals = dummyRentals;
-        */
+
+        playerInfo.houses = houses;
+        playerInfo.buildings = buildings;
+        playerInfo.rentals = rentals;
+*/
         // -----------------------------
 
         buildingByType = new BuildingGroup[3];
@@ -115,13 +127,52 @@ public class PlayerBuildingsFragment extends Fragment {
         BuildingsListAdapter buildingsListAdapter = new BuildingsListAdapter(this.getContext(), buildingByType, Integer.valueOf(prefHelper.getDaysForReminderMaintenance()));
         expandableListView.setAdapter(buildingsListAdapter);
 
+        Button btnReminder = view.findViewById(R.id.btn_reminder);
+
         if ((playerInfo.houses == null || playerInfo.houses.length == 0) && (playerInfo.buildings == null || playerInfo.buildings.length == 0) && (playerInfo.rentals == null || playerInfo.rentals.length == 0)){
             tvKeineDaten.setVisibility(View.VISIBLE);
             expandableListView.setVisibility(View.INVISIBLE);
+            btnReminder.setVisibility(View.INVISIBLE);
         } else {
             tvKeineDaten.setVisibility(View.INVISIBLE);
             expandableListView.setVisibility(View.VISIBLE);
+            btnReminder.setVisibility(View.VISIBLE);
         }
+
+        btnReminder.setOnClickListener(v -> {
+            int daysBefore = 3*24;
+            long factorHourToSec = 60 * 60;
+
+            Intent intent = new Intent(this.getActivity(), ReminderBroadcastReceiver.class);
+            AlarmManager am = (AlarmManager) this.getContext().getSystemService(Context.ALARM_SERVICE);
+
+            // Houses
+            for (House house : playerInfo.houses
+                 ) {
+                long plannedTimeInSeconds =  (house.payed_for - daysBefore) * factorHourToSec;
+                if (plannedTimeInSeconds <= 0) { // negative Werte, wenn weniger als 3 Tage, abfangen
+                    plannedTimeInSeconds = 1;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), house.getId(), intent, 0);
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.SECOND, (int) plannedTimeInSeconds);
+                am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+            }
+
+            // Rentals
+            for (Rental rental : playerInfo.rentals
+                 ) {
+                long plannedTimeInSeconds = (rental.payed_for - daysBefore) * factorHourToSec;
+                if (plannedTimeInSeconds <= 0) { // negative Werte, wenn weniger als 3 Tage, abfangen
+                    plannedTimeInSeconds = 1;
+                }
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), rental.getId(), intent, 0);
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.SECOND, (int) plannedTimeInSeconds);
+                am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+            }
+            Toast.makeText(this.getContext(), this.getContext().getResources().getString(R.string.str_alarms_set), Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override

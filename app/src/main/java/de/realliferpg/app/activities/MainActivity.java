@@ -1,10 +1,13 @@
 package de.realliferpg.app.activities;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Singleton.getInstance().setContext(getApplicationContext());
+        createNotificationChannel();
 
         PreferenceHelper preferenceHelper = new PreferenceHelper();
 
@@ -131,29 +135,6 @@ public class MainActivity extends AppCompatActivity
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
-
-
-
-        /*
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-
-        DrawerLayout drawer = findViewById(R.id.layout_main);
-
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            // TODO beim Zurückgehen laden die Controls nicht, daher wird vorerst der "Zurück"-Button disabled
-
-            if (count == 0) {
-                super.onBackPressed();
-            } else if (count == 1) {
-                finish();
-            } else {
-                getSupportFragmentManager().popBackStack();
-            }
-
-        }
-        */
     }
 
     @Override
@@ -348,6 +329,19 @@ public class MainActivity extends AppCompatActivity
         }catch (Exception e){
             Singleton.getInstance().setErrorMsg(e.getMessage());
             switchFragment(new ErrorFragment());
+        }
+    }
+
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "ReminderMaintenance";
+            String description = "Channel for RealLifeRPG Maintenance Reminder";
+            int importance =NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyMaintenance", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
         }
     }
 }

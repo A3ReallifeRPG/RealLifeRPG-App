@@ -115,6 +115,8 @@ public class FractionMappingHelper {
             case 15:
                 return context.getResources().getString(R.string.str_cop13);
             case 16:
+                return context.getResources().getString(R.string.str_cop14);
+            case 17:
                 return context.getResources().getString(R.string.str_cop15);
             default:
                 return context.getResources().getString(R.string.str_noRank);
@@ -217,6 +219,8 @@ public class FractionMappingHelper {
                 return "cop_14";
             case 16:
                 return "cop_15";
+            case 17:
+                return "cop_16";
 
             default:
                 return "Kein Rang";

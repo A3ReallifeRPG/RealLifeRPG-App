@@ -99,7 +99,8 @@
     <string name="str_cop11">Polizeirat</string> <!-- C11, cop-level 13 -->
     <string name="str_cop12">Polizeioberrat</string> <!-- C12, cop-level 14 -->
     <string name="str_cop13">Polizeidirektor</string> <!-- C13, cop-level 15 -->
-    <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 16 -->
+    <string name="str_cop14">Leitender Polizeidirektor</string> <!-- C14, cop-level 16 -->
+    <string name="str_cop15">Polizeipräsident</string> <!-- C15, cop-level 17 -->
 
     <!-- Raenge der Medics -->
     <string name="str_med01">Sanitätshelfer</string> <!-- medic-level 1 -->
@@ -205,6 +206,10 @@
     <string name="str_maintainance_house">{0} mit ID {1} ist für {2} Tage ({3} Stunden) gewartet.</string>
     <string name="str_maintainance_rental">{0} mit ID {1} ist für {2} Tage ({3} Stunden) bezahlt.</string>
     <string name="str_inactive"> - inaktiv</string>
+    <string name="str_remind_me">Erinnere mich</string>
+    <string name="str_alarms_set">Erinnerungen gesetzt</string>
+    <string name="str_notifications_reminder_maintenance_title">Erinnerung</string>
+    <string name="str_notifications_reminder_maintenance_content">Du musst ein Haus warten oder ein Appartment bezahlen! Öffne die App für mehr Infos.</string>
 
     <!-- CBS -->
     <string name="str_completed">abgeschlossen</string>
