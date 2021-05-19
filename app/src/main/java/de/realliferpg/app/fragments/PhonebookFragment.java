@@ -1,5 +1,6 @@
 package de.realliferpg.app.fragments;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import de.realliferpg.app.Constants;
@@ -28,10 +30,12 @@ import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PhoneNumbers;
 import de.realliferpg.app.objects.PlayerInfo;
 
-public class PhonebookFragment extends Fragment implements CallbackNotifyInterface {
+public class PhonebookFragment extends Fragment implements CallbackNotifyInterface, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     private View view;
     private FragmentInteractionInterface mListener;
+    private PhonebookAdapter listAdapter;
+    private ExpandableListView listPhoneBooks;
 
     public PhonebookFragment() {
         // Required empty public constructor
@@ -92,12 +96,21 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
             }
         });
 
+        SearchManager searchManager = (SearchManager) this.getContext().getSystemService(Context.SEARCH_SERVICE);
+        SearchView search = (SearchView) view.findViewById(R.id.sv_search_phone_by_name);
+        search.setSearchableInfo(searchManager.getSearchableInfo(this.getActivity().getComponentName()));
+        search.setIconifiedByDefault(false);
+        search.setOnQueryTextListener(this);
+        search.setOnCloseListener(this);
+
         if (playerInfo.phonebooks == null || playerInfo.phonebooks.length == 0){
             tvKeineDaten.setVisibility(View.VISIBLE);
             lvPhonebooks.setVisibility(View.INVISIBLE);
+            search.setVisibility(View.INVISIBLE);
         } else {
             tvKeineDaten.setVisibility(View.INVISIBLE);
             lvPhonebooks.setVisibility(View.VISIBLE);
+            search.setVisibility(View.VISIBLE);
         }
 
         return view;
@@ -128,25 +141,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
         switch (type) {
             case PLAYER:
-                final ExpandableListView listPhoneBooks = view.findViewById(R.id.lv_phonebook);
-
-                PhonebookAdapter listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
-
+                listPhoneBooks = view.findViewById(R.id.lv_phonebook);
+                listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
                 listPhoneBooks.setAdapter(listAdapter);
-
                 pblistPhonebooks.setVisibility(View.GONE);
-
-                // collapse all but selected item
-                listPhoneBooks.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                    int previousItem = -1;
-
-                    @Override
-                    public void onGroupExpand(int groupPosition) {
-                        if (groupPosition != previousItem)
-                            listPhoneBooks.collapseGroup(previousItem);
-                        previousItem = groupPosition;
-                    }
-                });
+                expandAll();
                 break;
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
@@ -170,6 +169,27 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         }
     }
 
+    @Override
+    public boolean onClose(){
+        listAdapter.filterData("");
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        listAdapter.filterData(query);
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        listAdapter.filterData(query);
+        expandAll();
+        return false;
+    }
+
     private String getDefaultNumber(PhoneNumbers[] phones) {
         for (PhoneNumbers phone : phones) {
             if (phone.note.matches("default")) {
@@ -177,5 +197,12 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
             }
         }
         return "0";
+    }
+
+    private void expandAll() {
+        int count = listAdapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            listPhoneBooks.expandGroup(i);
+        }
     }
 }

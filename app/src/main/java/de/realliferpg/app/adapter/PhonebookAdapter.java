@@ -7,11 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
 import de.realliferpg.app.objects.PhoneNumbers;
 import de.realliferpg.app.objects.PhonebookEntry;
+import de.realliferpg.app.objects.Phonebooks;
 import de.realliferpg.app.objects.PlayerInfo;
 
 
@@ -19,10 +23,15 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
     private final PlayerInfo playerInfo;
+    private ArrayList<Phonebooks> filteredList;
+    private ArrayList<Phonebooks> originalList;
 
     public PhonebookAdapter(Context _context, PlayerInfo _playerInfo) {
         this.context = _context;
         this.playerInfo = _playerInfo;
+        this.filteredList = new ArrayList<>();
+        this.originalList = new ArrayList<>();
+        this.originalList.addAll(Arrays.asList(_playerInfo.phonebooks));
     }
 
     @Override
@@ -162,6 +171,35 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             }
         }
         return "0";
+    }
+
+    public void filterData(String query){
+
+        query = query.toLowerCase();
+        filteredList.clear();
+
+        if (query.isEmpty()){
+            filteredList.addAll(originalList);
+        }
+        else {
+
+            for (Phonebooks phonebook : originalList){
+                ArrayList<PhonebookEntry> phonebookList = new ArrayList<PhonebookEntry>(Arrays.asList(phonebook.phonebook));
+                ArrayList<PhonebookEntry> newPhonebookList = new ArrayList<PhonebookEntry>();
+                for (PhonebookEntry entry: phonebookList){
+                    if(entry.name.toLowerCase().contains(query)){
+                        newPhonebookList.add(entry);
+                    }
+                }
+                if (newPhonebookList.size() > 0){
+                    Phonebooks newEntry = new Phonebooks(phonebook.side, newPhonebookList.toArray(new PhonebookEntry[newPhonebookList.size()]));
+                    filteredList.add(newEntry);
+                }
+            }
+        }
+
+        this.playerInfo.phonebooks = filteredList.toArray(new Phonebooks[filteredList.size()]);
+        notifyDataSetChanged();
     }
 
     private static class ViewHolder {
