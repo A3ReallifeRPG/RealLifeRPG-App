@@ -44,6 +44,8 @@
     <string name="str_days">Tag(e)</string>
     <string name="str_lastSeen">Zuletzt gesehen</string>
     <string name="str_buildings">Gebäude</string>
+    <string name="str_next_restart">Nächster Restart um</string>
+    <string name="o_clock">Uhr</string>
 
     <string name="str_cloud_dissconnect">Wolke ohne Verbindung</string>
     <string name="sry_somethign_wrong">Sieht aus als wäre etwas falsch gelaufen</string>

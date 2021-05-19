@@ -47,6 +47,9 @@
     <string name="str_permanent">Permanent</string>
     <string name="str_days">Day(s)</string>
     <string name="str_lastSeen">Last seen</string>
+    <string name="str_buildings">Buildings</string>
+    <string name="str_next_restart">Next restart at</string>
+    <string name="o_clock">o\'clock</string>
 
     <string name="str_cloud_dissconnect">Cloud disconnected</string>
     <string name="str_whoops" translatable="false">Whoops</string>
@@ -72,7 +75,6 @@
     <string name="str_server1">Server 1</string>
     <string name="str_server2">Server 2</string>
     <string name="str_server3">Server 3</string>
-    <string name="str_buildings">Buildings</string>
 
     <string name="str_medic">Medical Rescue Service</string>
     <string name="str_rac">RealLife Automobil Club</string>

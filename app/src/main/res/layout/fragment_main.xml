@@ -8,7 +8,7 @@
     android:background="@color/secondaryColor"
     tools:context=".fragments.MainFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -40,6 +40,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_remaining_time_till_restart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="right"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_main_serverHead" />
+
             <ListView
                 android:id="@+id/lv_main_serverList"
                 android:layout_width="0dp"
@@ -49,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_main_serverHead">
+                app:layout_constraintTop_toBottomOf="@+id/tv_remaining_time_till_restart">
 
             </ListView>
 
