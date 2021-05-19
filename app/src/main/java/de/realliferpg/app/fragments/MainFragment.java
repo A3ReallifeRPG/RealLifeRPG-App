@@ -93,6 +93,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 tvPiName.setText("");
                 tvPiPID.setText("");
                 tvPiGUID.setText("");
+                tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + timeTillRestart);
 
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
                 listView.setAdapter(null);
