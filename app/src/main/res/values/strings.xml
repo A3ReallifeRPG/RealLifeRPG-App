@@ -233,7 +233,7 @@
     <string name="str_name">Name:</string>
     <string name="str_number">Number:</string>
     <string name="str_iban">IBAN:</string>
-    <string name="str_multiple_phonenumbers">You have several phone numbers of your own. Default is:</string>
+    <string name="str_multiple_phonenumbers">You have several phone numbers:</string>
     <string name="str_own_phonenumber">Your phone number:</string>
     <string name="str_default_phonenumber">Your main number:</string>
 

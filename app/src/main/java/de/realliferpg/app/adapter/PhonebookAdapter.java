@@ -92,10 +92,11 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         FractionEnum fractionEnum = FractionMappingHelper.getFractionFromSide(playerInfo.phonebooks[groupPosition].side, Integer.valueOf(playerInfo.coplevel));
         viewHolder.tvSide.setText(FractionMappingHelper.getFractionNameFromEnum(this.context, fractionEnum));
 
-        String defaultNumber = getDefaultNumber(playerInfo.phones);
-
         if (playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum)) {
-            viewHolder.tvOwnNumbers.setVisibility(View.INVISIBLE);
+            String text = context.getResources().getString(R.string.str_multiple_phonenumbers) + "\n";
+            text = text.replace("\n", System.getProperty("line.separator"));
+            String textOwnPhoneNumber = text + getNumbersFormSide(playerInfo.phones, fractionEnum);
+            viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
         } else {
             String textOwnPhoneNumber = context.getResources().getString(R.string.str_own_phonenumber) + " " + getNumberFormSide(playerInfo.phones, fractionEnum);
             viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
@@ -141,21 +142,11 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
                 continue;
             }
             if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
-                continue;
+                count++;
             }
-            count++;
         }
 
         return count > 1;
-    }
-
-    private String getDefaultNumber(PhoneNumbers[] phones) {
-        for (PhoneNumbers phone : phones) {
-            if (phone.note.matches("default")) {
-                return phone.phone;
-            }
-        }
-        return "0";
     }
 
     private String getNumberFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
@@ -171,6 +162,30 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             }
         }
         return "0";
+    }
+
+    private String getNumbersFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
+        String numbers = "";
+        for (PhoneNumbers phone : phones) {
+            if (phone.disabled != 0) {
+                continue;
+            }
+            if (phone.note.matches("default")) {
+                continue;
+            }
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
+                if (phone.note.length() > 0){
+                    numbers += phone.phone + " (" + phone.note + ")\n";
+                }
+                else {
+                    numbers += phone.phone + "\n";
+                }
+            }
+        }
+        if (numbers.length() > 2) {
+            numbers = numbers.substring(0, numbers.length()-1);
+        }
+        return numbers.replace("\n", System.getProperty("line.separator"));
     }
 
     public void filterData(String query){

@@ -225,7 +225,7 @@
     <string name="str_name">Name:</string>
     <string name="str_number">Nummer:</string>
     <string name="str_iban">IBAN:</string>
-    <string name="str_multiple_phonenumbers">Du hast mehrere eigene Nummern. Standard ist:</string>
+    <string name="str_multiple_phonenumbers">Du hast mehrere Nummern:</string>
     <string name="str_own_phonenumber">Deine Nummer:</string>
     <string name="str_default_phonenumber">Deine Hauptnummer:</string>
 
