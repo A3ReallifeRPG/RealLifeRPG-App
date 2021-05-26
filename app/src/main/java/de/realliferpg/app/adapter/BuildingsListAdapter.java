@@ -178,12 +178,13 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         if (players == null || players.length == 0)
             return context.getResources().getString(R.string.str_no_person_with_key);
 
-        String playersWithKey = context.getResources().getString(R.string.str_persons_with_key) + " ";
+        String playersWithKey = context.getResources().getString(R.string.str_persons_with_key) + "\n";
         for (String name : players) {
-            playersWithKey += name + ", ";
+            playersWithKey += name + "\n";
         }
 
-        return playersWithKey.substring(0, playersWithKey.length()-2);
+        playersWithKey = playersWithKey.replace("\n", System.getProperty("line.separator"));
+        return playersWithKey.substring(0, playersWithKey.length()-1);
     }
 
     @Override
