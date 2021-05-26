@@ -141,7 +141,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
                 count++;
             }
         }
@@ -157,7 +157,7 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
                 return phone.phone;
             }
         }
@@ -173,13 +173,12 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
+                numbers += phone.phone;
                 if (phone.note.length() > 0){
-                    numbers += phone.phone + " (" + phone.note + ")\n";
+                    numbers += " (" + phone.note + ")";
                 }
-                else {
-                    numbers += phone.phone + "\n";
-                }
+                numbers += "\n";
             }
         }
         if (numbers.length() > 2) {
