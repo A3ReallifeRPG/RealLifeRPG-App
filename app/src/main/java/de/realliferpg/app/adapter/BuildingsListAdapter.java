@@ -12,6 +12,7 @@ import android.widget.TextView;
 import de.realliferpg.app.R;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.IBuilding;
+import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.BuildingGroup;
 
 public class BuildingsListAdapter extends BaseExpandableListAdapter {
@@ -136,6 +137,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
 
             viewHolderChild.tvBezeichnung = convertView.findViewById(R.id.tv_building_name);
             viewHolderChild.tvBezahlteTage = convertView.findViewById(R.id.tv_building_played_for);
+            viewHolderChild.tvMitglieder = convertView.findViewById(R.id.tv_building_players);
             viewHolderChild.ivListItemWarning = convertView.findViewById(R.id.iv_buildings_list_item_warning);
         } else {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
@@ -149,23 +151,39 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         if (building.getDisabled() != 0) // 0 heißt aktiv
         {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            buildingName += context.getResources().getString(R.string.str_inactive);
+            buildingName += " " + context.getResources().getString(R.string.str_inactive);
         }
 
         viewHolderChild.tvBezeichnung.setText(buildingName);
-        viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayedForDays())));
+        viewHolderChild.tvMitglieder.setText(getPlayersWithKey(building.getPlayers()));
         viewHolderChild.ivListItemWarning.setVisibility(building.getPayedForDays() <= daysMaintenance ? View.VISIBLE : View.INVISIBLE);
 
         if (buildingByType[groupPosition].type != BuildingEnum.BUILDING) {
+            viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayedForDays())));
+            viewHolderChild.tvBezahlteTage.setVisibility(View.VISIBLE);
             viewHolderChild.ivListItemWarning.setVisibility(building.getPayedForDays() <= daysMaintenance ? View.VISIBLE : View.INVISIBLE);
         }
         else {
             viewHolderChild.ivListItemWarning.setVisibility(View.INVISIBLE);
+            Building buildingCast = (Building)building;
+            viewHolderChild.tvBezahlteTage.setText("Stage: " + buildingCast.stage);
         }
 
         convertView.setTag(viewHolderChild);
 
         return convertView;
+    }
+
+    private String getPlayersWithKey(String[] players) {
+        if (players == null || players.length == 0)
+            return context.getResources().getString(R.string.str_no_person_with_key);
+
+        String playersWithKey = context.getResources().getString(R.string.str_persons_with_key) + " ";
+        for (String name : players) {
+            playersWithKey += name + ", ";
+        }
+
+        return playersWithKey.substring(0, playersWithKey.length()-2);
     }
 
     @Override
@@ -182,6 +200,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
     static class ViewHolderChild {
         TextView tvBezeichnung;
         TextView tvBezahlteTage;
+        TextView tvMitglieder;
         ImageView ivListItemWarning;
         int position;
     }

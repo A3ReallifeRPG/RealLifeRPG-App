@@ -212,6 +212,8 @@
     <string name="str_alarms_set">Erinnerungen gesetzt</string>
     <string name="str_notifications_reminder_maintenance_title">Erinnerung</string>
     <string name="str_notifications_reminder_maintenance_content">Du musst ein Haus warten oder ein Appartment bezahlen! Öffne die App für mehr Infos.</string>
+    <string name="str_no_person_with_key">Niemand hat einen Schlüssel.</string>
+    <string name="str_persons_with_key">Hat einen Schlüssel:</string>
 
     <!-- CBS -->
     <string name="str_completed">abgeschlossen</string>

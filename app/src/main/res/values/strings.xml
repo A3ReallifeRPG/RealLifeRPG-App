@@ -220,6 +220,8 @@
     <string name="str_alarms_set">Reminders set</string>
     <string name="str_notifications_reminder_maintenance_title">Reminder</string>
     <string name="str_notifications_reminder_maintenance_content">You have houses to maintain or rent to pay! Open the app for more information.</string>
+    <string name="str_no_person_with_key">Noone has a key.</string>
+    <string name="str_persons_with_key">Has a key:</string>
 
     <!-- CBS -->
     <string name="str_completed">completed</string>
