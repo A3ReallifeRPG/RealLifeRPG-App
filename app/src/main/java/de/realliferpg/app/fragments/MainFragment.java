@@ -75,8 +75,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         pbServer.setVisibility(View.VISIBLE);
 
         final TextView tvRestart = view.findViewById(R.id.tv_remaining_time_till_restart);
-        String timeTillRestart = getTimeTillRestart();
-        tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + timeTillRestart);
+        tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
 
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -93,7 +92,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 tvPiName.setText("");
                 tvPiPID.setText("");
                 tvPiGUID.setText("");
-                tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + timeTillRestart);
+                tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
 
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
                 listView.setAdapter(null);
