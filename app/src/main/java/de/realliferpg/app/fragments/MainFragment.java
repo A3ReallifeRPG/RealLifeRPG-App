@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -72,6 +74,9 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         pbPlayer.setVisibility(View.VISIBLE);
         pbServer.setVisibility(View.VISIBLE);
 
+        final TextView tvRestart = view.findViewById(R.id.tv_remaining_time_till_restart);
+        tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
+
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
         sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -87,6 +92,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 tvPiName.setText("");
                 tvPiPID.setText("");
                 tvPiGUID.setText("");
+                tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
 
                 final ListView listView = view.findViewById(R.id.lv_main_serverList);
                 listView.setAdapter(null);
@@ -195,5 +201,30 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         mListener = null;
     }
 
+    private String getTimeTillRestart(){
+        int nextRestart = 0;
+        Calendar c = Calendar.getInstance(Locale.GERMANY);
+        int currentHour = c.getTime().getHours();
 
+        if (currentHour < 3 || currentHour == 23) {
+            nextRestart = 3;
+        }
+        else if (currentHour < 7) {
+            nextRestart = 7;
+        }
+        else if (currentHour < 11) {
+            nextRestart = 11;
+        }
+        else if (currentHour < 15) {
+            nextRestart = 15;
+        }
+        else if (currentHour < 19) {
+            nextRestart = 19;
+        }
+        else if (currentHour < 23) {
+            nextRestart = 23;
+        }
+
+        return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);
+    }
 }

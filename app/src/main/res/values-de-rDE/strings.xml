@@ -44,6 +44,8 @@
     <string name="str_days">Tag(e)</string>
     <string name="str_lastSeen">Zuletzt gesehen</string>
     <string name="str_buildings">Gebäude</string>
+    <string name="str_next_restart">Nächster Restart um</string>
+    <string name="o_clock">Uhr</string>
 
     <string name="str_cloud_dissconnect">Wolke ohne Verbindung</string>
     <string name="sry_somethign_wrong">Sieht aus als wäre etwas falsch gelaufen</string>
@@ -210,6 +212,8 @@
     <string name="str_alarms_set">Erinnerungen gesetzt</string>
     <string name="str_notifications_reminder_maintenance_title">Erinnerung</string>
     <string name="str_notifications_reminder_maintenance_content">Du musst ein Haus warten oder ein Appartment bezahlen! Öffne die App für mehr Infos.</string>
+    <string name="str_no_person_with_key">Niemand hat einen Schlüssel.</string>
+    <string name="str_persons_with_key">Hat einen Schlüssel:</string>
 
     <!-- CBS -->
     <string name="str_completed">abgeschlossen</string>
@@ -221,7 +225,7 @@
     <string name="str_name">Name:</string>
     <string name="str_number">Nummer:</string>
     <string name="str_iban">IBAN:</string>
-    <string name="str_multiple_phonenumbers">Du hast mehrere eigene Nummern. Standard ist:</string>
+    <string name="str_multiple_phonenumbers">Du hast mehrere Nummern:</string>
     <string name="str_own_phonenumber">Deine Nummer:</string>
     <string name="str_default_phonenumber">Deine Hauptnummer:</string>
 

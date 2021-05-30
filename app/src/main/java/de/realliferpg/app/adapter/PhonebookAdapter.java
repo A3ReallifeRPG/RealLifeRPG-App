@@ -7,11 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
 import de.realliferpg.app.objects.PhoneNumbers;
 import de.realliferpg.app.objects.PhonebookEntry;
+import de.realliferpg.app.objects.Phonebooks;
 import de.realliferpg.app.objects.PlayerInfo;
 
 
@@ -19,10 +23,15 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
     private final PlayerInfo playerInfo;
+    private ArrayList<Phonebooks> filteredList;
+    private ArrayList<Phonebooks> originalList;
 
     public PhonebookAdapter(Context _context, PlayerInfo _playerInfo) {
         this.context = _context;
         this.playerInfo = _playerInfo;
+        this.filteredList = new ArrayList<>();
+        this.originalList = new ArrayList<>();
+        this.originalList.addAll(Arrays.asList(_playerInfo.phonebooks));
     }
 
     @Override
@@ -83,10 +92,11 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
         FractionEnum fractionEnum = FractionMappingHelper.getFractionFromSide(playerInfo.phonebooks[groupPosition].side, Integer.valueOf(playerInfo.coplevel));
         viewHolder.tvSide.setText(FractionMappingHelper.getFractionNameFromEnum(this.context, fractionEnum));
 
-        String defaultNumber = getDefaultNumber(playerInfo.phones);
-
         if (playerHasMultipleOwnNumbers(playerInfo.phones, fractionEnum)) {
-            viewHolder.tvOwnNumbers.setVisibility(View.INVISIBLE);
+            String text = context.getResources().getString(R.string.str_multiple_phonenumbers) + "\n";
+            text = text.replace("\n", System.getProperty("line.separator"));
+            String textOwnPhoneNumber = text + getNumbersFormSide(playerInfo.phones, fractionEnum);
+            viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
         } else {
             String textOwnPhoneNumber = context.getResources().getString(R.string.str_own_phonenumber) + " " + getNumberFormSide(playerInfo.phones, fractionEnum);
             viewHolder.tvOwnNumbers.setText(textOwnPhoneNumber);
@@ -131,22 +141,12 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
-                continue;
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
+                count++;
             }
-            count++;
         }
 
         return count > 1;
-    }
-
-    private String getDefaultNumber(PhoneNumbers[] phones) {
-        for (PhoneNumbers phone : phones) {
-            if (phone.note.matches("default")) {
-                return phone.phone;
-            }
-        }
-        return "0";
     }
 
     private String getNumberFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
@@ -157,11 +157,63 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
             if (phone.note.matches("default")) {
                 continue;
             }
-            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum))) {
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
                 return phone.phone;
             }
         }
         return "0";
+    }
+
+    private String getNumbersFormSide(PhoneNumbers[] phones, FractionEnum fractionEnum) {
+        String numbers = "";
+        for (PhoneNumbers phone : phones) {
+            if (phone.disabled != 0) {
+                continue;
+            }
+            if (phone.note.matches("default")) {
+                continue;
+            }
+            if (phone.side.matches(FractionMappingHelper.getSideFromFractionEnum(fractionEnum)) && phone.disabled == 0) {
+                numbers += phone.phone;
+                if (phone.note.length() > 0){
+                    numbers += " (" + phone.note + ")";
+                }
+                numbers += "\n";
+            }
+        }
+        if (numbers.length() > 2) {
+            numbers = numbers.substring(0, numbers.length()-1);
+        }
+        return numbers.replace("\n", System.getProperty("line.separator"));
+    }
+
+    public void filterData(String query){
+
+        query = query.toLowerCase();
+        filteredList.clear();
+
+        if (query.isEmpty()){
+            filteredList.addAll(originalList);
+        }
+        else {
+
+            for (Phonebooks phonebook : originalList){
+                ArrayList<PhonebookEntry> phonebookList = new ArrayList<PhonebookEntry>(Arrays.asList(phonebook.phonebook));
+                ArrayList<PhonebookEntry> newPhonebookList = new ArrayList<PhonebookEntry>();
+                for (PhonebookEntry entry: phonebookList){
+                    if(entry.name.toLowerCase().contains(query)){
+                        newPhonebookList.add(entry);
+                    }
+                }
+                if (newPhonebookList.size() > 0){
+                    Phonebooks newEntry = new Phonebooks(phonebook.side, newPhonebookList.toArray(new PhonebookEntry[newPhonebookList.size()]));
+                    filteredList.add(newEntry);
+                }
+            }
+        }
+
+        this.playerInfo.phonebooks = filteredList.toArray(new Phonebooks[filteredList.size()]);
+        notifyDataSetChanged();
     }
 
     private static class ViewHolder {

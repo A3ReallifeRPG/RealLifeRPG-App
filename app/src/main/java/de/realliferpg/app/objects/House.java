@@ -21,6 +21,9 @@ public class House implements IBuilding {
     public int getPayedForHours() { return payed_for; }
 
     @Override
+    public String[] getPlayers() { return players; }
+
+    @Override
     public int getDisabled() {
         return disabled;
     }
