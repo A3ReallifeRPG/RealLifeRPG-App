@@ -78,11 +78,11 @@ public class PlayerBuildingsFragment extends Fragment {
 
         // - DummyDaten -----------------------------
 /*
-        Calendar dateCurrent = Calendar.getInstance(); // 15.06.2021
+        Calendar dateCurrent = Calendar.getInstance(); // 19.06.2021
         Calendar date1 = Calendar.getInstance();
         Calendar date2 = Calendar.getInstance();
-        date1.set(2021,05,19); // 4
-        date2.set(2021,05,20); // 5
+        date1.set(2021,05,23); // 4
+        date2.set(2021,05,24); // 5
 
         long diff1 = date1.getTimeInMillis() - dateCurrent.getTimeInMillis();
         long diff2 = date2.getTimeInMillis() - dateCurrent.getTimeInMillis();
@@ -164,7 +164,7 @@ public class PlayerBuildingsFragment extends Fragment {
             // das Haus/Appartment finden, das am nächsten an drei Tagen dran ist
             for (House house : playerInfo.houses){
                 long plannedTimeInSeconds =  (house.getPayedForHours() - daysBefore) * factorHourToSec;
-                if (plannedTimeInSeconds > 0) { // <= hießt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
+                if (plannedTimeInSeconds > 0) { // <= heißt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
                     if (chosenBuilding == null){
                         chosenBuilding = house;
                     }
@@ -176,7 +176,7 @@ public class PlayerBuildingsFragment extends Fragment {
 
             for (Rental rental : playerInfo.rentals){
                 long plannedTimeInSeconds =  (rental.getPayedForHours() - daysBefore) * factorHourToSec;
-                if (plannedTimeInSeconds > 0) { // <= hießt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
+                if (plannedTimeInSeconds > 0) { // <= heißt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
                     if (chosenBuilding == null){
                         chosenBuilding = rental;
                     }
@@ -188,16 +188,17 @@ public class PlayerBuildingsFragment extends Fragment {
 
             // mit der ID eine Erinnerung setzen auf 15 Uhr
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), chosenBuilding.getId(), intent, 0);
-            Calendar c = Calendar.getInstance();
-            c.add(Calendar.HOUR, (int) chosenBuilding.getPayedForHours()-daysBefore);
-            c.set(Calendar.HOUR_OF_DAY, 16);
-            c.set(Calendar.MINUTE, 0);
-            am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+            Calendar cFuture = Calendar.getInstance();
+            cFuture.add(Calendar.HOUR, (int) chosenBuilding.getPayedForHours()-daysBefore);
+            cFuture.set(Calendar.HOUR_OF_DAY, 23);
+            cFuture.set(Calendar.MINUTE, 0);
+
+            am.set(AlarmManager.RTC_WAKEUP, cFuture.getTimeInMillis(), pendingIntent);
 
             // Info an Anwender
             String text = "Erinnerung für Gebäude mit ID {0} gesetzt für ";
             text = text.replace("{0}", Integer.toString(chosenBuilding.getId()));
-            text += c.get(Calendar.DAY_OF_MONTH) + "." + ((int)c.get(Calendar.MONTH)+1) + "." + c.get(Calendar.YEAR) + " 16:00 Uhr";
+            text += cFuture.get(Calendar.DAY_OF_MONTH) + "." + ((int)cFuture.get(Calendar.MONTH)+1) + "." + cFuture.get(Calendar.YEAR) + " 23:00 Uhr";
             Toast.makeText(this.getContext(), text, Toast.LENGTH_LONG).show();
         });
     }
