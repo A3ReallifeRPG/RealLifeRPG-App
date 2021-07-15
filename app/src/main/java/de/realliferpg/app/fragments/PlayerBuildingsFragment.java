@@ -81,8 +81,8 @@ public class PlayerBuildingsFragment extends Fragment {
         Calendar dateCurrent = Calendar.getInstance(); // 19.06.2021
         Calendar date1 = Calendar.getInstance();
         Calendar date2 = Calendar.getInstance();
-        date1.set(2021,05,23); // 4
-        date2.set(2021,05,24); // 5
+        date1.set(2021,06,18); // 4
+        date2.set(2021,06,19); // 5
 
         long diff1 = date1.getTimeInMillis() - dateCurrent.getTimeInMillis();
         long diff2 = date2.getTimeInMillis() - dateCurrent.getTimeInMillis();
@@ -189,8 +189,8 @@ public class PlayerBuildingsFragment extends Fragment {
             // mit der ID eine Erinnerung setzen auf 15 Uhr
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), chosenBuilding.getId(), intent, 0);
             Calendar cFuture = Calendar.getInstance();
-            cFuture.add(Calendar.HOUR, (int) chosenBuilding.getPayedForHours()-daysBefore);
-            cFuture.set(Calendar.HOUR_OF_DAY, 23);
+            cFuture.add(Calendar.HOUR, (int) chosenBuilding.getPayedForHours()-(daysBefore+1));
+            cFuture.set(Calendar.HOUR_OF_DAY, 19);
             cFuture.set(Calendar.MINUTE, 0);
 
             am.set(AlarmManager.RTC_WAKEUP, cFuture.getTimeInMillis(), pendingIntent);
@@ -198,7 +198,7 @@ public class PlayerBuildingsFragment extends Fragment {
             // Info an Anwender
             String text = "Erinnerung für Gebäude mit ID {0} gesetzt für ";
             text = text.replace("{0}", Integer.toString(chosenBuilding.getId()));
-            text += cFuture.get(Calendar.DAY_OF_MONTH) + "." + ((int)cFuture.get(Calendar.MONTH)+1) + "." + cFuture.get(Calendar.YEAR) + " 23:00 Uhr";
+            text += cFuture.get(Calendar.DAY_OF_MONTH) + "." + ((int)cFuture.get(Calendar.MONTH)+1) + "." + cFuture.get(Calendar.YEAR) + " 19:00 Uhr";
             Toast.makeText(this.getContext(), text, Toast.LENGTH_LONG).show();
         });
     }
