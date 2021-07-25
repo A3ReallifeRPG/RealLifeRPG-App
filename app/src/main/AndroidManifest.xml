@@ -39,11 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:process=":remote" android:name=".helper.ReminderBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+        <receiver android:name=".helper.ReminderBroadcastReceiver"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="6496dce83162d98adb08e404af68b6bc609ccff8" />
