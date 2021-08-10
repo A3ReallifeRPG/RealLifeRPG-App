@@ -184,6 +184,7 @@
     <string name="str_veh_sold">verkauft</string>
     <string name="str_veh_impound">beschlagnahmt</string>
     <string name="str_veh_disabled">zerstört</string>
+    <string name="str_last_garage">Garage:</string>
 
     <!-- Settings -->
     <string name="str_apiSettings">API-Einstellungen</string>
@@ -234,6 +235,162 @@
     <string name="str_industrial_area_id">Industriegebiet:</string>
     <string name="str_company_shops_amount">Stk.</string>
 
-    <!--<string name=""></string>-->
+    <!-- Garagen -->
+    <!-- Wallenfels -->
+    <string name="str_garage_car_1">Wallenfels Autogarage</string>
+    <string name="str_civ_car_1">Wallenfels Autohändler</string>
+    <string name="str_ship_1">Wallenfels Bootgarage</string>
+
+    <!-- Schwarzheide -->
+    <string name="str_garage_car_2">Schwarzheide Autogarage</string>
+    <string name="str_civ_car_2">Schwarzheide Autohändler</string>
+    <string name="str_ship_2">Schwarzheide Bootgarage</string>
+
+    <!-- Fisksee -->
+    <string name="str_garage_car_3">Fisksee Autogarage</string>
+    <string name="str_civ_car_3">Fisksee Autohändler</string>
+    <string name="str_taxi_car">Fisksee Taxihändler</string>
+    <string name="str_ship_3">Fisksee Bootgarage</string>
+
+    <!-- Ostersund -->
+    <string name="str_garage_car_4">Ostersund Autogarage</string>
+    <string name="str_civ_car_4">Ostersund Autohändler</string>
+    <string name="str_ship_4">Ostersund Bootgarage</string>
+    <string name="str_press">Ostersund Pressegarage</string>
+
+    <!-- Donatorshop -->
+    <string name="str_donator_car">Donator Shop Garage</string>
+
+    <!-- Pomberg -->
+    <string name="str_garage_car_5">Pomberg Autogarage</string>
+
+    <!-- Tortuga -->
+    <string name="str_garage_car_6">Tortuga Autogarage</string>
+    <string name="str_garage_car_7">Tortuga Autogarage und Bootgarage</string>
+    <string name="str_ship_18">Tortuga Bootgarage</string>
+    <string name="str_civ_air_11">Tortuga Flugzeug Garage</string>
+
+    <!-- Apparment Nord -->
+    <string name="str_garage_car_9">Appartement Nord Autogarage</string>
+
+    <!-- Blankenstein -->
+    <string name="str_garage_car_11">Blankenstein Autogarage</string>
+
+    <!-- Auenland -->
+    <string name="str_garage_car_12">Auenland Autogarage</string>
+
+    <!-- Holburg -->
+    <string name="str_garage_car_10">Holburg Autogarage</string>
+
+    <!-- Freudlingen -->
+    <string name="str_garage_car_8">Freudlingen Autogarage</string>
+
+    <!-- Autohaus Flughafen Fisksee -->
+    <string name="str_garage_car_13">Autohaus Flughafen Fisksee</string>
+
+    <!-- Import Shop -->
+    <string name="str_civ_car_6">Importhändler Autogarage</string>
+
+    <!-- Flughafen Holburg -->
+    <string name="str_faction_airhq">Flughafen Holburg AirHQ</string>
+    <string name="str_civ_air_1">Flughafen Holburg</string>
+
+    <!-- Flughafen Industriekomplex Ost -->
+    <string name="str_civ_air_2">Flughafen Industriekomplex Ost</string>
+    <string name="str_garage_impound">Industriekomplex impound Auto</string>
+    <string name="str_garage_impound_air">Industriekomplex impound Flugzeug</string>
+
+    <!-- Flughafen Herzberg -->
+    <string name="str_civ_air_3">Flughafen Herzberg</string>
+
+    <!-- Flughafen Schwarzheide -->
+    <string name="str_civ_air_4">Flughafen Schwarzheide</string>
+
+    <!-- Flughafen Auenland -->
+    <string name="str_civ_air_5">Flughafen Auenland</string>
+
+    <!-- Flughafen Rebellen Insel -->
+    <string name="str_civ_air_6">Flughafen Rebellen Insel</string>
+
+    <!-- Flughafen Tonoa -->
+    <string name="str_civ_air_7">Flughafen Tonoa</string>
+
+    <!-- Flughafen Südspitze -->
+    <string name="str_civ_air_8">Flughafen Südspitze</string>
+
+    <!-- Flughafen Frieddorf -->
+    <string name="str_civ_air_9">Flughafen Frieddorf</string>
+
+    <!-- Flughafen Sinheim -->
+    <string name="str_civ_air_10">Flughafen Sinheim</string>
+
+    <!-- Flughafen Fisksee -->
+    <string name="str_civ_air_12">Flughafen Fisksee</string>
+
+    <!-- Cop HQ -->
+    <string name="str_cop_car">Polizei Autogarage</string>
+    <string name="str_cop_air">Polizei Flug Garage</string>
+    <string name="str_cop_air_pad">Polizei Flug Garage Pad</string>
+
+    <!--- Landgericht -->
+    <string name="str_cop_court">Justiz Autogarage</string>
+    <string name="str_cop_court_pad">Justiz Flug Gang Pad</string>
+
+    <!-- RAC HQ -->
+    <string name="str_rac_car">RAC Autogarage</string>
+    <string name="str_rac_air">RAC Flug Garage</string>
+
+    <!-- ZNA -->
+    <string name="str_med_car">Medic Autogarage</string>
+    <string name="str_med_air">Medic Flug Garage</string>
+    <string name="str_garage_car_zna">ZNA Autogarage</string>
+
+    <!-- Spezial -->
+    <string name="str_garage_car_cc">Autohaus Auenland Autogarage</string>
+    <string name="str_civ_car_5">Kart Autogarage</string>
+    <string name="str_garage_unkown">unbekannt</string>
+    <string name="str_farm_shop">Traktor Händler</string>
+
+    <!-- Rennstrecke -->
+    <string name="str_civ_car_7">Rennstrecke Autohändler</string>
+    <string name="str_garage_car_14">Rennstrecke Autogarage</string>
+    <string name="str_garage_car_15">Clarks Autogarage</string>
+
+    <!-- LKW -->
+    <string name="str_civ_truck_1">Grosskirchen LKW Händler</string>
+    <string name="str_civ_truck_2">Industriekomplex Ost LKW Händler</string>
+
+    <!-- Mülldeponien -->
+    <string name="str_civ_dustmen_rent_1">Grosskirchen Müllmann Garage</string>
+    <string name="str_civ_dustmen_rent_2">Ostersund Müllmann Garage</string>
+    <string name="str_civ_dustmen_rent_3">Rabenstein Müllmann Garage</string>
+
+    <!-- Häfen -->
+    <string name="str_ship_5">Industriekomplex Ost Bootgarage</string>
+    <string name="str_ship_5_car">Industriekomplex Ost Autogarage</string>
+    <string name="str_ship_6">Ostinsel Bootgarage</string>
+    <string name="str_ship_6_car">Ostinsel Autogarage</string>
+    <string name="str_ship_7">Rabenstein Bootgarage</string>
+    <string name="str_ship_8">Buhlitz Bootgarage</string>
+    <string name="str_ship_9">Gang Bootgarage</string>
+    <string name="str_ship_9_car">Gang Autogarage</string>
+    <string name="str_ship_10">Neu Zemnitz Bootgarage</string>
+    <string name="str_ship_10_car">Neu Zemnitz Autogarage</string>
+    <string name="str_ship_11">Grosskirchen Bootgarage</string>
+    <string name="str_ship_12">Nordbrink Bootgarage</string>
+    <string name="str_ship_13">Holburg Bootgarage</string>
+    <string name="str_ship_14">ZNA Bootgarage</string>
+    <string name="str_ship_15">Bei TD Siedlung Bootgarage</string>
+    <string name="str_ship_16">Steinkamp Bootgarage</string>
+    <string name="str_ship_17">Tonoa Bootgarage</string>
+
+    <!-- Appartments -->
+    <string name="str_rental_2">Blankenstein Autogarage</string>
+    <string name="str_rental_3">Blankenstein Bar Autogarage</string>
+    <string name="str_rental_4">Schwarzheide Appartements Autogarage</string>
+    <string name="str_rental_5">Holburg Appartements Autogarage</string>
+    <string name="str_rental_6">Holburg Appartements Autogarage</string>
+    <string name="str_rental_7">Auenland Appartements Autogarage</string>
+    <string name="str_rental_9">Steinmark Appartements Autogarage</string>
 
 </resources>
