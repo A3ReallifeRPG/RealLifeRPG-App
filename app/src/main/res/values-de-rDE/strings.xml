@@ -348,7 +348,7 @@
     <!-- Spezial -->
     <string name="str_garage_car_cc">Autohaus Auenland Autogarage</string>
     <string name="str_civ_car_5">Kart Autogarage</string>
-    <string name="str_garage_unkown">unbekannt</string>
+    <string name="str_garage_unknown">unbekannt</string>
     <string name="str_farm_shop">Traktor Händler</string>
 
     <!-- Rennstrecke -->

@@ -2,6 +2,7 @@ package de.realliferpg.app.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -179,12 +180,19 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     }
 
     private String getNameGarage(String lastGarage){
-        switch (lastGarage) {
-            case "garage_car_zna":
-                return context.getString(R.string.str_garage_car_zna);
-            default:
-                return context.getString(R.string.str_garage_unkown);
+        if (lastGarage.toLowerCase().equals("unknown")){
+            lastGarage = "garage_unknown";
         }
+
+        String strLastGarage = new StringBuilder().append("str_").append(lastGarage).toString();
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
+
+        if (resourceId == 0){
+            resourceId = resources.getIdentifier(context.getString(R.string.str_garage_unknown),"string", context.getPackageName());
+        }
+
+        return resources.getString(resourceId);
     }
 
     static class ViewHolder {

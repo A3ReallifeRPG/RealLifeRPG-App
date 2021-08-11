@@ -356,7 +356,7 @@
     <!-- Spezial -->
     <string name="str_garage_car_cc">Car Dealership Auenland Car Garage</string>
     <string name="str_civ_car_5">Kart Car Garage</string>
-    <string name="str_garage_unkown">unkown</string>
+    <string name="str_garage_unknown">unknown</string>
     <string name="str_farm_shop">Tractor Dealer</string>
 
     <!-- Rennstrecke -->
