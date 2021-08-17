@@ -10,4 +10,5 @@ public class Vehicle {
     public int disabled;
     public int kilometer_total;
     public VehicleData vehicle_data;
+    public String lastgarage;
 }

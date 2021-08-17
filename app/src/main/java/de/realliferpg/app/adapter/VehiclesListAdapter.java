@@ -2,6 +2,7 @@ package de.realliferpg.app.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -129,6 +130,7 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
             viewHolderChild.ivVehiclesFraction = convertView.findViewById(R.id.iv_vehicle_fraction);
             viewHolderChild.tvVehiclePlate = convertView.findViewById(R.id.tv_vehicle_plate);
             viewHolderChild.tvVehicleKM = convertView.findViewById(R.id.tv_vehicle_km);
+            viewHolderChild.tvLastGarage = convertView.findViewById(R.id.tv_vehicle_lastgarage);
         } else {
             viewHolderChild = (ViewHolderChild) convertView.getTag();
         }
@@ -165,6 +167,7 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         viewHolderChild.tvVehicleName.setText(vehicleName);
         viewHolderChild.tvVehiclePlate.setText(context.getString(R.string.str_plate) + " " + formatHelper.formatPlate(vehicle.plate));
         viewHolderChild.tvVehicleKM.setText(context.getString(R.string.str_mileage) + " " + formatHelper.formatKilometer(vehicle.kilometer_total) + " km");
+        viewHolderChild.tvLastGarage.setText(context.getString(R.string.str_last_garage) + " " + getNameGarage(vehicle.lastgarage));
 
         convertView.setTag(viewHolderChild);
 
@@ -174,6 +177,22 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    private String getNameGarage(String lastGarage){
+        if (lastGarage.toLowerCase().equals("unknown")){
+            lastGarage = "garage_unknown";
+        }
+
+        String strLastGarage = new StringBuilder().append("str_").append(lastGarage).toString();
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
+
+        if (resourceId == 0){
+            resourceId = resources.getIdentifier(context.getString(R.string.str_garage_unknown),"string", context.getPackageName());
+        }
+
+        return resources.getString(resourceId);
     }
 
     static class ViewHolder {
@@ -186,6 +205,7 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
         ImageView ivVehiclesFraction;
         TextView tvVehiclePlate;
         TextView tvVehicleKM;
+        TextView tvLastGarage;
         int position;
     }
 }
