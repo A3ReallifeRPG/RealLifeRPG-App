@@ -119,9 +119,9 @@
     <string name="str_med05">Notfallhelfer</string> <!-- medic-level 5 -->
     <string name="str_med06">Notfallsanitäter</string> <!-- medic-level 6 -->
     <string name="str_med07">Medizinstudent</string> <!-- medic-level 7 -->
-    <string name="str_med08">Notarzt</string> <!-- medic-level 8 -->
-    <string name="str_med09">Ausbilder auf Probe</string> <!-- medic-level 9 -->
-    <string name="str_med10">Ausbilder</string> <!-- medic-level 10 -->
+    <string name="str_med08">Assistenzarzt</string> <!-- medic-level 8 -->
+    <string name="str_med09">Facharzt</string> <!-- medic-level 9 -->
+    <string name="str_med10">Oberarzt</string> <!-- medic-level 10 -->
     <string name="str_med11">Stellv. Ärztlicher Leiter</string> <!-- medic-level 11 -->
     <string name="str_med12">Ärztlicher Leiter</string> <!-- medic-level 12 -->
 
