@@ -15,6 +15,8 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.ArrayUtils;
+
 import java.util.Calendar;
 
 import de.realliferpg.app.R;
@@ -75,6 +77,14 @@ public class PlayerBuildingsFragment extends Fragment {
         House[] houses = playerInfo.houses;
         Building[] buildings = playerInfo.buildings;
         Rental[] rentals = playerInfo.rentals;
+
+        Building[] buildingsWithoutStageMinusOne = buildings.clone();
+        for (Building b:buildings) {
+            if (b.stage < 0){
+                buildingsWithoutStageMinusOne = ArrayUtils.removeAll(buildings, b);
+            }
+        }
+        buildings = buildingsWithoutStageMinusOne.clone();
 
         // - DummyDaten -----------------------------
 /*
