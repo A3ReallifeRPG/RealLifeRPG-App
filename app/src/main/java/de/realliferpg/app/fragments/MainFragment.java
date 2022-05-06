@@ -205,25 +205,15 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         int nextRestart = 0;
         Calendar c = Calendar.getInstance(Locale.GERMANY);
         int currentHour = c.getTime().getHours();
+        int[] restarts = new int[]{0,6,12,18};
 
-        if (currentHour < 3 || currentHour == 23) {
-            nextRestart = 3;
+        for (int i = 0; i < restarts.length-1; i++) {
+            if (currentHour > restarts[i] && currentHour <= restarts[i+1]){
+                nextRestart = restarts[i+1];
+                break;
+            }
         }
-        else if (currentHour < 7) {
-            nextRestart = 7;
-        }
-        else if (currentHour < 11) {
-            nextRestart = 11;
-        }
-        else if (currentHour < 15) {
-            nextRestart = 15;
-        }
-        else if (currentHour < 19) {
-            nextRestart = 19;
-        }
-        else if (currentHour < 23) {
-            nextRestart = 23;
-        }
+
         return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);
     }
 }
