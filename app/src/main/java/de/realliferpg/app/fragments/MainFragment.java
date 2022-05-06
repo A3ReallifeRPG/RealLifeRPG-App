@@ -3,9 +3,9 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,7 +169,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 }
 
                 Singleton.getInstance().setErrorMsg(error.toString());
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Snackbar.LENGTH_LONG);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override
@@ -224,7 +224,6 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         else if (currentHour < 23) {
             nextRestart = 23;
         }
-
         return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);
     }
 }

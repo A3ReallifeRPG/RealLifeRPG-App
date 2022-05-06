@@ -4,9 +4,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import de.realliferpg.app.Constants;
@@ -154,7 +154,7 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_phonebook), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_phonebook), R.string.str_error_occurred, Snackbar.LENGTH_LONG);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override

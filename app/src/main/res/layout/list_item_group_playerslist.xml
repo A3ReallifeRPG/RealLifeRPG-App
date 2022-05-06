@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="4dp"
@@ -21,6 +21,7 @@
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:text="@string/str_placeholder"
             android:textAlignment="center"
+            android:gravity="center_horizontal"
             android:textColor="@color/secondaryDarkColor"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,6 +55,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_playerslist_grouphead" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
