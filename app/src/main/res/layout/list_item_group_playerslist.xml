@@ -51,7 +51,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-            android:progressTint="@color/primaryColor"
+            android:progressTint="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_playerslist_grouphead" />
