@@ -3,9 +3,9 @@
     <color name="primaryColor">#660099</color>
     <color name="primaryLightColor">#A117E5</color>
     <color name="primaryDarkColor">#3C0059</color>
-    <color name="secondaryColor">#313335</color>
-    <color name="secondaryLightColor">#595b5d</color>
-    <color name="secondaryDarkColor">#2b2b2b</color>
+    <color name="secondaryColor">#424242</color>
+    <color name="secondaryLightColor">#616161</color>
+    <color name="secondaryDarkColor">#212121</color>
     <color name="primaryTextColor">@android:color/white</color>
     <color name="secondaryTextColor">@android:color/darker_gray</color>
 
