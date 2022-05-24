@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        android:background="@color/primaryLightColor">
+        android:background="@color/primaryColor">
 
         <TextView
             android:id="@+id/tv_playerslist_info"
@@ -22,7 +22,7 @@
             android:text="@string/str_placeholder"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:textColor="@color/secondaryDarkColor"
+            android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

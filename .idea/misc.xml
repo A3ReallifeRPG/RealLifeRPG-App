@@ -39,10 +39,17 @@
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_market.xml" value="0.31354166666666666" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_phonebook.xml" value="0.31354166666666666" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_playerslist.xml" value="0.31354166666666666" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_server.xml" value="0.31354166666666666" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_simple_spinner.xml" value="0.31354166666666666" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/list_item_vehicleslist.xml" value="0.3307291666666667" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/nav_header_main.xml" value="0.31354166666666666" />
         <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/layout/rc_item_donation.xml" value="0.2994791666666667" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/menu/bnv_info.xml" value="0.31354166666666666" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/menu/bnv_player.xml" value="0.31354166666666666" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/menu/bnv_rechner.xml" value="0.31354166666666666" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/menu/drawer_main.xml" value="0.31354166666666666" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3165" />
+        <entry key="..\:/Programmierung/RealLifeRPG-App/app/src/main/res/xml/preferences.xml" value="0.31354166666666666" />
       </map>
     </option>
   </component>

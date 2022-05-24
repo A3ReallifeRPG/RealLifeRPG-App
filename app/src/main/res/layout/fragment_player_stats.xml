@@ -121,7 +121,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/str_skillpoint"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/primaryLightColor"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pb_p_stats_level" />
@@ -133,7 +133,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/str_lastSeen"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/primaryLightColor"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_p_stats_skillpoint" />

@@ -13,7 +13,7 @@
         android:layout_marginBottom="2dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        android:background="@color/primaryLightColor">
+        android:background="@color/primaryColor">
 
         <TextView
             android:id="@+id/tv_changelog_group_header"
@@ -22,7 +22,7 @@
             android:layout_marginTop="2dp"
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:text="@string/str_placeholder"
-            android:textColor="@android:color/white"
+            android:textColor="@color/primaryTextColor"
             android:textSize="16sp"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
             android:layout_marginTop="2dp"
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:text="@string/str_placeholder"
-            android:textColor="@android:color/white"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="14sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"

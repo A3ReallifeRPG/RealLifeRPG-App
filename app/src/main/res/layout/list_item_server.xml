@@ -33,7 +33,7 @@
                 android:layout_margin = "4dp"
                 android:text="@string/str_placeholder"
                 android:textAlignment="center"
-                android:textColor="@color/secondaryDarkColor"
+                android:textColor="@color/secondaryTextColor"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

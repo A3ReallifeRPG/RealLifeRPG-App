@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="8dp"
-        android:background="@color/primaryLightColor"
+        android:background="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="@+id/elv_buildings"
         app:layout_constraintStart_toStartOf="@+id/elv_buildings"
         app:layout_constraintBottom_toBottomOf="parent"
