@@ -18,8 +18,8 @@ android {
         applicationId "de.realliferpg.app"
         minSdkVersion 14
         targetSdkVersion 30
-        versionCode 34
-        versionName "0.6.1"
+        versionCode 35
+        versionName "0.7.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
