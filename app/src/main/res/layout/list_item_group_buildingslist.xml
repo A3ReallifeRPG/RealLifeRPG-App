@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        android:background="@color/primaryLightColor">
+        android:background="@color/primaryColor">
 
         <TextView
             android:id="@+id/tv_buildings_category"
@@ -37,12 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:visibility="invisible"
+            app:tint="@color/secondaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_warning" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

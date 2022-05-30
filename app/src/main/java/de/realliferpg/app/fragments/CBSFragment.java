@@ -3,9 +3,9 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,12 +79,13 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
         ProgressBar pbCBS = view.findViewById(R.id.pb_cbs_main);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_cbs);
         sc.setRefreshing(false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_cbs);
+        final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
 
         switch (type) {
             case CBS:
                 ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
-                final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
-                final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenCBS);
+                tvKeineDaten.setVisibility(View.GONE);
 
                 if (cbsData == null || cbsData.isEmpty()){
                     tvKeineDaten.setVisibility(View.VISIBLE);
@@ -114,9 +115,11 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbCBS.setVisibility(View.GONE);
+                tvKeineDaten.setVisibility(View.VISIBLE);
+                expandableListView.setVisibility(View.INVISIBLE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_changelog), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_changelog), R.string.str_error_occurred, Snackbar.LENGTH_LONG);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override

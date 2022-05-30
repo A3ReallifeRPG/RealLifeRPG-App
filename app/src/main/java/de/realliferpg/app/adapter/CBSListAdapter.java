@@ -92,9 +92,9 @@ public class CBSListAdapter extends BaseExpandableListAdapter {
             status = "</font><font color='" + convertView.getResources().getColor(R.color.colorMed) + "'>" + context.getResources().getString(R.string.str_completed);
         } else if (cbsData.amount >= cbsData.funding_required)
         {
-            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>" + context.getResources().getString(R.string.str_financed);
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.secondaryTextColor) + "'>" + context.getResources().getString(R.string.str_financed);
         } else {
-            status = "</font><font color='" + convertView.getResources().getColor(R.color.colorRac) + "'>" + context.getResources().getString(R.string.str_wip);
+            status = "</font><font color='" + convertView.getResources().getColor(R.color.secondaryTextColor) + "'>" + context.getResources().getString(R.string.str_wip);
         }
 
         tv_groupSubtitle.setText(Html.fromHtml(status));

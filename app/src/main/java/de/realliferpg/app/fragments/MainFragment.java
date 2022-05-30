@@ -3,9 +3,9 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,7 +169,7 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 }
 
                 Singleton.getInstance().setErrorMsg(error.toString());
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main), R.string.str_error_occurred, Snackbar.LENGTH_LONG);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override
@@ -205,24 +205,13 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         int nextRestart = 0;
         Calendar c = Calendar.getInstance(Locale.GERMANY);
         int currentHour = c.getTime().getHours();
+        int[] restarts = new int[]{0,6,12,18};
 
-        if (currentHour < 3 || currentHour == 23) {
-            nextRestart = 3;
-        }
-        else if (currentHour < 7) {
-            nextRestart = 7;
-        }
-        else if (currentHour < 11) {
-            nextRestart = 11;
-        }
-        else if (currentHour < 15) {
-            nextRestart = 15;
-        }
-        else if (currentHour < 19) {
-            nextRestart = 19;
-        }
-        else if (currentHour < 23) {
-            nextRestart = 23;
+        for (int i = 0; i < restarts.length-1; i++) {
+            if (currentHour > restarts[i] && currentHour <= restarts[i+1]){
+                nextRestart = restarts[i+1];
+                break;
+            }
         }
 
         return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);

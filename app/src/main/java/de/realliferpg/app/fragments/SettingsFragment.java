@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceManager;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.preference.SwitchPreference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.google.zxing.client.android.Intents;
@@ -182,13 +182,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
 
             PreferenceHelper preferenceHelper = new PreferenceHelper();
             if (preferenceHelper.isCrashlyticsEnabled()) {
-                Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsEnabled, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsEnabled, Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 mListener.onFragmentInteraction(SettingsFragment.class, Uri.parse("enable_crashlytics"));
             }
             else {
-                Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsDisabled, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(getView(), R.string.str_crashlyticsDisabled, Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
             }

@@ -3,9 +3,9 @@ package de.realliferpg.app.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,9 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -23,6 +26,7 @@ import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PhoneNumbers;
 
@@ -48,6 +52,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_companyshops, container, false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
 
         final ProgressBar pbLoadCompanyShop = view.findViewById(R.id.pb_company_shops);
         pbLoadCompanyShop.setVisibility(View.VISIBLE);
@@ -83,7 +88,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             }
         });
 
-        /*
+
         ArrayList<CompanyShops> companyShopsData = Singleton.getInstance().getCompanyShopsData();
 
         if (companyShopsData == null || companyShopsData.size() == 0){
@@ -93,7 +98,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             tvKeineDaten.setVisibility(View.INVISIBLE);
             elv_company_shops.setVisibility(View.VISIBLE);
         }
-        */
+
 
         return view;
     }
@@ -120,11 +125,14 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         ProgressBar pb_company_shops = view.findViewById(R.id.pb_company_shops);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_company_shops);
         sc.setRefreshing(false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
+        final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
 
         switch (type) {
             case COMPANY_SHOPS:
-                final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
+
                 CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), Singleton.getInstance().getCompanyShopsData());
+                tvKeineDaten.setVisibility(View.GONE);
 
                 elv_company_shops.setAdapter(listAdapter);
 
@@ -146,10 +154,12 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pb_company_shops.setVisibility(View.GONE);
+                tvKeineDaten.setVisibility(View.VISIBLE);
+                elv_company_shops.setVisibility(View.INVISIBLE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
-                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_company_shops), R.string.str_error_occurred, Constants.ERROR_SNACKBAR_DURATION);
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_main_company_shops), R.string.str_error_occurred, Snackbar.LENGTH_LONG);
 
                 snackbar.setAction(R.string.str_view, new View.OnClickListener() {
                     @Override
