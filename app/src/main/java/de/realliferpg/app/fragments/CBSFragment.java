@@ -79,12 +79,13 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
         ProgressBar pbCBS = view.findViewById(R.id.pb_cbs_main);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_cbs);
         sc.setRefreshing(false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_cbs);
+        final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
 
         switch (type) {
             case CBS:
                 ArrayList<CBSData> cbsData = Singleton.getInstance().getCBSData();
-                final ExpandableListView expandableListView = view.findViewById(R.id.lv_cbs_main);
-                final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenCBS);
+                tvKeineDaten.setVisibility(View.GONE);
 
                 if (cbsData == null || cbsData.isEmpty()){
                     tvKeineDaten.setVisibility(View.VISIBLE);
@@ -114,6 +115,8 @@ public class CBSFragment extends Fragment implements CallbackNotifyInterface{
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pbCBS.setVisibility(View.GONE);
+                tvKeineDaten.setVisibility(View.VISIBLE);
+                expandableListView.setVisibility(View.INVISIBLE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
                 Snackbar snackbar = Snackbar.make(view.findViewById(R.id.cl_changelog), R.string.str_error_occurred, Snackbar.LENGTH_LONG);

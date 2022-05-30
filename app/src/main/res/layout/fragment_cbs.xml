@@ -8,6 +8,18 @@
     android:background="@color/secondaryColor"
     tools:context=".fragments.ChangelogFragment">
 
+    <TextView
+        android:id="@+id/tv_cbs_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/str_cbs"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/srl_cbs"
         android:layout_width="0dp"
@@ -17,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tv_cbs_head">
 
         <ExpandableListView
             android:id="@+id/lv_cbs_main"
@@ -48,7 +60,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvKeineDatenCBS"
+        android:id="@+id/tv_no_data_cbs"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/str_no_data"

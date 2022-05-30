@@ -125,11 +125,14 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         ProgressBar pb_company_shops = view.findViewById(R.id.pb_company_shops);
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_company_shops);
         sc.setRefreshing(false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
+        final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
 
         switch (type) {
             case COMPANY_SHOPS:
-                final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);
+
                 CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), Singleton.getInstance().getCompanyShopsData());
+                tvKeineDaten.setVisibility(View.GONE);
 
                 elv_company_shops.setAdapter(listAdapter);
 
@@ -151,6 +154,8 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
                 pb_company_shops.setVisibility(View.GONE);
+                tvKeineDaten.setVisibility(View.VISIBLE);
+                elv_company_shops.setVisibility(View.INVISIBLE);
 
                 Singleton.getInstance().setErrorMsg(error.toString());
 
