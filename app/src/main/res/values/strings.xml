@@ -243,162 +243,91 @@
     <string name="str_industrial_area_id">Industrial Area:</string>
     <string name="str_company_shops_amount">pcs.</string>
 
-    <!-- Garagen -->
-    <!-- Wallenfels -->
-    <string name="str_garage_car_1">Wallenfels Car Garage</string>
-    <string name="str_civ_car_1">Wallenfels Car Dealer</string>
-    <string name="str_ship_1">Wallenfels Boat Garage</string>
-
-    <!-- Schwarzheide -->
-    <string name="str_garage_car_2">Schwarzheide Car Garage</string>
-    <string name="str_civ_car_2">Schwarzheide Car Dealer</string>
-    <string name="str_ship_2">Schwarzheide Boat Garage</string>
-
-    <!-- Fisksee -->
-    <string name="str_garage_car_3">Fisksee Car Garage</string>
-    <string name="str_civ_car_3">Fisksee Car Dealer</string>
-    <string name="str_taxi_car">Fisksee Cab Dealer</string>
-    <string name="str_ship_3">Fisksee Boat Garage</string>
-
-    <!-- Ostersund -->
-    <string name="str_garage_car_4">Ostersund Car Garage</string>
-    <string name="str_civ_car_4">Ostersund Car Dealer</string>
-    <string name="str_ship_4">Ostersund Boat Garage</string>
-    <string name="str_press">Ostersund Press Garage</string>
-
-    <!-- Donatorshop -->
-    <string name="str_donator_car">Donator Shop Garage</string>
-
-    <!-- Pomberg -->
-    <string name="str_garage_car_5">Pomberg Car Garage</string>
-
-    <!-- Tortuga -->
-    <string name="str_garage_car_6">Tortuga Car Garage</string>
-    <string name="str_garage_car_7">Tortuga Car Garage and Boat Garage</string>
-    <string name="str_ship_18">Tortuga Boat Garage</string>
-    <string name="str_civ_air_11">Tortuga Air Garage</string>
-
-    <!-- Apparment Nord -->
-    <string name="str_garage_car_9">Appartement Nord Car Garage</string>
-
-    <!-- Blankenstein -->
-    <string name="str_garage_car_11">Blankenstein Car Garage</string>
-
-    <!-- Auenland -->
-    <string name="str_garage_car_12">Auenland Car Garage</string>
-
-    <!-- Holburg -->
-    <string name="str_garage_car_10">Holburg Car Garage</string>
-
-    <!-- Freudlingen -->
-    <string name="str_garage_car_8">Freudlingen Car Garage</string>
-
-    <!-- Car Dealership Airport Fisksee -->
-    <string name="str_garage_car_13">Car Dealership Airport Fisksee</string>
-
-    <!-- Import Shop -->
-    <string name="str_civ_car_6">Importers Car Garage</string>
-
-    <!-- Airport Holburg -->
-    <string name="str_faction_airhq">Airport Holburg AirHQ</string>
-    <string name="str_civ_air_1">Airport Holburg</string>
-
-    <!-- Airport Industriekomplex Ost -->
-    <string name="str_civ_air_2">Airport Industriekomplex Ost</string>
-    <string name="str_garage_impound">Industriekomplex impound Car</string>
-    <string name="str_garage_impound_air">Industriekomplex impound Air</string>
-
-    <!-- Airport Herzberg -->
-    <string name="str_civ_air_3">Airport Herzberg</string>
-
-    <!-- Airport Schwarzheide -->
-    <string name="str_civ_air_4">Airport Schwarzheide</string>
-
-    <!-- Airport Auenland -->
-    <string name="str_civ_air_5">Airport Auenland</string>
-
-    <!-- Airport Rebellen Insel -->
-    <string name="str_civ_air_6">Airport Rebels Island</string>
-
-    <!-- Airport Tonoa -->
-    <string name="str_civ_air_7">Airport Tonoa</string>
-
-    <!-- Airport Südspitze -->
-    <string name="str_civ_air_8">Airport Südspitze</string>
-
-    <!-- Airport Frieddorf -->
-    <string name="str_civ_air_9">Airport Frieddorf</string>
-
-    <!-- Airport Sinheim -->
-    <string name="str_civ_air_10">Airport Sinheim</string>
-
-    <!-- Airport Fisksee -->
-    <string name="str_civ_air_12">Airport Fisksee</string>
-
-    <!-- Cop HQ -->
-    <string name="str_cop_car">Polizei Car Garage</string>
-    <string name="str_cop_air">Polizei Flug Garage</string>
-    <string name="str_cop_air_pad">Polizei Flug Garage Pad</string>
-
-    <!--- Landgericht -->
-    <string name="str_cop_court">Justiz Car Garage</string>
-    <string name="str_cop_court_pad">Justiz Air Garage Pad</string>
-
-    <!-- RAC HQ -->
-    <string name="str_rac_car">RAC Car Garage</string>
-    <string name="str_rac_air">RAC Air Garage</string>
-
-    <!-- ZNA -->
-    <string name="str_med_car">Medic Car Garage</string>
-    <string name="str_med_air">Medic Air Garage</string>
-    <string name="str_garage_car_zna">ZNA Car Garage</string>
-
-    <!-- Spezial -->
-    <string name="str_garage_car_cc">Car Dealership Auenland Car Garage</string>
-    <string name="str_civ_car_5">Kart Car Garage</string>
-    <string name="str_garage_unknown">unknown</string>
-    <string name="str_farm_shop">Tractor Dealer</string>
-
-    <!-- Rennstrecke -->
-    <string name="str_civ_car_7">Race Track Car Dealer</string>
-    <string name="str_garage_car_14">Race Track Car Garage</string>
-    <string name="str_garage_car_15">Clarks Car Garage</string>
-
-    <!-- Truck -->
-    <string name="str_civ_truck_1">Grosskirchen Truck Dealer</string>
-    <string name="str_civ_truck_2">Industriekomplex Ost Truck Dealer</string>
-
-    <!-- Mülldeponien -->
-    <string name="str_civ_dustmen_rent_1">Grosskirchen Garbage Collector Garage</string>
-    <string name="str_civ_dustmen_rent_2">Ostersund Garbage Collector Garage</string>
-    <string name="str_civ_dustmen_rent_3">Rabenstein Garbage Collector Garage</string>
-
-    <!-- Häfen -->
-    <string name="str_ship_5">Industriekomplex Ost Boat Garage</string>
-    <string name="str_ship_5_car">Industriekomplex Ost Car Garage</string>
-    <string name="str_ship_6">Ostinsel Boat Garage</string>
-    <string name="str_ship_6_car">Ostinsel Car Garage</string>
-    <string name="str_ship_7">Rabenstein Boat Garage</string>
-    <string name="str_ship_8">Buhlitz Boat Garage</string>
-    <string name="str_ship_9">Gang Boat Garage</string>
-    <string name="str_ship_9_car">Gang Car Garage</string>
-    <string name="str_ship_10">Neu Zemnitz Boat Garage</string>
-    <string name="str_ship_10_car">Neu Zemnitz Car Garage</string>
-    <string name="str_ship_11">Grosskirchen Boat Garage</string>
-    <string name="str_ship_12">Nordbrink Boat Garage</string>
-    <string name="str_ship_13">Holburg Boat Garage</string>
-    <string name="str_ship_14">ZNA Boat Garage</string>
-    <string name="str_ship_15">Bei TD Settlement Boat Garage</string>
-    <string name="str_ship_16">Steinkamp Boat Garage</string>
-    <string name="str_ship_17">Tonoa Boat Garage</string>
-
-    <!-- Appartments -->
-    <string name="str_rental_2">Blankenstein Car Garage</string>
-    <string name="str_rental_3">Blankenstein Bar Car Garage</string>
-    <string name="str_rental_4">Schwarzheide Appartements Car Garage</string>
-    <string name="str_rental_5">Holburg Appartements Car Garage</string>
-    <string name="str_rental_6">Holburg Appartements Car Garage</string>
-    <string name="str_rental_7">Auenland Appartements Car Garage</string>
-    <string name="str_rental_9">Steinmark Appartements Car Garage</string>
+    <!-- Garagen und Autohändler aus Config_Map.hpp-->
+    <string name="garage_car_1">Großfelden Autogarage</string>
+    <string name="civ_car_1">Großfelden Autohändler</string>
+    <string name="ship_1">Bootgarage am Klinikum</string>
+    <string name="civ_car_industrie_1">Industriegebiet 2 Spezialfahrzeughändler</string>
+    <string name="civ_car_industrie_2">Industriegebiet 4 Spezialfahrzeughändler</string>
+    <string name="garage_car_2">Kessstein Autogarage</string>
+    <string name="civ_car_2">Altwied Autohändler</string>
+    <string name="ship_2">Großfelden Bootgarage</string>
+    <string name="garage_car_3">Schulungszentrum Autogarage</string>
+    <string name="civ_car_3">Landsberg Autohändler</string>
+    <string name="taxi_car">Taxihändler</string>
+    <string name="ship_3">Sonnenbach Bootgarage</string>
+    <string name="garage_car_4">Neuberg Autogarage</string>
+    <string name="civ_car_4">Kessstein Autohändler</string>
+    <string name="ship_4">Freudenstedt Bootgarage</string>
+    <string name="press">Ostersund Pressegarage</string>
+    <string name="donator_car">Donator Shop Garage</string>
+    <string name="garage_car_5">Südhemmern Autogarage</string>
+    <string name="garage_car_6">Niederfels Autogarage</string>
+    <string name="garage_car_7">Tortuga Autogarage und Bootgarage</string>
+    <string name="garage_car_9">Fahrzeugbau Autogarage</string>
+    <string name="ship_18">Tortuga Bootgarage</string>
+    <string name="civ_air_11">Helicopter Garage</string>
+    <string name="garage_car_11">RAC Außenstelle</string>
+    <string name="garage_car_12">Polizei Außenstelle</string>
+    <string name="garage_car_10">Holburg Autogarage</string>
+    <string name="garage_car_8">Sonnenbach Autogarage</string>
+    <string name="garage_car_13">Donator Garage</string>
+    <string name="garage_car_20">Catharin Autogarage</string>
+    <string name="civ_car_6">Niederfels Autohändler</string>
+    <string name="faction_airhq">Flughafen Holburg AirHQ</string>
+    <string name="civ_air_1">Flughafen Havama</string>
+    <string name="civ_air_2">Flughafen Altwied</string>
+    <string name="garage_impound">Impound Garage</string>
+    <string name="garage_impound_air">Industriekomplex impound Flugzeug</string>
+    <string name="civ_air_5">Flughafen Großfelden</string>
+    <string name="civ_air_6">Flughafen Rebellen Insel</string>
+    <string name="civ_air_9">Flughafen Havama</string>
+    <string name="civ_air_10">Flugpiste</string>
+    <string name="civ_air_12">Flughafen Hohenkirchen</string>
+    <string name="cop_car">Polizei Autogarage</string>
+    <string name="cop_car_outside_HQ_ober">Polizei Autogarage</string>
+    <string name="cop_air">Polizei Flug Garage</string>
+    <string name="cop_air_pad">Polizei Helipad</string>
+    <string name="cop_court">Justiz Autogarage</string>
+    <string name="cop_court_pad">Justiz Flug Gang Pad</string>
+    <string name="rac_car">RAC Autogarage</string>
+    <string name="rac_air">RAC Flug Garage</string>
+    <string name="rac_car_outpost">RAC Autogarage</string>
+    <string name="med_car">Medic Autogarage</string>
+    <string name="med_car_2">Medic Rettungswache</string>
+    <string name="med_car_3">Medic Rettungswache</string>
+    <string name="med_air">Medic Flug Garage</string>
+    <string name="garage_car_zna">ZNA Autogarage</string>
+    <string name="garage_car_bg">Gefängnis Autogarage</string>
+    <string name="garage_car_cc">Autohaus Autogarage</string>
+    <string name="civ_car_5">Kart Autogarage</string>
+    <string name="civ_car_towing">Spezialfahrzeughändler Abschlepper</string>
+    <string name="civ_car_roadrepair">Spezialfahrzeughändler Straßenwacht</string>
+    <string name="civ_car_7">Rennstrecke Autohändler</string>
+    <string name="civ_car_8">Rennstrecke Autohändler</string>
+    <string name="garage_car_14">Autogarage Bootshafen</string>
+    <string name="garage_car_15">Autogarage</string>
+    <string name="garage_car_16">Gangeroberung Autogarage</string>
+    <string name="civ_truck_1">Großfelden LKW Händler</string>
+    <string name="civ_truck_2">Catharin LKW Händler</string>
+    <string name="farm_shop">Traktor Händler</string>
+    <string name="civ_dustmen_rent_1">Müllabfuhr Garage</string>
+    <string name="civ_dustmen_rent_2">Müllabfuhr Garage</string>
+    <string name="civ_dustmen_rent_3">Müllabfuhr Garage</string>
+    <string name="civ_dustmen_rent_4">Müllabfuhr Garage</string>
+    <string name="ship_5">Kessstein Bootgarage</string>
+    <string name="ship_5_car">Kessstein Autogarage</string>
+    <string name="ship_6">Landsberg Bootgarage</string>
+    <string name="ship_7">Eisingen Bootgarage</string>
+    <string name="ship_8">Altwied Bootgarage</string>
+    <string name="ship_9">Havama Bootgarage</string>
+    <string name="ship_10">Catharin Bootgarage</string>
+    <string name="rental_2">Blankenstein Autogarage</string>
+    <string name="rental_3">Blankenstein Bar Autogarage</string>
+    <string name="rental_4">Schwarzheide Appartements Autogarage</string>
+    <string name="rental_5">Holburg Appartements Autogarage</string>
+    <string name="rental_6">Holburg Appartements Autogarage</string>
+    <string name="rental_7">Auenland Appartements Autogarage</string>
+    <string name="rental_9">Steinmark Appartements Autogarage</string>
 
 </resources>
