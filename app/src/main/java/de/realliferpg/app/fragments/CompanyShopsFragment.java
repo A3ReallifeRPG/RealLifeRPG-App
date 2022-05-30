@@ -13,6 +13,9 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
@@ -23,6 +26,7 @@ import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PhoneNumbers;
 
@@ -48,6 +52,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_companyshops, container, false);
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
 
         final ProgressBar pbLoadCompanyShop = view.findViewById(R.id.pb_company_shops);
         pbLoadCompanyShop.setVisibility(View.VISIBLE);
@@ -83,7 +88,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             }
         });
 
-        /*
+
         ArrayList<CompanyShops> companyShopsData = Singleton.getInstance().getCompanyShopsData();
 
         if (companyShopsData == null || companyShopsData.size() == 0){
@@ -93,7 +98,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
             tvKeineDaten.setVisibility(View.INVISIBLE);
             elv_company_shops.setVisibility(View.VISIBLE);
         }
-        */
+
 
         return view;
     }
