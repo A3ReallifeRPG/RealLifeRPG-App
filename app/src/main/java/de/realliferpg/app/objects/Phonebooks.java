@@ -1,11 +1,11 @@
 package de.realliferpg.app.objects;
 
 public class Phonebooks {
-    public String side;
+    public int idNR;
     public PhonebookEntry[] phonebook;
 
-    public Phonebooks(String _side, PhonebookEntry[] _phonebook){
-        this.side = _side;
+    public Phonebooks(int _idNr, PhonebookEntry[] _phonebook){
+        this.idNR = _idNr;
         this.phonebook = _phonebook;
     }
 }

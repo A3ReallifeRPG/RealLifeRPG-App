@@ -64,7 +64,7 @@ public class PlayerInfo {
     // Fahrzeuge je nach Typ
     public VehicleGroup[] vehiclesByType;
     
-    public PhoneNumbers[] phones;
+    public Phones[] phones;
     public Phonebooks[] phonebooks;
 
     public long requested_at;
