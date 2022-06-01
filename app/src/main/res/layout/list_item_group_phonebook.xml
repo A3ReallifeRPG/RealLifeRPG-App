@@ -14,7 +14,7 @@
         android:background="@color/primaryColor">
 
         <TextView
-            android:id="@+id/tv_phonebook_own_numbers"
+            android:id="@+id/tv_phonebook_side"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin = "4dp"
@@ -25,11 +25,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_side"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_to_phonenumber"
             android:gravity="left" />
 
         <TextView
-            android:id="@+id/tv_phonebook_side"
+            android:id="@+id/tv_phonebook_to_phonenumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"

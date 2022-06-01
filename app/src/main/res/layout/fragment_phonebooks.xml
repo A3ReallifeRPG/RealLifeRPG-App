@@ -40,18 +40,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_default_phonenumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/str_placeholder"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_head" />
-
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/sv_search_phone_by_name"
                 android:layout_width="match_parent"
@@ -59,7 +47,7 @@
                 android:layout_margin="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_default_phonenumber"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_head"
                 android:iconifiedByDefault="false" />
 
             <ExpandableListView

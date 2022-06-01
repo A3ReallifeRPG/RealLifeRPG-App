@@ -27,7 +27,7 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.PhoneNumbers;
+import de.realliferpg.app.objects.Phones;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -64,8 +64,6 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
 
-        final TextView tvDefaultPhoneNumber = view.findViewById(R.id.tv_default_phonenumber);
-        tvDefaultPhoneNumber.setText(getContext().getResources().getString(R.string.str_default_phonenumber) + " " + getDefaultNumber(playerInfo.phones));
         final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_phonebooks);
         final ExpandableListView lvPhonebooks = view.findViewById(R.id.lv_phonebook);
 
@@ -188,15 +186,6 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         listAdapter.filterData(query);
         expandAll();
         return false;
-    }
-
-    private String getDefaultNumber(PhoneNumbers[] phones) {
-        for (PhoneNumbers phone : phones) {
-            if (phone.note.matches("default")) {
-                return phone.phone;
-            }
-        }
-        return "0";
     }
 
     private void expandAll() {

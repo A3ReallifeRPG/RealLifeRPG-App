@@ -28,7 +28,7 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.PhoneNumbers;
+import de.realliferpg.app.objects.Phones;
 
 public class CompanyShopsFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -174,8 +174,8 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         }
     }
 
-    private String getDefaultNumber(PhoneNumbers[] phones) {
-        for (PhoneNumbers phone : phones) {
+    private String getDefaultNumber(Phones[] phones) {
+        for (Phones phone : phones) {
             if (phone.note.matches("default")) {
                 return phone.phone;
             }
