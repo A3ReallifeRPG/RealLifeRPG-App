@@ -1,6 +1,7 @@
 package de.realliferpg.app.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -87,7 +88,9 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                 return true;
             }
         });
-        
+
+        bnv.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+
         return view;
     }
 

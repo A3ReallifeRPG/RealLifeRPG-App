@@ -190,11 +190,12 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
 
         String strLastGarage = new StringBuilder().append("str_").append(lastGarage).toString();
         Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier("str_garage_unknown", "string", context.getPackageName());
+        int resourceId = 0;
         try {
             resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
         } catch (Exception e) {
             // Fehlermeldung ist hier nicht sinnig, es wird einfach "Garage: unbekannt" angezeigt
+            resourceId = 0;
         }
 
         if (resourceId == 0){

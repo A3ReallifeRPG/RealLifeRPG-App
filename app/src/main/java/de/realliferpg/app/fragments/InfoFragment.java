@@ -85,6 +85,8 @@ public class InfoFragment extends Fragment implements CallbackNotifyInterface {
             }
         });
 
+        bnv.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+
         final RecyclerView recyclerView = view.findViewById(R.id.rv_info_main);
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getShops(currentCategory);
