@@ -184,9 +184,18 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
             lastGarage = "garage_unknown";
         }
 
+        if (lastGarage.toLowerCase().startsWith("custom_garage")){
+            lastGarage = "garage_selfbuild";
+        }
+
         String strLastGarage = new StringBuilder().append("str_").append(lastGarage).toString();
         Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
+        int resourceId = resources.getIdentifier("str_garage_unknown", "string", context.getPackageName());
+        try {
+            resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
+        } catch (Exception e) {
+            // Fehlermeldung ist hier nicht sinnig, es wird einfach "Garage: unbekannt" angezeigt
+        }
 
         if (resourceId == 0){
             resourceId = resources.getIdentifier(context.getString(R.string.str_garage_unknown),"string", context.getPackageName());

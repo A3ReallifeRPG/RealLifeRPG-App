@@ -331,5 +331,6 @@
     <string name="str_rental_7">Auenland Appartements Autogarage</string>
     <string name="str_rental_9">Steinmark Appartements Autogarage</string>
     <string name="str_garage_unknown">unbekannt</string>
+    <string name="str_garage_selfbuild">self build garage</string>
 
 </resources>
