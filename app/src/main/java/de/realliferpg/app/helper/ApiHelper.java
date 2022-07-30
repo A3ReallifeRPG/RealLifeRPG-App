@@ -139,11 +139,7 @@ public class ApiHelper {
     private boolean showVehicle(Vehicle veh){
         boolean showVehicle = false;
 
-        if (veh.alive == 0 && preferenceHelper.showSold()) // verkauft == 0
-        {
-            showVehicle = true;
-        }
-        else if (veh.impound == 1 && preferenceHelper.showImpounded()) // beschlagnahmt == 1
+        if (veh.impound == 1 && preferenceHelper.showImpounded()) // beschlagnahmt == 1
         {
             showVehicle = true;
         }

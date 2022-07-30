@@ -30,13 +30,6 @@
     <PreferenceCategory android:title="@string/str_vehiclesListSettings">
 
         <SwitchPreference
-            android:id="@+id/pref_vehicleList_sold"
-            android:key="pref_vehicleList_sold"
-            android:summaryOff="@string/str_dont_show"
-            android:summaryOn="@string/str_show"
-            android:title="@string/str_vehicleList_sold" />
-            />
-        <SwitchPreference
             android:id="@+id/pref_vehicleList_destroyed"
             android:key="pref_vehicleList_destroyed"
             android:summaryOff="@string/str_dont_show"

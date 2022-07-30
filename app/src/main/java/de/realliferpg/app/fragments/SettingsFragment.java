@@ -78,16 +78,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Fragme
             }
         });
 
-        // Preferences for vehicle list
-        Preference prefVehicleSold = findPreference("pref_vehicleList_sold");
-        prefVehicleSold.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                switchSettingsVehicleList(preference);
-                return true;
-            }
-        });
-
         Preference prefVehicleDestroyed = findPreference("pref_vehicleList_destroyed");
         prefVehicleDestroyed.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
