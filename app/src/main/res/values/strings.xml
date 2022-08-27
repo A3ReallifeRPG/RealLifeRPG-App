@@ -247,8 +247,12 @@
     <string name="str_garage_car_1">Großfelden Autogarage</string>
     <string name="str_civ_car_1">Großfelden Autohändler</string>
     <string name="str_ship_1">Bootgarage am Klinikum</string>
-    <string name="str_civ_car_industrie_1">Industriegebiet 2 Spezialfahrzeughändler</string>
-    <string name="str_civ_car_industrie_2">Industriegebiet 4 Spezialfahrzeughändler</string>
+    <string name="str_civ_car_industrie_1">Industriegebiet 1</string>
+    <string name="str_civ_car_industrie_2">Industriegebiet 2 Spezialfahrzeughändler</string>
+    <string name="str_civ_car_industrie_3">Industriegebiet 3 Spezialfahrzeughändler</string>
+    <string name="str_civ_car_industrie_4">Industriegebiet 4</string>
+    <string name="str_civ_car_industrie_5">Industriegebiet 5</string>
+    <string name="str_civ_car_industrie_6">Industriegebiet 6</string>
     <string name="str_garage_car_2">Kessstein Autogarage</string>
     <string name="str_civ_car_2">Altwied Autohändler</string>
     <string name="str_ship_2">Großfelden Bootgarage</string>
@@ -264,6 +268,7 @@
     <string name="str_garage_car_5">Südhemmern Autogarage</string>
     <string name="str_garage_car_6">Niederfels Autogarage</string>
     <string name="str_garage_car_7">Tortuga Autogarage und Bootgarage</string>
+    <string name="str_garage_car_9">Unterfels Autogarage</string>
     <string name="str_ship_18">Tortuga Bootgarage</string>
     <string name="str_civ_air_11">Helicopter Garage</string>
     <string name="str_garage_car_11">RAC Außenstelle</string>
@@ -273,7 +278,7 @@
     <string name="str_garage_car_13">Donator Garage</string>
     <string name="str_garage_car_20">Catharin Autogarage</string>
     <string name="str_civ_car_6">Niederfels Autohändler</string>
-    <string name="str_garage_car_9">Fahrzeugbau Neuberg</string>
+    <string name="str_civ_car_9">Fahrzeugbau Neuberg</string>
     <string name="str_faction_airhq">Flughafen Holburg AirHQ</string>
     <string name="str_civ_air_1">Flughafen Havama</string>
     <string name="str_civ_air_2">Flughafen Altwied</string>
@@ -286,11 +291,13 @@
     <string name="str_civ_air_12">Flughafen Hohenkirchen</string>
     <string name="str_cop_car">Polizei Autogarage</string>
     <string name="str_cop_car_outside_HQ_ober">Polizei Autogarage</string>
+    <string name="str_cop_car_outside_HQ_sued">Polizei Autogarage</string>
     <string name="str_cop_car_outside_HQ_hav">Polizei Autogarage</string>
     <string name="str_cop_air">Polizei Flug Garage</string>
     <string name="str_cop_air_pad">Polizei Helipad</string>
     <string name="str_cop_court">Justiz Autogarage</string>
     <string name="str_cop_court_pad">Justiz Flug Gang Pad</string>
+    <string name="str_cop_court_ah">Auktionshaus Justiz Autogarage</string>
     <string name="str_rac_car">RAC Autogarage</string>
     <string name="str_rac_air">RAC Flug Garage</string>
     <string name="str_rac_car_outpost">RAC Autogarage</string>
@@ -303,12 +310,13 @@
     <string name="str_garage_car_cc">Autohaus Autogarage</string>
     <string name="str_civ_car_5">Kart Autogarage</string>
     <string name="str_civ_car_towing">Spezialfahrzeughändler Abschlepper</string>
-    <string name="str_civ_car_roadrepair">Spezialfahrzeughändler Straßenwacht</string>
+    <string name="str_civ_car_roadrepair">Spezialfahrzeughändler Straßenmeisterei</string>
     <string name="str_civ_car_7">Auto Crafting</string>
     <string name="str_civ_car_8">Rennstrecke Autohändler</string>
     <string name="str_garage_car_14">Autogarage Bootshafen</string>
     <string name="str_garage_car_15">Autogarage</string>
     <string name="str_garage_car_16">Gangeroberung Autogarage</string>
+    <string name="str_garage_car_17">Autogarage Auktionshaus</string>
     <string name="str_civ_truck_1">Großfelden LKW Händler</string>
     <string name="str_civ_truck_2">Catharin LKW Händler</string>
     <string name="str_farm_shop">Traktor Händler</string>
@@ -331,6 +339,5 @@
     <string name="str_rental_7">Auenland Appartements Autogarage</string>
     <string name="str_rental_9">Steinmark Appartements Autogarage</string>
     <string name="str_garage_unknown">unbekannt</string>
-    <string name="str_garage_selfbuild">self build garage</string>
-
+    <string name="str_garage_selfbuild">selbstgebaute Garage</string>
 </resources>
