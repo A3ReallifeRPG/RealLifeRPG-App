@@ -74,12 +74,18 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         Building[] buildingsWithoutStageMinusOne = buildings.clone();
+        int counter = 0;
         for (Building b : buildings) {
             if (b.stage < 0){
+                counter++;
                 buildingsWithoutStageMinusOne = ArrayUtils.removeAll(buildings, b);
             }
         }
-        buildings = buildingsWithoutStageMinusOne.clone();
+        if (counter == buildings.length){
+            buildings = new Building[0];
+        } else {
+            buildings = buildingsWithoutStageMinusOne.clone();
+        }
 
         buildingByType = new BuildingGroup[3];
 
