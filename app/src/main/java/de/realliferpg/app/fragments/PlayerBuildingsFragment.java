@@ -1,7 +1,5 @@
 package de.realliferpg.app.fragments;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.util.ArrayUtils;
 
@@ -23,10 +20,8 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.helper.PreferenceHelper;
-import de.realliferpg.app.helper.ReminderBroadcastReceiver;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.IBuilding;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.House;
@@ -79,59 +74,12 @@ public class PlayerBuildingsFragment extends Fragment {
         Rental[] rentals = playerInfo.rentals;
 
         Building[] buildingsWithoutStageMinusOne = buildings.clone();
-        for (Building b:buildings) {
+        for (Building b : buildings) {
             if (b.stage < 0){
                 buildingsWithoutStageMinusOne = ArrayUtils.removeAll(buildings, b);
             }
         }
         buildings = buildingsWithoutStageMinusOne.clone();
-
-        // - DummyDaten -----------------------------
-/*
-        Calendar dateCurrent = Calendar.getInstance(); // 19.06.2021
-        Calendar date1 = Calendar.getInstance();
-        Calendar date2 = Calendar.getInstance();
-        date1.set(2021,06,18); // 4
-        date2.set(2021,06,19); // 5
-
-        long diff1 = date1.getTimeInMillis() - dateCurrent.getTimeInMillis();
-        long diff2 = date2.getTimeInMillis() - dateCurrent.getTimeInMillis();
-
-        float dayCount1 = (float) diff1 / (24 * 60 * 60 * 1000);
-        float dayCount2 = (float) diff2 / (24 * 60 * 60 * 1000);
-
-        House hausEins = new House();
-        hausEins.players = new String[]{"Spieler 1", "Spieler 2"};
-        hausEins.id = 11;
-        hausEins.payed_for = (int)dayCount1*24;
-        House hausZwei = new House();
-        hausZwei.players = new String[]{"Spieler 1", "Spieler 2"};
-        hausZwei.id = 12;
-        hausZwei.payed_for = (int)dayCount2*24;
-        House[] dummyHaeuser = new House[]{hausEins, hausZwei};
-        houses = dummyHaeuser;
-
-        Building buildingEins = new Building();
-        buildingEins.id = 21;
-        Building buildingZwei = new Building();
-        buildingZwei.id = 22;
-        Building[] dummyBuildings = new Building[]{buildingEins, buildingZwei};
-        buildings = dummyBuildings;
-
-        Rental rentalEins = new Rental();
-        rentalEins.id = 31;
-        rentalEins.payed_for = 123;
-        Rental rentalZwei = new Rental();
-        rentalZwei.id = 32;
-        rentalZwei.payed_for = 1234;
-        Rental[] dummyRentals = new Rental[]{rentalEins, rentalZwei};
-        rentals = dummyRentals;
-
-        playerInfo.houses = houses;
-        playerInfo.buildings = buildings;
-        playerInfo.rentals = rentals;
-*/
-        // -----------------------------
 
         buildingByType = new BuildingGroup[3];
 
@@ -163,53 +111,35 @@ public class PlayerBuildingsFragment extends Fragment {
         }
 
         btnReminder.setOnClickListener(v -> {
-            int daysBefore = 3*24;
-            long factorHourToSec = 60 * 60;
+            int daysLeft = 100;
 
-            Intent intent = new Intent(this.getActivity(), ReminderBroadcastReceiver.class);
-            AlarmManager am = (AlarmManager) this.getContext().getSystemService(Context.ALARM_SERVICE);
-
-            IBuilding chosenBuilding = null;
-
-            // das Haus/Appartment finden, das am nächsten an drei Tagen dran ist
-            for (House house : playerInfo.houses){
-                long plannedTimeInSeconds =  (house.getPayedForHours() - daysBefore) * factorHourToSec;
-                if (plannedTimeInSeconds > 0) { // <= heißt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
-                    if (chosenBuilding == null){
-                        chosenBuilding = house;
-                    }
-                    else if (chosenBuilding.getPayedForHours() > house.getPayedForHours()){
-                        chosenBuilding = house;
-                    }
+            // Minimum an verbleibenden Tagen finden
+            for (House house : houses) {
+                if (house.getPayedForDays() < daysLeft)
+                {
+                    daysLeft = house.getPayedForDays();
                 }
             }
 
-            for (Rental rental : playerInfo.rentals){
-                long plannedTimeInSeconds =  (rental.getPayedForHours() - daysBefore) * factorHourToSec;
-                if (plannedTimeInSeconds > 0) { // <= heißt negative Werte, wenn weniger als 3 Tage; wir wollen aber die anderen
-                    if (chosenBuilding == null){
-                        chosenBuilding = rental;
-                    }
-                    else if (chosenBuilding.getPayedForHours() > rental.getPayedForHours()){
-                        chosenBuilding = rental;
-                    }
-                }
+            // Davon prefHelper.getDaysForReminderMaintenance Tage abziehen (wenn nicht schon kleiner gleich 5)
+            int prefDaysForReminder = Integer.valueOf(prefHelper.getDaysForReminderMaintenance());
+
+            if (daysLeft >= prefDaysForReminder) {
+                daysLeft = daysLeft - prefDaysForReminder;
             }
 
-            // mit der ID eine Erinnerung setzen auf 15 Uhr
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), chosenBuilding.getId(), intent, 0);
-            Calendar cFuture = Calendar.getInstance();
-            cFuture.add(Calendar.HOUR, (int) chosenBuilding.getPayedForHours()-(daysBefore+1));
-            cFuture.set(Calendar.HOUR_OF_DAY, 19);
-            cFuture.set(Calendar.MINUTE, 0);
+            // Kalenderevent von heute + daysLeft erzeugen
+            Calendar calendarEvent = Calendar.getInstance();
+            calendarEvent.add(Calendar.DAY_OF_YEAR, daysLeft);
 
-            am.set(AlarmManager.RTC_WAKEUP, cFuture.getTimeInMillis(), pendingIntent);
-
-            // Info an Anwender
-            String text = "Erinnerung für Gebäude mit ID {0} gesetzt für ";
-            text = text.replace("{0}", Integer.toString(chosenBuilding.getId()));
-            text += cFuture.get(Calendar.DAY_OF_MONTH) + "." + ((int)cFuture.get(Calendar.MONTH)+1) + "." + cFuture.get(Calendar.YEAR) + " 19:00 Uhr";
-            Toast.makeText(this.getContext(), text, Toast.LENGTH_LONG).show();
+            // Kalender-App aufrufen
+            Intent i = new Intent(Intent.ACTION_EDIT);
+            i.setType("vnd.android.cursor.item/event");
+            i.putExtra("beginTime", calendarEvent.getTimeInMillis());
+            i.putExtra("allDay", true);
+            i.putExtra("endTime", calendarEvent.getTimeInMillis() + 60 * 60 * 1000);
+                        i.putExtra("title", getResources().getString(R.string.str_notifications_reminder_maintenance_title));
+            startActivity(i);
         });
     }
 
